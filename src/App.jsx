@@ -1,10 +1,12 @@
 import React from 'react'
-import './App.css'
+import './App.scss'
+import Categories from './components/Сategories/Categories.jsx'
+
 
 const App = () => {
   return (
     <div>
-      Exam project
+      <Categories/>
     </div>
   )
 }
