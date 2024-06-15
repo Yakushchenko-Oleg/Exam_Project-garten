@@ -1,10 +1,11 @@
 import React from 'react'
 import './App.css'
+import DiscountForm from './components/DiscountForm/DiscountForm'
 
 const App = () => {
   return (
     <div>
-      Exam project
+     <DiscountForm />
     </div>
   )
 }
