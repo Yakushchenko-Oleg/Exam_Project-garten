@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 
 
-const prosuctsSlice = createSlice({
+const productsSlice = createSlice({
     name: 'products',
     initialState: {
             products: [ // временные данные, после подключения Thunk почистить этот массив
@@ -40,9 +40,9 @@ const prosuctsSlice = createSlice({
     }
 })
 
-export default prosuctsSlice.reducer
+export default productsSlice.reducer
 
 export const { //заменить названия экшнов в экспорте
     delLastProduct, 
     sortByPriceAction
-} = prosuctsSlice.actions
+} = productsSlice.actions
