@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css'
 import DiscountForm from './components/DiscountForm/DiscountForm'
 import './App.scss'
 import { Link, Route, Routes } from 'react-router-dom'
@@ -10,6 +9,7 @@ import AllProductsPage from './pages/AllProductsPage.jsx'
 import AllSalesPage from './pages/AllSalesPage.jsx' 
 import Error404 from './pages/Error404.jsx' 
 import Cart from './pages/Cart.jsx' 
+import Categories from './components/Сategories/Categories';
 
 
 const App = () => {

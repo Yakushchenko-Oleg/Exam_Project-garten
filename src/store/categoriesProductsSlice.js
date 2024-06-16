@@ -1,60 +1,53 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice,  createAsyncThunk } from "@reduxjs/toolkit"
 
 
+const URL = 'http://localhost:3333/categories/all' // ссылка на локальный сервер
+
+export const fetchAllCategoties = createAsyncThunk(
+  'categories/fetchAllCategoties',
+  async function (_, ) {
+    const resp = await fetch(URL)
+    const data = await resp.json()
+
+    return data
+  }
+
+)
 
 const categoriesProductsSlice = createSlice({
     name: 'categories',
     initialState: {
-        categories: [ // временные данные, после подключения Thunk почистить этот массив
-                {
-                  "id": 1,
-                  "title": "Annuals",
-                  "image": "/category_img/1.jpeg",
-                  "createdAt": "2022-10-02T14:43:29.000Z",
-                  "updatedAt": "2022-10-02T14:43:29.000Z"
-                },
-                {
-                  "id": 2,
-                  "title": "Nursery",
-                  "image": "/category_img/2.jpeg",
-                  "createdAt": "2022-10-02T14:43:29.000Z",
-                  "updatedAt": "2022-10-02T14:43:29.000Z"
-                },
-                {
-                  "id": 3,
-                  "title": "Garden Art",
-                  "image": "/category_img/3.jpeg",
-                  "createdAt": "2022-10-02T14:43:29.000Z",
-                  "updatedAt": "2022-10-02T14:43:29.000Z"
-                },
-                {
-                  "id": 4,
-                  "title": "Plant Care",
-                  "image": "/category_img/4.jpeg",
-                  "createdAt": "2022-10-02T14:43:29.000Z",
-                  "updatedAt": "2022-10-02T14:43:29.000Z"
-                },
-                {
-                  "id": 5,
-                  "title": "Seasonal",
-                  "image": "/category_img/5.jpeg",
-                  "createdAt": "2022-10-02T14:43:29.000Z",
-                  "updatedAt": "2022-10-02T14:43:29.000Z"
-                }
-              ]
-    },
+        categories: [],
+        isLoading: false,
+        error: null
+          },
     reducers: {// заменить экшны на новые
         delLastProduct(state) {
         },
         sortByPriceAction(state) {
 
         }
+    },
+    extraReducers: (builder) => {
+      builder.addCase(fetchAllCategoties.pending,(state) => {
+        state.isLoading = true, 
+        state.error = null
+      })
+      .addCase(fetchAllCategoties.fulfilled, (state, action)  =>{
+        state.isLoading = false,
+        state.categories = action.payload
+      })
+      // .addCase(fetchAllCategoties.rejected, (error) => {
+      //   state.error = error } )
+      
     }
+
 })
 
-export default categoriesProductsSlice.reducer
 
 export const {//заменить названия экшнов в экспорте
     delLastProduct,  
     sortByPriceAction
 } = categoriesProductsSlice.actions
+
+export default categoriesProductsSlice.reducer
