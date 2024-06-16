@@ -1,4 +1,6 @@
 import React from 'react'
+import './App.css'
+import DiscountForm from './components/DiscountForm/DiscountForm'
 import './App.scss'
 import { Link, Route, Routes } from 'react-router-dom'
 
@@ -12,18 +14,23 @@ import Cart from './pages/Cart.jsx'
 
 const App = () => {
   return (
-    <Routes>
+    <>
+      <Routes>
 
-          <Route index element={<MainPage />} />
-          {/* <Route path='/' element={<MainPage />} /> */}
-          <Route path='/categories' element={<CategoriesPage />} />
-          <Route path='/allproducts' element={<AllProductsPage />} />
-          <Route path='/allsales' element={<AllSalesPage />} />
-          <Route path='*' element={<Error404 />} />
-          <Route path='/cart' element={<Cart />} />
+            <Route index element={<MainPage />} />
+            {/* <Route path='/' element={<MainPage />} /> */}
+            <Route path='/categories' element={<CategoriesPage />} />
+            <Route path='/allproducts' element={<AllProductsPage />} />
+            <Route path='/allsales' element={<AllSalesPage />} />
+            <Route path='*' element={<Error404 />} />
+            <Route path='/cart' element={<Cart />} />
 
-     
-    </Routes> 
+      </Routes> 
+      <div>
+         <Categories/>
+         <DiscountForm />
+      </div>
+  </>
   )
 }
 
