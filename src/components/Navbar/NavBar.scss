@@ -1,0 +1,29 @@
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__menu {
+        font-size: 20px;
+        line-height: 130%;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        gap: 32px;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #92A134;
+        font-weight: bold;
+        font-size: 21px;
+    }
+
+    &__icon-cart:hover {
+        transform: scale(1.1)
+    }
+}
