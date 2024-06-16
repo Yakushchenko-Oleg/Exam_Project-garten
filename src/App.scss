@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 $primary-grey: #424436;
-
+$primary-green: #92A134;
 
 *{
     font-family: Montserrat;
     color: $primary-grey;
+  }
+
+  .maincontainer{
+    margin: 80px 40px 80px 40px;
   }

@@ -1,0 +1,24 @@
+$primary-green: #92A134;
+
+.header {
+    height: 600px;
+    background-image: url("../../../public/images/header/headerimg.jpg");
+    padding: 80px 40px 40px 40px;
+
+    &__h1 {
+        font-size: 96px;
+        font-weight: bold;
+        color: #FFFF;
+        margin-bottom: 40px;
+    }
+
+    &__btn {
+        background-color: $primary-green;
+        color: #FFFF;
+        padding: 16px 56px 16px 56px;
+        font-size: 20px;
+        font-weight: 500;
+        border: none;
+        border-radius: 5px;
+    }
+}

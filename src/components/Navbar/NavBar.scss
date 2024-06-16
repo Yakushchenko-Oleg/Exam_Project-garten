@@ -1,8 +1,10 @@
+$primary-green: #92A134;
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 30px 40px 30px 40px;
 
     &__menu {
         font-size: 20px;
@@ -18,7 +20,7 @@
     }
 
     a:hover {
-        color: #92A134;
+        color: $primary-green;
         font-weight: bold;
         font-size: 21px;
     }
