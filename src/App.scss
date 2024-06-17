@@ -2,6 +2,8 @@
 
 $primary-grey: #424436;
 $primary-green: #92A134;
+$primary-white: #FFFF;
+$primary-orange: #F26D22;
 
 *{
     font-family: Montserrat;
@@ -10,4 +12,7 @@ $primary-green: #92A134;
 
   .maincontainer{
     margin: 80px 40px 80px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
   }

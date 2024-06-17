@@ -23,9 +23,29 @@ $primary-green: #92A134;
         color: $primary-green;
         font-weight: bold;
         font-size: 21px;
+        cursor: pointer;
     }
 
     &__icon-cart:hover {
-        transform: scale(1.1)
+        transform: scale(1.1);
+        cursor: pointer;
     }
 }
+
+// @media (min-width: 1000) {
+//     .navbar {
+//         max-width: 1000px;
+//     }
+// }
+
+// @media (min-width: 768) {
+
+// }
+
+// @media(min-width: 480){
+
+// }
+
+// @media(min-width: 360){
+
+// }

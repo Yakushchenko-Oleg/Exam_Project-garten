@@ -1,57 +1,79 @@
+
+
+$primary-green: #92A134;
+$primary-white: #FFFF;
+$primary-grey: #424436;
+$primary-orange: #F26D22;
+
 .discount__container{
-    max-width: 1360px;
-    margin: 0 auto;
     background: linear-gradient(80.46deg, #87933D -0.68%, #55610B 66.66%);
     border-radius: 12px;
     padding: 32px 32px 0 32px;
+    color: $primary-white;
+  
 }
 
 .discount__title{
     font-size: 64px;
     text-align: center;
     font-weight: 700;
-    color: #ffffff;
+    color: $primary-white;
 }
 
 .form__container{
+    margin-top: 24px;
     display: flex;
     justify-content: space-between;
     gap: 32px;
-
+    
+    img{
+       object-position: right;
+       object-fit: cover;
+       width: 50%;
+    }
 }
 
 .form { 
-    
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
 
     &__item {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-
+        width: 100%;
         input, select {
+            width: 100%;
             padding: 16px 32px;
-            border: 1px solid #fffff1;
+            border: 1px solid $primary-white;
             border-radius: 6px;
             font-size: 20px;
-            color: #ffffff;
+            
             background: transparent;
-            
         }
+
         input::placeholder {
-            color: #fffff1;
-            
-          }
+            color: $primary-white;
+        }
     }
 }
 
 .discount__btn {
-    width: 516px;
-    padding: 16px 32px;
-    border: 1px solid #fffff1;
-    background-color: #fffff1;
+    width: 100%;
+    padding: 16px 0;
+    background-color: $primary-white;
     border-radius: 6px;
-    color:  #424436;
+    color: $primary-grey;
     font-weight: 600;
     font-size: 20px;
-    margin: 32px 0;
+    margin: 16px 0;
+   
 }
+
+.discount__btn:hover{
+    background-color: $primary-orange;
+    cursor: pointer;
+    color: $primary-white;
+         
+}
+// написать медиа запрос на 480 и 360

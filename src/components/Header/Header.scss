@@ -1,24 +1,51 @@
+$primary-grey: #424436;
 $primary-green: #92A134;
+$primary-white: #FFFF;
+$primary-orange: #F26D22;
 
 .header {
     height: 600px;
     background-image: url("../../../public/images/header/headerimg.jpg");
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: cover;
     padding: 80px 40px 40px 40px;
 
     &__h1 {
         font-size: 96px;
         font-weight: bold;
-        color: #FFFF;
+        color: $primary-white;
         margin-bottom: 40px;
     }
 
     &__btn {
         background-color: $primary-green;
-        color: #FFFF;
+        color: $primary-white;
         padding: 16px 56px 16px 56px;
         font-size: 20px;
         font-weight: 500;
         border: none;
         border-radius: 5px;
     }
+    &__btn:hover{
+        background-color: $primary-orange;
+        cursor: pointer;
+        color: $primary-white;
+    }
 }
+
+// @media (min-width: 1000) {
+
+// }
+
+// @media (min-width: 768) {
+
+// }
+
+// @media(min-width: 480){
+
+// }
+
+// @media(min-width: 360){
+
+// }
