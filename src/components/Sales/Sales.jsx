@@ -32,5 +32,3 @@ return (
     </div>
 
 export default Sales
-
-
