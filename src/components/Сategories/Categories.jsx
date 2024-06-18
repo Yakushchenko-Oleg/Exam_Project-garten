@@ -5,10 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
 
-
-
 // добавить полоску к all categories
-
 
 const Categories = () => {
 
@@ -23,8 +20,6 @@ const Categories = () => {
   useEffect(()=> {
     dispatch(fetchAllCategoties())
   },[dispatch])
-console.log(import.meta.env);
-
 
   return (
     <div className="categories">
@@ -38,7 +33,7 @@ console.log(import.meta.env);
       <div className="categories__wrapper">
         
       {
-        isLoading ? <h2>'Loading...' </h2>
+        isLoading ? <div className="loader"></div> 
         : slicedCategories.map( item =>        
           <div className="categories__item" key={item.id}>
             <img src={`${apiUrl}${item.image}`}></img> 
