@@ -2,10 +2,10 @@ import React from 'react'
 
 const Sales = () => {
   return (
-    <div>
-      
-    </div>
+    <div>Sales</div>
   )
 }
 
 export default Sales
+
+

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import '../../App.scss';
 import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -42,8 +41,6 @@ console.log(import.meta.env);
         : slicedCategories.map( item =>        
           <div className="categories__item" key={item.id}>
             <img src={`${apiUrl}${item.image}`}></img> 
-            {/* узнать как подставлять изображения с сервера и заменить путь */}
-            {/* <img src={item.image}></img>  */}
             <span>{item.title}</span>
           </div>
         ) 
