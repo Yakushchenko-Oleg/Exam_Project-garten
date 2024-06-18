@@ -1,8 +1,8 @@
 import { createSlice,  createAsyncThunk } from "@reduxjs/toolkit"
 
 
-const URL = 'http://localhost:3333/categories/' // ссылка на локальный сервер
-// const URL = 'https://exam-server-5c4e.onrender.com/' // ссылка на локальный сервер
+const URL = `${import.meta.env.APP_API_URL}/categories/`
+
 
 
 export const fetchAllCategoties = createAsyncThunk(
