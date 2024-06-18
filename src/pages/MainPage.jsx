@@ -10,7 +10,7 @@ import Sales from '../components/Sales/Sales'
 const MainPage = () => {
   return (
     <div className='container-1440'> MainPage
-      
+
       <NavBar />
       <Header />
       <main className='maincontainer'>

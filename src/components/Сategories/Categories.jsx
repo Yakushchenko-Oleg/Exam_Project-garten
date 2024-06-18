@@ -13,14 +13,16 @@ const Categories = () => {
 
   const {categories, isLoading, error} = useSelector(state => state.categories)
 
-  const slicedCat = categories.slice(0,4)
+  const slicedCategories = categories.slice(0,4)
+
+  const apiUrl = import.meta.env.APP_API_URL
 
   const dispatch = useDispatch()
 
   useEffect(()=> {
     dispatch(fetchAllCategoties())
   },[dispatch])
-
+console.log(import.meta.env);
 
 
   return (
@@ -36,9 +38,9 @@ const Categories = () => {
         
       {
         isLoading ? <h2>'Loading...' </h2>
-        : slicedCat.map( item =>        
+        : slicedCategories.map( item =>        
           <div className="categories__item" key={item.id}>
-            <img src={`http://localhost:3333${item.image}`}></img>  
+            <img src={`${apiUrl}${item.image}`}></img> 
             <span>{item.title}</span>
           </div>
         ) 
