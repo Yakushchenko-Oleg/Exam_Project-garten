@@ -1,5 +1,4 @@
 import React from 'react'
-import '../App.scss'
 
 // импрорт всех копмонентов  :
 import Categories from '../components/Сategories/Categories'
@@ -10,7 +9,7 @@ import Sales from '../components/Sales/Sales'
 
 const MainPage = () => {
   return (
-    <div> MainPage
+    <div className='container-1440'> MainPage
       
       <NavBar />
       <Header />

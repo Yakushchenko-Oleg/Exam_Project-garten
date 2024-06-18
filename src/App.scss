@@ -1,18 +1,26 @@
+@import './variables.scss';
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-$primary-grey: #424436;
-$primary-green: #92A134;
-$primary-white: #FFFF;
-$primary-orange: #F26D22;
 
-*{
-    font-family: Montserrat;
-    color: $primary-grey;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 
-  .maincontainer{
+  font-family: Montserrat;
+  color: $primary-grey;
+}
+
+// главный контэйнер
+.container-1440{
+  margin: 0 auto;
+  max-width: 1440px;
+}
+
+.maincontainer{
     margin: 80px 40px 80px 40px;
     display: flex;
     flex-direction: column;
     gap: 80px;
-  }
+}

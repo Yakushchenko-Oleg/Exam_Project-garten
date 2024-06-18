@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import '../../App.scss';
 import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,9 +38,7 @@ const Categories = () => {
         isLoading ? <h2>'Loading...' </h2>
         : slicedCat.map( item =>        
           <div className="categories__item" key={item.id}>
-            <img src="../../../public/images/categories/img.svg"></img> 
-            {/* узнать как подставлять изображения с сервера и заменить путь */}
-            {/* <img src={item.image}></img>  */}
+            <img src={`http://localhost:3333${item.image}`}></img>  
             <span>{item.title}</span>
           </div>
         ) 

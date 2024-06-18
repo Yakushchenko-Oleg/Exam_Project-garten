@@ -1,4 +1,4 @@
-$primary-green: #92A134;
+@import '../../variables.scss';
 
 .navbar {
     display: flex;
@@ -30,22 +30,52 @@ $primary-green: #92A134;
         transform: scale(1.1);
         cursor: pointer;
     }
+
+    .burger{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        z-index: 50;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        display: none;
+    }
+    
+    .burger span{
+        width: 100%;
+        height: 2px;
+        transform: scale(1);
+        background-color: $primary-grey;
+   }
 }
 
-// @media (min-width: 1000) {
-//     .navbar {
-//         max-width: 1000px;
-//     }
-// }
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .navbar {
+        padding: 30px 20px 30px 20px;
+        &__menu {
+            gap: 22px;
+        }
+    }
+    
+}
 
-// @media (min-width: 768) {
+@media screen and (min-width: 361px) and (max-width: 480px) {
+    .navbar__menu {
+        display: none;
+    }
+    .burger {
+        display: block;
+    }
+ }
 
-// }
+ @media screen and (min-width: 200px) and (max-width: 360px) {
+    .navbar__menu {
+        display: none;
+    }
+    .burger {
+        display: block;
+    }
+ }
 
-// @media(min-width: 480){
-
-// }
-
-// @media(min-width: 360){
-
-// }
