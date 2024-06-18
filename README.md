@@ -6,6 +6,7 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<<<<<<< HEAD
 
 
 Daily Srum Meeting- SPRINT 1
@@ -20,3 +21,5 @@ Daily Srum Meeting- SPRINT 1
 ? index css не трогаем? переменные создаем в App.scss?
 ? layout не создаем
 ? как решить проблему с роутером  для mainPage
+=======
+>>>>>>> 85e2d2e940c2955535f57faa0d13440d453a5ae0

@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 
 import './App.scss'
 import { Route, Routes } from 'react-router-dom'
@@ -26,6 +27,15 @@ const App = () => {
 
       </Routes> 
     </>
+=======
+import './App.css'
+
+const App = () => {
+  return (
+    <div>
+      Exam project
+    </div>
+>>>>>>> 85e2d2e940c2955535f57faa0d13440d453a5ae0
   )
 }
 
