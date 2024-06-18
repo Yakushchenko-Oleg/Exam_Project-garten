@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllProducts } from '../../store/productSlice'
 
-const Sales = (product) => {
+
+const Sales = () => {
 
 const {products} = useSelector(state => state.products)
 
@@ -10,14 +11,12 @@ const dispatch = useDispatch()
 
 useEffect(()=> {dispatch(fetchAllProducts())},[dispatch])
 
-
 function randomIndexInArray(array) {
    return Math.floor(Math.random() * array.length)
 }
 
 // console.log(products);
 // console.log(randomIndexInArray(products));
-
 
 return (
     <div>
@@ -31,7 +30,7 @@ return (
         </div>
        */}
     </div>
-  )
-}
 
 export default Sales
+
+
