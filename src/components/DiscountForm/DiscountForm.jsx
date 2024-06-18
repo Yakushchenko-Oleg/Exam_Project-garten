@@ -15,7 +15,7 @@ const DiscountForm = () => {
     <div className="discount__container">
       <h3 className="discount__title">5% off on the first order</h3>
       <div className="form__container">
-        <img src="./images/dicount/discount_image.svg" alt="" />
+        <img src="../../../public/images/dicount/discount_image.svg" alt="" />
         <div className="form">
           <div className="form__item">
             <label htmlFor="username"></label>
