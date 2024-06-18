@@ -6,6 +6,11 @@ $primary-white: #FFFF;
 $primary-orange: #F26D22;
 
 *{
+  
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
     font-family: Montserrat;
     color: $primary-grey;
   }

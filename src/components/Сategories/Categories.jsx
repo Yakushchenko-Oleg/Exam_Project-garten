@@ -14,14 +14,14 @@ const Categories = () => {
 
   const {categories, isLoading, error} = useSelector(state => state.categories)
 
-  const slicedCat = categories.slice(0,4)
+  const slicedCategories = categories.slice(0,4)
 
   const dispatch = useDispatch()
 
   useEffect(()=> {
     dispatch(fetchAllCategoties())
   },[dispatch])
-
+console.log(slicedCategories);
 
 
   return (
@@ -37,9 +37,9 @@ const Categories = () => {
         
       {
         isLoading ? <h2>'Loading...' </h2>
-        : slicedCat.map( item =>        
+        : slicedCategories.map( item =>        
           <div className="categories__item" key={item.id}>
-            <img src="../../../public/images/categories/img.svg"></img> 
+            <img src={`http://localhost:3333${item.image}`}></img> 
             {/* узнать как подставлять изображения с сервера и заменить путь */}
             {/* <img src={item.image}></img>  */}
             <span>{item.title}</span>
