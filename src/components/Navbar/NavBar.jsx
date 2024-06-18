@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
 
@@ -18,7 +19,7 @@ const NavBar = () => {
       </ul>
 
       <div className='navbar__icon-cart'>
-        <NavLink to="/cart"><img src='../../../public/images/navbar/Vector.png'/></NavLink> 
+        <NavLink to="/cart"><img className='navbar__icon-cart' src='../../../public/images/navbar/Vector.png'/></NavLink> 
       </div>
     
     </div>
