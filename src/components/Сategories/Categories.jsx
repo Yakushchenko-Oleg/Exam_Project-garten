@@ -16,12 +16,14 @@ const Categories = () => {
 
   const slicedCategories = categories.slice(0,4)
 
+  const apiUrl = import.meta.env.APP_API_URL
+
   const dispatch = useDispatch()
 
   useEffect(()=> {
     dispatch(fetchAllCategoties())
   },[dispatch])
-console.log(slicedCategories);
+console.log(import.meta.env);
 
 
   return (
@@ -39,7 +41,7 @@ console.log(slicedCategories);
         isLoading ? <h2>'Loading...' </h2>
         : slicedCategories.map( item =>        
           <div className="categories__item" key={item.id}>
-            <img src={`http://localhost:3333${item.image}`}></img> 
+            <img src={`${apiUrl}${item.image}`}></img> 
             {/* узнать как подставлять изображения с сервера и заменить путь */}
             {/* <img src={item.image}></img>  */}
             <span>{item.title}</span>
