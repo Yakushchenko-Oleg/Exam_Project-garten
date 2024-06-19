@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import '../../App.scss';
 import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,7 +22,6 @@ const Categories = () => {
   useEffect(() => {
     dispatch(fetchAllCategoties());
   }, [dispatch]);
-  console.log(import.meta.env);
 
   return (
     <div className="categories">

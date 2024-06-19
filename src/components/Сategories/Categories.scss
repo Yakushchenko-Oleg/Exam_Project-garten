@@ -1,19 +1,18 @@
-@import '../../variables.scss';
 
-.categories {
 
-    &__header-wrapper {
+.categories{
+
+    &__header-wrapper{
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 40px;
 
-        h2 {
+        h2{
             font-size: 64px;
             font-weight: 700;
         }
-
-        .categories__link {
+        .categories__link{
             font-size: 16px;
             color: #8B8B8B;
             align-content: center;
@@ -25,10 +24,11 @@
         }
     }
 
-    &__wrapper {
+    &__wrapper{
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: auto;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        
+        grid-auto-rows: auto; 
         gap: 20px;
         
         .categories__item {
@@ -42,8 +42,7 @@
                 width: 100%;
                 object-fit: cover;
             }
-
-            span {
+            span{
                 margin-top: 16px;
                 text-align: center;
                 font-weight: 500px;
@@ -54,7 +53,6 @@
         .categories__item:hover {
             transform: scale(1.1);
             box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
-            ;
         }
     }
 
@@ -100,8 +98,8 @@
         justify-content: flex-start;
         gap: 12px;
     }
-
-    .categories__wrapper {
+  
+   .categories__wrapper {
         grid-template-columns: 1fr 1fr;
         grid-auto-rows: auto;
     }
@@ -155,4 +153,3 @@
         }
     }
 }
-//test

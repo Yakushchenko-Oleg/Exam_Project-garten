@@ -1,10 +1,11 @@
 import React from 'react'
+import '../../App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
 
 const NavBar = () => {
   return (
-    <nav className='navbar'>
+    <div className='navbar'>
       
       <div className='navbar__logo' >
         <img src='./images/navbar/logo.png' />
@@ -18,17 +19,10 @@ const NavBar = () => {
       </ul>
 
       <div className='navbar__icon-cart'>
-        <NavLink to="/cart"><img className='navbar__icon-cart' src='./images/navbar/Vector.png'/></NavLink> 
+        <NavLink to="/cart"><img className='navbar__icon-cart' src='../../../public/images/navbar/Vector.png'/></NavLink> 
       </div>
-
-      <div className='burger'>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
     
-    </nav>
+    </div>
   )
 }
 
