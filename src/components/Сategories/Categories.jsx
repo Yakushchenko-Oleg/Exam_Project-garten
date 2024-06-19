@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
+import '../../App.scss';
 import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
 import CategoriesItem from "./CategoriesItem";
 
-
-
 // добавить полоску к all categories
-
 
 const Categories = () => {
   const { categories, isLoading, error } = useSelector(
@@ -24,7 +22,6 @@ const Categories = () => {
   useEffect(() => {
     dispatch(fetchAllCategoties());
   }, [dispatch]);
-  console.log(import.meta.env);
 
   return (
     <div className="categories">

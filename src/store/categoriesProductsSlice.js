@@ -1,16 +1,14 @@
 import { createSlice,  createAsyncThunk } from "@reduxjs/toolkit"
 
 
-const URL = `${import.meta.env.APP_API_URL}/categories/`
-
-
+const URL = import.meta.env.APP_API_URL
 
 export const fetchAllCategoties = createAsyncThunk(
   'categories/fetchAllCategoties',
   async function (_, {rejectWithValue}) {
 
     try {
-      const resp = await fetch(`${URL}all`)
+      const resp = await fetch(`${URL}/categories/all`)
       if (!resp.ok) {
         throw new Error('Server Error')
       } 
@@ -26,12 +24,12 @@ export const fetchAllCategoties = createAsyncThunk(
 
 export const fetchProductsfromCategory = createAsyncThunk(
   'categories/fetchProductsfromCategory',
-  async function(id, {rejectWithValue}) {
+  async function(categoryId, {rejectWithValue}) {
 
     try {
-      const resp = await fetch(`${URL}${id}`)
+      const resp = await fetch(`${URL}${categoryId}`)
       if (!resp.ok) {
-        throw new Error('Cen`t get prouscts frpm this category')
+        throw new Error('Cen`t get prouscts from this category')
       } 
 
       const products = resp.json()
@@ -52,8 +50,8 @@ const categoriesProductsSlice = createSlice({
         error: null
           },
     reducers: {// заменить экшны на новые
-        firstReducer(state) {},
-        secondReducer(state) {}
+      firstReducer(state) {},
+      secondReducer(state) {}
     },
     extraReducers: (builder) => {
       builder
@@ -69,7 +67,6 @@ const categoriesProductsSlice = createSlice({
         state.isLoading = null
         state.error = action.payload // Принимает payload (error.message) от rejectWithValue из блока catch
       })
-
       .addCase(fetchProductsfromCategory.pending,(state) => {
         state.isLoading = true, 
         state.error = null

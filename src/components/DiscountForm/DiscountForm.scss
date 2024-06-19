@@ -1,10 +1,16 @@
-@import '../../variables.scss';
+
+
+$primary-green: #92A134;
+$primary-white: #FFFF;
+$primary-grey: #424436;
+$primary-orange: #F26D22;
 
 .discount__container{
     background: linear-gradient(80.46deg, #87933D -0.68%, #55610B 66.66%);
     border-radius: 12px;
-    // padding: 32px 32px 0 32px;
+    padding: 32px 32px 0 32px;
     color: $primary-white;
+  
 }
 
 .discount__title{
@@ -12,7 +18,6 @@
     text-align: center;
     font-weight: 700;
     color: $primary-white;
-    margin-top: 32px;
 }
 
 .form__container{
@@ -29,7 +34,6 @@
 }
 
 .form { 
-    margin-right: 32px;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -38,13 +42,13 @@
 
     &__item {
         width: 100%;
-
         input, select {
             width: 100%;
             padding: 16px 32px;
             border: 1px solid $primary-white;
             border-radius: 6px;
             font-size: 20px;
+            
             background: transparent;
         }
 
@@ -58,12 +62,12 @@
     width: 100%;
     padding: 16px 0;
     background-color: $primary-white;
-    border: 1px solid $primary-white;
     border-radius: 6px;
     color: $primary-grey;
     font-weight: 600;
     font-size: 20px;
-    margin-bottom: 16px;
+    margin: 16px 0;
+   
 }
 
 .discount__btn:hover{
@@ -72,48 +76,4 @@
     color: $primary-white;
          
 }
-
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .discount__title{
-        padding: 0 20px 0 20px;
-        font-size: 50px;
-    }
-}
-
-@media screen and (min-width: 361px) and (max-width: 480px) {
-    .discount__container{
-        padding: 32px 12px 0 12px;
-    }
-    .discount__title{
-        font-size: 42px;
-    }
-    .form__container{
-        flex-direction: column-reverse;
-        img{
-            width: 100%;
-        }
-    }
-    .form { 
-        width: 100%;
-    }
-}
-
-@media screen and (min-width: 200px) and (max-width: 360px) {
-    .discount__container{
-        padding: 32px 12px 0 12px;
-    }
-    .discount__title{
-        font-size: 34px;
-    }
-    .form__container{
-        flex-direction: column-reverse;
-        img{
-            width: 100%;
-            object-position: center;
-            object-fit: cover;
-        }
-    }
-    .form { 
-        width: 100%;
-    }
-}
+// написать медиа запрос на 480 и 360
