@@ -4,22 +4,24 @@ import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
+import CategoriesItem from "./CategoriesItem";
 
 // добавить полоску к all categories
 
 const Categories = () => {
+  const { categories, isLoading, error } = useSelector(
+    (state) => state.categories
+  );
 
-  const {categories, isLoading, error} = useSelector(state => state.categories)
+  const slicedCategories = categories.slice(0, 4);
 
-  const slicedCategories = categories.slice(0,4)
+  const apiUrl = import.meta.env.APP_API_URL;
 
-  const apiUrl = import.meta.env.APP_API_URL
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  useEffect(()=> {
-    dispatch(fetchAllCategoties())
-  },[dispatch])
+  useEffect(() => {
+    dispatch(fetchAllCategoties());
+  }, [dispatch]);
 
   return (
     <div className="categories">
@@ -29,24 +31,18 @@ const Categories = () => {
           <span className="categories__link">All categories</span>
         </Link>
       </div>
-
-      <div className="categories__wrapper">
-        
-      {
-        isLoading ? <div className="loader"></div> 
-        : slicedCategories.map( item =>        
-          <div className="categories__item" key={item.id}>
-            <img src={`${apiUrl}${item.image}`}></img> 
-            {/* узнать как подставлять изображения с сервера и заменить путь */}
-            {/* <img src={item.image}></img>  */}
-            <span>{item.title}</span>
+      
+        {isLoading ? (
+          <div className="loader"></div>
+        ) : ( 
+          <div className="categories__wrapper">
+          {slicedCategories.map( item => (
+            <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
+          ))}
           </div>
-        ) 
-      }
-      {
-        error && <h2> Error from server: {error} </h2>
-      }
-      </div>
+        )}
+        {error && <h2> Error from server: {error} </h2>}
+      
     </div>
   );
 };
