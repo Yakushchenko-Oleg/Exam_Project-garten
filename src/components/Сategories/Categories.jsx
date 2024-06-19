@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import '../../App.scss';
 import "./Categories.scss";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllCategoties } from "../../store/categoriesProductsSlice";
 import CategoriesItem from "./CategoriesItem";
 
 // добавить полоску к all categories
@@ -31,18 +31,17 @@ const Categories = () => {
           <span className="categories__link">All categories</span>
         </Link>
       </div>
-      
-        {isLoading ? (
-          <div className="loader"></div>
-        ) : ( 
-          <div className="categories__wrapper">
-          {slicedCategories.map( item => (
+
+      {isLoading ? (
+        <div className="loader"></div>
+      ) : (
+        <div className="categories__wrapper">
+          {slicedCategories.map((item) => (
             <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
           ))}
-          </div>
-        )}
-        {error && <h2> Error from server: {error} </h2>}
-      
+        </div>
+      )}
+      {error && <h2> Error from server: {error} </h2>}
     </div>
   );
 };
