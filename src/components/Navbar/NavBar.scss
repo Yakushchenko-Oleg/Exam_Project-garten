@@ -51,7 +51,7 @@
    }
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (min-width: 661px) and (max-width: 768px) {
     .navbar {
         padding: 30px 20px 30px 20px;
         &__menu {
@@ -61,9 +61,21 @@
     
 }
 
+@media screen and (min-width: 481px) and (max-width: 661px) {
+    .navbar {
+        padding: 30px 20px 30px 20px;
+        &__menu {
+            gap: 15px;
+            font-size: 18px;
+        }
+    }
+    
+}
+
 @media screen and (min-width: 361px) and (max-width: 480px) {
     .navbar__menu {
         display: none;
+        
     }
     .burger {
         display: block;
