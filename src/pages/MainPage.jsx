@@ -1,4 +1,5 @@
 import React from 'react'
+import '../App.scss'
 
 
 // импрорт всех копмонентов  :
@@ -11,8 +12,7 @@ import Contacts from '../components/Contacts/Contacts'
 
 const MainPage = () => {
   return (
-    <div className='container-1440'> MainPage
-
+    <div> 
       <NavBar />
       <Header />
       <main className='maincontainer'>

@@ -1,8 +1,11 @@
-@import '../../variables.scss';
+$primary-grey: #424436;
+$primary-green: #92A134;
+$primary-white: #FFFF;
+$primary-orange: #F26D22;
 
 .header {
     height: 600px;
-    background-image: url("./images/header/headerimg.jpg");
+    background-image: url("../../../public/images/header/headerimg.jpg");
     background-repeat: no-repeat;
     background-position: 0 100%;
     background-size: cover;
@@ -25,58 +28,24 @@
         border-radius: 5px;
     }
     &__btn:hover{
-        transform: scale(1.1);
         background-color: $primary-orange;
         cursor: pointer;
         color: $primary-white;
     }
 }
 
-// @media screen and (min-width: 1001px) and (max-width: 1440px) {
-//     .header {
-//         padding: 80px 10px 40px 10px;
-//         &__h1 {
-//             font-size: 88px;
-//         }
-//     }
+// @media (min-width: 1000) {
+
 // }
 
-@media screen and (min-width: 998px) and (max-width: 1150px) {
-    .header {
-        padding: 80px 10px 40px 10px;
-        &__h1 {
-            font-size: 88px;
-        }
-    }
-}
+// @media (min-width: 768) {
 
-@media screen and (min-width: 769px) and (max-width: 997px) {
-    .header {
-        padding: 80px 10px 40px 10px;
-        &__h1 {
-            font-size: 80px;
-        }
-    }
-}
+// }
 
+// @media(min-width: 480){
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
-    .header {
-        padding: 80px 10px 40px 10px;
-        &__h1 {
-            font-size: 66px;
-        }
-    }
-}
+// }
 
-@media screen and (min-width: 361px) and (max-width: 480px) {
-    .header__h1 {
-        font-size: 60px;
-    }
-}
+// @media(min-width: 360){
 
-@media screen and (min-width: 150px) and (max-width: 360px) {
-    .header__h1 {
-        font-size: 50px;
-    }
-}
+// }
