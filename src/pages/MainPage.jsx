@@ -18,7 +18,7 @@ const MainPage = () => {
       <main className='maincontainer'>
           <Categories />
           <DiscountForm />
-          {/* <Sales /> */}
+          <Sales />
           <Contacts />
       </main>
      

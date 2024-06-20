@@ -20,6 +20,6 @@ const SingleProduct = ({product}) => {
           <span>{product.title}</span>
         </div>
       );
-}
+    }
 
 export default SingleProduct

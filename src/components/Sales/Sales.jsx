@@ -12,6 +12,8 @@ const Sales = () => {
 const {products, isLoading, error} = useSelector(state => state.products)
 
 const discoutProducts = products.filter(item => item.discont_price)
+console.log(discoutProducts);
+  
 
 const dispatch = useDispatch()
 
@@ -36,10 +38,10 @@ return (
         <div className="loader"></div>
       ) : (
         <div className="sales__wrapper">
+          {/* <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
           <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
           <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
+          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/> */}
         </div>
       )}
       {error && <h2> Error from server: {error} </h2>}
