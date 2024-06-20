@@ -38,10 +38,11 @@ return (
         <div className="loader"></div>
       ) : (
         <div className="sales__wrapper">
-          {/* <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
+          
           <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
           <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/> */}
+          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
+          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
         </div>
       )}
       {error && <h2> Error from server: {error} </h2>}

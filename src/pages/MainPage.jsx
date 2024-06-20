@@ -12,14 +12,15 @@ import Contacts from '../components/Contacts/Contacts'
 
 const MainPage = () => {
   return (
-    <div> 
+    <div className='container-1440'>
+
       <NavBar />
       <Header />
       <main className='maincontainer'>
           <Categories />
           <DiscountForm />
           <Sales />
-          <Contacts />
+          {/* <Contacts/> */}
       </main>
      
     </div>
