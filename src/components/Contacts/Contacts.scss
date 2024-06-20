@@ -1,0 +1,20 @@
+.contacts{
+    h2{
+        font-size: 64px;
+        font-weight: 700;
+    }
+    &__wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+    }
+    .wrapper-item{
+        height: 50%;
+    }
+    .img{
+        width: 100%;
+    }
+
+}
