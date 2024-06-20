@@ -1,9 +1,4 @@
-
-
-$primary-green: #92A134;
-$primary-white: #FFFF;
-$primary-grey: #424436;
-$primary-orange: #F26D22;
+@import '../../variables.scss';
 
 .discount__container{
     background: linear-gradient(80.46deg, #87933D -0.68%, #55610B 66.66%);
@@ -76,4 +71,48 @@ $primary-orange: #F26D22;
     color: $primary-white;
          
 }
-// написать медиа запрос на 480 и 360
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .discount__title{
+        padding: 0 20px 0 20px;
+        font-size: 50px;
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 480px) {
+    .discount__container{
+        padding: 0 12px 0 12px;
+    }
+    .discount__title{
+        font-size: 42px;
+    }
+    .form__container{
+        flex-direction: column-reverse;
+        img{
+            width: 100%;
+        }
+    }
+    .form { 
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 360px) {
+    .discount__container{
+        padding: 0 12px 0 12px;
+    }
+    .discount__title{
+        font-size: 34px;
+    }
+    .form__container{
+        flex-direction: column-reverse;
+        img{
+            width: 100%;
+            object-position: center;
+            object-fit: cover;
+        }
+    }
+    .form { 
+        width: 100%;
+    }
+}

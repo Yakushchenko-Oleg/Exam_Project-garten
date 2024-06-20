@@ -12,6 +12,8 @@ const Sales = () => {
 const {products, isLoading, error} = useSelector(state => state.products)
 
 const discoutProducts = products.filter(item => item.discont_price)
+console.log(discoutProducts);
+  
 
 const dispatch = useDispatch()
 

@@ -14,45 +14,30 @@ $primary-orange: #F26D22;
   color: $primary-grey;
 }
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Montserrat;
-    color: $primary-grey;
-  }
+// главный контэйнер
+.container-1440 {
+  margin: 0 auto;
+  max-width: 1440px;
+}
 
   .maincontainer{
     margin: 80px 40px 80px 40px;
     display: flex;
     flex-direction: column;
     gap: 80px;
-  }
+}
 
-  /* HTML: <div class="loader"></div> */
 .loader {
-  width: 60px;
-  aspect-ratio: 1;
-  border: 15px solid #ddd;
-  border-radius: 50%;
-  position: relative;
-  transform: rotate(45deg);
+  margin: 0 auto;
+  width: 120px;
+  height: 20px;
+  border-radius: 20px;
+  background:
+      linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
+  animation: l2 2s infinite steps(10);
 }
-
-.loader::before {
-  content: "";
-  position: absolute;
-  inset: -15px;
-  border-radius: 50%;
-  border: 15px solid #514b82;
-  animation: l18 2s infinite linear;
+@keyframes l2 {
+  100% {
+      background-size: 110%
+  }
 }
-
-@keyframes l18 {
-    0%   {clip-path:polygon(50% 50%,0 0,0    0,0    0   ,0    0   ,0    0   )}
-    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0   ,100% 0   ,100% 0   )}
-    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0    100%,0    100%)}
-    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0    100%,0    0   )}
-}
-
