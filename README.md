@@ -28,4 +28,6 @@ Daily Srum Meeting- SPRINT 1
 ? в медиа не появляется бургер меню
 
 //this is the test elena
-//this is THE TEST CONFLICT с моей ветки 2106,2 в лэссон 
+//this is the testConflict +
+//this is THE TEST CONFLICT с моей ветки 2106,2 в лэссон =
+// Result of my Test
