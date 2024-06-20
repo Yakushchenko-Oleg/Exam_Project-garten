@@ -4,7 +4,7 @@
     height: 600px;
     background-image: url("./images/header/headerimg.jpg");
     background-repeat: no-repeat;
-    background-position: 0 100%;
+    background-position: 50%;
     background-size: cover;
     padding: 80px 40px 40px 40px;
 
@@ -32,14 +32,7 @@
     }
 }
 
-// @media screen and (min-width: 1001px) and (max-width: 1440px) {
-//     .header {
-//         padding: 80px 10px 40px 10px;
-//         &__h1 {
-//             font-size: 88px;
-//         }
-//     }
-// }
+// исправления 20.06
 
 @media screen and (min-width: 998px) and (max-width: 1150px) {
     .header {
@@ -70,8 +63,11 @@
 }
 
 @media screen and (min-width: 361px) and (max-width: 480px) {
+    .header {
+        padding: 80px 10px 40px 10px;
     .header__h1 {
         font-size: 60px;
+        }
     }
 }
 

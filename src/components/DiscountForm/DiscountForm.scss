@@ -3,7 +3,7 @@
 .discount__container{
     background: linear-gradient(80.46deg, #87933D -0.68%, #55610B 66.66%);
     border-radius: 12px;
-    padding: 32px 32px 0 32px;
+    // padding: 32px 32px 0 32px;
     color: $primary-white;
   
 }
@@ -13,6 +13,7 @@
     text-align: center;
     font-weight: 700;
     color: $primary-white;
+    margin-top: 32px;
 }
 
 .form__container{
@@ -29,6 +30,7 @@
 }
 
 .form { 
+    margin-right: 32px;
     width: 50%;
     display: flex;
     flex-direction: column;
@@ -43,7 +45,6 @@
             border: 1px solid $primary-white;
             border-radius: 6px;
             font-size: 20px;
-            
             background: transparent;
         }
 
@@ -62,7 +63,7 @@
     font-weight: 600;
     font-size: 20px;
     margin: 16px 0;
-   
+    margin-bottom: 16px;
 }
 
 .discount__btn:hover{
@@ -81,9 +82,10 @@
 
 @media screen and (min-width: 361px) and (max-width: 480px) {
     .discount__container{
-        padding: 0 12px 0 12px;
+        padding: 32px 12px 0 12px;
     }
     .discount__title{
+        margin-top: 0;
         font-size: 42px;
     }
     .form__container{
@@ -99,7 +101,7 @@
 
 @media screen and (min-width: 200px) and (max-width: 360px) {
     .discount__container{
-        padding: 0 12px 0 12px;
+        padding: 32px 12px 0 12px;
     }
     .discount__title{
         font-size: 34px;
