@@ -19,7 +19,7 @@ const NavBar = () => {
       </ul>
 
       <div className='navbar__icon-cart'>
-        <NavLink to="/cart"><img className='navbar__icon-cart' src='../../../public/images/navbar/Vector.png'/></NavLink> 
+        <NavLink to="/cart"><img className='navbar__icon-cart' src='./images/navbar/Vector.png'/></NavLink> 
       </div>
     
     </div>
