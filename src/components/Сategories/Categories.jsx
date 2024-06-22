@@ -4,7 +4,7 @@ import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
-import CategoriesItem from "./CategoriesItem";
+import CategoriesItem from "../CategoriesItem/CategoriesItem";
 
 // добавить полоску к all categories
 
