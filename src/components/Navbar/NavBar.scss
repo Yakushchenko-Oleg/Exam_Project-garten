@@ -31,7 +31,7 @@
         cursor: pointer;
     }
 
-    .burger{
+    &__burger{
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -41,14 +41,14 @@
         justify-content: center;
         width: 32px;
         display: none;
-    }
-    
-    .burger span{
+        
+        span{
         width: 100%;
         height: 2px;
         transform: scale(1);
         background-color: $primary-grey;
-   }
+        }
+    }
 }
 
 @media screen and (min-width: 661px) and (max-width: 768px) {
@@ -75,9 +75,9 @@
 @media screen and (min-width: 361px) and (max-width: 480px) {
     .navbar__menu {
         display: none;
-        
     }
-    .burger {
+    
+    .navbar__burger {
         display: block;
     }
  }

@@ -1,10 +1,13 @@
 @import '../../variables.scss';
 
 .categories{
-
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    
     &__header-wrapper{
         display: flex;
-        justify-content: space-between;
+        
         align-items: center;
         margin-bottom: 40px;
 
@@ -15,25 +18,24 @@
 
         .categories__line{
             height: 1px;
-            width: 100%;
+            
+            flex-grow: 1; // Занимает доступное свободное пространство
             margin-left: 32px;
             align-items: center;
             background: #8b8b8b85;
-            // display: block;
-            display: none;
+            display: block;
         }
 
         .categories__link {
-            // text-decoration: none;
+            
             font-size: 16px;
             color: #8B8B8B;
-            align-content: center;
+            
             border-radius: 5px;
             padding: 8px 16px;
             border: 1px solid #8b8b8b85;
-            display: inline-block;
-            // height: 36px;
-        }
+            display: block;
+         }
     }
 
     &__wrapper{
@@ -42,46 +44,14 @@
         
         grid-auto-rows: auto; 
         gap: 20px;
-        
-        .categories__item {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-
-            img{
-                min-height: 350px;
-                border-radius: 10px;
-                width: 100%;
-                object-fit: cover;
-            }
-            span{
-                margin-top: 16px;
-                text-align: center;
-                font-weight: 500px;
-                font-size: 20px;
-            }
-        }
-
-        .categories__item:hover {
-            transform: scale(1.1);
-            box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
-        }
     }
-
-    .loader {
-        margin: 0 auto;
-        width: 120px;
-        height: 20px;
-        border-radius: 20px;
-        background:
-            linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
-        animation: l2 2s infinite steps(10);
-    }
-    @keyframes l2 {
-        100% {
-            background-size: 110%
-        }
-    }
+    
+    &__link-hidden{
+        display: none;
+        align-self: center;
+        // margin: 0 auto;
+        margin-top: 24px;
+   }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1000px) {
@@ -122,7 +92,7 @@
 
         .categories__link {
             font-size: 12px;
-            display:none;
+            // display:none;
         }
     }
 
@@ -148,6 +118,10 @@
             font-size: 36px;
         }
 
+        .categories__line {
+            display: none;
+        }
+
         .categories__link {
             font-size: 12px;
             display: none;
@@ -157,6 +131,9 @@
     .categories__wrapper {
         grid-template-columns: 1fr;
         gap: 10px;
+    }
 
+    .categories__link-hidden{
+        display: block;
     }
 }

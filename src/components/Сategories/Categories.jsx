@@ -4,7 +4,7 @@ import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
-import CategoriesItem from "./CategoriesItem";
+import CategoriesItem from "../CategoriesItem/CategoriesItem";
 
 // добавить полоску к all categories
 
@@ -47,6 +47,10 @@ const Categories = () => {
           )
         }
         {error && <h2> Error from server: {error} </h2>}
+
+      <Link to="/categories">
+        <span className="categories__link categories__link-hidden">All categories</span>
+      </Link>  
       
     </div>
   );

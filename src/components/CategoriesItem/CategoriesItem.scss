@@ -1,0 +1,27 @@
+@import '../../variables.scss';
+
+.categories__item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    img{
+        min-height: 350px;
+        border-radius: 10px;
+        width: 100%;
+        object-fit: cover;
+    }
+    span{
+        margin-top: 16px;
+        text-align: center;
+        font-weight: 500px;
+        font-size: 20px;
+    }
+
+    .categories__item:hover {
+        transform: scale(1.1);
+        box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+    }
+}
+
+// media к CategoriesItem прописаны в Categories.scss 
