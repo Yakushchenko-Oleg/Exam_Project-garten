@@ -20,6 +20,7 @@ const NavBar = () => {
 
       <div className='navbar__icon-cart'>
         <NavLink to="/cart"><img className='navbar__icon-cart' src='./images/navbar/Vector.png'/></NavLink> 
+
       </div>
 
       <div className='navbar__burger'>

@@ -33,15 +33,19 @@ const Categories = () => {
         </Link>
       </div>
       
-        {isLoading ? (
-          <div className="loader"></div>
-        ) : ( 
-          <div className="categories__wrapper">
-          {slicedCategories.map( item => (
-            <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
-          ))}
-          </div>
-        )}
+        {
+          isLoading ? (
+            <div className="loader"></div>
+          ) : ( 
+            <div className="categories__wrapper">
+            {
+              slicedCategories.map( item => (
+                <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
+              ))
+            }
+            </div>
+          )
+        }
         {error && <h2> Error from server: {error} </h2>}
 
       <Link to="/categories">

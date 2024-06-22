@@ -7,7 +7,7 @@
   margin: 0;
   box-sizing: border-box;
 
-  font-family: Montserrat;
+  font-family: "Montserrat", sans-serif;
   color: $primary-grey;
 }
 
@@ -19,6 +19,7 @@ a {
 .container-1440 {
   margin: 0 auto;
   max-width: 1440px;
+  background-color: $body-white;
 }
 
 .maincontainer{
