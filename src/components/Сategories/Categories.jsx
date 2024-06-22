@@ -43,6 +43,10 @@ const Categories = () => {
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
+
+      <Link to="/categories">
+        <span className="categories__link categories__link-hidden">All categories</span>
+      </Link>  
       
     </div>
   );
