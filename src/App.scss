@@ -11,17 +11,21 @@
   color: $primary-grey;
 }
 
+a {
+  text-decoration: none;
+}
+
 // главный контэйнер
 .container-1440 {
   margin: 0 auto;
   max-width: 1440px;
 }
 
-  .maincontainer{
-    margin: 80px 40px 80px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+.maincontainer{
+  margin: 80px 40px 80px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
 }
 
 .loader {
