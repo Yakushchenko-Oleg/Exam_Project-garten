@@ -7,21 +7,26 @@ import SingleProduct from '../SingleProduct/SingleProduct'
 import { Link } from 'react-router-dom'
 
 
+
 const Sales = () => {
 
 const {products, isLoading, error} = useSelector(state => state.products)
 
 const discoutProducts = products.filter(item => item.discont_price)
-console.log(discoutProducts);
-  
 
+  
 const dispatch = useDispatch()
 
 useEffect(()=> {dispatch(fetchAllProducts())},[dispatch])
 
-function randomIndexInArray(array) {
-   return Math.floor(Math.random() * array.length)
+function mixArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const randomObj = Math.floor(Math.random() * (i + 1));
+      [array[i], array[randomObj]] = [array[randomObj], array[i]];
+  }
+  return array;
 }
+
 
 return (
 
@@ -38,11 +43,11 @@ return (
         <div className="loader"></div>
       ) : (
         <div className="sales__wrapper">
-          
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
+          {
+            discoutProducts && mixArray(discoutProducts).slice(0,4).map(item =>
+              <SingleProduct product={item} key={item.id}/>
+            )
+          }
         </div>
       )}
       {error && <h2> Error from server: {error} </h2>}
