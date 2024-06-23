@@ -20,7 +20,7 @@ const MainPage = () => {
           <Categories />
           <DiscountForm />
           <Sales />
-          {/* <Contacts/> */}
+          <Contacts/>
       </main>
      
     </div>
