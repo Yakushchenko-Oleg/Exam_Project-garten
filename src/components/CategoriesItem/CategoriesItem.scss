@@ -7,7 +7,7 @@
 
     img{
         min-height: 350px;
-        border-radius: 10px;
+        border-radius: radius-big;
         width: 100%;
         object-fit: cover;
     }
@@ -17,11 +17,11 @@
         font-weight: 500px;
         font-size: 20px;
     }
-
-    .categories__item:hover {
-        transform: scale(1.1);
-        box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
-    }
 }
 
-// media к CategoriesItem прописаны в Categories.scss 
+.categories__item:hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+}
+
+// media к CategoriesItem прописаны в Categories.scss

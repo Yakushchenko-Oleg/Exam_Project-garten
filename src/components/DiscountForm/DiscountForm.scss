@@ -2,7 +2,7 @@
 
 .discount__container{
     background: linear-gradient(80.46deg, #87933D -0.68%, #55610B 66.66%);
-    border-radius: 12px;
+    border-radius: $radius-big;
     // padding: 32px 32px 0 32px;
     color: $primary-white;
   
@@ -43,7 +43,7 @@
             width: 100%;
             padding: 16px 32px;
             border: 1px solid $primary-white;
-            border-radius: 6px;
+            border-radius: $radius-small;
             font-size: 20px;
             background: transparent;
         }
@@ -58,7 +58,7 @@
     width: 100%;
     padding: 16px 0;
     background-color: $primary-white;
-    border-radius: 6px;
+    border-radius: $radius-small;
     color: $primary-grey;
     font-weight: 600;
     font-size: 20px;
