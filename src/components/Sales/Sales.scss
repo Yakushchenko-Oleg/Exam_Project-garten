@@ -14,10 +14,12 @@
             font-weight: 700;
         }
         &_line{
-            height: 0;
-            width: 100%;
+            height: 1px;
+            flex-grow: 1; // Занимает доступное свободное пространство
             margin-left: 32px;
-            border: 1px solid #DDDDDD;
+            align-items: center;
+            background: $text-grey;
+            display: block;
         }
 
 

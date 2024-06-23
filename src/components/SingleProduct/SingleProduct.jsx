@@ -16,7 +16,6 @@ if(!product){
               <div className="singleProduct__discount-container">
                 <span>{`-${discountCounter(product)}%`}</span>
               </div>
-
           }
            
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
