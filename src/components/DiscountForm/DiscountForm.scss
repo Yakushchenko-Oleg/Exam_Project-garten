@@ -43,8 +43,9 @@
             width: 100%;
             padding: 16px 32px;
             border: 1px solid $primary-white;
-            border-radius: 6px;
+            border-radius: $radius-small;
             font-size: 20px;
+            font-weight: 600;
             background: transparent;
         }
 
@@ -58,7 +59,8 @@
     width: 100%;
     padding: 16px 0;
     background-color: $primary-white;
-    border-radius: 6px;
+    border: none;
+    border-radius: $radius-small;
     color: $primary-grey;
     font-weight: 600;
     font-size: 20px;
@@ -71,6 +73,13 @@
     cursor: pointer;
     color: $primary-white;
          
+}
+.errornessage{
+    color: $primary-orange;
+    padding-top: 5px;
+    font-size: 15px;
+    font-weight: 400;
+
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
