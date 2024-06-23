@@ -1,4 +1,5 @@
 @import '../../variables.scss';
+@import '../../mixin.scss';
 
 .header {
     height: 600px;
@@ -9,7 +10,8 @@
     padding: 80px 40px 40px 40px;
 
     &__h1 {
-        font-size: 96px;
+        // font-size: от 96 до 46;
+        @include adaptiv-font(96, 46);
         font-weight: bold;
         color: $primary-white;
         margin-bottom: 40px;
@@ -19,10 +21,11 @@
         background-color: $primary-green;
         color: $primary-white;
         padding: 16px 56px 16px 56px;
-        font-size: 20px;
+        // font-size: 20px;
+        @include adaptiv-font(20, 18);
         font-weight: 500;
         border: none;
-        border-radius: 5px;
+        border-radius: $radius-small;
     }
     &__btn:hover{
         transform: scale(1.1);
@@ -32,47 +35,30 @@
     }
 }
 
-// исправления 20.06
-
-@media screen and (min-width: 998px) and (max-width: 1150px) {
-    .header {
-        padding: 80px 10px 40px 10px;
-        &__h1 {
-            font-size: 88px;
-        }
-    }
-}
-
-@media screen and (min-width: 769px) and (max-width: 997px) {
-    .header {
-        padding: 80px 10px 40px 10px;
-        &__h1 {
-            font-size: 80px;
-        }
-    }
-}
-
+// исправления 23.06
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .header {
-        padding: 80px 10px 40px 10px;
-        &__h1 {
-            font-size: 66px;
-        }
+        padding: 60px 20px 20px 40px;
     }
 }
 
 @media screen and (min-width: 361px) and (max-width: 480px) {
     .header {
-        padding: 80px 10px 40px 10px;
-    .header__h1 {
-        font-size: 60px;
+        padding: 50px 20px 20px 24px;
+
+        &__h1 {
+            margin-bottom: 24px;
         }
     }
 }
 
-@media screen and (min-width: 150px) and (max-width: 360px) {
-    .header__h1 {
-        font-size: 50px;
+@media screen and (min-width: 300px) and (max-width: 360px) {
+    .header {
+        padding: 50px 10px 10px 24px;
+
+        &__h1 {
+            margin-bottom: 24px;
+        }
     }
 }
