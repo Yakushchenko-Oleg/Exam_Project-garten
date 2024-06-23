@@ -30,7 +30,6 @@
             // font-size: 16px;
             @include adaptiv-font(16, 12);
             color: $text-grey;
-            
             border-radius: $radius-small;
             padding: 8px 16px;
             border: 1px solid #8b8b8b85;
@@ -67,7 +66,7 @@
     .categories__header-wrapper {
         margin-bottom: 32px;
     }
-
+  
     .categories__wrapper {
         grid-template-columns: 1fr 1fr;
         }
@@ -76,13 +75,13 @@
 @media screen and (min-width: 361px) and (max-width: 480px) {
     .categories__header-wrapper {
         margin-bottom: 24px;
-        h2 {
-            font-size: 42px;
+        justify-content: space-between;
+       
+        .categories__link {
+            padding: 8px 8px;
         }
-
-    .categories__link {
-        font-size: 12px;
-            // display:none;
+        .categories__line{
+            display: none;
         }
     }
 
@@ -100,16 +99,11 @@
         gap: 12px;
         margin-bottom: 24px;
 
-        h2 {
-            font-size: 36px;
-        }
-
         .categories__line {
             display: none;
         }
 
         .categories__link {
-            font-size: 12px;
             display: none;
         }
     }
