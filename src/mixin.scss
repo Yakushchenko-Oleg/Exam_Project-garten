@@ -1,0 +1,13 @@
+
+$maxWidth: 1440;
+
+@mixin adaptiv-font($curSize, $minSize) {
+  $addSize: $curSize - $minSize;
+  $addMobSize: $addSize + $addSize * 0.7; //70%
+  @media (max-width: 1440px) {
+    font-size: calc(#{$minSize + px} + #{$addMobSize} * ((100vw - 360px) / #{$maxWidth}));
+  }
+  @media (min-width: 1440px) {
+    font-size: calc(#{$minSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
