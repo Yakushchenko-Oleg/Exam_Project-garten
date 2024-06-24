@@ -5,9 +5,11 @@
     display: flex;
     flex-direction: column;
     border-radius: $radius-big;
-    justify-content: space-between;
+    // justify-content: space-between;
     position: relative;
     z-index: 1;
+    width: 100%;
+    height: 100%;
    
     img {
         width: 100%;
