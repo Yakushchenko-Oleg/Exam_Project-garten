@@ -45,7 +45,6 @@
             padding: 16px 32px;
             border: 1px solid $primary-white;
             border-radius: $radius-small;
-            // font-size: 20px;
             @include adaptiv-font(20, 18);
             font-weight: 600;
             background: transparent;
@@ -65,9 +64,8 @@
     border-radius: $radius-small;
     color: $primary-grey;
     font-weight: 600;
-    // font-size: 20px;
     @include adaptiv-font(20, 18);
-    margin: 16px 0;
+    // margin: 16px 0;
     margin-bottom: 16px;
 }
 

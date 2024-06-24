@@ -33,7 +33,7 @@ return (
   <div className="sales">
       <div className="sales__header-wrapper">
         <h2>Sale</h2>
-        <div className="sales__header-wrapper_line"></div>
+        <div className="sales__line"></div>
         <Link to="/allsales">
           <span className="sales__link">All sales</span>
         </Link>
@@ -51,7 +51,13 @@ return (
         </div>
       )}
       {error && <h2> Error from server: {error} </h2>}
+
+    <Link to="/allsales">
+          <span className="sales__link sales__link-hidden">All sales</span>
+    </Link>  
+    
     </div>
   )
 }
 export default Sales
+

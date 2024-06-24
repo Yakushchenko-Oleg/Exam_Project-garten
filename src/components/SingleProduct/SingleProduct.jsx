@@ -10,30 +10,29 @@ if(!product){
    const discountCounter = (product) => Math.round(100-(product.discont_price / product.price * 100))
   
     return (
-        <div className="singleProduct" key={product.id}>
-          {
-            product.discont_price &&  
-              <div className="singleProduct__discount-container">
-                <span>{`-${discountCounter(product)}%`}</span>
-              </div>
-          }
-           
+      <div className="singleProduct" key={product.id}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
 
-          <div className="singleProduct__info-cont">
-            <h4 className="singleProduct__info-cont_title">{product.title}</h4>
-            <span className="singleProduct__info-cont_price" >
-              {`$${product.discont_price}`}
-              {
-                product.discont_price &&  
-                <span>
-                 {`$${product.price}`}
-                </span>
-              }
-            </span>
-          </div>
+          <span className="discount">{`-${discountCounter(product)}%`}</span>
+
+
+          {/* {
+            product.discont_price &&  (
+  
+          )}   */}
           
+        <div className="singleProduct__info">
+            <h4 className="info-title">{product.title}</h4>
+
+            <span className="info-price" >
+              {`$${product.discont_price}`}
+
+              {product.discont_price && ( 
+                <span>{`$${product.price}`}</span>
+            )}
+            </span>
         </div>
+      </div>
       );
     }
 
