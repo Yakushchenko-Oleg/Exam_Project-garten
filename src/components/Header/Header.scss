@@ -35,7 +35,7 @@
     }
 }
 
-// исправления 23.06
+// исправления 24.06
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .header {
@@ -59,6 +59,10 @@
 
         &__h1 {
             margin-bottom: 24px;
+        }
+
+        &__btn {
+            padding: 16px 42px 16px 42px;
         }
     }
 }

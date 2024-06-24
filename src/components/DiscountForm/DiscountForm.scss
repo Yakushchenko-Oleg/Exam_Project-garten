@@ -82,7 +82,6 @@
     padding-top: 5px;
     font-size: 15px;
     font-weight: 400;
-
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -96,7 +95,6 @@
         padding: 16px 20px;
         }
     }
-
 }
 
 @media screen and (min-width: 361px) and (max-width: 480px) {
@@ -136,5 +134,11 @@
     }
     .form { 
         width: 100%;
+    }
+
+    .form__item{
+        input{
+            padding: 16px 10px;
+        }
     }
 }
