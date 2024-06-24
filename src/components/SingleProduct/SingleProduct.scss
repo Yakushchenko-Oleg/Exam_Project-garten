@@ -1,4 +1,5 @@
 @import '../../variables.scss';
+@import '../../mixin.scss';
 
 .singleProduct {
     position: relative;
@@ -21,7 +22,7 @@
 
         span{
             color: $primary-white;
-            font-size: 20px;
+            @include adaptiv-font(20, 18);
             font-weight: 600;
             line-height: 26px;
             letter-spacing: 0.03em;
@@ -47,7 +48,7 @@
 
         &_title{
             font-weight: 500;
-            font-size: 20px;
+            @include adaptiv-font(20, 18);
             display: block;
             width: 100%;
             overflow: hidden;
@@ -57,7 +58,7 @@
         }
 
         &_price{
-            font-size: 40px;
+            @include adaptiv-font(40, 36);
             font-weight: 600;
             line-height: 44px;
 
@@ -67,7 +68,7 @@
                 color: $text-grey;
                 text-decoration-line: line-through;
                 font-weight: 500;
-                font-size: 20px;
+                @include adaptiv-font(20, 18);
 
             }
         }       

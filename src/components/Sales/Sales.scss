@@ -1,5 +1,5 @@
 @import '../../variables.scss';
-
+@import '../../mixin.scss';
 
 .sales{
 
@@ -10,7 +10,7 @@
         margin-bottom: 40px;
 
         h2{
-            font-size: 64px;
+            @include adaptiv-font(64, 40);
             font-weight: 700;
         }
         &_line{
@@ -24,7 +24,7 @@
 
 
         .sales__link{
-            font-size: 16px;
+            @include adaptiv-font(16, 12);
             color: #8B8B8B;
             align-content: center;
             border-radius: 5px;
@@ -60,7 +60,7 @@
                 margin-top: 16px;
                 text-align: center;
                 font-weight: 500px;
-                font-size: 20px;
+                @include adaptiv-font(20, 18);
             }
         }
 
@@ -125,15 +125,15 @@
         gap: 12px;
     }
 
-    .sales__header-wrapper {
-        h2 {
-            font-size: 42px;
-        }
+    // .sales__header-wrapper {
+    //     // h2 {
+    //     //     font-size: 42px;
+    //     // }
 
-        .sales__link {
-            font-size: 12px;
-        }
-    }
+    //     .sales__link {
+    //         font-size: 12px;
+    //     }
+    // }
 
     .sales__wrapper {
         grid-template-columns: 1fr 1fr;
