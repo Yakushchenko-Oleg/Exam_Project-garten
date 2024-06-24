@@ -1,53 +1,46 @@
 @import '../../variables.scss';
+@import '../../mixin.scss';
 
 .singleProduct {
-    position: relative;
     display: flex;
     flex-direction: column;
-    z-index: 2;
-    max-width: 316px;
-    border: 1px solid $border-grey;
-    background-color: $primary-white;
     border-radius: $radius-big;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+   
+    img {
+        width: 100%;
+        min-height: 350px;
+        object-fit: cover;
+        border-bottom: 1px solid $border-grey;
+        border-radius: $radius-big $radius-big 0 0;
+    }
 
-    &__discount-container{
-        position: absolute;
-        z-index: 999;
-        right: 16px;
-        top: 16px;
-        background-color: $primary-orange;
-        padding: 4px 8px;
-        border-radius: $radius-small;
-
-        span{
+    .discount{
+            position: absolute;
+            z-index: 999;
+            right: 16px;
+            top: 16px;
+            background-color: $primary-orange;
+            padding: 4px 8px;
+            border-radius: $radius-small;
+    
             color: $primary-white;
-            font-size: 20px;
+            @include adaptiv-font(20, 18);
             font-weight: 600;
             line-height: 26px;
             letter-spacing: 0.03em;
-        }
-    }
-
-    img {
-        // min-height: 284px;
-        position: relative;
-        z-index: 1;
-        object-fit: cover;
-        height: 100%;
-        max-width: 316px;
+    } 
+        
+    &__info{
         width: 100%;
-        object-fit: cover;
-        border-bottom: 1px solid $border-grey;
-
-    }
-    
-    &__info-cont{
         margin-top: 20px;
         padding: 0 32px 32px;
 
-        &_title{
+        .info-title{
             font-weight: 500;
-            font-size: 20px;
+            @include adaptiv-font(20, 18);
             display: block;
             width: 100%;
             overflow: hidden;
@@ -56,25 +49,55 @@
             padding-bottom: 16px;
         }
 
-        &_price{
-            font-size: 40px;
+        .info-price{
+            @include adaptiv-font(40, 36);
             font-weight: 600;
             line-height: 44px;
 
             span{
-
                 padding-left: 16px;
                 color: $text-grey;
                 text-decoration-line: line-through;
                 font-weight: 500;
-                font-size: 20px;
-
+                @include adaptiv-font(20, 18);
             }
         }       
     }
 }
-
+ 
 .singleProduct:hover {
     transform: scale(1.03);
     box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+}
+
+@media screen and (min-width: 769px) and (max-width: 1000px) {
+    .singleProduct {
+        img {
+            min-height: 250px;
+        }
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .singleProduct {
+        img{
+            min-height: 250px;
+        }
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 480px) {
+    .singleProduct {
+        img{
+            min-height: 254px;
+        }
+    }
+}
+
+@media screen and (min-width: 200px) and (max-width: 360px) {
+    .singleProduct {
+        img{
+            min-height: 220px;
+        }
+    }
 }

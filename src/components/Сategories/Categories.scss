@@ -22,7 +22,7 @@
             flex-grow: 1; // Занимает доступное свободное пространство
             margin-left: 32px;
             // align-items: center;
-            background: #DDDDDD;
+            background: $text-grey;
             display: block;
         }
 
@@ -32,7 +32,7 @@
             color: $text-grey;
             border-radius: $radius-small;
             padding: 8px 16px;
-            border: 1px solid #8b8b8b85;
+            border: 1px solid $text-grey;
             display: block;
          }
     }
