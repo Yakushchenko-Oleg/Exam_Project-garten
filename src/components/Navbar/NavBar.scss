@@ -8,7 +8,6 @@
     padding: 30px 40px 30px 40px;
 
     &__menu {
-        // font-size: 20px;
         @include adaptiv-font(20, 12);
         line-height: 130%;
         list-style: none;
@@ -71,14 +70,19 @@
 
 @media screen and (min-width: 361px) and (max-width: 480px) {
     .navbar {
+        
         padding: 30px 20px 30px 20px;
-
+        
         &__menu {
             display: none;
         }
     
         &__burger {
-            display: block;
+            display: flex;
+        }
+
+        &__icon-cart{
+            margin-left: 70px;
         }
     }
 }
@@ -86,14 +90,18 @@
  @media screen and (min-width: 200px) and (max-width: 360px) {
     .navbar {
         padding: 30px 20px 30px 20px;
-
+        
         &__menu {
             display: none;
         }
         
         &__burger {
-            display: block;
+            display: flex;
         }
+
+        &__icon-cart{
+            margin-left: 40px;
+        }   
     }
 }
 

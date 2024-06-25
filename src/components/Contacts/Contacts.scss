@@ -1,6 +1,8 @@
 /* src/components/Contacts/Contacts.scss */
+@import '../../mixin.scss';
+
 .footer {
-    background-color: #FFFFF1; 
+    // background-color: #FFFFF1; 
     text-align: left; 
     gap: 40px;
     
@@ -14,8 +16,8 @@
 }
 
 .contact-title {
-    font-size: 64px; 
-    color: #424436; 
+    @include adaptiv-font(64, 40);
+    // color: #424436; 
     font-weight: 700; 
     line-height: 70.4px;
     margin-bottom: 20px;

@@ -12,7 +12,6 @@
         margin-bottom: 40px;
 
         h2{
-            // font-size: 64px;
             @include adaptiv-font(64, 40);
             font-weight: 700;
         }
@@ -21,14 +20,13 @@
             height: 1px;
             flex-grow: 1; // Занимает доступное свободное пространство
             margin-left: 32px;
-            // align-items: center;
             background: $text-grey;
             display: block;
         }
 
         .categories__link {
-            // font-size: 16px;
             @include adaptiv-font(16, 12);
+            align-content: center;
             color: $text-grey;
             border-radius: $radius-small;
             padding: 8px 16px;
@@ -39,9 +37,7 @@
 
     &__wrapper{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        
-        grid-auto-rows: auto; 
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: auto; 
         gap: 20px;
     }
     
@@ -68,7 +64,7 @@
     }
   
     .categories__wrapper {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
         }
 }
 
@@ -78,17 +74,31 @@
         justify-content: space-between;
        
         .categories__link {
-            padding: 8px 8px;
+            padding: 8px 5px;
         }
         .categories__line{
             display: none;
         }
     }
+}
+
+@media screen and (min-width: 361px) and (max-width: 420px) {
+    .categories__header-wrapper {
+        .categories__line {
+            display: none;
+        }
+
+        .categories__link {
+            display: none;
+        }
+    }
 
     .categories__wrapper {
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: auto;
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .categories__link-hidden{
+        display: block;
     }
 }
 
@@ -109,8 +119,7 @@
     }
 
     .categories__wrapper {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
     .categories__link-hidden{

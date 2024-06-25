@@ -20,7 +20,6 @@
             height: 1px;
             flex-grow: 1; // Занимает доступное свободное пространство
             margin-left: 32px;
-            // align-items: center;
             background: $text-grey;
             display: block;
         }
@@ -38,8 +37,7 @@
 
     &__wrapper{
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        // max-width: 1360px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-auto-rows: auto; 
         gap: 20px;
     }
@@ -56,9 +54,6 @@
     .sales__header-wrapper {
         margin-bottom: 32px;
     }
-    .sales__wrapper {
-        gap: 10px;
-    }
 }
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
@@ -66,7 +61,7 @@
         margin-bottom: 32px;
     }
     .sales__wrapper {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
     }
 }
 
@@ -84,9 +79,27 @@
     }
 
     .sales__wrapper {
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: auto;
-        gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+}
+
+@media screen and (min-width: 361px) and (max-width: 420px) {
+    .sales__header-wrapper {
+        .sales__line {
+            display: none;
+        }
+
+        .sales__link {
+            display: none;
+        }
+    }
+
+    .sales__wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .sales__link-hidden{
+        display: block;
     }
 }
 
@@ -107,8 +120,7 @@
     }
 
     .sales__wrapper {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
     .sales__link-hidden{
