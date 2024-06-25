@@ -48,6 +48,7 @@
             @include adaptiv-font(20, 18);
             font-weight: 600;
             background: transparent;
+            overflow: hidden;
         }
 
         input::placeholder {
