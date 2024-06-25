@@ -15,7 +15,7 @@ export const handleGetDiscount = async (formData) => {
         if (!responce.ok) {
             throw new Error('Failed to send a discount request')
         } else {
-            localStorage.setItem('discont', true)
+            
         }
         return data
         

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../App.scss'
 import  './DiscountForm.scss'
 import { useForm } from "react-hook-form"
@@ -21,11 +21,17 @@ const DiscountForm = () => {
 
   const handleDiscountSubmit = (data) => {
     handleGetDiscount(data)
+    localStorage.setItem('discount', true)
     reset()
   }
 
-   const [isDiscont, setIsDiscount] = useState( localStorage.getItem('discont')) // пока не работаеь эта конструкция
-   console.log(isDiscont);
+  const [isDiscount, setIsDiscount] = useState( false) // пока не работаеь эта конструкция
+
+useEffect(()=> { setIsDiscount(localStorage.getItem('discount'))
+
+},[localStorage.getItem('discount')])
+
+   console.log(isDiscount);
   
   return (
     <div className="discount__container">
@@ -89,7 +95,7 @@ const DiscountForm = () => {
           </p>
           <button className="discount__btn" disabled={isSubmitting}> 
             {
-              isDiscont === true? "You've got a discount" :'Get a discount' // пока не работаеь эта конструкция
+              isDiscount === true? "You've got a discount" :'Get a discount' // пока не работаеь эта конструкция
             }
             
             </button>

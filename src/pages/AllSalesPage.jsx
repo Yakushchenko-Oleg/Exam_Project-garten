@@ -1,9 +1,7 @@
 import React from 'react'
 
 const AllSalesPage = () => {
-  return (
-    <div>AllSalesPage</div>
-  )
+  <main className='maincontainer'> AllSalesPage </main>
 }
 
 export default AllSalesPage
