@@ -31,7 +31,7 @@
             border-radius: $radius-small;
             padding: 8px 16px;
             border: 1px solid $text-grey;
-            display: block;
+            display: inline-block;
          }
     }
 
@@ -43,9 +43,13 @@
     
     &__link-hidden{
         display: none;
-        align-self: center;
-        // margin: 0 auto;
         margin-top: 24px;
+        @include adaptiv-font(16, 12);
+        color: $text-grey;
+        border-radius: $radius-small;
+        padding: 8px 16px;
+        border: 1px solid $text-grey;
+        // display: inline-block;
    }
 }
 
@@ -98,7 +102,7 @@
     }
 
     .categories__link-hidden{
-        display: block;
+        display: inline-block;
     }
 }
 
@@ -123,6 +127,6 @@
     }
 
     .categories__link-hidden{
-        display: block;
+        display: inline-block;
     }
 }
