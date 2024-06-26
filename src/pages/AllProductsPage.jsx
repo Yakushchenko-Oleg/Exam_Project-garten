@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts } from '../../src/store/productSlice';
 import SingleProduct from '../components/SingleProduct/SingleProduct';
 import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 const AllProductsPage = () => {
@@ -42,23 +43,17 @@ const AllProductsPage = () => {
           ) : (
           <div className="wrapper">
             {
-              products && products.map(item =>
+              products && products.map(item => (
+              <Link to={`/products/${item.id}`} className='item__title'>
                 <SingleProduct product={item} key={item.id}/>
-            )}
+              </Link>
+            ))}
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
 
-         {/* <Link to="/allsales">
-          <span className="sales__link sales__link-hidden">All sales</span>
-    </Link>  */}
-
       </div>
-
-    
     </main>
-    
-    
   )
 }
 

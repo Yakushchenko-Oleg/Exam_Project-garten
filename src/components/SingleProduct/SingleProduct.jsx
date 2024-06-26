@@ -25,14 +25,14 @@ const SingleProduct = ({ product }) => {
         <div className="info-price">
           {
             product.discont_price ? (
-              <>
-                <span className="discount-price">{`$${product.discont_price}`}</span>
-                <span className="original-price">{`$${product.price}`}</span>
-              </>  
-            ) : (
-              <span className="info-price">{`$${product.price}`}</span>
-            )}
-        </div>     
+            <>
+              <span className="discount-price">{`$${product.discont_price}`}</span>
+              <span className="original-price">{`$${product.price}`}</span>
+            </>
+          ) : (
+            <span className="info-price">{`$${product.price}`}</span>
+          )}
+        </div>
       </div>
     </div>
   );
