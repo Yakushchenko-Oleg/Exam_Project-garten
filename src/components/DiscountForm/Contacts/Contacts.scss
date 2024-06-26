@@ -1,0 +1,107 @@
+/* src/components/Contacts/Contacts.scss */
+@import '../../mixin.scss';
+
+.footer {
+    // background-color: #FFFFF1; 
+    text-align: left; 
+    gap: 40px;
+    max-width: 1360px;
+    margin: 0 40px;
+    
+}
+
+.contacts-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.contact-title {
+    @include adaptiv-font(64, 40);
+    // color: #424436; 
+    font-weight: 700; 
+    line-height: 70.4px;
+    margin-bottom: 20px;
+}
+
+.contact-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.contact-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.card {
+    background: #F2F6D3; 
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1 1 calc(50% - 40px); 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.map-card {
+    background: #F2F6D3; 
+    border-radius: 20px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 400px; 
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.map-card iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item {
+    margin: 10px 0;
+}
+
+.label {
+    display: block;
+    font-weight: normal; 
+    font-size: 0.8em; 
+}
+.value {
+    margin-top: 5px;
+    font-size: 1.2em; 
+    font-weight: bold; 
+}
+
+.social-icon img {
+    width: 24px;
+    height: 24px;
+    margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 1 100%; 
+    }
+
+    .map-card {
+        width: 100%;
+    }
+}

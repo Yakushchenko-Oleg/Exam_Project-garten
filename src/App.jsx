@@ -6,12 +6,12 @@ import { Route, Routes } from 'react-router-dom'
 
 import MainPage from './pages/MainPage.jsx' 
 import CategoriesPage from './pages/CategoriesPage.jsx' 
-import AllProductsPage from './pages/AllProductsPage.jsx' 
+import AllProductsPage from './pages/AllProductsPage/AllProductsPage.jsx' 
 import AllSalesPage from './pages/AllSalesPage.jsx' 
 import Error404 from './pages/Error404.jsx' 
 import Cart from './pages/Cart.jsx' 
 import Layout from './components/Layout.jsx'
-import ProductsFromCategoryPage from './pages/ProductsFromCategoryPage.jsx'
+import ProductsFromCategoryPage from './pages/ProductsFromCategoryPage/ProductsFromCategoryPage.jsx'
 
 
 const App = () => {
