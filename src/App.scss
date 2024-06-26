@@ -44,3 +44,24 @@ a {
       background-size: 110%
   }
 }
+
+.products{ 
+  //назвать это контейнором и применить для всех
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+h2{
+  @include adaptiv-font(64, 40);
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.wrapper{
+  //назвать это враппером  и применить для всех
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); grid-auto-rows: auto; 
+  gap: 20px;
+}
+
