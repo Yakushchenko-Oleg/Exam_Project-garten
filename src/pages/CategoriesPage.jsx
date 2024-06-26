@@ -1,10 +1,12 @@
 import React from 'react'
+import AllСategories from '../components/AllСategories/AllСategories'
 
 const CategoriesPage = () => {
   return (
-    <main className='maincontainer'> CategoriesPage </main>
+    <main className='maincontainer'> 
+    <AllСategories/>
   
-    
+    </main>
   )
 }
 
