@@ -1,19 +1,15 @@
+// src/components/AllCategories/AllCategories.jsx
 import React, { useEffect } from "react";
-
-import "./AllСategories.scss";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
+import { fetchAllCategoties } from "../../store/categoriesProductsSlice";
 import CategoriesItem from "../CategoriesItem/CategoriesItem";
+import Navigation from "../Navigation/Navigation";
+import "./AllСategories.scss";
 
-// добавить полоску к all categories
-
-const AllСategories = () => {
-  const { categories, isLoading, error } = useSelector(
-    (state) => state.categories
-  );
+const AllCategories = () => {
+  const { categories, isLoading, error } = useSelector((state) => state.categories);
   const apiUrl = import.meta.env.APP_API_URL;
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,6 +18,7 @@ const AllСategories = () => {
 
   return (
     <div className="AllCategories">
+      <Navigation currentPage="Categories" />
       <div className="AllCategories__header-wrapper">
         <h2>Categories</h2>
       </div>
@@ -42,4 +39,6 @@ const AllСategories = () => {
     </div>
   );
 };
-export default AllСategories;
+
+export default AllCategories;
+
