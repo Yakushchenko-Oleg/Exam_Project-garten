@@ -20,7 +20,7 @@
     .discount{
             position: absolute;
             z-index: 999;
-            right: 16px;
+            left: 16px;
             top: 16px;
             background-color: $primary-orange;
             padding: 4px 8px;
@@ -32,6 +32,25 @@
             line-height: 26px;
             letter-spacing: 0.03em;
     } 
+
+    .icon-wrapper{
+        max-width: 44px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+        position: absolute;
+        z-index: 999;
+        right: 16px;
+        top: 16px;
+        
+        img{
+            border:none;
+        }
+        img:hover{
+            color: $primary-grey;
+        }
+    }
         
     &__info{
         width: 100%;

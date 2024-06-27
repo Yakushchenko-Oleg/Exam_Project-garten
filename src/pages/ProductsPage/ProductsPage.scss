@@ -1,0 +1,15 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+
+.wrapper{
+    //назвать это враппером  и применить для всех
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
+    grid-auto-rows: auto; 
+    gap: 20px;
+  
+    img{
+        width: 100%;
+        height: 100%;
+    }
+  }

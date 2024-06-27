@@ -20,6 +20,11 @@ const SingleProduct = ({ product }) => {
         <span className="discount">{`-${discountCounter(product)}%`}</span>
       )}
 
+      <div className="icon-wrapper">
+        <img src='../../../public/images/singleProduct/icon-he.svg'></img>
+        <img src='../../../public/images/singleProduct/icon-bas.svg'></img>
+      </div>
+
       <div className="singleProduct__info">
         <h4 className="info-title">{product.title}</h4>
         <div className="info-price">

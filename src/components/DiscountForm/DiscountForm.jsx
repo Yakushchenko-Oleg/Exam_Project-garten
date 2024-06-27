@@ -27,9 +27,13 @@ const DiscountForm = () => {
 
   const [isDiscount, setIsDiscount] = useState( false) // пока не работаеь эта конструкция
 
-useEffect(()=> { setIsDiscount(localStorage.getItem('discount'))
-
-},[localStorage.getItem('discount')])
+useEffect(()=> {
+  let discount = JSON.parse(localStorage.getItem('discount'))
+  if (discount) {
+    setIsDiscount(true)
+  }
+console.log(localStorage.getItem('discount'))
+},[])
 
    console.log(isDiscount);
   
