@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 
 const Sales = () => {
 
-const {products, isLoading, error} = useSelector(state => state.products)
+const {products, isLoading, error} = useSelector(state => state.recivedProducts.products)
 
 const discoutProducts = products.filter(item => item.discont_price)
 

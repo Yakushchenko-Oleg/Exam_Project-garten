@@ -31,8 +31,11 @@ export const fetchProductsByCategory = createAsyncThunk(
         throw new Error('Server Error')
       } 
       
-      const data = await resp.json()
+      const data  = await resp.json()
+      // console.log(data);
       return data
+
+
 
     } catch (error) {
       return rejectWithValue(error.message)
@@ -43,8 +46,10 @@ export const fetchProductsByCategory = createAsyncThunk(
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
-    products: [],
-    productsByCategory: {},
+    recivedProducts: {
+      data: [],
+      category: null
+    },
     singleProduct: {},
     isLoading: false,
     error: null
@@ -61,7 +66,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action)  =>{
         state.isLoading = false,
-        state.products = action.payload
+        state.recivedProducts.data = action.payload
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = null
@@ -73,7 +78,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action)  =>{
         state.isLoading = false,
-        state.productsByCategory = action.payload
+        state.recivedProducts = action.payload
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
         state.isLoading = null
