@@ -10,8 +10,8 @@ const ProductsPage = () => {
     (state) => state.products
   );
   const { data, category } = recivedProducts;
-  // const [breadcrumbs, setBreadcrumbs] = useState([]);
 
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
 
   const { categoryId } = useParams();
@@ -25,58 +25,39 @@ const ProductsPage = () => {
       }
     };
     fetchData();
-    // setBreadcrumbs([
-    //     {
-    //         link: "/",
-    //         name: "Main page"
-    //     },
-    //     {
-    //         link: "/categories",
-    //         name: "Categories page"
-    //     },
-    //     {
-    //         link: `/categories/${category.id}`,
-    //         name: category.title
-    //     }
-    // ])
-
-    // setTitle(category.title)
-    // }
-    // catch(err){
-    //    console.log(err);
-    // }
-  }, [categoryId, dispatch]);
+   }, [categoryId, dispatch]);
 
   useEffect(() => {
     if (categoryId && category) {
       setCategoryTitle(category.title);
+      setBreadcrumbs([
+          { link: "/", 
+            name: "Main page " 
+          },
+          { link: "/categories", 
+            name: " Categories page " 
+          },
+          { link: `/categories/${categoryId}`, 
+          name: category.title },
+      ])
     } else {
       setCategoryTitle("All Products");
+      setBreadcrumbs([
+        { link: "/", name: "Main page " },
+        { link: "/allproducts", name: " All products " }
+      ])
     }
   }, [categoryId, category]);
 
   return (
     <main className="maincontainer">
       <div className="product-navigation">
-        {" "}
-        product navigation
-        {/* <Link to="/">
-          <span className="link">Main page</span>
-      </Link>
-      <div className="line"></div>
-      <Link to="/categories">
-          <span className="link">Categories</span>
-      </Link>
-      <div className="line"></div>
-      <Link to={`/categories/${categoryId}`}>
-          <span className="link link-active">Chosen Category</span>
-      </Link> */}
-        {/* или  */}
-        {/* <div>
         {
-            breadcrumbs && breadcrumbs.map(item => <><Link key={item.link} to={item.link}>{item.name}</Link> / </>)
+          breadcrumbs && breadcrumbs.map(item => 
+          <>
+            <Link key={item.link} to={item.link}>{item.name}</Link> /
+          </>)
         }
-    </div> */}
       </div>
 
       <div className="products">
