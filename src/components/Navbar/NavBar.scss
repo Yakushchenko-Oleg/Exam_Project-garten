@@ -6,7 +6,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 30px 40px 30px 40px;
-
+    border-bottom: 1px solid $border-grey;
     &__menu {
         @include adaptiv-font(20, 12);
         line-height: 130%;
