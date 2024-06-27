@@ -12,8 +12,6 @@ const AllСategories = () => {
   const { categories, isLoading, error } = useSelector(
     (state) => state.categories
   );
-
-
   const apiUrl = import.meta.env.APP_API_URL;
 
   const dispatch = useDispatch();
@@ -23,37 +21,25 @@ const AllСategories = () => {
   }, [dispatch]);
 
   return (
-    <div className="AllСategories">
-      <div className="AllСategories__header-wrapper">
-        <h2>Сategories</h2>
+    <div className="AllCategories">
+      <div className="AllCategories__header-wrapper">
+        <h2>Categories</h2>
       </div>
       
-        {
-          isLoading ? (
-            <div className="loader"></div>
-          ) : ( 
-            <div className="AllСategories__wrapper">
-            {
-              categories.map( item => (
-                <Link to={`/categories/${item.id}`} className='item__title'>{item.title}
-                    <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
-                </Link>
-
-                
-              ))
-            }
-            </div>
-          )
-        }
-        {error && <h2> Error from server: {error} </h2>}
-
-      <Link to="/categories"> // переделать
-        <span className="AllСategories__link AllСategories__link-hidden">All categories</span>
-      </Link>  
+      {isLoading ? (
+        <div className="loader"></div>
+      ) : (
+        <div className="AllCategories__wrapper">
+          {categories.map(item => (
+            <Link to={`/categories/${item.id}`} className="item__link" key={item.id}>
+              <CategoriesItem item={item} apiUrl={apiUrl} />
+            </Link>
+          ))}
+        </div>
+      )}
       
+      {error && <h2>Error from server: {error}</h2>}
     </div>
   );
 };
-
-
 export default AllСategories;
