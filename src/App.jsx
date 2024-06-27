@@ -11,7 +11,9 @@ import AllSalesPage from './pages/AllSalesPage.jsx'
 import Error404 from './pages/Error404.jsx' 
 import Cart from './pages/Cart.jsx' 
 import Layout from './components/Layout.jsx'
+import SingleProductsPage from './pages/SingleProductsPage.jsx'
 import ProductsFromCategoryPage from './pages/ProductsFromCategoryPage/ProductsFromCategoryPage.jsx'
+
 
 
 const App = () => {
@@ -23,6 +25,7 @@ const App = () => {
           <Route path='/categories' element={<CategoriesPage />} />
           <Route path='/categories/:categoryId' element={<ProductsFromCategoryPage/>} />
           <Route path='/allproducts' element={<AllProductsPage />} />
+          <Route path='/products/:id' element={<SingleProductsPage />} />
           <Route path='/allsales' element={<AllSalesPage />} />
           <Route path='*' element={<Error404 />} />
           <Route path='/cart' element={<Cart />} />
