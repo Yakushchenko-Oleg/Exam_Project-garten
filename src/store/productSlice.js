@@ -21,10 +21,30 @@ export const fetchAllProducts = createAsyncThunk(
   }
 )
 
+export const fetchProductsByCategory = createAsyncThunk(
+  'products/fetchProductsByCategory',
+  async function (categoryId, {rejectWithValue}) {
+
+    try {
+      const resp = await fetch(`${URL}/categories/${categoryId}`)
+      if (!resp.ok) {
+        throw new Error('Server Error')
+      } 
+      
+      const data = await resp.json()
+      return data
+
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 const productsSlice = createSlice({
     name: 'products',
     initialState: {
     products: [],
+    productsByCategory: {},
     singleProduct: {},
     isLoading: false,
     error: null
@@ -47,6 +67,19 @@ const productsSlice = createSlice({
         state.isLoading = null
         state.error = action.payload // Принимает payload (error.message) от rejectWithValue из блока catch
       })
+      .addCase(fetchProductsByCategory.pending,(state) => {
+        state.isLoading = true, 
+        state.error = null
+      })
+      .addCase(fetchProductsByCategory.fulfilled, (state, action)  =>{
+        state.isLoading = false,
+        state.productsByCategory = action.payload
+      })
+      .addCase(fetchProductsByCategory.rejected, (state, action) => {
+        state.isLoading = null
+        state.error = action.payload // Принимает payload (error.message) от rejectWithValue из блока catch
+      })
+
     }
 })
 

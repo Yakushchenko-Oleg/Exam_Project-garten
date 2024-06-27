@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react'
-import '../App.scss';
+import '../../App.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllProducts } from '../../store/productSlice';
 import SingleProduct from '../../components/SingleProduct/SingleProduct';
@@ -18,6 +18,8 @@ const AllProductsPage = () => {
     {dispatch(fetchAllProducts())
   }, [dispatch])
   console.log(products)
+
+  
 
   return (
     <main className='maincontainer'> 
