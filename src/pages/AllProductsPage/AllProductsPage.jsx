@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import '../App.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllProducts } from '../../src/store/productSlice';
-import SingleProduct from '../components/SingleProduct/SingleProduct';
+import { fetchAllProducts } from '../../store/productSlice';
+import SingleProduct from '../../components/SingleProduct/SingleProduct';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
