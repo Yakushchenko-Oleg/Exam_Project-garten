@@ -46,6 +46,7 @@ const categoriesProductsSlice = createSlice({
     initialState: {
         categories: [],
         productsFromCategory: {},
+        productsByCategory: {},
         isLoading: false,
         error: null
           },

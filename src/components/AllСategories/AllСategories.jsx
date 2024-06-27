@@ -35,7 +35,7 @@ const AllСategories = () => {
             <div className="AllСategories__wrapper">
             {
               categories.map( item => (
-                <Link to={`/categories/${item.id}`} className='item__title'>{item.title}
+                <Link to={`/categories/${item.id}`} className='item__title' key={item.id}>
                     <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
                 </Link>
 
@@ -46,10 +46,6 @@ const AllСategories = () => {
           )
         }
         {error && <h2> Error from server: {error} </h2>}
-
-      <Link to="/categories"> // переделать
-        <span className="AllСategories__link AllСategories__link-hidden">All categories</span>
-      </Link>  
       
     </div>
   );

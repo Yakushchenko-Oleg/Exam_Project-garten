@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react'
 import '../App.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -54,6 +55,7 @@ const AllProductsPage = () => {
 
       </div>
     </main>
+
   )
 }
 
