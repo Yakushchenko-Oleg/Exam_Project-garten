@@ -7,6 +7,7 @@ import SingleProduct from '../../components/SingleProduct/SingleProduct';
 import { Link } from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
+// удалить эту папку
 
 const AllProductsPage = () => {
 

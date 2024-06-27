@@ -10,14 +10,14 @@ import { Link } from 'react-router-dom'
 
 const Sales = () => {
 
-const {products, isLoading, error} = useSelector(state => state.recivedProducts.products)
+const {recivedProducts  = { data: [] }, isLoading, error} = useSelector(state => state.products)
 
-const discoutProducts = products.filter(item => item.discont_price)
+const discoutProducts = recivedProducts.data.filter(item => item.discont_price)
 
-  
 const dispatch = useDispatch()
-
-useEffect(()=> {dispatch(fetchAllProducts())},[dispatch])
+useEffect(()=> {
+  dispatch(fetchAllProducts())
+},[dispatch])
 
 function mixArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
