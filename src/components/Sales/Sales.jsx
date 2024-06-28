@@ -45,7 +45,9 @@ return (
         <div className="sales__wrapper">
           {
             discoutProducts && mixArray(discoutProducts).slice(0,4).map(item =>
-              <SingleProduct product={item} key={item.id}/>
+              <Link to={`/products/${item.id}`} key={item.id}  className="item__title">
+              <SingleProduct product={item}/>
+            </Link>
             )
           }
         </div>

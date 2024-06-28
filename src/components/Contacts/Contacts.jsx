@@ -23,8 +23,8 @@ const Contacts = () => {
                             <span className="label">Socials</span>
                             <div className="contact-details">
                                 <div className="contact-item">
-                                    <a href="#" className="social-icon"><img src={InstagramIcon} alt="Instagram" /></a>
-                                    <a href="#" className="social-icon"><img src={WhatsappIcon} alt="WhatsApp" /></a>
+                                    <a href="https://www.instagram.com/" target="_blank" className="social-icon"><img src={InstagramIcon} alt="Instagram" /></a>
+                                    <a href="https://web.whatsapp.com/" target="_blank" className="social-icon"><img src={WhatsappIcon} alt="WhatsApp" /></a>
                                 </div>
                             </div>
                         </div>

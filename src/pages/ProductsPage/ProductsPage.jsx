@@ -55,7 +55,7 @@ const ProductsPage = () => {
         {
           breadcrumbs && breadcrumbs.map(item => 
           <>
-            <Link key={item.link} to={item.link}>{item.name}</Link> /
+            <Link key={item.link} to={item.link}>{item.name}</Link> <span>-</span>
           </>)
         }
       </div>
@@ -69,8 +69,8 @@ const ProductsPage = () => {
           <div className="wrapper">
             {data &&
               data.map((item) => (
-                <Link to={`/products/${item.id}`} className="item__title">
-                  <SingleProduct product={item} key={item.id} />
+                <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
+                  <SingleProduct product={item} />
                 </Link>
               ))}
           </div>
