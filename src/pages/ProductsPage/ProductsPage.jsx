@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { fetchProductsByCategory, fetchAllProducts } from '../../store/productSlice'
+import { fetchProductsByCategory, fetchAllProducts, sortByPriceAction } from '../../store/productSlice'
 import { useDispatch, useSelector } from 'react-redux';
 import SingleProduct from '../../components/SingleProduct/SingleProduct';
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
-  const { recivedProducts, isLoading, error } = useSelector(
+  const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
     (state) => state.products
   );
   const { data, category } = recivedProducts;
@@ -49,15 +49,40 @@ const ProductsPage = () => {
     }
   }, [categoryId, category]);
 
+  const handleSort = (event) =>{
+    const value = event.target.value ;//userchoise
+    let sorted = data;
+
+    if(value === "low-to-high") {
+      sorted = [ ...data].sort( (a,b)=> a.price -b.price);
+    }else if(value === "high-to-low") {
+      sorted = [ ...data].sort( (a,b)=> b.price -a.price);
+    }
+
+    dispatch(sortByPriceAction(sorted));
+  }
+
   return (
     <main className="maincontainer">
       <div className="product-navigation">
         {
           breadcrumbs && breadcrumbs.map(item => 
-          <>
-            <Link key={item.link} to={item.link}>{item.name}</Link> <span>-</span>
-          </>)
+          <span key={item.link}>
+              <Link to={item.link}>{item.name}</Link> <span>-</span>
+          </span>
+         )
         }
+      </div>
+
+      <div className='filter__wrapper'>
+        <div className="filter__item">
+          <p>Sort</p>
+          <select onChange={handleSort}>
+              <option value="default">by default</option>
+              <option value="low-to-high">Price: Low to High</option>
+              <option value="high-to-low">Price: High to Low</option>
+          </select>
+        </div>
       </div>
 
       <div className="products">
@@ -67,12 +92,14 @@ const ProductsPage = () => {
           <div className="loader"></div>
         ) : (
           <div className="wrapper">
-            {data &&
-              data.map((item) => (
+           {
+           filteredProducts &&
+           filteredProducts.map((item) => (
                 <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
                   <SingleProduct product={item} />
                 </Link>
-              ))}
+              ))
+            }
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
@@ -82,9 +109,3 @@ const ProductsPage = () => {
 };
 
 export default ProductsPage;
-
-// // наши ошибки
-
-// Неиспользование dispatch для вызова fetchProductsByCategory и fetchAllProducts в компоненте.
-// Ошибки в обработке состояния в productsSlice.
-// Некорректное обращение к recivedProducts в компоненте.
