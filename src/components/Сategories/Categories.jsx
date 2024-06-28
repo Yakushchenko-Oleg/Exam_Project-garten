@@ -40,7 +40,9 @@ const Categories = () => {
             <div className="categories__wrapper">
             {
               slicedCategories.map( item => (
-                <CategoriesItem item={item} apiUrl={apiUrl} key={item.id} />
+                <Link to={`/categories/${item.id}`} className="item__link" key={item.id}>
+                <CategoriesItem item={item} apiUrl={apiUrl} />
+              </Link>
               ))
             }
             </div>

@@ -23,8 +23,8 @@ const AllCategories = () => {
         <h2>Categories</h2>
       </div>
       
-      {isLoading ? (
-        <div className="loader"></div>
+        {isLoading ? (
+          <div className="loader"></div>
       ) : (
         <div className="AllCategories__wrapper">
           {categories.map(item => (
