@@ -61,7 +61,7 @@ const productsSlice = createSlice({
         state.filteredProducts = action.payload;
       },
       // sortByDiscountAction(state){
-      //   state.filteredProducts.data.filter(item => item.discont_price)
+      //   state.filteredProducts = action.payload;
       // }
 
     },

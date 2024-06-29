@@ -1,6 +1,31 @@
 @import '../../variables.scss';
 @import '../../mixin.scss';
 
+.filter-wrapper{
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    gap: 50px;
+    &__item{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        p{
+            font-weight: bold;
+        }
+        input, select {
+            max-width: 112px;
+            padding: 8px 16px; 
+            border-radius: $radius-small;
+            color: $text-grey; 
+            border: 1px solid $border-grey;
+        }
+        select{
+            max-width: none;
+        }
+    }
+}
+
 .wrapper{
     //назвать это враппером  и применить для всех
     display: grid;
