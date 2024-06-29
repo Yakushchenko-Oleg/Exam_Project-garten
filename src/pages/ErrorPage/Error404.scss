@@ -1,0 +1,35 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+
+.container{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    max-width: 664px;
+}
+
+.btn{
+    
+    background-color: $primary-green;
+    color: $primary-white;
+    padding: 16px 56px 16px 56px;
+    // font-size: 20px;
+    @include adaptiv-font(20, 18);
+    font-weight: 500;
+    border: none;
+    border-radius: $radius-small;
+}
+.btn:hover{
+    transform: scale(1.1);
+        background-color: $primary-orange;
+        cursor: pointer;
+        color: $primary-white;
+}
+p{
+    padding: 0 32px;
+    text-align: center;
+    @include adaptiv-font(20, 18)
+}
