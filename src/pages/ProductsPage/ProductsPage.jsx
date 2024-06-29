@@ -5,6 +5,7 @@ import {
   fetchProductsByCategory,
   fetchAllProducts,
   sortByPriceAction,
+  sortByDiscountAction
 } from "../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
@@ -62,6 +63,19 @@ const ProductsPage = () => {
     dispatch(sortByPriceAction(sorted));
   };
 
+  const handleDiscountApply = (event) => {
+    const value = event.target.checked; // checkbox
+    let discounted = data;
+
+    if (value) {
+    discounted = data.filter(item => item.discont_price);
+    } else {
+      discounted = data;
+    }
+
+    dispatch(sortByDiscountAction(discounted));
+  };
+
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -76,13 +90,13 @@ const ProductsPage = () => {
       <div className="filter-wrapper">
         <div className="filter-wrapper__item">
           <p>Price</p>
-          <input placeholder="from"></input>
-          <input placeholder="to"></input>
+          <input type="number" placeholder="from"></input>
+          <input type="number" placeholder="to"></input>
         </div>
 
         <div className="filter-wrapper__item">
           <p>Discounted items</p>
-          <input type="checkbox"></input>
+          <input type="checkbox" onChange={handleDiscountApply}></input>
         </div>
 
         <div className="filter-wrapper__item">

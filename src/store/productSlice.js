@@ -60,9 +60,9 @@ const productsSlice = createSlice({
       sortByPriceAction(state, action) {
         state.filteredProducts = action.payload;
       },
-      // sortByDiscountAction(state){
-      //   state.filteredProducts = action.payload;
-      // }
+      sortByDiscountAction(state, action){
+        state.filteredProducts = action.payload;
+      }
 
     },
     extraReducers: (builder) => {
