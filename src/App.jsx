@@ -7,11 +7,11 @@ import { Route, Routes } from 'react-router-dom'
 import MainPage from './pages/MainPage.jsx' 
 import CategoriesPage from './pages/CategoriesPage.jsx' 
 import AllSalesPage from './pages/AllSalesPage/AllSalesPage.jsx' 
-import Error404 from './pages/Error404.jsx' 
+import Error404 from './pages/ErrorPage/Error404.jsx' 
 import Cart from './pages/Cart.jsx' 
 import Layout from './components/Layout.jsx'
 import SingleProductsPage from './pages/SingleProductsPage.jsx'
-import ProductsFromCategoryPage from './pages/ProductsFromCategoryPage/ProductsFromCategoryPage.jsx'
+
 import ProductsPage from './pages/ProductsPage/ProductsPage.jsx'
 
 
