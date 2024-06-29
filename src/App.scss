@@ -59,12 +59,10 @@ h2{
 }
 
 .wrapper{
-  //назвать это враппером  и применить для всех
+  //переделать названия классов и применить для всех подобных
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
   grid-auto-rows: auto; 
   gap: 20px;
-
-
 }
 

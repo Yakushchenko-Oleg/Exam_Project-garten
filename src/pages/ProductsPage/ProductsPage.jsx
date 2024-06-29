@@ -51,7 +51,7 @@ const ProductsPage = () => {
     }
   }, [categoryId, category]);
 
-  //ф-ции для сортировки на странице
+  //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
     const value = event.target.value; //userchoise
     let sorted = data;
@@ -85,13 +85,14 @@ const ProductsPage = () => {
     let formObject  = Object.fromEntries(formData)
     console.log(formObject)
     
-    const minValue = formObject.min === '' ? -Infinity : +(formObject.min );
-    const maxValue = formObject.max === '' ? Infinity : +(formObject.max);
+    const minValue = formObject.from === '' ? -Infinity : +(formObject.from );
+    const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
 
     const ranged = data.filter(item => item.price >= minValue && item.price <= maxValue);
     
     dispatch(sortByUserPriceAction(ranged));
-    e.target.reset();
+
+    event.target.reset();
   };
 
   return (
@@ -108,8 +109,8 @@ const ProductsPage = () => {
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p>Price</p>
-          <input type='number' placeholder='min' name='min' ></input>
-          <input type='number' placeholder="max"  name='max'></input>
+          <input type='number' placeholder='from' name='from' ></input>
+          <input type='number' placeholder="to"  name='to'></input>
         </form>
 
         <div className="filter-wrapper__item">
