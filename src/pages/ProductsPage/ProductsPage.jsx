@@ -5,7 +5,8 @@ import {
   fetchProductsByCategory,
   fetchAllProducts,
   sortByPriceAction,
-  sortByDiscountAction
+  sortByDiscountAction,
+  sortByUserPriceAction
 } from "../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
@@ -50,6 +51,7 @@ const ProductsPage = () => {
     }
   }, [categoryId, category]);
 
+  //ф-ции для сортировки на странице
   const handleSort = (event) => {
     const value = event.target.value; //userchoise
     let sorted = data;
@@ -76,6 +78,22 @@ const ProductsPage = () => {
     dispatch(sortByDiscountAction(discounted));
   };
 
+  const handleUserPrice = (event) => {
+    event.preventDefault(); // Останавливаем отправку формы
+
+    let formData = new FormData(event.target.parentElement)
+    let formObject  = Object.fromEntries(formData)
+    console.log(formObject)
+    
+    const minValue = formObject.min === '' ? -Infinity : +(formObject.min );
+    const maxValue = formObject.max === '' ? Infinity : +(formObject.max);
+
+    const ranged = data.filter(item => item.price >= minValue && item.price <= maxValue);
+    
+    dispatch(sortByUserPriceAction(ranged));
+    e.target.reset();
+  };
+
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -88,11 +106,11 @@ const ProductsPage = () => {
       </div>
 
       <div className="filter-wrapper">
-        <div className="filter-wrapper__item">
+        <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p>Price</p>
-          <input type="number" placeholder="from"></input>
-          <input type="number" placeholder="to"></input>
-        </div>
+          <input type='number' placeholder='min' name='min' ></input>
+          <input type='number' placeholder="max"  name='max'></input>
+        </form>
 
         <div className="filter-wrapper__item">
           <p>Discounted items</p>

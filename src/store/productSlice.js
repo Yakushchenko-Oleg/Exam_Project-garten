@@ -56,14 +56,15 @@ const productsSlice = createSlice({
     error: null
     },
     reducers: {
-         
-      sortByPriceAction(state, action) {
+      sortByUserPriceAction(state, action) {
         state.filteredProducts = action.payload;
       },
       sortByDiscountAction(state, action){
         state.filteredProducts = action.payload;
+      },
+      sortByPriceAction(state, action) {
+        state.filteredProducts = action.payload;
       }
-
     },
     extraReducers: (builder) => {
       builder
@@ -100,4 +101,5 @@ const productsSlice = createSlice({
 export default productsSlice.reducer
 
 export const {sortByPriceAction, 
-              sortByDiscountAction} = productsSlice.actions
+              sortByDiscountAction,
+              sortByUserPriceAction} = productsSlice.actions
