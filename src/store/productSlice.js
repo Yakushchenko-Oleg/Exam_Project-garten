@@ -51,12 +51,20 @@ const productsSlice = createSlice({
       category: null
     },
     singleProduct: {},
+    filteredProducts: [],
     isLoading: false,
     error: null
     },
     reducers: {
-      delLastProduct(state) {},// заменить экшны на новые      
-      sortByPriceAction(state) { }
+      sortByUserPriceAction(state, action) {
+        state.filteredProducts = action.payload;
+      },
+      sortByDiscountAction(state, action){
+        state.filteredProducts = action.payload;
+      },
+      sortByPriceAction(state, action) {
+        state.filteredProducts = action.payload;
+      }
     },
     extraReducers: (builder) => {
       builder
@@ -92,7 +100,6 @@ const productsSlice = createSlice({
 
 export default productsSlice.reducer
 
-export const { //заменить названия экшнов в экспорте
-    delLastProduct, 
-    sortByPriceAction
-} = productsSlice.actions
+export const {sortByPriceAction, 
+              sortByDiscountAction,
+              sortByUserPriceAction} = productsSlice.actions

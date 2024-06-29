@@ -13,8 +13,10 @@ const SingleProduct = ({ product }) => {
 
   return (
     <div className="singleProduct" key={product.id}>
-      <img src={`${apiUrl}${product.image}`} alt={product.title} />
-
+      {/* картинка обернута в контэйнер для регулирования высоты */}
+      <div className="img-container"> 
+        <img src={`${apiUrl}${product.image}`} alt={product.title} />
+      </div>
       {
         product.discont_price && (
         <span className="discount">{`-${discountCounter(product)}%`}</span>
