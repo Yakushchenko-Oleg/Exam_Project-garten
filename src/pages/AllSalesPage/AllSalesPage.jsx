@@ -1,10 +1,11 @@
+// src/pages/AllSalesPage/AllSalesPage.jsx
 import React, { useEffect, useState } from "react";
 import "./AllSalesPage.scss";
 import { Link } from "react-router-dom";
 import {
   fetchAllProducts,
   sortByPriceAction,
-  sortByUserPriceAction
+  sortByUserPriceAction,
 } from "../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
@@ -30,18 +31,18 @@ const AllSalesPage = () => {
     setCategoryTitle("Discounted items");
     setBreadcrumbs([
       { link: "/", name: "Main page " },
-      { link: "/allsales", name: " All sales " },
+      { link: "/allsales", name: " Discounted items " },
     ]);
   }, []);
 
   const handleSort = (event) => {
     const value = event.target.value;
-    let sorted = data;
+    let sorted = data.filter((item) => item.discont_price);
 
     if (value === "low-to-high") {
-      sorted = [...data].sort((a, b) => a.price - b.price);
+      sorted = [...sorted].sort((a, b) => a.price - b.price);
     } else if (value === "high-to-low") {
-      sorted = [...data].sort((a, b) => b.price - a.price);
+      sorted = [...sorted].sort((a, b) => b.price - a.price);
     }
 
     dispatch(sortByPriceAction(sorted));
@@ -49,7 +50,6 @@ const AllSalesPage = () => {
 
   const handleUserPrice = (event) => {
     event.preventDefault();
-
     let formData = new FormData(event.target.parentElement);
     let formObject = Object.fromEntries(formData);
 
@@ -57,11 +57,11 @@ const AllSalesPage = () => {
     const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
 
     const ranged = data.filter(
-      (item) => item.price >= minValue && item.price <= maxValue
+      (item) =>
+        item.discont_price && item.price >= minValue && item.price <= maxValue
     );
 
     dispatch(sortByUserPriceAction(ranged));
-
     event.target.reset();
   };
 
@@ -79,8 +79,8 @@ const AllSalesPage = () => {
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p>Price</p>
-          <input type="number" placeholder="from" name="from"></input>
-          <input type="number" placeholder="to" name="to"></input>
+          <input type='number' placeholder='from' name='from'></input>
+          <input type='number' placeholder="to" name='to'></input>
         </form>
 
         <div className="filter-wrapper__item">
@@ -102,23 +102,17 @@ const AllSalesPage = () => {
           <div className="wrapper">
             {filteredProducts && filteredProducts.length > 0
               ? filteredProducts.map((item) => (
-                  <Link
-                    to={`/products/${item.id}`}
-                    className="item__title"
-                    key={item.id}
-                  >
+                  <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
                     <SingleProduct product={item} />
                   </Link>
                 ))
-              : data.map((item) => (
-                  <Link
-                    to={`/products/${item.id}`}
-                    className="item__title"
-                    key={item.id}
-                  >
-                    <SingleProduct product={item} />
-                  </Link>
-                ))}
+              : data
+                  .filter((item) => item.discont_price)
+                  .map((item) => (
+                    <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
+                      <SingleProduct product={item} />
+                    </Link>
+                  ))}
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
