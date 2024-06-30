@@ -30,6 +30,25 @@ a {
   gap: 80px;
 }
 
+.product-navigation{
+  display: flex;
+  gap: 20px;
+  :last-child{
+    color: $primary-grey;
+  }
+  &__link{
+    @include adaptiv-font(16, 12);
+    align-content: center;
+    color: $text-grey;
+    border-radius: $radius-small;
+    font-weight: 500;
+
+    padding: 8px 16px;
+    border: 1px solid $text-grey;
+    display: inline-block;
+  }
+}
+
 .loader {
   margin: 0 auto;
   width: 120px;

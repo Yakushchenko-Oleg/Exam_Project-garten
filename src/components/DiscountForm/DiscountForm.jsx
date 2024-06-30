@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import '../../App.scss'
 import  './DiscountForm.scss'
 import { useForm } from "react-hook-form"
-import { handleGetDiscount } from '../../utils/requests';
+import { fetchGetDiscount } from '../../store/cartSlice ';
+
 
 // import { v4 as uuidv4 } from 'uuid'
 
@@ -20,7 +21,7 @@ const DiscountForm = () => {
     } = useForm()
 
   const handleDiscountSubmit = (data) => {
-    handleGetDiscount(data)
+    fetchGetDiscount(data)
     localStorage.setItem('discount', true)
     reset()
   }

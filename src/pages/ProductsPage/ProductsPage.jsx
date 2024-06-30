@@ -100,9 +100,8 @@ const ProductsPage = () => {
       <div className="product-navigation">
         {breadcrumbs &&
           breadcrumbs.map((item) => (
-            <span key={item.link}>
-              <Link to={item.link}>{item.name}</Link> <span>-</span>
-            </span>
+              <Link key={item.link} to={item.link} className="product-navigation__link">{item.name}</Link> 
+
           ))}
       </div>
 
