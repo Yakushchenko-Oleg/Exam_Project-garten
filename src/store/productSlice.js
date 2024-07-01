@@ -56,16 +56,29 @@ const productsSlice = createSlice({
     error: null
     },
     reducers: {
-      sortByUserPriceAction(state, action) {
-        state.filteredProducts = action.payload;
+      sortByPriceAction(state, action) {
+        const { value } = action.payload;
+        if (value === "low-to-high") {
+          state.filteredProducts = [...state.recivedProducts.data].sort((a, b) => a.price - b.price);
+        } else if (value === "high-to-low") {
+          state.filteredProducts = [...state.recivedProducts.data].sort((a, b) => b.price - a.price);
+        } else{
+          state.filteredProducts = state.recivedProducts.data;
+        }
       },
       sortByDiscountAction(state, action){
-        state.filteredProducts = action.payload;
+        const { applyDiscount } = action.payload;
+        if (applyDiscount) {
+          state.filteredProducts = state.recivedProducts.data.filter(item => item.discont_price);
+        } else {
+          state.filteredProducts = state.recivedProducts.data;
+        }
       },
-      sortByPriceAction(state, action) {
-        state.filteredProducts = action.payload;
+      sortByUserPriceAction(state, action) {
+       const { minValue, maxValue } = action.payload;
+       state.filteredProducts = state.recivedProducts.data.filter(item => item.price >= minValue && item.price <= maxValue);
       }
-    },
+   },
     extraReducers: (builder) => {
       builder
       .addCase(fetchAllProducts.pending,(state) => {

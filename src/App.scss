@@ -14,17 +14,26 @@
 
 a {
   text-decoration: none;
+  
 }
+
 
 // главный контэйнер
 .container-1440 {
   margin: 0 auto;
   max-width: 1440px;
   background-color: $body-white;
+
+}
+
+.blur{
+  backdrop-filter: blur(2px);
+  width: 100vw;
+  height: 100vw;
 }
 
 .maincontainer{
-  margin: 80px 40px 80px 40px;
+  margin: 80px 40px;
   display: flex;
   flex-direction: column;
   gap: 80px;
@@ -36,6 +45,7 @@ a {
   :last-child{
     color: $primary-grey;
   }
+ 
   &__link{
     @include adaptiv-font(16, 12);
     align-content: center;
@@ -47,6 +57,13 @@ a {
     border: 1px solid $text-grey;
     display: inline-block;
   }
+}
+
+.filter-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
+  width: 100%;
+  gap: 50px;
 }
 
 .loader {
@@ -85,3 +102,18 @@ h2{
   gap: 20px;
 }
 
+.btn {
+    background-color: $primary-green;
+    color: $primary-white;
+    padding: 16px 56px 16px 56px;
+    @include adaptiv-font(20, 18);
+    font-weight: 500;
+    border: none;
+    border-radius: $radius-small;
+}
+.btn:hover{
+    transform: scale(1.1);
+    background-color: $primary-orange;
+    cursor: pointer;
+    color: $primary-white;
+}

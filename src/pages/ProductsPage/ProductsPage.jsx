@@ -53,44 +53,28 @@ const ProductsPage = () => {
 
   //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
-    const value = event.target.value; //userchoise
-    let sorted = data;
-
-    if (value === "low-to-high") {
-      sorted = [...data].sort((a, b) => a.price - b.price);
-    } else if (value === "high-to-low") {
-      sorted = [...data].sort((a, b) => b.price - a.price);
-    }
-
-    dispatch(sortByPriceAction(sorted));
+    const userValue = event.target.value; //userchoise
+   
+    dispatch(sortByPriceAction({value: userValue}));
   };
 
   const handleDiscountApply = (event) => {
-    const value = event.target.checked; // checkbox
-    let discounted = data;
-
-    if (value) {
-    discounted = data.filter(item => item.discont_price);
-    } else {
-      discounted = data;
-    }
-
-    dispatch(sortByDiscountAction(discounted));
+    const userValue = event.target.checked; // apply checkbox
+   
+    dispatch(sortByDiscountAction({applyDiscount: userValue}));
   };
 
   const handleUserPrice = (event) => {
     event.preventDefault(); // Останавливаем отправку формы
 
-    let formData = new FormData(event.target.parentElement)
+    let formData = new FormData(event.target.parentElement) //userInput
     let formObject  = Object.fromEntries(formData)
     console.log(formObject)
     
     const minValue = formObject.from === '' ? -Infinity : +(formObject.from );
     const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
 
-    const ranged = data.filter(item => item.price >= minValue && item.price <= maxValue);
-    
-    dispatch(sortByUserPriceAction(ranged));
+   dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
     event.target.reset();
   };

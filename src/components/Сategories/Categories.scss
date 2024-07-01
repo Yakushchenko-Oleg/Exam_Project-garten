@@ -12,6 +12,7 @@
         margin-bottom: 40px;
 
         h2{
+            margin-bottom: 0;
             @include adaptiv-font(64, 40);
             font-weight: 700;
         }
