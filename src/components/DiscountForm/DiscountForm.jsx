@@ -22,7 +22,7 @@ const DiscountForm = () => {
 
   const handleDiscountSubmit = (data) => {
     fetchGetDiscount(data)
-    localStorage.setItem('discount', true)
+  console.log(data);
     reset()
   }
 
