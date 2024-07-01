@@ -77,7 +77,6 @@ const ProductsPage = () => {
 
     dispatch(sortByDiscountAction(discounted));
   };
-
   const handleUserPrice = (event) => {
     event.preventDefault(); // Останавливаем отправку формы
 

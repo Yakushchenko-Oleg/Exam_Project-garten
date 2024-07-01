@@ -1,0 +1,43 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+
+.navigation {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20.16px;
+  color: #8B8B8B; // Цвет текста
+  
+  &__link, &__current {
+    text-decoration: none;
+    padding: 8px 16px;
+    border: 1px solid #DDDDDD; // Цвет границы
+    border-radius: $radius-small;
+    background: #FFFFF1; // Цвет фона
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__link {
+    color: #8B8B8B; // Цвет текста для ссылок
+  }
+
+  &__current {
+    color: #424436; // Цвет текста для текущей страницы
+  }
+
+  &__divider {
+    width: 10px;
+    height: 1px;
+    background: #DDDDDD; // Цвет разделителя
+    margin: 0 8px;
+  }
+}
+
+
+
+  
