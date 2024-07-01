@@ -16,6 +16,7 @@ a {
   text-decoration: none;
 }
 
+
 // главный контэйнер
 .container-1440 {
   margin: 0 auto;
@@ -36,6 +37,7 @@ a {
   :last-child{
     color: $primary-grey;
   }
+ 
   &__link{
     @include adaptiv-font(16, 12);
     align-content: center;
@@ -47,7 +49,10 @@ a {
     border: 1px solid $text-grey;
     display: inline-block;
   }
+
 }
+
+
 
 .loader {
   margin: 0 auto;

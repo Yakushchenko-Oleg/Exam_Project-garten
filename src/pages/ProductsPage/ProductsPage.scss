@@ -11,6 +11,7 @@
         align-items: center;
         gap: 10px;
         p{
+            padding-right: 16px;
             font-weight: bold;
             @include adaptiv-font(20, 18);
         }

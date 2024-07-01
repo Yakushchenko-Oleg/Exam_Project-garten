@@ -8,6 +8,8 @@
     border-radius: $radius-big;
     position: relative;
     z-index: 1;
+    border: 1px solid $border-grey;
+    background-color: $primary-white;
     
     .img-container{
         display: flex;
