@@ -14,6 +14,7 @@
 
 a {
   text-decoration: none;
+  
 }
 
 
@@ -49,10 +50,7 @@ a {
     border: 1px solid $text-grey;
     display: inline-block;
   }
-
 }
-
-
 
 .loader {
   margin: 0 auto;
@@ -90,3 +88,18 @@ h2{
   gap: 20px;
 }
 
+.btn {
+    background-color: $primary-green;
+    color: $primary-white;
+    padding: 16px 56px 16px 56px;
+    @include adaptiv-font(20, 18);
+    font-weight: 500;
+    border: none;
+    border-radius: $radius-small;
+}
+.btn:hover{
+    transform: scale(1.1);
+    background-color: $primary-orange;
+    cursor: pointer;
+    color: $primary-white;
+}
