@@ -8,7 +8,7 @@ import MainPage from './pages/MainPage.jsx'
 
 import AllSalesPage from './pages/AllSalesPage/AllSalesPage.jsx' 
 import Error404 from './pages/ErrorPage/Error404.jsx' 
-import Cart from './pages/Cart.jsx' 
+import Cart from './pages/Cart/Cart.jsx' 
 import Layout from './components/Layout.jsx'
 import SingleProductsPage from './pages/SingleProductsPage.jsx'
 

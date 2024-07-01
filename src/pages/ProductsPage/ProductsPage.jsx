@@ -63,7 +63,6 @@ const ProductsPage = () => {
    
     dispatch(sortByDiscountAction({applyDiscount: userValue}));
   };
-
   const handleUserPrice = (event) => {
     event.preventDefault(); // Останавливаем отправку формы
 

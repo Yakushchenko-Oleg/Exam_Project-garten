@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+    
+.cart__header-wrapper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+
+    h2{
+        @include adaptiv-font(64, 40);
+        font-weight: 700;
+    }
+
+    .cart__line{
+        height: 1px;
+        flex-grow: 1; // Занимает доступное свободное пространство
+        margin-left: 32px;
+        background: $text-grey;
+        display: block;
+    }
+
+    .categories__link{
+        @include adaptiv-font(16, 12);
+        align-content: center;
+        color: $text-grey;
+        border-radius: $radius-small;
+        padding: 8px 16px;
+        border: 1px solid $text-grey;
+        display: inline-block;
+        }
+}
