@@ -31,7 +31,7 @@ const AllSalesPage = () => {
     setCategoryTitle("Discounted items");
     setBreadcrumbs([
       { link: "/", name: "Main page " },
-      { link: "/allsales", name: " Discounted items " },
+      { link: "/allsales", name: "All sales" },
     ]);
   }, []);
 
@@ -94,7 +94,7 @@ const AllSalesPage = () => {
       </div>
 
       <div className="products">
-        <h2>{categoryTitle}</h2>
+        <h2>All sales</h2>
 
         {isLoading ? (
           <div className="loader"></div>
