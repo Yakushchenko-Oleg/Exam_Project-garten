@@ -13,17 +13,14 @@ export const fetchGetDiscount = createAsyncThunk(
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({...formData, id: uuidv4()}),
-      })
+        body: JSON.stringify(formData)
       
+      })
+      console.log(responce, formData);
       if (!responce.ok) {
         throw new Error('Failed to send a discount request')      
         }  else {localStorage.setItem('discount', true)}
-
-      const data = await responce.json()
-
-      return data
-      
+  
     } catch (error) {
       return rejectWithValue(error.message)
     }
