@@ -2,10 +2,10 @@
 @import '../../mixin.scss';
 
 .filter-wrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-  gap: 50px;
+    // display: grid;
+    // grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
+    // width: 100%;
+    // gap: 50px;
   &__item {
     display: flex;
     align-items: center;

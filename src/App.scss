@@ -59,6 +59,13 @@ a {
   }
 }
 
+.filter-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
+  width: 100%;
+  gap: 50px;
+}
+
 .loader {
   margin: 0 auto;
   width: 120px;
