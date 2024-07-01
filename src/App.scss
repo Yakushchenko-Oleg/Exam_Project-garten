@@ -23,10 +23,17 @@ a {
   margin: 0 auto;
   max-width: 1440px;
   background-color: $body-white;
+
+}
+
+.blur{
+  backdrop-filter: blur(2px);
+  width: 100vw;
+  height: 100vw;
 }
 
 .maincontainer{
-  margin: 80px 40px 80px 40px;
+  margin: 80px 40px;
   display: flex;
   flex-direction: column;
   gap: 80px;

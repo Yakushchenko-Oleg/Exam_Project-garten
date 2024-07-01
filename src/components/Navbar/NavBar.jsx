@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../../App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
 
 const NavBar = () => {
+  const [isOpen, setOpen] = useState()
+  
   return (
     <nav className='navbar'>
       
@@ -13,7 +15,8 @@ const NavBar = () => {
         <img className='dark' src='./images/navbar/mode=dark.png'></img>
       </div>
 
-      <div className='menu-wrapper'>
+      {/* если isOpen то класс menu-wrapper-active */}
+      <div className={`menu-wrapper ${isOpen ? 'menu-wrapper-active' : ''}`}>
         <p className='discount-lable'>1 day discount!</p>
         <ul className='navbar__menu'>
         <li><NavLink to="/" className='mainpage'>Main Page</NavLink></li>
@@ -28,10 +31,12 @@ const NavBar = () => {
 
         <NavLink to="/cart"><img className='navbar__icon-cart' src='./images/navbar/basket=empty.png'/></NavLink> 
 
-        <div className='navbar__burger'>
-        <span></span>
-        <span></span>
-        <span></span>
+       {/* если isOpen то класс burger-x */}
+        <div className={`navbar__burger ${isOpen ? 'burger-x' : ''}`}
+        onClick={ ()=> setOpen(!isOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
       </div>
 
