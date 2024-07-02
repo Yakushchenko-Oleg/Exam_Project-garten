@@ -26,12 +26,6 @@ a {
 
 }
 
-.blur{
-  backdrop-filter: blur(2px);
-  width: 100vw;
-  height: 100vw;
-}
-
 .maincontainer{
   margin: 80px 40px;
   display: flex;
@@ -62,7 +56,7 @@ a {
 .filter-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
-  width: 100%;
+  width: 80%;
   gap: 50px;
 }
 
@@ -116,4 +110,15 @@ h2{
     background-color: $primary-orange;
     cursor: pointer;
     color: $primary-white;
+}
+
+.bg-opacity {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: #50505051;
+  left: 0;
+  // backdrop-filter: blur(12px);
+  backdrop-filter: grayscale(50%);
 }

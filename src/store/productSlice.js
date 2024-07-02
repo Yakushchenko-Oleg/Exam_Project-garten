@@ -44,71 +44,75 @@ export const fetchProductsByCategory = createAsyncThunk(
 )
 
 const productsSlice = createSlice({
-    name: 'products',
-    initialState: {
+  name: "products",
+  initialState: {
     recivedProducts: {
       data: [],
-      category: null
+      category: null,
     },
     singleProduct: {},
     filteredProducts: [],
     isLoading: false,
-    error: null
+    error: null,
+  },
+  reducers: {
+    sortByPriceAction(state, action) {
+      const { value } = action.payload;
+      state.filteredProducts = 
+      (state.filteredProducts.length > 0
+          ? state.filteredProducts
+          : [...state.recivedProducts.data]
+      ).sort(
+          value === "low-to-high" ? (a, b) => a.price - b.price
+          : value === "high-to-low" ? (a, b) => b.price - a.price
+          : (a, b) => a.id - b.id
+        );
     },
-    reducers: {
-      sortByPriceAction(state, action) {
-        const { value } = action.payload;
-        if (value === "low-to-high") {
-          state.filteredProducts = [...state.recivedProducts.data].sort((a, b) => a.price - b.price);
-        } else if (value === "high-to-low") {
-          state.filteredProducts = [...state.recivedProducts.data].sort((a, b) => b.price - a.price);
-        } else{
-          state.filteredProducts = state.recivedProducts.data;
-        }
-      },
-      sortByDiscountAction(state, action){
-        const { applyDiscount } = action.payload;
-        if (applyDiscount) {
-          state.filteredProducts = state.recivedProducts.data.filter(item => item.discont_price);
-        } else {
-          state.filteredProducts = state.recivedProducts.data;
-        }
-      },
-      sortByUserPriceAction(state, action) {
-       const { minValue, maxValue } = action.payload;
-       state.filteredProducts = state.recivedProducts.data.filter(item => item.price >= minValue && item.price <= maxValue);
-      }
-   },
-    extraReducers: (builder) => {
-      builder
-      .addCase(fetchAllProducts.pending,(state) => {
-        state.isLoading = true, 
-        state.error = null
+
+    sortByDiscountAction(state, action) {
+      const { applyDiscount } = action.payload;
+      state.filteredProducts = 
+      applyDiscount ? (
+            state.filteredProducts.length > 0 
+            ? state.filteredProducts.filter(item => item.discont_price) 
+            : [...state.recivedProducts.data].filter(item => item.discont_price)
+      ) : [...state.recivedProducts.data];
+    },
+
+    sortByUserPriceAction(state, action) {
+      const { minValue, maxValue } = action.payload;
+      state.filteredProducts = 
+      (state.filteredProducts.length > 0 
+          ? state.filteredProducts 
+          : [...state.recivedProducts.data]
+      ).filter(item => item.price >= minValue && item.price <= maxValue);
+    }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllProducts.pending, (state) => {
+        (state.isLoading = true), (state.error = null);
       })
-      .addCase(fetchAllProducts.fulfilled, (state, action)  =>{
-        state.isLoading = false,
-        state.recivedProducts.data = action.payload
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        (state.isLoading = false),
+          (state.recivedProducts.data = action.payload);
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
-        state.isLoading = null
-        state.error = action.payload // Принимает payload (error.message) от rejectWithValue из блока catch
+        state.isLoading = null;
+        state.error = action.payload; // Принимает payload (error.message) от rejectWithValue из блока catch
       })
-      .addCase(fetchProductsByCategory.pending,(state) => {
-        state.isLoading = true, 
-        state.error = null
+      .addCase(fetchProductsByCategory.pending, (state) => {
+        (state.isLoading = true), (state.error = null);
       })
-      .addCase(fetchProductsByCategory.fulfilled, (state, action)  =>{
-        state.isLoading = false,
-        state.recivedProducts = action.payload
+      .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+        (state.isLoading = false), (state.recivedProducts = action.payload);
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
-        state.isLoading = null
-        state.error = action.payload // Принимает payload (error.message) от rejectWithValue из блока catch
-      })
-
-    }
-})
-
+        state.isLoading = null;
+        state.error = action.payload; // Принимает payload (error.message) от rejectWithValue из блока catch
+      });
+  },
+});
 
 
 export default productsSlice.reducer
