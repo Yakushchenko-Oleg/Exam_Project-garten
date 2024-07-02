@@ -53,11 +53,8 @@ const ProductsPage = () => {
   const handleSort = (event) => {
     const userValue = event.target.value; //userchoise
     dispatch(sortByPriceAction({ value: userValue }));
-  };
 
-  const handleDiscountApply = (event) => {
-    const userValue = event.target.checked; // apply checkbox
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    event.target.reset();
   };
 
   const handleUserPrice = (event) => {
@@ -75,6 +72,23 @@ const ProductsPage = () => {
     event.target.reset();
   };
 
+  const handleDiscountApply = (event) => {
+    
+    // const userValue = event.target.checked; // apply checkbox
+    // if(userValue){
+    //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    // }else{
+    //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    //   dispatch(handleSort);
+    //   dispatch(handleUserPrice);
+   
+    const userValue = event.target.checked;
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+
+    event.target.reset();
+ };
+
+ 
   return (
     <main className="maincontainer">
       <div className="product-navigation">
