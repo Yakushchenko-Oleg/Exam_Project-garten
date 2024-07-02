@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct";
 
 const ProductsPage = () => {
+  
   const dispatch = useDispatch();
   const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
     (state) => state.products
@@ -24,14 +25,11 @@ const ProductsPage = () => {
   const { categoryId } = useParams();
 
   useEffect(() => {
-    
-      if (categoryId) {
-         dispatch(fetchProductsByCategory(categoryId));
-      } else {
-         dispatch(fetchAllProducts());
-      }
-   
-   
+    if (categoryId) {
+      dispatch(fetchProductsByCategory(categoryId));
+    } else {
+      dispatch(fetchAllProducts());
+    }
   }, [categoryId, dispatch]);
 
   useEffect(() => {
@@ -54,26 +52,25 @@ const ProductsPage = () => {
   //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
     const userValue = event.target.value; //userchoise
-   
-    dispatch(sortByPriceAction({value: userValue}));
+    dispatch(sortByPriceAction({ value: userValue }));
   };
 
   const handleDiscountApply = (event) => {
     const userValue = event.target.checked; // apply checkbox
-   
-    dispatch(sortByDiscountAction({applyDiscount: userValue}));
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
   };
+
   const handleUserPrice = (event) => {
     event.preventDefault(); // Останавливаем отправку формы
 
-    let formData = new FormData(event.target.parentElement) //userInput
-    let formObject  = Object.fromEntries(formData)
-    console.log(formObject)
-    
-    const minValue = formObject.from === '' ? -Infinity : +(formObject.from );
-    const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
+    let formData = new FormData(event.target.parentElement); //userInput
+    let formObject = Object.fromEntries(formData);
+    console.log(formObject);
 
-   dispatch(sortByUserPriceAction({ minValue, maxValue }));
+    const minValue = formObject.from === "" ? -Infinity : +formObject.from;
+    const maxValue = formObject.to === "" ? Infinity : +formObject.to;
+
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
     event.target.reset();
   };
@@ -83,21 +80,30 @@ const ProductsPage = () => {
       <div className="product-navigation">
         {breadcrumbs &&
           breadcrumbs.map((item) => (
-              <Link key={item.link} to={item.link} className="product-navigation__link">{item.name}</Link> 
-
+            <Link
+              key={item.link}
+              to={item.link}
+              className="product-navigation__link"
+            >
+              {item.name}
+            </Link>
           ))}
       </div>
 
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p className="filter-name">Price</p>
-          <input type='number' placeholder='from' name='from' ></input>
-          <input type='number' placeholder="to"  name='to'></input>
+          <input type="number" placeholder="from" name="from"></input>
+          <input type="number" placeholder="to" name="to"></input>
         </form>
 
         <div className="filter-wrapper__item">
           <p className="filter-name">Discounted items</p>
-          <input className="checkbox" type="checkbox" onChange={handleDiscountApply}></input>
+          <input
+            className="checkbox"
+            type="checkbox"
+            onChange={handleDiscountApply}
+          ></input>
         </div>
 
         <div className="filter-wrapper__item">
