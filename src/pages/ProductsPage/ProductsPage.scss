@@ -1,18 +1,12 @@
 @import '../../variables.scss';
 @import '../../mixin.scss';
 
-.filter-wrapper{
-    // display: grid;
-    // grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
-    // width: 100%;
-    // gap: 50px;
-    &__item{
+    .filter-wrapper__item{
         display: flex;
         align-items: center;
-        gap: 10px;
-        p{
-            padding-right: 16px;
-            font-weight: bold;
+        gap: 16px;
+        .filter-name{
+            font-weight: 600;
             @include adaptiv-font(20, 18);
         }
         input, select {
@@ -25,8 +19,13 @@
         select{
             max-width: none;
         }
+        .checkbox{
+            width: 34px;
+            height: 34px;
+            border-radius: $radius-small;
+            border: 1px solid $border-grey;
+        }
     }
-}
 
 .wrapper{
     //назвать это враппером  и применить для всех подобных

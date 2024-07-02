@@ -59,9 +59,19 @@ const productsSlice = createSlice({
       sortByPriceAction(state, action) {
         const { value } = action.payload;
         if (value === "low-to-high") {
-          state.filteredProducts = [...state.recivedProducts.data].sort((a, b) => a.price - b.price);
+          if(state.filteredProducts.length > 0) {
+            state.filteredProducts = state.filteredProducts.sort((a, b) => a.price - b.price);
+          }else { 
+            state.filteredProducts = state.recivedProducts.data.sort((a, b) => a.price - b.price)
+          }
+
         } else if (value === "high-to-low") {
-          state.filteredProducts = [...state.recivedProducts.data].sort((a, b) => b.price - a.price);
+          if(state.filteredProducts.length > 0) {
+            state.filteredProducts = state.filteredProducts.sort((a, b) => b.price - a.price);
+          }else { 
+            state.filteredProducts = state.recivedProducts.data.sort((a, b) => b.price - a.price)
+          }
+
         } else{
           state.filteredProducts = state.recivedProducts.data;
         }
@@ -69,16 +79,25 @@ const productsSlice = createSlice({
       sortByDiscountAction(state, action){
         const { applyDiscount } = action.payload;
         if (applyDiscount) {
-          state.filteredProducts = state.recivedProducts.data.filter(item => item.discont_price);
+          if(state.filteredProducts.length > 0) {
+               state.filteredProducts = state.filteredProducts.filter(item => item.discont_price);
+          } else {
+            state.filteredProducts = state.recivedProducts.data.filter(item => item.discont_price);
+          }
+          
         } else {
-          state.filteredProducts = state.recivedProducts.data;
-        }
+          state.filteredProducts =  state.recivedProducts.data;
+        } 
       },
       sortByUserPriceAction(state, action) {
        const { minValue, maxValue } = action.payload;
-       state.filteredProducts = state.recivedProducts.data.filter(item => item.price >= minValue && item.price <= maxValue);
+       if(state.filteredProducts.length > 0) {
+          state.filteredProducts = state.filteredProducts.filter(item => item.price >= minValue && item.price <= maxValue);
+       } else {
+          state.filteredProducts = state.recivedProducts.data.filter(item => item.price >= minValue && item.price <= maxValue);
+        }  
       }
-   },
+    },
     extraReducers: (builder) => {
       builder
       .addCase(fetchAllProducts.pending,(state) => {
@@ -108,7 +127,6 @@ const productsSlice = createSlice({
 
     }
 })
-
 
 
 export default productsSlice.reducer

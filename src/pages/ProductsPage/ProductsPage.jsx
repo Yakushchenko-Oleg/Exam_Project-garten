@@ -24,14 +24,14 @@ const ProductsPage = () => {
   const { categoryId } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
+    
       if (categoryId) {
-        await dispatch(fetchProductsByCategory(categoryId));
+         dispatch(fetchProductsByCategory(categoryId));
       } else {
-        await dispatch(fetchAllProducts());
+         dispatch(fetchAllProducts());
       }
-    };
-    fetchData();
+   
+   
   }, [categoryId, dispatch]);
 
   useEffect(() => {
@@ -90,18 +90,18 @@ const ProductsPage = () => {
 
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
-          <p>Price</p>
+          <p className="filter-name">Price</p>
           <input type='number' placeholder='from' name='from' ></input>
           <input type='number' placeholder="to"  name='to'></input>
         </form>
 
         <div className="filter-wrapper__item">
-          <p>Discounted items</p>
-          <input type="checkbox" onChange={handleDiscountApply}></input>
+          <p className="filter-name">Discounted items</p>
+          <input className="checkbox" type="checkbox" onChange={handleDiscountApply}></input>
         </div>
 
         <div className="filter-wrapper__item">
-          <p>Sort</p>
+          <p className="filter-name">Sort</p>
           <select onChange={handleSort}>
             <option value="default">by default</option>
             <option value="low-to-high">Price: Low to High</option>

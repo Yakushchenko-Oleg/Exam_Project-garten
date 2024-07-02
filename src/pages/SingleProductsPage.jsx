@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const SingleProductsPage = () => {
+const SingleProductsPage = ({item}) => {
+  const [imageOpen, setImageOpen] = useState(null)
+
   return (
-    <div>SingleProductsPage</div>
+   <>
+     {/* <div>
+      <img src="" alt="" onClick={() => setImageOpen(item)}/>
+    </div>
+
+{
+  imageOpen &&  (
+    <div className='modal'>
+       <div className="modal-content">
+        <div className="modal__header"></div>
+          <div className="modal__body">
+              <img src={imageOpen.url} alt="" />
+          </div>
+       </div>
+    </div>
+  )
+}
+    */}
+   </>
   )
 }
 

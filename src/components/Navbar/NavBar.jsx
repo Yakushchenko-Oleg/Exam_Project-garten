@@ -16,6 +16,7 @@ const NavBar = () => {
       </div>
 
       {/* если isOpen то класс menu-wrapper-active */}
+  <div className={`${isOpen ? "bg-opacity" : ""}`}>
       <div className={`menu-wrapper ${isOpen ? 'menu-wrapper-active' : ''}`}>
         <p className='discount-lable'>1 day discount!</p>
         <ul className='navbar__menu'>
@@ -25,7 +26,7 @@ const NavBar = () => {
         <li><NavLink to="/allsales" className='allsalles'>All sales</NavLink></li>
         </ul>
       </div>
-
+  </div>
       <div className='navbar__icon-wrapper'>
         <NavLink className='navbar__icon-heart' to="#"><img src='./images/navbar/heart empty.png'></img></NavLink> 
 
