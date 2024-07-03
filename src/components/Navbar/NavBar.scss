@@ -44,17 +44,16 @@
         p{
             padding: 6px 16px;
         }
+      
     }
-
-    &__menu {
-        @include adaptiv-font(20, 12);
-        line-height: 130%;
+    .navbar__menu {
+        @include adaptiv-font(20, 11);
         list-style: none;
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         gap: 32px;
+        justify-content: space-between;
     }
-
     a {
         text-decoration: none;
     }
@@ -100,26 +99,26 @@
 }
 
 
-
-@media screen and (min-width: 767px) and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     .navbar {
         padding: 30px 20px 30px 20px;
+
+        .navbar__menu {
+            gap: 20px;
+        }
     }
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .navbar {
         padding: 30px 20px 30px 20px;
     }
     .navbar__menu{
-        gap: 5px;
-    }
-    .navbar__icon-wrapper, .navbar__logo {
-        gap: 5px;
+        gap: 10px;
     }
 }
 
-@media screen and (min-width: 361px) and (max-width: 480px) {
+@media screen and (max-width: 700px) {
     .navbar {
         padding: 30px 20px 30px 20px;
               
@@ -167,7 +166,7 @@
     }
 }
 
- @media screen and (min-width: 200px) and (max-width: 360px) {
+ @media screen and (max-width: 360px) {
     .navbar {
         padding: 30px 20px 30px 20px;
         gap: 10px;
