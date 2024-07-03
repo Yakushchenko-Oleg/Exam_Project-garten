@@ -1,53 +1,6 @@
 @import '../../variables.scss';
 @import '../../mixin.scss';
+@import '../ProductsPage/ProductsPage.scss';
 
-.filter-wrapper {
-    // display: grid;
-    // grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
-    // width: 100%;
-    // gap: 50px;
-  &__item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    p {
-      font-weight: bold;
-    }
-    input, select {
-      max-width: 112px;
-      padding: 8px 16px;
-      border-radius: $radius-small;
-      color: $text-grey;
-      border: 1px solid $border-grey;
-    }
-    select {
-      max-width: none;
-    }
-  }
-}
 
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: auto;
-  gap: 20px;
-}
-
-.products {
-  h2 {
-    font-weight: 700;
-  }
-}
-// .product-navigation {
-//     display: flex;
-//     align-items: center;
-//     gap: 10px;
-//     margin-bottom: 20px;
-//     &__link {
-//       color: $text-grey;
-//       text-decoration: none;
-//       &:hover {
-//         text-decoration: underline;
-//       }
-//     }
-//   }
+// стили берутся общие

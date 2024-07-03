@@ -114,8 +114,8 @@ const ProductsPage = () => {
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p className="filter-name">Price</p>
-          <input type="number" placeholder="from" name="from"></input>
-          <input type="number" placeholder="to" name="to"></input>
+          <input className="userInput" type="number" placeholder="from" name="from"></input>
+          <input className="userInput" type="number" placeholder="to" name="to"></input>
         </form>
 
         <div className="filter-wrapper__item">
@@ -137,8 +137,10 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      <div className="products">
-        <h2>{categoryTitle}</h2>
+      <div className="products container">
+        <div className="header-wrapper">
+          <h2>{categoryTitle}</h2>
+        </div>
 
         {isLoading ? (
           <div className="loader"></div>

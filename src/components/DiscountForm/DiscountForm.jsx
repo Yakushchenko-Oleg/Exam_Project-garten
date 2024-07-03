@@ -47,7 +47,7 @@ console.log(localStorage.getItem('discount'))
         <form className="form" onSubmit={handleSubmit(handleDiscountSubmit)}>
           <div className="form__item">
             <label htmlFor="username"></label>
-            <input
+            <input className='form-input'
               placeholder="Name"
               type="text"
               id="username"
@@ -63,7 +63,7 @@ console.log(localStorage.getItem('discount'))
 
           <div className="form__item">
             <label htmlFor="phonenumber"></label>
-            <input
+            <input className='form-input'
               placeholder="Phone number"
               type="tel"
               id="phonenumber"
@@ -81,7 +81,7 @@ console.log(localStorage.getItem('discount'))
 
           <div className="form__item">
             <label htmlFor="email"></label>
-            <input
+            <input className='form-input'
               placeholder="Email"
               type="text"
               id="email"

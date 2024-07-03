@@ -10,20 +10,7 @@
     
 }
 
-.contacts-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-}
-
-.contact-title {
-    @include adaptiv-font(64, 40);
-    // color: #424436; 
-    font-weight: 700; 
-    line-height: 70.4px;
-    margin-bottom: 40px;
-}
+// container - общий 
 
 .contact-content {
     width: 100%;

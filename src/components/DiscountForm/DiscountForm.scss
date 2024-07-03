@@ -9,7 +9,7 @@
 }
 
 .discount__title{
-    // font-size: 64px;
+    
     @include adaptiv-font(64, 40);
     text-align: center;
     font-weight: 700;
@@ -37,10 +37,11 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
+    width: 100%;
 
     &__item {
         width: 100%;
-        input, select {
+        .form-input {
             width: 100%;
             padding: 16px 32px;
             border: 1px solid $primary-white;
@@ -49,9 +50,10 @@
             font-weight: 600;
             background: transparent;
             overflow: hidden;
+           
         }
 
-        input::placeholder {
+        .form-input::placeholder {
             color: $primary-white;
         }
     }
@@ -85,9 +87,7 @@
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
     .discount__title{
-        // padding: 0 20px 0 20px;
         margin-top: 32px;
-        // font-size: 50px;
     }
     .form__item{
         input{
@@ -102,16 +102,18 @@
     }
     .discount__title{
         margin-top: 0;
-        // font-size: 42px;
     }
     .form__container{
         flex-direction: column-reverse;
         img{
             width: 100%;
+            object-position: center;
+            object-fit: cover;
         }
-    }
-    .form { 
-        width: 100%;
+        .form{
+            width: 100%;
+        }
+        
     }
 }
 
@@ -121,7 +123,6 @@
     }
     .discount__title{
         margin-top: 0;
-        // font-size: 34px;
     }
     .form__container{
         flex-direction: column-reverse;
@@ -131,12 +132,9 @@
             object-fit: cover;
         }
     }
-    .form { 
-        width: 100%;
-    }
-
+   
     .form__item{
-        input{
+        .form-input{
             padding: 16px 10px;
         }
     }

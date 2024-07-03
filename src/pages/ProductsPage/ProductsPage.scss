@@ -1,15 +1,18 @@
 @import '../../variables.scss';
 @import '../../mixin.scss';
 
+
     .filter-wrapper__item{
         display: flex;
         align-items: center;
         gap: 16px;
+    }
         .filter-name{
             font-weight: 600;
             @include adaptiv-font(20, 18);
         }
-        input, select {
+
+        .userInput, select {
             max-width: 112px;
             padding: 8px 16px; 
             border-radius: $radius-small;
@@ -25,12 +28,25 @@
             border-radius: $radius-small;
             border: 1px solid $border-grey;
         }
-    }
 
-.wrapper{
-    //назвать это враппером  и применить для всех подобных
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
-    grid-auto-rows: auto; 
-    gap: 20px;
+
+
+
+ @media screen and (min-width: 361px) and (max-width: 480px) {
+    .filter-wrapper__item{
+        gap: 10px;
+    }
+    .userInput, select {
+        max-width: 90px;
+        padding: 8px 8px; 
+    }
+ }
+ @media screen and (min-width: 200px) and (max-width: 360px) {
+    .filter-wrapper__item{
+        gap: 10px;
+    }
+    .userInput, select {
+        max-width: 90px;
+        padding: 8px 8px; 
+    }
  }
