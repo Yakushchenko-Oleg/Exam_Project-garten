@@ -14,7 +14,6 @@
 
 a {
   text-decoration: none;
-  
 }
 
 
@@ -34,13 +33,14 @@ a {
 }
 
 .product-navigation{
-  display: flex;
   gap: 16px;
+ 
   :last-child{
     color: $primary-grey;
   }
  
   &__link{
+    margin: 0 16px 16px 0;
     @include adaptiv-font(16, 12);
     align-content: center;
     color: $text-grey;
@@ -55,7 +55,8 @@ a {
 
 .filter-wrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-auto-rows: auto; 
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  grid-auto-rows: auto; 
   width: 80%;
   gap: 50px;
 }
