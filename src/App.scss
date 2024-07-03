@@ -88,7 +88,7 @@ a {
   align-items: stretch;
 }
 
-@media screen and (min-width: 200px) and (max-width: 420px) {
+@media screen and (min-width: 200px) and (max-width: 440px) {
   .container{
       align-items: center;
   }
@@ -112,6 +112,7 @@ h2{
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  width:100%;
 }
 
 .btn {

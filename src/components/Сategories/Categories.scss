@@ -46,32 +46,30 @@ h2 {
     }
 }
     
- @media screen and (min-width: 481px) and (max-width: 768px) {
+ @media screen and (min-width: 491px) and (max-width: 768px) {
     .header-wrapper {
         margin-bottom: 32px;
     }
-    
-    .wrapper {
-        grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
-    }
 }
     
-@media screen and (min-width: 361px) and (max-width: 480px) {
+@media screen and (min-width: 361px) and (max-width: 490px) {
     .header-wrapper {
         margin-bottom: 24px;
         justify-content: space-between;
-    
-        .categories__link {
-            padding: 8px 5px;
-        }
-    
+      
         .categories__line {
             display: none;
         }
     }
 }
-    
-@media screen and (min-width: 361px) and (max-width: 420px) {
+  
+@media screen and (min-width: 361px) and (max-width: 460px) {
+    .categories__link {
+            padding: 8px 8px;
+        }
+}
+
+@media screen and (min-width: 361px) and (max-width: 440px) {
     .container{
         justify-content: center;
     }
