@@ -90,11 +90,6 @@ a {
   align-items: stretch;
 }
 
-@media screen and (max-width: 440px) {
-  .container{
-      align-items: center;
-  }
-}
 
 h2{
   @include adaptiv-font(64, 40);

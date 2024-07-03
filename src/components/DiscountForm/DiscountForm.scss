@@ -9,7 +9,6 @@
 }
 
 .discount__title{
-    
     @include adaptiv-font(64, 40);
     text-align: center;
     font-weight: 700;
@@ -50,7 +49,6 @@
             font-weight: 600;
             background: transparent;
             overflow: hidden;
-           
         }
 
         .form-input::placeholder {
@@ -85,7 +83,7 @@
     font-weight: 400;
 }
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .discount__title{
         margin-top: 32px;
     }
@@ -96,7 +94,7 @@
     }
 }
 
-@media screen and (min-width: 361px) and (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .discount__container{
         padding: 24px 20px 0 20px;
     }
@@ -117,7 +115,7 @@
     }
 }
 
-@media screen and (min-width: 200px) and (max-width: 360px) {
+@media screen and (max-width: 360px) {
     .discount__container{
         padding: 24px 20px 0 20px;
     }
