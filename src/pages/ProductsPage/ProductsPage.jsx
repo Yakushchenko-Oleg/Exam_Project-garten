@@ -9,7 +9,8 @@ import {
   sortByUserPriceAction
 } from "../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import SingleProduct from "../../components/SingleProduct/SingleProduct";
+import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
+
 
 const ProductsPage = () => {
   
@@ -74,20 +75,26 @@ const ProductsPage = () => {
 
   const handleDiscountApply = (event) => {
     
-    // const userValue = event.target.checked; // apply checkbox
+    const userValue = event.target.checked; // apply checkbox
     // if(userValue){
     //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
     // }else{
     //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
     //   dispatch(handleSort);
     //   dispatch(handleUserPrice);
-   
-    const userValue = event.target.checked;
     dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-
-    event.target.reset();
+    
+    // if (userValue) {
+    //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    // } 
+    // else {
+    //   resetFilters();
+    // }
  };
 
+//  const resetFilters = () => {
+//   dispatch(fetchAllProducts()); // Очищаем фильтры = Загружаем все продукты заново
+// };
  
   return (
     <main className="maincontainer">
