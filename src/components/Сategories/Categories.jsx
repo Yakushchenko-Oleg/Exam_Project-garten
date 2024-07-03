@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
 import CategoriesItem from "../CategoriesItem/CategoriesItem";
 
-// добавить полоску к all categories
 
 const Categories = () => {
   const { categories, isLoading, error } = useSelector(
@@ -24,9 +23,9 @@ const Categories = () => {
   }, [dispatch]);
 
   return (
-    <div className="categories">
-      <div className="categories__header-wrapper">
-        <h2>Categories</h2>
+    <div className="products container">
+      <div className="header-wrapper">
+        <h2 className="categories-title">Categories</h2>
         <div className="categories__line"></div>
         <Link to="/categories">
           <span className="categories__link">All categories</span>
@@ -37,7 +36,7 @@ const Categories = () => {
           isLoading ? (
             <div className="loader"></div>
           ) : ( 
-            <div className="categories__wrapper">
+            <div className="wrapper">
             {
               slicedCategories.map( item => (
                 <Link to={`/categories/${item.id}`} className="item__link" key={item.id}>

@@ -23,8 +23,8 @@ const SingleProduct = ({ product }) => {
       )}
 
       <div className="icon-wrapper">
-        <img src='./images/singleProduct/icon-he.svg'></img>
-        <img src='./images/singleProduct/icon-bas.svg'></img>
+        <img src='../../../public/images/singleProduct/icon-he.svg'></img>
+        <img src='../../../public/images/singleProduct/icon-bas.svg'></img>
       </div>
 
       <div className="singleProduct__info">

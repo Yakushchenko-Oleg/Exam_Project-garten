@@ -30,8 +30,8 @@ function mixArray(array) {
 
 return (
 
-  <div className="sales">
-      <div className="sales__header-wrapper">
+  <div className="products container">
+      <div className="header-wrapper">
         <h2>Sale</h2>
         <div className="sales__line"></div>
         <Link to="/allsales">
@@ -42,7 +42,7 @@ return (
       {isLoading ? (
         <div className="loader"></div>
       ) : (
-        <div className="sales__wrapper">
+        <div className="wrapper">
           {
             discoutProducts && mixArray(discoutProducts).slice(0,4).map(item =>
               <Link to={`/products/${item.id}`} key={item.id}  className="item__title">

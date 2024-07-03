@@ -9,9 +9,9 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar__logo">
-        <img src="./images/navbar/logo.png" />
-        <img className="light" src="./images/navbar/mode=light.png"></img>
-        <img className="dark" src="./images/navbar/mode=dark.png"></img>
+        <img src="../../../public/images/navbar/logo.png" />
+        <img className="light" src="../../../public/images/navbar/mode=light.png"></img>
+        <img className="dark" src="../../../public/images/navbar/mode=dark.png"></img>
       </div>
 
       {/* если isOpen то - класс menu-wrapper-active */}
@@ -44,13 +44,13 @@ const NavBar = () => {
       </div>
       <div className="navbar__icon-wrapper">
         <NavLink className="navbar__icon-heart" to="#">
-          <img src="./images/navbar/heart empty.png"></img>
+          <img src="../../../public/images/navbar/heart empty.png"></img>
         </NavLink>
 
         <NavLink to="/cart">
           <img
             className="navbar__icon-cart"
-            src="./images/navbar/basket=empty.png"
+            src="../../../public/images/navbar/basket=empty.png"
           />
         </NavLink>
 

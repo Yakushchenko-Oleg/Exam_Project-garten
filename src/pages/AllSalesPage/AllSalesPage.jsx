@@ -78,13 +78,13 @@ const AllSalesPage = () => {
 
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
-          <p>Price</p>
-          <input type='number' placeholder='from' name='from'></input>
-          <input type='number' placeholder="to" name='to'></input>
+          <p className="filter-name">Price</p>
+          <input className="userInput" type='number' placeholder='from' name='from'></input>
+          <input className="userInput" type='number' placeholder="to" name='to'></input>
         </form>
 
         <div className="filter-wrapper__item">
-          <p>Sort</p>
+          <p className="filter-name">Sort</p>
           <select onChange={handleSort}>
             <option value="default">by default</option>
             <option value="low-to-high">Price: Low to High</option>
@@ -93,8 +93,10 @@ const AllSalesPage = () => {
         </div>
       </div>
 
-      <div className="products">
-        <h2>All sales</h2>
+      <div className="products container">
+        <div className="header-wrapper">
+          <h2>All sales</h2>
+        </div>
 
         {isLoading ? (
           <div className="loader"></div>
