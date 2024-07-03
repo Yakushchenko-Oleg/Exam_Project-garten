@@ -8,7 +8,7 @@ const Error404 = () => {
 
         <div className='containerError'>
           <img src="../../public/images/error/404.svg"></img>  
-          <h2>Page Not Found</h2>
+          <h2 className='error-title'>Page Not Found</h2>
           <p>We’re sorry, the page you requested could not be found.
           Please go back to the homepage</p>
           <Link to='/'>
