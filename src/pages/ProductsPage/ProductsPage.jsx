@@ -82,6 +82,11 @@ const ProductsPage = () => {
     const userValue = event.target.checked;
    
     dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+   
+    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
+
+    dispatch(sortByPriceAction({ value: sortValue}));  
+    
   };
  
   return (
