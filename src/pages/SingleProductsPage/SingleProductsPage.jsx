@@ -34,7 +34,8 @@ const SingleProductsPage = () => {
       setBreadcrumbs([
         { link: "/", name: "Main page" },
         { link: "/categories", name: "Categories" },
-        { link: "/allproducts", name: "All products" }
+        { link: "/allproducts", name: "All products" },
+         { link: `/products/${product.id}`, name: product.title }
       ]);
     }
   }, [product]);
@@ -77,7 +78,7 @@ const SingleProductsPage = () => {
             <Link to={item.link} className="product-navigation__link">
               {item.name}
             </Link>
-            {index < breadcrumbs.length - 1 && " / "}
+            {/* {index < breadcrumbs.length - 1 && " / "} */}
           </span>
         ))}
       </div>
@@ -90,17 +91,27 @@ const SingleProductsPage = () => {
           <div className="product-details__info">
             <div className="product-details__title-wrapper">
               <h1 className="product-details__title">{product.title}</h1>
-              <img src="./images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" />
+              <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" />
             </div>
             <div className="product-details__price-wrapper">
               {product.discont_price ? (
                 <>
-                  <span className="product-details__price--discount">{`$${product.discont_price}`}</span>
-                  <span className="product-details__price--original">{`$${product.price}`}</span>
-                  <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+                 {
+            product.discont_price ? (
+            <>
+              <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
+              <span className="original-price product-details__price--original">{`$${product.price}`}</span>
+              <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+            </>
+          ) : (
+            <span className="info-price">{`$${product.price}`}</span>
+          )}
+                  {/* <span className="product-details__price--discount">{`$${product.discont_price}`}</span>
+                  <span className="product-details__price--original">{`$${product.price}`}</span> */}
+                
                 </>
               ) : (
-                <span className="product-details__price">{`$${product.price}`}</span>
+                <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
               )}
             </div>
             <div className="product-details__buttons">
