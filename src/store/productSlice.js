@@ -58,7 +58,7 @@ const productsSlice = createSlice({
   reducers: {
     sortByPriceAction(state, action) {
       const { value } = action.payload;
-      // state.filteredProducts = 
+      state.filteredProducts = 
       (state.filteredProducts.length > 0
           ? state.filteredProducts
           : [...state.recivedProducts.data]

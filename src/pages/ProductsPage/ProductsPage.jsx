@@ -22,6 +22,7 @@ const ProductsPage = () => {
 
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
+  const [sortValue, setSortValue] = useState("default")
 
   const { categoryId } = useParams();
 
@@ -52,14 +53,18 @@ const ProductsPage = () => {
 
   //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
-    const userValue = event.target.value; //userchoise
-    dispatch(sortByPriceAction({ value: userValue }));
-
-    event.target.reset();
+    // const userValue = event.target.value; //userchoise
+    setSortValue(event.target.value);
+    // dispatch(sortByPriceAction({ value: userValue }));
   };
 
+  useEffect(()=>{
+    dispatch(sortByPriceAction({ value: sortValue}));
+  },[sortValue])
+
+
   const handleUserPrice = (event) => {
-    event.preventDefault(); // Останавливаем отправку формы
+    event.preventDefault(); 
 
     let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
@@ -70,31 +75,19 @@ const ProductsPage = () => {
 
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    event.target.reset();
+    dispatch(sortByPriceAction({ value: sortValue }))
   };
 
   const handleDiscountApply = (event) => {
     
-    const userValue = event.target.checked; // apply checkbox
-    // if(userValue){
-    //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-    // }else{
-    //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-    //   dispatch(handleSort);
-    //   dispatch(handleUserPrice);
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    const userValue = event.target.checked;
     
-    // if (userValue) {
-    //   dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-    // } 
-    // else {
-    //   resetFilters();
-    // }
- };
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
 
-//  const resetFilters = () => {
-//   dispatch(fetchAllProducts()); // Очищаем фильтры = Загружаем все продукты заново
-// };
+    dispatch(sortByPriceAction({ value: sortValue }));
+
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
+ };
  
   return (
     <main className="maincontainer">

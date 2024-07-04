@@ -16,9 +16,9 @@ const AllSalesPage = () => {
     (state) => state.products
   );
 
-  const [sortValue, setSortValue] = useState("default")
+  const [sortValue, setSortValue] = useState("default");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [categoryTitle, setCategoryTitle] = useState("All sales");
+  const [categoryTitle, setCategoryTitle] = useState("Title");
 
   let  data  = [];
 
@@ -60,8 +60,8 @@ const AllSalesPage = () => {
     const maxValue = formObject.to === "" ? Infinity : +formObject.to;
 
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
-    dispatch(sortByPriceAction({ value: sortValue }))
 
+    dispatch(sortByPriceAction({ value: sortValue }));
   };
 
   return (
