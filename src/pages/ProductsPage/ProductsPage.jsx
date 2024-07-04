@@ -53,9 +53,7 @@ const ProductsPage = () => {
 
   //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
-    // const userValue = event.target.value; //userchoise
     setSortValue(event.target.value);
-    // dispatch(sortByPriceAction({ value: userValue }));
   };
 
   useEffect(()=>{
@@ -75,19 +73,16 @@ const ProductsPage = () => {
 
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByPriceAction({ value: sortValue }))
+    dispatch(sortByPriceAction({ value: sortValue}));
+
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
   };
 
   const handleDiscountApply = (event) => {
-    
     const userValue = event.target.checked;
-    
+   
     dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-
-    dispatch(sortByPriceAction({ value: sortValue }));
-
-    dispatch(sortByUserPriceAction({ minValue, maxValue }));
- };
+  };
  
   return (
     <main className="maincontainer">
