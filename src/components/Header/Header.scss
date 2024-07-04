@@ -34,15 +34,14 @@
     }
 }
 
-// исправления 24.06
 
-@media screen and (min-width: 481px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     .header {
         padding: 60px 20px 20px 40px;
     }
 }
 
-@media screen and (min-width: 361px) and (max-width: 480px) {
+@media screen and (max-width: 480px) {
     .header {
         padding: 50px 20px 20px 24px;
 
@@ -52,7 +51,7 @@
     }
 }
 
-@media screen and (min-width: 200px) and (max-width: 360px) {
+@media screen and (max-width: 360px) {
     .header {
         padding: 50px 10px 10px 24px;
 

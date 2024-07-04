@@ -7,8 +7,10 @@ import WhatsappIcon from "./assets/ic-whatsapp.png";
 const Contacts = () => {
     return (
         <footer className="footer">
-            <div className="contacts-wrapper">
-                <span className="contact-title">Contact</span>
+            <div className="container ">
+                <div className="header-wrapper">
+                    <h2 className="contact-title">Contact</h2>
+                </div>
                 <div className="contact-content">
                     <div className="contact-wrapper">
                         <div className="card">

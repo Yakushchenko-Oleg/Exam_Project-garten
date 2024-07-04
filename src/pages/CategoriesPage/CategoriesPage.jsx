@@ -24,23 +24,23 @@ const CategoriesPage = () => {
   return (
     <main className="maincontainer">
 
-<div className="product-navigation">
+      <div className="product-navigation">
         {breadcrumbs &&
           breadcrumbs.map((item) => (
               <Link key={item.link} to={item.link} className="product-navigation__link">{item.name}</Link> 
           ))}
       </div>
 
-      <div className="AllCategories">
+      <div className="AllCategories container">
 
-        <div className="AllCategories__header-wrapper">
+        <div className="header-wrapper">
           <h2>Categories</h2>
         </div>
         
           {isLoading ? (
             <div className="loader"></div>
         ) : (
-          <div className="AllCategories__wrapper">
+          <div className="wrapper">
             {categories.map(item => (
               <Link to={`/categories/${item.id}`} className="item__link" key={item.id}>
                 <CategoriesItem item={item} apiUrl={apiUrl} />
