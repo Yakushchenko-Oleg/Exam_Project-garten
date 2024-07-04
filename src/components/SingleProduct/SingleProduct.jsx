@@ -6,7 +6,7 @@ const SingleProduct = ({ product }) => {
     return <div className="loader"></div>;
   }
 
-  const apiUrl = import.meta.env.APP_API_URL;
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const discountCounter = (product) =>
     Math.round(100 - (product.discont_price / product.price) * 100);
@@ -15,8 +15,8 @@ const SingleProduct = ({ product }) => {
     <div className="singleProduct" key={product.id}>
       {/* картинка обернута в контэйнер для регулирования высоты */}
       <div className="img-container"> 
-        <img src={`${apiUrl}${product.image}`} alt={product.title} />
-      </div>
+      <img src={`${apiUrl}${product.image}`} alt={product.title} />
+      </div> 
       {
         product.discont_price && (
         <span className="discount">{`-${discountCounter(product)}%`}</span>
