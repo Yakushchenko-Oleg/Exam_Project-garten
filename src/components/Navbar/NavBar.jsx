@@ -43,8 +43,8 @@ const NavBar = () => {
         </div>
       </div>
       <div className="navbar__icon-wrapper">
-        <NavLink className="navbar__icon-heart" to="#">
-          <img src="../../../public/images/navbar/heart empty.png"></img>
+        <NavLink to="#">
+          <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img>
         </NavLink>
 
         <NavLink to="/cart">
