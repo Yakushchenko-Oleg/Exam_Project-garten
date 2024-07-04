@@ -67,7 +67,13 @@
     &__icon-wrapper{
         display:flex;
         gap: 24px;
+        align-items: center;
     }
+
+    &__icon-cart,  &__icon-heart {
+        @include adaptiv-icon((100% null, 85% 480px, 75% 360px)); 
+    }
+
     &__icon-cart:hover {
         transform: scale(1.1);
         cursor: pointer;
@@ -117,6 +123,12 @@
     }
 }
 
+@media screen and (min-width: 701px) {
+    .bg-opacity{
+        display: none;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .navbar {
         padding: 30px 20px 30px 20px;
@@ -124,6 +136,7 @@
         .menu-wrapper-active {
            transform: translateX(-100%); //выезжает влево
         }
+
         .menu-wrapper {
            position:fixed;
            top:0;
@@ -161,7 +174,7 @@
 
     }
     .navbar__icon-wrapper, .navbar__logo{
-        gap: 16px;
+        gap: 10px;
     }
 }
 
@@ -169,15 +182,8 @@
     .navbar {
         padding: 30px 20px 30px 20px;
         gap: 10px;
-        
-        .menu-wrapper {
-            display: none;
-        }
-        
-        &__burger {
-            display: flex;
-        }
     }
+
     .navbar__icon-wrapper, .navbar__logo{
         gap: 8px;
     }
