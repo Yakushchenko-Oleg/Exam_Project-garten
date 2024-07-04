@@ -117,6 +117,12 @@
     }
 }
 
+@media screen and (min-width: 701px) {
+    .bg-opacity{
+        display: none;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .navbar {
         padding: 30px 20px 30px 20px;
@@ -124,6 +130,7 @@
         .menu-wrapper-active {
            transform: translateX(-100%); //выезжает влево
         }
+
         .menu-wrapper {
            position:fixed;
            top:0;
