@@ -7,52 +7,67 @@
 }
 
 .product-details {
-  padding: 0 15px; 
-  @media (min-width: 1200px) {
-    padding: 0 30px;
-  }
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
+  // padding: 0 15px; 
+  // @media (min-width: 1200px) {
+  //   padding: 0 30px;
+  // }
+  // display: flex;
+  // justify-content: center;
+  // align-items: flex-start;
+  // gap: 20px;
 
   &__container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    display: flex;
+    
+    gap: 32px;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+    // max-width: 1200px;
+    // margin: 0 auto;
   }
 
   &__image {
     cursor: pointer;
-    width: 100%;
+    width: 60%;
     img {
       width: 100%;
-      height: auto;
+      // height: auto;
+      max-height: 500px;
       object-fit: cover;
     }
   }
 
   &__info {
-    width: 100%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    justify-content: space-between;
   }
 
   &__title {
+    // text-align: justify;
     font-size: 40px;
     line-height: 44px;
     letter-spacing: 3%;
     color: #424436;
   }
 
+  &__title-wrapper {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+  }
+
   &__price-wrapper {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    :nth-child(2){
+      align-self: flex-end;
+    }
+    :nth-child(3){
+      align-self: flex-start;
+    }
   }
 
   &__price--discount {
@@ -84,7 +99,8 @@
   &__buttons {
     display: flex;
     align-items: center;
-    gap: 0;
+    // justify-content: space-between;
+    // gap: 20px;
   }
 
   &__quantity-button {
@@ -129,7 +145,7 @@
     font-weight: 600;
     border: none;
     cursor: pointer;
-    margin-left: 10px; 
+    margin-left: 30px; 
   }
 
   &__description-label {
@@ -144,9 +160,9 @@
   &__description {
     font-size: 16px;
     line-height: 1.5;
-    color: #424436;
-    text-align: left;
-    padding: 4px 8px;
+    // color: #424436;
+    text-align: justify;
+    // padding: 4px 8px;
   }
 
   &__read-more {
