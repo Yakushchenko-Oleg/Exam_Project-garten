@@ -31,7 +31,7 @@ const AllSalesPage = () => {
     setCategoryTitle("Discounted items");
     setBreadcrumbs([
       { link: "/", name: "Main page " },
-      { link: "/allsales", name: " Discounted items " },
+      { link: "/allsales", name: " All Sales " },
     ]);
   }, []);
 
