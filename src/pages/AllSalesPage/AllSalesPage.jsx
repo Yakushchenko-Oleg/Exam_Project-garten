@@ -18,17 +18,14 @@ const AllSalesPage = () => {
   const { data } = recivedProducts;
 
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [categoryTitle, setCategoryTitle] = useState("Discounted items");
+  const [categoryTitle, setCategoryTitle] = useState("All sales");
 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(fetchAllProducts());
-    };
-    fetchData();
+    dispatch(fetchAllProducts());
   }, [dispatch]);
 
   useEffect(() => {
-    setCategoryTitle("Discounted items");
+    setCategoryTitle("All sales");
     setBreadcrumbs([
       { link: "/", name: "Main page " },
       { link: "/allsales", name: "All sales" },
@@ -36,32 +33,24 @@ const AllSalesPage = () => {
   }, []);
 
   const handleSort = (event) => {
-    const value = event.target.value;
-    let sorted = data.filter((item) => item.discont_price);
+    const userValue = event.target.value; //userchoise
+    dispatch(sortByPriceAction({ value: userValue }));
 
-    if (value === "low-to-high") {
-      sorted = [...sorted].sort((a, b) => a.price - b.price);
-    } else if (value === "high-to-low") {
-      sorted = [...sorted].sort((a, b) => b.price - a.price);
-    }
-
-    dispatch(sortByPriceAction(sorted));
+    event.target.reset();
   };
 
   const handleUserPrice = (event) => {
-    event.preventDefault();
-    let formData = new FormData(event.target.parentElement);
+    event.preventDefault(); // Останавливаем отправку формы
+
+    let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
+    console.log(formObject);
 
-    const minValue = formObject.from === '' ? -Infinity : +(formObject.from);
-    const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
+    const minValue = formObject.from === "" ? -Infinity : +formObject.from;
+    const maxValue = formObject.to === "" ? Infinity : +formObject.to;
 
-    const ranged = data.filter(
-      (item) =>
-        item.discont_price && item.price >= minValue && item.price <= maxValue
-    );
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByUserPriceAction(ranged));
     event.target.reset();
   };
 
