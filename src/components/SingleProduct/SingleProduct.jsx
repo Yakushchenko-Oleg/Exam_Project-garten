@@ -6,7 +6,7 @@ const SingleProduct = ({ product }) => {
     return <div className="loader"></div>;
   }
 
-  const apiUrl = import.meta.env.VITE_API_URL;
+  const apiUrl = import.meta.env.APP_API_URL;
 
   const discountCounter = (product) =>
     Math.round(100 - (product.discont_price / product.price) * 100);
