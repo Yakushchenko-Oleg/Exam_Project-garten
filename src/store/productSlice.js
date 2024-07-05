@@ -32,10 +32,7 @@ export const fetchProductsByCategory = createAsyncThunk(
       } 
       
       const data  = await resp.json()
-      // console.log(data);
       return data
-
-
 
     } catch (error) {
       return rejectWithValue(error.message)
@@ -52,6 +49,7 @@ const productsSlice = createSlice({
     },
     singleProduct: {},
     filteredProducts: [],
+    favorites: [],
     isLoading: false,
     error: null,
   },
@@ -86,6 +84,18 @@ const productsSlice = createSlice({
           ? state.filteredProducts 
           : [...state.recivedProducts.data]
       ).filter(item => item.price >= minValue && item.price <= maxValue);
+    },
+    setFavourites: (state, payload ) =>{
+      const foundProduct = state.recivedProducts.data.find( item => item.id === payload)
+
+      let localProducts = JSON.parse(localStorage.getItem("favourites"))
+
+      if(localProducts){ 
+        let localProduct = localProducts.find(item => item.id === payload)
+        if (localProduct) {
+          localProducts = localProducts.filter(item => item.id !== payload)}
+          
+        }
     }
   },
   extraReducers: (builder) => {

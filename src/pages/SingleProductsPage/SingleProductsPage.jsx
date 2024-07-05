@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo  } from "react";
 import "./SingleProductsPage.scss";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "../../store/productSlice";
+import { addToCart } from "../../store/cartSlice ";
 
 const SingleProductsPage = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const SingleProductsPage = () => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const apiUrl = import.meta.env.APP_API_URL;
+  const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
 
   useEffect(() => {
     if (!data.length) {
@@ -38,7 +40,7 @@ const SingleProductsPage = () => {
          { link: `/products/${product.id}`, name: product.title }
       ]);
     }
-  }, [product]);
+  }, [memoizedProduct]);
 
   if (isLoading) {
     return <div className="loader">Loading...</div>;
@@ -57,8 +59,9 @@ const SingleProductsPage = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${product.title} to cart.`);
+    dispatch(addToCart({product, quantity}))
   };
+
 
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);

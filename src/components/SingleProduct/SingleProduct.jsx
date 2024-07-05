@@ -1,7 +1,11 @@
 import React from "react";
 import "./SingleProduct.scss";
+import { addToCart } from "../../store/cartSlice ";
+import { useDispatch } from "react-redux";
 
 const SingleProduct = ({ product }) => {
+  const dispatch = useDispatch();
+
   if (!product) {
     return <div className="loader"></div>;
   }
@@ -10,6 +14,10 @@ const SingleProduct = ({ product }) => {
 
   const discountCounter = (product) =>
     Math.round(100 - (product.discont_price / product.price) * 100);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({product, quantity: 1}))
+  };
 
   return (
     <div className="singleProduct" key={product.id}>
@@ -24,7 +32,9 @@ const SingleProduct = ({ product }) => {
 
       <div className="icon-wrapper">
         <img src='../../../public/images/singleProduct/icon-he.svg'></img>
-        <img src='../../../public/images/singleProduct/icon-bas.svg'></img>
+        <img 
+        src='../../../public/images/singleProduct/icon-bas.svg'
+        onClick={handleAddToCart}></img>
       </div>
 
       <div className="singleProduct__info">

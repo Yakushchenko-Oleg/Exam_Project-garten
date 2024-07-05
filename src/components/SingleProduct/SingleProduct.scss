@@ -61,11 +61,11 @@
         right: 16px;
         top: 16px;
         
-        img{
+        svg{
             border:none;
         }
-        img:hover{
-            color: $primary-grey;
+        svg:hover{
+            fill: $primary-grey;
         }
     }
         
