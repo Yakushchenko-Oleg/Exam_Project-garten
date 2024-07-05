@@ -15,11 +15,20 @@ const AllSalesPage = () => {
   const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
     (state) => state.products
   );
-  const { data } = recivedProducts;
 
+  const [sortValue, setSortValue] = useState("default");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [categoryTitle, setCategoryTitle] = useState("All sales");
+  const [categoryTitle, setCategoryTitle] = useState("Title");
 
+  let  data  = [];
+
+  if (filteredProducts && filteredProducts.length > 0) {
+    data = filteredProducts.filter((item) => item.discont_price)
+  } else{
+    data = recivedProducts.data.filter((item) => item.discont_price)
+  }
+  console.log(data);
+ 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
@@ -33,14 +42,15 @@ const AllSalesPage = () => {
   }, []);
 
   const handleSort = (event) => {
-    const userValue = event.target.value; //userchoise
-    dispatch(sortByPriceAction({ value: userValue }));
-
-    event.target.reset();
+    setSortValue(event.target.value);
   };
 
+  useEffect(()=>{
+    dispatch(sortByPriceAction({ value: sortValue}));
+  },[sortValue])
+
   const handleUserPrice = (event) => {
-    event.preventDefault(); // Останавливаем отправку формы
+    event.preventDefault();
 
     let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
@@ -51,7 +61,7 @@ const AllSalesPage = () => {
 
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    event.target.reset();
+    dispatch(sortByPriceAction({ value: sortValue }));
   };
 
   return (
@@ -91,19 +101,11 @@ const AllSalesPage = () => {
           <div className="loader"></div>
         ) : (
           <div className="wrapper">
-            {filteredProducts && filteredProducts.length > 0
-              ? filteredProducts.map((item) => (
+            {data && data.map((item) => (
                   <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
                     <SingleProduct product={item} />
                   </Link>
-                ))
-              : data
-                  .filter((item) => item.discont_price)
-                  .map((item) => (
-                    <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
-                      <SingleProduct product={item} />
-                    </Link>
-                  ))}
+            ))}
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
