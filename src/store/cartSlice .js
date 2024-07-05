@@ -14,7 +14,6 @@ export const fetchGetDiscount = createAsyncThunk(
             'Content-Type': 'application/json'
         }, 
         body: JSON.stringify(formData)
-      
       })
       console.log(responce, formData);
       if (!responce.ok) {
@@ -35,9 +34,19 @@ const cartSlice = createSlice({
         isLoading: false,
         error: null
           },
-    reducers: {// заменить экшны на новые
-      firstReducer(state) {},
-      secondReducer(state) {}
+    reducers: {
+      addToCart(state, action) {
+        const {product, quantity} = action.payload
+        let findProduct = state.cart.find(item => item.id === product.id)
+        if (findProduct) {
+          findProduct.quantity += quantity
+        }
+        else {
+          state.cart.push({...product, quantity})
+        }
+        localStorage.setItem('cart', JSON.stringify(state.cart))
+      },
+      // secondReducer(state) {}
     },
     extraReducers: (builder) => {
       builder
@@ -58,9 +67,9 @@ const cartSlice = createSlice({
 })
 
 
-export const {//заменить названия экшнов в экспорте
-    delLastProduct,  
-    sortByPriceAction
+export const {
+    addToCart,  
+    // sortByPriceAction
 } = cartSlice.actions
 
 export default cartSlice.reducer

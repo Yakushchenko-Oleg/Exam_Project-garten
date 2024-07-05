@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './CartItem.scss'
+import { addToCart } from '../../store/cartSlice ';
+import { useDispatch } from 'react-redux';
 
 const CartItem = ({product}) => {
   const apiUrl = import.meta.env.APP_API_URL;
+  const dispach = useDispatch
+  const [quantity, seQuantity] = useState(product.quantity)
+
+  const handleAddToCart = () => {
+    seQuantity(prev => prev +1)
+    dispach(addToCart({product, quantity}))
+  };
 
   return (
 
@@ -21,9 +30,9 @@ const CartItem = ({product}) => {
             <div className="cartitem__info__price-wraper">
 
               <div className="cartitem__info__price-wraper_quantity-container">
-                <button>+</button>
-                <p>{product.quantity}</p> 
                 <button>-</button>
+                <p>{product.quantity}</p> 
+                <button onClick={handleAddToCart}>+</button>
               </div>
 
               <div className="cartitem__info__price-wraper_price-container">
