@@ -9,9 +9,11 @@ import {
   sortByUserPriceAction
 } from "../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import SingleProduct from "../../components/SingleProduct/SingleProduct";
+import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
+
 
 const ProductsPage = () => {
+  
   const dispatch = useDispatch();
   const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
     (state) => state.products
@@ -20,18 +22,16 @@ const ProductsPage = () => {
 
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
+  const [sortValue, setSortValue] = useState("default")
 
   const { categoryId } = useParams();
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (categoryId) {
-        await dispatch(fetchProductsByCategory(categoryId));
-      } else {
-        await dispatch(fetchAllProducts());
-      }
-    };
-    fetchData();
+    if (categoryId) {
+      dispatch(fetchProductsByCategory(categoryId));
+    } else {
+      dispatch(fetchAllProducts());
+    }
   }, [categoryId, dispatch]);
 
   useEffect(() => {
@@ -53,71 +53,75 @@ const ProductsPage = () => {
 
   //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
-    const value = event.target.value; //userchoise
-    let sorted = data;
+    setSortValue(event.target.value);
+  };
 
-    if (value === "low-to-high") {
-      sorted = [...data].sort((a, b) => a.price - b.price);
-    } else if (value === "high-to-low") {
-      sorted = [...data].sort((a, b) => b.price - a.price);
-    }
+  useEffect(()=>{
+    dispatch(sortByPriceAction({ value: sortValue}));
+  },[sortValue])
 
-    dispatch(sortByPriceAction(sorted));
+
+  const handleUserPrice = (event) => {
+    event.preventDefault(); 
+
+    let formData = new FormData(event.target.parentElement); //userInput
+    let formObject = Object.fromEntries(formData);
+    console.log(formObject);
+
+    const minValue = formObject.from === "" ? -Infinity : +formObject.from;
+    const maxValue = formObject.to === "" ? Infinity : +formObject.to;
+
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
+
+    dispatch(sortByPriceAction({ value: sortValue}));
+
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
   };
 
   const handleDiscountApply = (event) => {
-    const value = event.target.checked; // checkbox
-    let discounted = data;
+    const userValue = event.target.checked;
+   
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+   
+    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    if (value) {
-    discounted = data.filter(item => item.discont_price);
-    } else {
-      discounted = data;
-    }
-
-    dispatch(sortByDiscountAction(discounted));
-  };
-  const handleUserPrice = (event) => {
-    event.preventDefault(); // Останавливаем отправку формы
-
-    let formData = new FormData(event.target.parentElement)
-    let formObject  = Object.fromEntries(formData)
-    console.log(formObject)
+    dispatch(sortByPriceAction({ value: sortValue}));  
     
-    const minValue = formObject.from === '' ? -Infinity : +(formObject.from );
-    const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
-
-    const ranged = data.filter(item => item.price >= minValue && item.price <= maxValue);
-    
-    dispatch(sortByUserPriceAction(ranged));
-
-    event.target.reset();
   };
-
+ 
   return (
     <main className="maincontainer">
       <div className="product-navigation">
         {breadcrumbs &&
           breadcrumbs.map((item) => (
-              <Link key={item.link} to={item.link} className="product-navigation__link">{item.name}</Link> 
-
+            <Link
+              key={item.link}
+              to={item.link}
+              className="product-navigation__link"
+            >
+              {item.name}
+            </Link>
           ))}
       </div>
 
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
-          <p>Price</p>
-          <input type='number' placeholder='from' name='from' ></input>
-          <input type='number' placeholder="to"  name='to'></input>
+          <p className="filter-name">Price</p>
+          <input className="userInput" type="number" placeholder="from" name="from"></input>
+          <input className="userInput" type="number" placeholder="to" name="to"></input>
         </form>
 
         <div className="filter-wrapper__item">
-          <p>Discounted items</p>
-          <input type="checkbox" onChange={handleDiscountApply}></input>
+          <p className="filter-name">Discounted items</p>
+          <input
+            className="checkbox"
+            type="checkbox"
+            onChange={handleDiscountApply}
+          ></input>
         </div>
 
         <div className="filter-wrapper__item">
-          <p>Sort</p>
+          <p className="filter-name">Sort</p>
           <select onChange={handleSort}>
             <option value="default">by default</option>
             <option value="low-to-high">Price: Low to High</option>
@@ -126,8 +130,10 @@ const ProductsPage = () => {
         </div>
       </div>
 
-      <div className="products">
-        <h2>{categoryTitle}</h2>
+      <div className="products container">
+        <div className="header-wrapper">
+          <h2>{categoryTitle}</h2>
+        </div>
 
         {isLoading ? (
           <div className="loader"></div>

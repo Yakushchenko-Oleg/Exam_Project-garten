@@ -15,16 +15,16 @@ const SingleProduct = ({ product }) => {
     <div className="singleProduct" key={product.id}>
       {/* картинка обернута в контэйнер для регулирования высоты */}
       <div className="img-container"> 
-        <img src={`${apiUrl}${product.image}`} alt={product.title} />
-      </div>
+      <img src={`${apiUrl}${product.image}`} alt={product.title} />
+      </div> 
       {
         product.discont_price && (
         <span className="discount">{`-${discountCounter(product)}%`}</span>
       )}
 
       <div className="icon-wrapper">
-        <img src='./images/singleProduct/icon-he.svg'></img>
-        <img src='./images/singleProduct/icon-bas.svg'></img>
+        <img src='../../../public/images/singleProduct/icon-he.svg'></img>
+        <img src='../../../public/images/singleProduct/icon-bas.svg'></img>
       </div>
 
       <div className="singleProduct__info">

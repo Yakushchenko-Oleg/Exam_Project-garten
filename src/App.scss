@@ -16,15 +16,17 @@ a {
   text-decoration: none;
 }
 
+
 // главный контэйнер
 .container-1440 {
   margin: 0 auto;
   max-width: 1440px;
   background-color: $body-white;
+
 }
 
 .maincontainer{
-  margin: 80px 40px 80px 40px;
+  margin: 80px 40px;
   display: flex;
   flex-direction: column;
   gap: 80px;
@@ -32,10 +34,13 @@ a {
 
 .product-navigation{
   display: flex;
+  flex-wrap: wrap;
   gap: 16px;
+ 
   :last-child{
     color: $primary-grey;
   }
+ 
   &__link{
     @include adaptiv-font(16, 12);
     align-content: center;
@@ -47,6 +52,21 @@ a {
     border: 1px solid $text-grey;
     display: inline-block;
   }
+}
+
+.filter-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  grid-auto-rows: auto; 
+  width: 80%;
+  gap: 50px;
+} 
+
+@media screen and (max-width: 360px) {
+  .filter-wrapper {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+      width: 100%;
+    }
 }
 
 .loader {
@@ -64,12 +84,13 @@ a {
   }
 }
 
-.products{ 
-  //назвать это контейнором и применить для всех
+.container{ 
+  //products назвать это контейнором и применить для всех
   display: flex;
   flex-direction: column;
   align-items: stretch;
 }
+
 
 h2{
   @include adaptiv-font(64, 40);
@@ -85,3 +106,36 @@ h2{
   gap: 20px;
 }
 
+.header-wrapper{
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  width:100%;
+}
+
+.btn {
+    background-color: $primary-green;
+    color: $primary-white;
+    padding: 16px 56px 16px 56px;
+    @include adaptiv-font(20, 18);
+    font-weight: 500;
+    border: none;
+    border-radius: $radius-small;
+}
+.btn:hover{
+    transform: scale(1.1);
+    background-color: $primary-orange;
+    cursor: pointer;
+    color: $primary-white;
+}
+
+.bg-opacity {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  background: #50505051;
+  left: 0;
+  // backdrop-filter: blur(12px);
+  backdrop-filter: grayscale(50%);
+}

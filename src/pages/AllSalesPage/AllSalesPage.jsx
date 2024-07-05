@@ -15,54 +15,53 @@ const AllSalesPage = () => {
   const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
     (state) => state.products
   );
-  const { data } = recivedProducts;
 
+  const [sortValue, setSortValue] = useState("default");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [categoryTitle, setCategoryTitle] = useState("Discounted items");
+  const [categoryTitle, setCategoryTitle] = useState("Title");
 
+  let  data  = [];
+
+  if (filteredProducts && filteredProducts.length > 0) {
+    data = filteredProducts.filter((item) => item.discont_price)
+  } else{
+    data = recivedProducts.data.filter((item) => item.discont_price)
+  }
+  console.log(data);
+ 
   useEffect(() => {
-    const fetchData = async () => {
-      await dispatch(fetchAllProducts());
-    };
-    fetchData();
+    dispatch(fetchAllProducts());
   }, [dispatch]);
 
   useEffect(() => {
-    setCategoryTitle("Discounted items");
+    setCategoryTitle("All sales");
     setBreadcrumbs([
       { link: "/", name: "Main page " },
-      { link: "/allsales", name: " Discounted items " },
+      { link: "/allsales", name: "All sales" },
     ]);
   }, []);
 
   const handleSort = (event) => {
-    const value = event.target.value;
-    let sorted = data.filter((item) => item.discont_price);
-
-    if (value === "low-to-high") {
-      sorted = [...sorted].sort((a, b) => a.price - b.price);
-    } else if (value === "high-to-low") {
-      sorted = [...sorted].sort((a, b) => b.price - a.price);
-    }
-
-    dispatch(sortByPriceAction(sorted));
+    setSortValue(event.target.value);
   };
+
+  useEffect(()=>{
+    dispatch(sortByPriceAction({ value: sortValue}));
+  },[sortValue])
 
   const handleUserPrice = (event) => {
     event.preventDefault();
-    let formData = new FormData(event.target.parentElement);
+
+    let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
+    console.log(formObject);
 
-    const minValue = formObject.from === '' ? -Infinity : +(formObject.from);
-    const maxValue = formObject.to === '' ? Infinity : +(formObject.to);
+    const minValue = formObject.from === "" ? -Infinity : +formObject.from;
+    const maxValue = formObject.to === "" ? Infinity : +formObject.to;
 
-    const ranged = data.filter(
-      (item) =>
-        item.discont_price && item.price >= minValue && item.price <= maxValue
-    );
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByUserPriceAction(ranged));
-    event.target.reset();
+    dispatch(sortByPriceAction({ value: sortValue }));
   };
 
   return (
@@ -78,13 +77,13 @@ const AllSalesPage = () => {
 
       <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
-          <p>Price</p>
-          <input type='number' placeholder='from' name='from'></input>
-          <input type='number' placeholder="to" name='to'></input>
+          <p className="filter-name">Price</p>
+          <input className="userInput" type='number' placeholder='from' name='from'></input>
+          <input className="userInput" type='number' placeholder="to" name='to'></input>
         </form>
 
         <div className="filter-wrapper__item">
-          <p>Sort</p>
+          <p className="filter-name">Sort</p>
           <select onChange={handleSort}>
             <option value="default">by default</option>
             <option value="low-to-high">Price: Low to High</option>
@@ -93,26 +92,20 @@ const AllSalesPage = () => {
         </div>
       </div>
 
-      <div className="products">
-        <h2>{categoryTitle}</h2>
+      <div className="products container">
+        <div className="header-wrapper">
+          <h2>All sales</h2>
+        </div>
 
         {isLoading ? (
           <div className="loader"></div>
         ) : (
           <div className="wrapper">
-            {filteredProducts && filteredProducts.length > 0
-              ? filteredProducts.map((item) => (
+            {data && data.map((item) => (
                   <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
                     <SingleProduct product={item} />
                   </Link>
-                ))
-              : data
-                  .filter((item) => item.discont_price)
-                  .map((item) => (
-                    <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
-                      <SingleProduct product={item} />
-                    </Link>
-                  ))}
+            ))}
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
