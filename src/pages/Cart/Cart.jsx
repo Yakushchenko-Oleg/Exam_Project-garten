@@ -15,7 +15,7 @@ const Cart = () => {
       createdAt: "2022-10-02T14:43:29.000Z",
       updatedAt: "2022-10-02T14:43:29.000Z",
       categoryId: 1,
-      count: 1,
+      quantity: 1,
     },
     {
       id: 2,
@@ -27,12 +27,15 @@ const Cart = () => {
       createdAt: "2022-10-02T14:43:29.000Z",
       updatedAt: "2022-10-02T14:43:29.000Z",
       categoryId: 1,
-      count: 1,
+      quantity: 3,
     },
   ]
-  
-  let sum = cart.reduce((acc, curent) => {
-    return acc + (curent.price * curent.count)
+
+  let totalSum = cart.reduce((acc, curent) => {
+    return acc + (curent.price * curent.quantity)
+  }, 0)
+  let totalQontity = cart.reduce((acc, curent) => {
+    return acc + curent.quantity
   }, 0)
 
   return (
@@ -42,7 +45,7 @@ const Cart = () => {
         <div className="cart__header-wrapper">
           <h2>Shopping cart</h2>
           <div className="cart__line"></div>
-          <Link to="/allproducts">
+          <Link to="/allproducts">                                  
             <span className="categories__link">Back to the store</span>
           </Link>
         </div>
@@ -57,11 +60,17 @@ const Cart = () => {
             </div>
             <form className='cart__content_form' action="">
               <h3>Order details</h3>
-              <p>{`${cart.length} item`}</p>
+              <p>{`${totalQontity} item`}</p>
               <div className="cart__content_form_totoalConteiner">
                 <p>Total</p>
-                <p>{`$${sum}`}</p>
+                <h3>{`$${totalSum}`}</h3>
               </div>
+
+              <input type="text" placeholder='Name'/>
+              <input type="text"  placeholder='Phone number'/>
+              <input type="text" placeholder='Email'/>
+              <button>Order</button>
+
 
             </form>
         
