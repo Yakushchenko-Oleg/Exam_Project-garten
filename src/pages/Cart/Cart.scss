@@ -2,18 +2,8 @@
 @import '../../mixin.scss';
 
 .cart{
-    &__header-wrapper{
-        display: flex;
-        align-items: center;
-        margin-bottom: 40px;
     
-        h2{
-            @include adaptiv-font(64, 40);
-            font-weight: 700;
-            margin-bottom: 0;
-        }
-    
-        .cart__line{
+    .cart__line{
             height: 1px;
             flex-grow: 1; // Занимает доступное свободное пространство
             margin-left: 32px;
@@ -21,7 +11,7 @@
             display: block;
         }
     
-        .categories__link{
+    .cart__link{
             @include adaptiv-font(16, 12);
             align-content: center;
             color: $text-grey;
@@ -29,8 +19,17 @@
             padding: 8px 16px;
             border: 1px solid $text-grey;
             display: inline-block;
-            }
-    }
+        }
+    .cart__link-hidden{
+        display: none;
+        margin-top: 24px;
+        @include adaptiv-font(16, 12);
+        color: $text-grey;
+        border-radius: $radius-small;
+        padding: 8px 16px;
+        border: 1px solid $text-grey;
+        // display: inline-block;
+        }
 
     &__content{
         display: flex;
@@ -47,7 +46,7 @@
         }
 
         &_form{
-            max-width: 548px;
+            // max-width: 548px;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -112,16 +111,70 @@
                 padding: 16px 32px;
                 border: none;
                 border-radius: $radius-small;
-
-
             }
         }
     }
 
-
-
-
     &__enpty{}
 }
-    
+
+
+
+@media screen and (max-width: 1000px) {
+    .header-wrapper {
+        margin-bottom: 32px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-wrapper {
+        margin-bottom: 32px;
+    }
+
+    .cart__content{
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+   
+}
+
+@media screen and (max-width: 630px) {
+    .cart{
+        
+        h2{
+            text-align: start;
+        }
+   
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .cart{
+    .header-wrapper {
+        margin-bottom: 24px;
+        justify-content: space-between;
+    }
+    .cart__line {
+        display: none;
+    }
+    .cart__link {
+        display: none;
+    }
+    .cart__link-hidden{
+        display: inline-block;
+    }
+    }    
+}
+
+@media screen and (max-width: 360px) {
+    .header-wrapper {
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 12px;
+        margin-bottom: 24px;
+                
+      
+    }
+}
 

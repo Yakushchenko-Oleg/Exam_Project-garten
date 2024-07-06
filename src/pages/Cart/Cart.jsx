@@ -17,13 +17,13 @@ const Cart = () => {
 
   return (
     <main className="maincontainer">
-      <div className="cart">
+      <div className="cart container">
 
-        <div className="cart__header-wrapper">
+        <div className="header-wrapper">
           <h2>Shopping cart</h2>
           <div className="cart__line"></div>
           <Link to="/allproducts">                                  
-            <span className="categories__link">Back to the store</span>
+            <span className="cart__link">Back to the store</span>
           </Link>
         </div>
 
@@ -51,7 +51,9 @@ const Cart = () => {
 
             </form>
         
-             
+          <Link to="/allproducts">
+            <span className="cart__link cart__link-hidden">Back to the store</span>
+          </Link>  
           </div>
           : 
           <div className="cart__enpty">
@@ -60,7 +62,7 @@ const Cart = () => {
           </div>
         }
 
-
+         
       </div>
 
 
