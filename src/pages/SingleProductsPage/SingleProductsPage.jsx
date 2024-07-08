@@ -8,12 +8,13 @@ const SingleProductsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { recivedProducts, isLoading, error } = useSelector((state) => state.products);
-  const { data } = recivedProducts || { data: [] }; 
-  const product = data.find((item) => item.id === parseInt(id)) || {}; 
+  const { data } = recivedProducts || { data: [] };
+  const product = data.find((item) => item.id === parseInt(id)) || {};
   const [imageOpen, setImageOpen] = useState(null);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
   const apiUrl = import.meta.env.APP_API_URL;
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const SingleProductsPage = () => {
          { link: `/products/${product.id}`, name: product.title }
       ]);
     }
-  }, [product]);
+  }, [product.id, product.category?.id, product.title]);
 
   if (isLoading) {
     return <div className="loader">Loading...</div>;
@@ -57,6 +58,7 @@ const SingleProductsPage = () => {
   };
 
   const handleAddToCart = () => {
+    setAddedToCart(true);
     console.log(`Added ${quantity} of ${product.title} to cart.`);
   };
 
@@ -73,12 +75,11 @@ const SingleProductsPage = () => {
   return (
     <main className="maincontainer">
       <div className="product-navigation">
-        {breadcrumbs.map((item, index) => (
+        {breadcrumbs.map((item) => (
           <span key={item.link}>
             <Link to={item.link} className="product-navigation__link">
               {item.name}
             </Link>
-            {/* {index < breadcrumbs.length - 1 && " / "} */}
           </span>
         ))}
       </div>
@@ -91,24 +92,13 @@ const SingleProductsPage = () => {
           <div className="product-details__info">
             <div className="product-details__title-wrapper">
               <h1 className="product-details__title">{product.title}</h1>
-              <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" />
             </div>
             <div className="product-details__price-wrapper">
               {product.discont_price ? (
                 <>
-                 {
-            product.discont_price ? (
-            <>
-              <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
-              <span className="original-price product-details__price--original">{`$${product.price}`}</span>
-              <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
-            </>
-          ) : (
-            <span className="info-price">{`$${product.price}`}</span>
-          )}
-                  {/* <span className="product-details__price--discount">{`$${product.discont_price}`}</span>
-                  <span className="product-details__price--original">{`$${product.price}`}</span> */}
-                
+                  <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
+                  <span className="original-price product-details__price--original">{`$${product.price}`}</span>
+                  <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
                 </>
               ) : (
                 <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
@@ -118,7 +108,13 @@ const SingleProductsPage = () => {
               <button className="product-details__quantity-button" onClick={handleDecreaseQuantity}>-</button>
               <span className="product-details__quantity">{quantity}</span>
               <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>
-              <button className="product-details__add-to-cart" onClick={handleAddToCart}>Add to cart</button>
+              <button
+                className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
+                onClick={handleAddToCart}
+                disabled={addedToCart}
+              >
+                {addedToCart ? 'Added' : 'Add to cart'}
+              </button>
             </div>
             <span className="product-details__description-label">Description</span>
             <p className={`product-details__description ${isDescriptionExpanded ? 'expanded' : ''}`}>
@@ -150,3 +146,4 @@ const SingleProductsPage = () => {
 };
 
 export default SingleProductsPage;
+
