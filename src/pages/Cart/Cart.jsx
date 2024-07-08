@@ -57,8 +57,9 @@ const Cart = () => {
           </div>
           : 
           <div className="cart__enpty">
-            <span>Looks like you have no items in your basket currently.</span>
-            <button> Continue Shopping </button>
+            <span>Looks like you have no items in your basket currently</span>
+            <Link to="/allproducts">
+            <button className='btn'> Continue Shopping </button></Link>
           </div>
         }
 
