@@ -115,7 +115,14 @@
         }
     }
 
-    &__enpty{}
+    &__enpty{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        .btn{
+            align-self: flex-start;
+        }
+    }
 }
 
 
@@ -173,7 +180,10 @@
         justify-content: flex-start;
         gap: 12px;
         margin-bottom: 24px;
-                
+        
+        h2{
+            text-align: center;
+         }       
       
     }
 }
