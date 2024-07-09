@@ -98,7 +98,7 @@ console.log(localStorage.getItem('discount'))
           <p className='errornessage'>
 
           </p>
-          <button className="discount__btn" disabled={isSubmitting}> 
+          <button className="discount__btn btn" disabled={isSubmitting}> 
             {
               isDiscount === true? "You've got a discount" :'Get a discount' // пока не работаеь эта конструкция
             }

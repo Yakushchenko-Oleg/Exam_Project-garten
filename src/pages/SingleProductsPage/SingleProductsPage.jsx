@@ -102,6 +102,7 @@ const SingleProductsPage = () => {
               {/* <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" /> */}
 
             </div>
+
             <div className="product-details__price-wrapper">
               {product.discont_price ? (
                 <>
@@ -113,26 +114,31 @@ const SingleProductsPage = () => {
                 <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
               )}
             </div>
+            
             <div className="product-details__buttons">
-              <button className="product-details__quantity-button" onClick={handleDecreaseQuantity}>-</button>
-              <span className="product-details__quantity">{quantity}</span>
-              <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>
-              <button
-                className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
+              <div className="product-details__counter">
+                <button className="product-details__quantity-button" onClick={handleDecreaseQuantity}>-</button>
+                <span className="product-details__quantity">{quantity}</span>
+                <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
+              </div>
+
+              <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
                 onClick={handleAddToCart}
                 disabled={addedToCart}
               >
                 {addedToCart ? 'Added' : 'Add to cart'}
               </button>
             </div>
+          </div>
+          <div className="product-details__description">
             <span className="product-details__description-label">Description</span>
-            <p className={`product-details__description ${isDescriptionExpanded ? 'expanded' : ''}`}>
+            <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
               {product.description}
             </p>
             {product.description.length > 200 && (
-              <button className="product-details__read-more" onClick={toggleDescription}>
-                {isDescriptionExpanded ? 'Read less' : 'Read more'}
-              </button>
+            <button className="product-details__description_read-more" onClick={toggleDescription}>
+              {isDescriptionExpanded ? 'Read less' : 'Read more'}
+            </button>
             )}
           </div>
         </div>

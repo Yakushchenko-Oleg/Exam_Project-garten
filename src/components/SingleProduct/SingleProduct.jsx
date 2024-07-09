@@ -1,9 +1,9 @@
 import React from "react";
 import "./SingleProduct.scss";
-import { addToCart } from "../../store/cartSlice ";
+import { addToCart } from "@/store/cartSlice ";
 import { useDispatch } from "react-redux";
-import IconHeart  from '../../../public/images/singleProduct/icon-he.svg?react';
-import IconCart  from '../../../public/images/singleProduct/icon-bas.svg?react';
+import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
+import IconCart  from '@public/images/singleProduct/icon-bas.svg?react';
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
@@ -18,6 +18,7 @@ const SingleProduct = ({ product }) => {
     Math.round(100 - (product.discont_price / product.price) * 100);
 
   const handleAddToCart = () => {
+    // event.stopPropagation()
     dispatch(addToCart({product, quantity: 1}))
   };
 
@@ -33,8 +34,12 @@ const SingleProduct = ({ product }) => {
       )}
 
       <div className="icon-wrapper">
-        <IconHeart className='icon'/>
-        <IconCart className='icon' onClick={handleAddToCart}/>
+        <IconHeart className='icons'/>
+        <IconCart className='icons' onClick={(event)=>{
+          console.log(event);
+          event.stopPropagation()
+          handleAddToCart()
+          }}/>
       </div>
 
       <div className="singleProduct__info">

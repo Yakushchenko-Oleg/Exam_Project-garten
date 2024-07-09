@@ -17,19 +17,8 @@
     text-align: center;
 }
 
-.btn{
-    
-    background-color: $primary-green;
-    color: $primary-white;
-    padding: 16px 56px 16px 56px;
-    // font-size: 20px;
-    @include adaptiv-font(20, 18);
-    font-weight: 500;
-    border: none;
-    border-radius: $radius-small;
-}
 .btn:hover{
-    transform: scale(1.1);
+    // transform: scale(1.1);
         background-color: $primary-orange;
         cursor: pointer;
         color: $primary-white;
