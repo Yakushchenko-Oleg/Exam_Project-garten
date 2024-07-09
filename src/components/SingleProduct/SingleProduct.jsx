@@ -2,6 +2,8 @@ import React from "react";
 import "./SingleProduct.scss";
 import { addToCart } from "../../store/cartSlice ";
 import { useDispatch } from "react-redux";
+import IconHeart  from '../../../public/images/singleProduct/icon-he.svg?react';
+import IconCart  from '../../../public/images/singleProduct/icon-bas.svg?react';
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
@@ -31,10 +33,8 @@ const SingleProduct = ({ product }) => {
       )}
 
       <div className="icon-wrapper">
-        <img src='../../../public/images/singleProduct/icon-he.svg'></img>
-        <img 
-        src='../../../public/images/singleProduct/icon-bas.svg'
-        onClick={handleAddToCart}></img>
+        <IconHeart className='icon'/>
+        <IconCart className='icon' onClick={handleAddToCart}/>
       </div>
 
       <div className="singleProduct__info">

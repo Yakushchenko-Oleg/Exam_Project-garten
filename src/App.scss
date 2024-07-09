@@ -145,3 +145,20 @@ h2 {
   left: 0;
   backdrop-filter: grayscale(50%);
 }
+// Стили для иконок (корзина и сердечко) По умолчанию они с белым фоном и черным контуром
+.logo *{
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+ .logo *, .added * {   // при добавлении класа .added становятся залаеыми без рамки
+  fill: $primary-green;
+  stroke: none;
+}
+
+.icon:hover * { //При наведении мышью становятчя серыми без рамки
+ fill: $primary-grey;
+
+}
+
