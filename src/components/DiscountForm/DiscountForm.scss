@@ -59,14 +59,8 @@
 
 .discount__btn {
     width: 100%;
-    padding: 16px 0;
-    background-color: $primary-white;
-    border: none;
-    border-radius: $radius-small;
+    background-color: $body-white;
     color: $primary-grey;
-    font-weight: 600;
-    @include adaptiv-font(20, 18);
-    // margin: 16px 0;
     margin-bottom: 16px;
 }
 

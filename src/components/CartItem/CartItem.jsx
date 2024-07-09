@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './CartItem.scss'
-import { addToCart } from '../../store/cartSlice ';
+import {  changeQuantity } from '../../store/cartSlice ';
 import { useDispatch } from 'react-redux';
 
 const CartItem = ({product}) => {
@@ -8,9 +8,13 @@ const CartItem = ({product}) => {
   const dispach = useDispatch
   const [quantity, seQuantity] = useState(product.quantity)
 
-  const handleAddToCart = () => {
+  const handleIncreaseQuantity = () => {
     seQuantity(prev => prev +1)
-    dispach(addToCart({product, quantity}))
+    dispach(changeQuantity({product, quantity}))
+  };
+  const handleDecreaseQuantity = () => {
+    seQuantity(prev => prev -1)
+    dispach(changeQuantity({product, quantity}))
   };
 
   return (
@@ -30,9 +34,9 @@ const CartItem = ({product}) => {
             <div className="cartitem__info__price-wraper">
 
               <div className="cartitem__info__price-wraper_quantity-container">
-                <button>-</button>
+                <button onClick={handleDecreaseQuantity}>-</button>
                 <p>{product.quantity}</p> 
-                <button onClick={handleAddToCart}>+</button>
+                <button onClick={handleIncreaseQuantity}>+</button>
               </div>
 
               <div className="cartitem__info__price-wraper_price-container">
