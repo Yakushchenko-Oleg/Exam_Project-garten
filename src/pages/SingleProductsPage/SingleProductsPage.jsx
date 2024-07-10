@@ -136,9 +136,9 @@ const SingleProductsPage = () => {
               {product.description}
             </p>
             {product.description.length > 200 && (
-            <button className="product-details__description_read-more" onClick={toggleDescription}>
+            <a className="product-details__description_read-more" onClick={toggleDescription}>
               {isDescriptionExpanded ? 'Read less' : 'Read more'}
-            </button>
+            </a>
             )}
           </div>
         </div>

@@ -10,9 +10,11 @@ import Layout from './components/Layout.jsx';
 import SingleProductsPage from './pages/SingleProductsPage/SingleProductsPage.jsx';
 import ProductsPage from './pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './pages/CategoriesPage/CategoriesPage.jsx';
+import ThemeProvider from './providers/ThemeProvider.jsx';
 
 const App = () => {
   return (
+   
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route index element={<MainPage />} />
@@ -25,6 +27,7 @@ const App = () => {
         <Route path='/cart' element={<Cart />} />
       </Route>
     </Routes>
+
   );
 };
 

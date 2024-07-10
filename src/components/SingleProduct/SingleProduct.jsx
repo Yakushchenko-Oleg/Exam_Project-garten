@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./SingleProduct.scss";
 import { addToCart } from "@/store/cartSlice ";
 import { useDispatch } from "react-redux";
 import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
 import IconCart  from '@public/images/singleProduct/icon-bas.svg?react';
+import {ThemeContext} from '../../providers/ThemeProvider'
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
@@ -21,6 +22,9 @@ const SingleProduct = ({ product }) => {
     // event.stopPropagation()
     dispatch(addToCart({product, quantity: 1}))
   };
+
+  const {theme} = useContext(ThemeContext);
+
 
   return (
     <div className="singleProduct" key={product.id}>
@@ -42,7 +46,8 @@ const SingleProduct = ({ product }) => {
           }}/>
       </div>
 
-      <div className="singleProduct__info">
+ 
+      <div className={`singleProduct__info ${theme ? 'singleProduct__info-light' : 'singleProduct__info-dark'}`}>
         <h4 className="info-title">{product.title}</h4>
         <div className="info-price">
           {

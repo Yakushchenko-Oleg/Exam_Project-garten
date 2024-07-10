@@ -52,7 +52,7 @@
           font-weight: 700;
           line-height: 44px;
           letter-spacing: 0.03em;
-          color: #424436;
+          // color: #424436;
 
           .icons * {
            width: 100%;
@@ -70,7 +70,7 @@
           font-weight: 700;
           font-size: 64px;
           line-height: 70.4px;
-          color: #424436;
+          // color: #424436;
           @include respond-to('small') {
             font-size: 36px;
             line-height: 40px;
@@ -136,6 +136,7 @@
           }
         
           .product-details__quantity {
+            color: $primary-grey;
             padding: 0 25.5px;
             height: 58px;
             display: flex;
@@ -189,7 +190,7 @@
           text-align: left;
           background: none;
           border: none;
-          color: #424436;
+          // color: #424436;
           cursor: pointer;
           padding: 0;
           text-decoration: underline;
@@ -210,7 +211,7 @@
   background: rgba(0, 0, 0, 0.5);
 
   &-content {
-    background: #ffffff;
+    // background: #ffffff;
     padding: 20px;
     border-radius: $radius-small;
     position: relative;

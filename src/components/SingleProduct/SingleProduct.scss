@@ -9,7 +9,7 @@
     position: relative;
     z-index: 1;
     border: 1px solid $border-grey;
-    background-color: $primary-white;
+    // background-color: $primary-white;
     
     .img-container{
         display: flex;
@@ -72,6 +72,19 @@
     &__info{
         width: 100%;
         padding: 20px;
+        border-radius: 0 0 12px 12px;
+
+        &-light{
+            // background-color: $primary-white;
+            color: $primary-grey;
+
+        }
+
+        &-dark{
+            background-color: $element-dark;
+            color: $primary-white;
+
+        }
 
         .info-title{
             font-weight: 500;
@@ -91,7 +104,8 @@
 
             .original-price{
                 padding-left: 16px;
-                color: $text-grey;
+                // color: $text-grey;
+                opacity: 60%;
                 text-decoration-line: line-through;
                 font-weight: 500;
                 @include adaptiv-font(20, 18);
@@ -102,6 +116,6 @@
 }
  
 .singleProduct:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
     box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
 }

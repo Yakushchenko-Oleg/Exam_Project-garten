@@ -10,8 +10,25 @@
     position: sticky;
     top: 0px;
     max-width: 1440px;
-    background-color: #FFFFF1;
+    // background-color: #FFFFF1;
     z-index:99999;
+
+    &-dark {
+        background-color: $primary-grey;
+        color: $primary-white;
+        border-bottom: 1px solid $text-grey;
+        &__burger{
+            span{
+                background-color: $primary-white;
+            }
+        }
+        
+    }
+    
+    &-light {
+        background-color: $body-white;
+        color: $primary-grey;
+    }
     
     &__logo{
         display: flex;
@@ -46,6 +63,7 @@
         }
       
     }
+    
     .navbar__menu {
         @include adaptiv-font(20, 11);
         list-style: none;
@@ -71,19 +89,16 @@
         justify-content: center;
     }
 
-    &__icon-cart,  &__icon-heart {
-        @include adaptiv-icon((100% null, 85% 480px, 75% 360px)); 
+    .icon-cart,  .icon-heart {
+        @include adaptiv-font(44, 34);
     }
 
-    &__icon-cart:hover {
-        transform: scale(1.1);
+    &__icon-cart:hover, &__icon-heart:hover  {
+        color: $primary-green;
+        fill: $primary-green;
         cursor: pointer;
     }
-    &__icon-heart:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
-
+ 
     &__burger{
         display: flex;
         flex-direction: column;
