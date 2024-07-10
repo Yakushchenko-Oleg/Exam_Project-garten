@@ -63,8 +63,9 @@
 
       .product-details__price-wrapper{
         display: flex;
-        align-items: center;
-        gap: 20px;
+        align-items: baseline;
+        // gap: 20px; // не работает при display: inline;
+        display: inline; // для того чтоб сработал  vertical-align: top; в на скидке
         
         .product-details__price--discount {
           font-weight: 700;
@@ -78,6 +79,7 @@
         }
       
         .product-details__price--original {
+          padding: 0 20px; // иместо gap при display: inline;
           font-weight: 500;
           font-size: 40px;
           line-height: 52px;
@@ -92,12 +94,11 @@
         .product-details__discount {
           font-weight: 600;
           font-size: 20px;
-          line-height: 26px;
-          letter-spacing: 0.03em;
-          color: #ffffff;
+          color: $primary-white;
           padding: 4px 8px;
-          border-radius: radius small;
-          background: #f26d22;
+          border-radius: $radius-small;
+          background: $primary-orange;
+          vertical-align: top;
           @include respond-to('small') {
             width: 58px;
             height: 31px;

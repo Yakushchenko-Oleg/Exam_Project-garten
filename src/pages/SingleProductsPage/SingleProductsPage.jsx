@@ -2,9 +2,9 @@ import React, { useEffect, useState, useMemo  } from "react";
 import "./SingleProductsPage.scss";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProducts } from "../../store/productSlice";
-import { addToCart } from "../../store/cartSlice ";
-import IconHeart  from '../../../public/images/singleProduct/icon-he.svg?react';
+import { fetchAllProducts } from "@/store/productSlice";
+import { addToCart } from "@/store/cartSlice ";
+import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
 
 
 const SingleProductsPage = () => {
@@ -40,7 +40,7 @@ const SingleProductsPage = () => {
         { link: "/", name: "Main page" },
         { link: "/categories", name: "Categories" },
         { link: "/allproducts", name: "All products" },
-         { link: `/products/${product.id}`, name: product.title }
+        { link: `/products/${product.id}`, name: product.title }
       ]);
     }
   }, [product.id, product.category?.id, product.title]);
@@ -61,20 +61,25 @@ const SingleProductsPage = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
 
-  const handleAddToCart = () => {
-    setAddedToCart(true);
-    console.log(`Added ${quantity} of ${product.title} to cart.`);
-  };
-
-
   const handleIncreaseQuantity = () => {
-    setQuantity(quantity + 1);
+    setQuantity(prev => prev + 1);
+    setAddedToCart(false)
   };
 
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      setQuantity(prev => prev - 1);
+      addToCart(false)
+      setAddedToCart(false)
+
     }
+  };
+
+  const handleAddToCart = () => {
+    setAddedToCart(true);
+    dispatch(addToCart({product, quantity, selected: true}))
+    setQuantity(0);
+    console.log(`Added ${quantity} of ${product.title} to cart from singleProductPage.`);
   };
 
   return (
@@ -98,7 +103,7 @@ const SingleProductsPage = () => {
             <div className="product-details__title-wrapper">
               <h1 className="product-details__title">{product.title}</h1>
 
-              <IconHeart className="product-details__icon icon" />
+              <IconHeart className="product-details__icon icons" />
               {/* <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" /> */}
 
             </div>
@@ -114,10 +119,10 @@ const SingleProductsPage = () => {
                 <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
               )}
             </div>
-            
+
             <div className="product-details__buttons">
               <div className="product-details__counter">
-                <button className="product-details__quantity-button" onClick={handleDecreaseQuantity}>-</button>
+                <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
                 <span className="product-details__quantity">{quantity}</span>
                 <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
               </div>
