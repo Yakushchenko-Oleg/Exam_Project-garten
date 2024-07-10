@@ -33,27 +33,30 @@ const cartSlice = createSlice({
         discount: false,
         isLoading: false,
         error: null
-          },
+        },
     reducers: {
       addToCart(state, action) {
-        const {product, quantity} = action.payload
-        let findProduct = state.cart.find(item => item.id === product.id)
+        const {product, quantity, selected} = action.payload
+        let findProduct = state.cart.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве
         if (findProduct) {
-          findProduct.quantity += quantity
+          state.cart.map(item => { 
+            // findProduct.quantity === quantity
+            if (item.id === product.id) 
+              { item.quantity === quantity  // в стейте не менфяется количество
+            }
+          } 
+        )
         }
         else {
-          state.cart.push({...product, quantity})
+          state.cart.push({...product, quantity, selected})
         }
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       changeQuantity(state, action) {
         const {product, quantity} = action.payload
-        let findProduct = state.cart.find(item => item.id === product.id)
-
-        if (findProduct) {
-          findProduct.quantity = quantity
-        }
-        
+        state.cart.map(item => {if (item.id === product.id){
+          item.quantity === quantity
+        } })
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       extraReducers: (builder) => {

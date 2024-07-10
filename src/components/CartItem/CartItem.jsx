@@ -1,20 +1,34 @@
 import React, { useState } from 'react'
 import './CartItem.scss'
-import {  changeQuantity } from '../../store/cartSlice ';
+import {  changeQuantity } from '@/store/cartSlice ';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const CartItem = ({product}) => {
   const apiUrl = import.meta.env.APP_API_URL;
-  const dispach = useDispatch
-  const [quantity, seQuantity] = useState(product.quantity)
+  const [quantity, setQuantity] = useState(product.quantity)
+  const dispach = useDispatch()
 
+  // const handleIncreaseQuantity = () => {
+  //   seQuantity(prev => prev +1)
+  //   dispach(changeQuantity({product, quantity}))
+  // };
+  // const handleDecreaseQuantity = () => {
+  //   seQuantity(prev => prev -1)
+  // };
+
+  
   const handleIncreaseQuantity = () => {
-    seQuantity(prev => prev +1)
+    setQuantity(prev => prev + 1);
     dispach(changeQuantity({product, quantity}))
+
   };
+
   const handleDecreaseQuantity = () => {
-    seQuantity(prev => prev -1)
-    dispach(changeQuantity({product, quantity}))
+    if (quantity > 1) {
+      setQuantity(prev => prev - 1);
+      dispach(changeQuantity({product, quantity}))
+    }
   };
 
   return (
@@ -27,15 +41,17 @@ const CartItem = ({product}) => {
         <div className="cartitem__info">
       
             <div className="cartitem__info_title-container">  
-             <span>{product.title}</span>  
+              <Link to={`/products/${product.id}`} className="item__title">
+                <span>{product.title}</span>  
+              </Link>
              <button>X</button> 
             </div>
 
             <div className="cartitem__info__price-wraper">
 
               <div className="cartitem__info__price-wraper_quantity-container">
-                <button onClick={handleDecreaseQuantity}>-</button>
-                <p>{product.quantity}</p> 
+                <button onClick={handleDecreaseQuantity} >-</button>
+                <p>{quantity}</p> 
                 <button onClick={handleIncreaseQuantity}>+</button>
               </div>
 

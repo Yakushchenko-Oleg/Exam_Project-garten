@@ -141,13 +141,7 @@ const ProductsPage = () => {
           <div className="wrapper">
             {filteredProducts && filteredProducts.length > 0
               ? filteredProducts.map((item) => (
-                  <Link
-                    to={`/products/${item.id}`}
-                    className="item__title"
-                    key={item.id}
-                  >
-                    <SingleProduct product={item} />
-                  </Link>
+                  <SingleProduct key={item.id} product={item} />
                 ))
               : data.map((item) => (
                   <Link

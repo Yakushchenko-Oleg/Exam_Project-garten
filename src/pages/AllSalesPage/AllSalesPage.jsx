@@ -6,9 +6,9 @@ import {
   fetchAllProducts,
   sortByPriceAction,
   sortByUserPriceAction,
-} from "../../store/productSlice";
+} from "@/store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import SingleProduct from "../../components/SingleProduct/SingleProduct";
+import SingleProduct from "@/components/SingleProduct/SingleProduct";
 
 const AllSalesPage = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,6 @@ const AllSalesPage = () => {
   } else{
     data = recivedProducts.data.filter((item) => item.discont_price)
   }
-  console.log(data);
  
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -102,9 +101,7 @@ const AllSalesPage = () => {
         ) : (
           <div className="wrapper">
             {data && data.map((item) => (
-                  <Link to={`/products/${item.id}`} className="item__title" key={item.id}>
-                    <SingleProduct product={item} />
-                  </Link>
+              <SingleProduct key={item.id} product={item} />
             ))}
           </div>
         )}

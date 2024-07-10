@@ -4,6 +4,7 @@ import { addToCart } from "@/store/cartSlice ";
 import { useDispatch } from "react-redux";
 import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
 import IconCart  from '@public/images/singleProduct/icon-bas.svg?react';
+import { Link } from "react-router-dom";
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
@@ -18,8 +19,7 @@ const SingleProduct = ({ product }) => {
     Math.round(100 - (product.discont_price / product.price) * 100);
 
   const handleAddToCart = () => {
-    // event.stopPropagation()
-    dispatch(addToCart({product, quantity: 1}))
+    dispatch(addToCart({product, quantity: 1, selected: true}))
   };
 
   return (
@@ -35,15 +35,14 @@ const SingleProduct = ({ product }) => {
 
       <div className="icon-wrapper">
         <IconHeart className='icons'/>
-        <IconCart className='icons' onClick={(event)=>{
-          console.log(event);
-          event.stopPropagation()
-          handleAddToCart()
-          }}/>
+        <IconCart className='icons' onClick={()=>{handleAddToCart()}}/>
       </div>
 
       <div className="singleProduct__info">
-        <h4 className="info-title">{product.title}</h4>
+        <Link to={`/products/${product.id}`} className="item__title">
+          <h4 className="info-title">{product.title}</h4>
+        </Link>
+        
         <div className="info-price">
           {
             product.discont_price ? (
