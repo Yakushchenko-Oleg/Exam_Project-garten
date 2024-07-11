@@ -146,20 +146,35 @@ h2 {
   left: 0;
   backdrop-filter: grayscale(50%);
 }
-// Стили для иконок (корзина и сердечко) По умолчанию они с белым фоном и черным контуром
-.icons *{
-  display: flex;
-  width: 100%;
-  height: 100%;
+
+.icon-favourite {
+  font-size: 48px;
+  fill: $primary-white;
+  stroke-width: 0.8px;
+
+  &:hover {
+      fill: $primary-grey;
+      stroke-width: 0px;
+  }
+
+  &-active {
+      fill: $primary-green;
+      stroke-width: 0px;
+  }
 }
+.icon-cart {
+  font-size: 48px;
+  fill: $primary-white;
+  stroke-width: 13px;
 
-.icons.selected * {   // при добавлении класа .selected становятся залаеыми без рамки
-  fill: $primary-green;
-  stroke: none;
-}
+  &:hover {
+      fill: $primary-grey;
+      stroke-width: 0px;
+  }
 
-.icons:hover * { //При наведении мышью становятчя серыми без рамки
- fill: $primary-grey;
-
+  &-active {
+      fill: $primary-green;
+      stroke-width: 0px;
+  }
 }
 

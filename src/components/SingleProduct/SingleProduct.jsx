@@ -1,13 +1,17 @@
 import React from "react";
 import "./SingleProduct.scss";
 import { addToCart } from "@/store/cartSlice ";
-import { useDispatch } from "react-redux";
-import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
-import IconCart  from '@public/images/singleProduct/icon-bas.svg?react';
+import { useDispatch, useSelector } from "react-redux";
+import { RiHeartFill } from "react-icons/ri";
+import { GiShoppingBag } from "react-icons/gi";
+// import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
+// import IconCart  from '@public/images/singleProduct/icon-bas.svg?react';
 import { Link } from "react-router-dom";
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
+
+  const cart = useSelector(state => state.cart);
 
   if (!product) {
     return <div className="loader"></div>;
@@ -34,8 +38,8 @@ const SingleProduct = ({ product }) => {
       )}
 
       <div className="icon-wrapper">
-        <IconHeart className='icons'/>
-        <IconCart className='icons' onClick={()=>{handleAddToCart()}}/>
+        <RiHeartFill  className='icon-favourite'/>
+        <GiShoppingBag className='icon-cart' onClick={()=>{handleAddToCart()}}/>
       </div>
 
       <div className="singleProduct__info">

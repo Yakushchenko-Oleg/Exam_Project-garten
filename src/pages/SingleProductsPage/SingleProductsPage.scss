@@ -21,181 +21,181 @@
     'image info'
     'description description' ;
     }
+  }
 
-    .product-details__image {
-      cursor: pointer;
-      grid-area: image;
+  &__image {
+    cursor: pointer;
+    grid-area: image;
 
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    grid-area: info;
+    > button{
+      width: 100%;
+
+    }
+  }
+
+  .product-details__title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+
+    .product-details__title{
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 44px;
+      letter-spacing: 0.03em;
+      color: #424436;
+
+      .icons * {
+       width: 100%;
+     }
     }
 
-    .product-details__info {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      justify-content: space-between;
-      grid-area: info;
+  }
 
-      .product-details__title-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 20px;
-
-        .product-details__title{
-          font-size: 40px;
-          font-weight: 700;
-          line-height: 44px;
-          letter-spacing: 0.03em;
-          color: #424436;
-
-          .icons * {
-           width: 100%;
-         }
-        }
-
-      }
-
-      .product-details__price-wrapper{
-        display: flex;
-        align-items: baseline;
-        // gap: 20px; // не работает при display: inline;
-        display: inline; // для того чтоб сработал  vertical-align: top; в на скидке
-        
-        .product-details__price--discount {
-          font-weight: 700;
-          font-size: 64px;
-          line-height: 70.4px;
-          color: #424436;
-          @include respond-to('small') {
-            font-size: 36px;
-            line-height: 40px;
-          }
-        }
-      
-        .product-details__price--original {
-          padding: 0 20px; // иместо gap при display: inline;
-          font-weight: 500;
-          font-size: 40px;
-          line-height: 52px;
-          color: #8b8b8b;
-          text-decoration: line-through;
-          @include respond-to('small') {
-            font-size: 24px;
-            line-height: 28px;
-          }
-        }
-      
-        .product-details__discount {
-          font-weight: 600;
-          font-size: 20px;
-          color: $primary-white;
-          padding: 4px 8px;
-          border-radius: $radius-small;
-          background: $primary-orange;
-          vertical-align: top;
-          @include respond-to('small') {
-            width: 58px;
-            height: 31px;
-            font-size: 18px;
-            line-height: 23.4px;
-          }
-        }        
-      }
-
-      .product-details__buttons {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
+  .product-details__price-wrapper{
+    display: flex;
+    align-items: baseline;
+    // gap: 20px; // не работает при display: inline;
+    display: inline; // для того чтоб сработал  vertical-align: top; в на скидке
     
-        .product-details__counter{
-          display: flex;
-
-          .product-details__quantity-button {
-            width: 58px;
-            height: 58px;
-            border-radius: radius small;
-            border: 1px solid #dddddd;
-            background-color: #ffffff;
-            // color: #000000;
-            font-size: 20px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            @include respond-to('small') {
-              width: 36px;
-              height: 36px;
-            }
-          }
-        
-          .product-details__quantity {
-            padding: 0 25.5px;
-            height: 58px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-width: 1px 0px 1px 0px;
-            border-style: solid;
-            border-color: #dddddd;
-            font-size: 20px;
-            font-weight: 600;
-            background-color: #ffffff;
-            @include respond-to('small') {
-              width: 36px;
-              height: 36px;
-            }
-          }
-        }
+    .product-details__price--discount {
+      font-weight: 700;
+      font-size: 64px;
+      line-height: 70.4px;
+      color: #424436;
+      @include respond-to('small') {
+        font-size: 36px;
+        line-height: 40px;
       }
-      > button{
+    }
+  
+    .product-details__price--original {
+      padding: 0 20px; // иместо gap при display: inline;
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 52px;
+      color: #8b8b8b;
+      text-decoration: line-through;
+      @include respond-to('small') {
+        font-size: 24px;
+        line-height: 28px;
+      }
+    }
+  
+    .product-details__discount {
+      font-weight: 600;
+      font-size: 20px;
+      color: $primary-white;
+      padding: 4px 8px;
+      border-radius: $radius-small;
+      background: $primary-orange;
+      vertical-align: top;
+      @include respond-to('small') {
+        width: 58px;
+        height: 31px;
+        font-size: 18px;
+        line-height: 23.4px;
+      }
+    }        
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  &__counter{
+    display: flex;
+  }
+
+  &__quantity-button {
+    width: 58px;
+    height: 58px;
+    border-radius: radius small;
+    border: 1px solid #dddddd;
+    background-color: #ffffff;
+    // color: #000000;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include respond-to('small') {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  &__quantity {
+    padding: 0 25.5px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+    border-color: #dddddd;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #ffffff;
+    @include respond-to('small') {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .product-details__description{
+    grid-area: description;
+
+      &-label {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26px;
+        text-align: left;
+        padding: 4px 8px;
+        border-radius: radius small;
+      }
+
+      &-text {
+        font-size: 16px;
+        line-height: 1.5;
+        text-align: left;
         width: 100%;
-
-      }
-    }
-
-    .product-details__description{
-      grid-area: description;
-  
-        &-label {
-          font-size: 20px;
-          font-weight: 600;
-          line-height: 26px;
-          text-align: left;
-          padding: 4px 8px;
-          border-radius: radius small;
-        }
-  
-        &-text {
-          font-size: 16px;
-          line-height: 1.5;
-          text-align: left;
-          width: 100%;
-          margin-top: 20px;
-        } 
-        
-        &_read-more {
-          width: 548px;
-          height: 21px;
-          font-size: 16px;
-          font-weight: 500;
-          line-height: 20.8px;
-          text-align: left;
-          background: none;
-          border: none;
-          color: #424436;
-          cursor: pointer;
-          padding: 0;
-          text-decoration: underline;
-        }    
-    }
+        margin-top: 20px;
+      } 
+      
+      &_read-more {
+        width: 548px;
+        height: 21px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20.8px;
+        text-align: left;
+        background: none;
+        border: none;
+        color: #424436;
+        cursor: pointer;
+        padding: 0;
+        text-decoration: underline;
+      }    
   }
 }
 

@@ -10,6 +10,12 @@
     z-index: 1;
     border: 1px solid $border-grey;
     background-color: $primary-white;
+
+    &:hover {
+        transform: scale(1.03);
+        box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+    }
+    
     
     .img-container{
         display: flex;
@@ -97,9 +103,7 @@
            
         }       
     }
+
+
 }
  
-.singleProduct:hover {
-    transform: scale(1.03);
-    box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
-}
