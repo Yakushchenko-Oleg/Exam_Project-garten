@@ -17,7 +17,7 @@
         background-color: $primary-grey;
         color: $primary-white;
         border-bottom: 1px solid $text-grey;
-        &__burger{
+        .navbar__burger{
             span{
                 background-color: $primary-white;
             }
@@ -72,15 +72,16 @@
         gap: 32px;
         justify-content: space-between;
     }
+
     a {
         text-decoration: none;
-    }
-
-    a:hover {
+        &:hover {
         color: $primary-green;
         text-decoration: underline;
         cursor: pointer;
+        }
     }
+   
 
     &__icon-wrapper{
         display:flex;
@@ -90,12 +91,15 @@
     }
 
     .icon-cart,  .icon-heart {
-        @include adaptiv-font(44, 34);
+        @include adaptiv-font(48, 38);
+        fill: $primary-white;
+        stroke-width: 1px;
+     
     }
 
     &__icon-cart:hover, &__icon-heart:hover  {
-        color: $primary-green;
-        fill: $primary-green;
+        fill: $primary-grey;
+        
         cursor: pointer;
     }
  

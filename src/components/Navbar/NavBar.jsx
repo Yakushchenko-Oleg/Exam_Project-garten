@@ -3,8 +3,9 @@ import '../../App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
 import {ThemeContext} from '../../providers/ThemeProvider'
-import { FaRegHeart } from "react-icons/fa6";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+
+import { RiHeartFill } from 'react-icons/ri'
+import { GiShoppingBag } from 'react-icons/gi'
 
 
 const NavBar = () => {
@@ -53,7 +54,7 @@ const NavBar = () => {
       <div className="navbar__icon-wrapper">
         <NavLink to="#">
           {/* <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img> */}
-          <FaRegHeart className='icon-heart'/>
+          <RiHeartFill className='icon-heart'/>
         </NavLink>
 
         <NavLink to="/cart">
@@ -61,7 +62,7 @@ const NavBar = () => {
             className="navbar__icon-cart"
             src="../../../public/images/navbar/basket=empty.png"
           /> */}
-          <HiOutlineShoppingBag className='icon-cart'/>
+          <GiShoppingBag className='icon-cart'/>
         </NavLink>
 
         {/* если isOpen то класс burger-x */}
