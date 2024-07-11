@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
-import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
+import { RiHeartFill } from "react-icons/ri";
 
 
 const SingleProductsPage = () => {
@@ -103,7 +103,7 @@ const SingleProductsPage = () => {
             <div className="product-details__title-wrapper">
               <h1 className="product-details__title">{product.title}</h1>
 
-              <IconHeart className="product-details__icon icons" />
+              <RiHeartFill  className='icon-favourite'/>
               {/* <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" /> */}
 
             </div>

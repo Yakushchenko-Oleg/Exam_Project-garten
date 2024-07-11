@@ -85,7 +85,7 @@ const productsSlice = createSlice({
           : [...state.recivedProducts.data]
       ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
-    setFavourites: (state, payload ) =>{
+    setFavourites: (state, {payload} ) =>{
       const foundProduct = state.recivedProducts.data.find( item => item.id === payload)
 
       let localProducts = JSON.parse(localStorage.getItem("favourites"))
