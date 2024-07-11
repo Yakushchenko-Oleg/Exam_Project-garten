@@ -165,7 +165,7 @@ h2 {
   width: 100%;
   height: 100%;
   top: 0;
-  background: #50505051;
+  background: $primary-grey;
   left: 0;
   backdrop-filter: grayscale(50%);
 }
@@ -176,7 +176,7 @@ h2 {
   height: 100%;
 }
 
-  .added * {   // при добавлении класа .added становятся залаеыми без рамки
+.icons.selected * {   // при добавлении класа .selected становятся залаеыми без рамки
   fill: $primary-green;
   stroke: none;
 }

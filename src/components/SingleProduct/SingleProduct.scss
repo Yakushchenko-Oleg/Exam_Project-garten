@@ -29,9 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-
          }
-       
     }  
 
     .discount{
@@ -61,11 +59,11 @@
         right: 16px;
         top: 16px;
         
-        svg{
+        img{
             border:none;
         }
-        svg:hover{
-            fill: $primary-grey;
+        img:hover{
+            color: $primary-grey;
         }
     }
         
