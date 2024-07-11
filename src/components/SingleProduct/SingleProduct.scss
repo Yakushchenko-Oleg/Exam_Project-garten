@@ -76,6 +76,19 @@
     &__info{
         width: 100%;
         padding: 20px;
+        border-radius: 0 0 12px 12px;
+
+        &-light{
+            // background-color: $primary-white;
+            color: $primary-grey;
+
+        }
+
+        &-dark{
+            background-color: $element-dark;
+            color: $primary-white;
+
+        }
 
         .info-title{
             font-weight: 500;
@@ -95,7 +108,8 @@
 
             .original-price{
                 padding-left: 16px;
-                color: $text-grey;
+                // color: $text-grey;
+                opacity: 60%;
                 text-decoration-line: line-through;
                 font-weight: 500;
                 @include adaptiv-font(20, 18);
@@ -103,7 +117,4 @@
            
         }       
     }
-
-
 }
- 

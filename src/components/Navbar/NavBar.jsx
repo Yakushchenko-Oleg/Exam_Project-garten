@@ -1,16 +1,25 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '../../App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
+import {ThemeContext} from '../../providers/ThemeProvider'
+
+import { RiHeartFill } from 'react-icons/ri'
+import { GiShoppingBag } from 'react-icons/gi'
+
 
 const NavBar = () => {
-  const [isOpen, setOpen] = useState()
+  const [isOpen, setOpen] = useState();
+
+  const {theme, toggleTheme} = useContext(ThemeContext);
+
   
   return (
-    <nav className="navbar">
+    <nav className={ `navbar ${theme ? 'navbar-light' : 'navbar-dark'} `}>
+    
       <div className="navbar__logo">
         <img src="../../../public/images/navbar/logo.png" />
-        <img className="light" src="../../../public/images/navbar/mode=light.png"></img>
+        <img className="light" onClick={toggleTheme} src="../../../public/images/navbar/mode=light.png"></img>
         <img className="dark" src="../../../public/images/navbar/mode=dark.png"></img>
       </div>
 
@@ -44,14 +53,16 @@ const NavBar = () => {
       </div>
       <div className="navbar__icon-wrapper">
         <NavLink to="#">
-          <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img>
+          {/* <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img> */}
+          <RiHeartFill className='icon-heart'/>
         </NavLink>
 
         <NavLink to="/cart">
-          <img
+          {/* <img
             className="navbar__icon-cart"
             src="../../../public/images/navbar/basket=empty.png"
-          />
+          /> */}
+          <GiShoppingBag className='icon-cart'/>
         </NavLink>
 
         {/* если isOpen то класс burger-x */}
