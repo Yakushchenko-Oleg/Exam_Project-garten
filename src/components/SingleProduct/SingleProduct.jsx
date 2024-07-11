@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./SingleProduct.scss";
 import { addToCart } from "@/store/cartSlice ";
 import { useDispatch } from "react-redux";
 import IconHeart  from '@public/images/singleProduct/icon-he.svg?react';
 import IconCart  from '@public/images/singleProduct/icon-bas.svg?react';
+import {ThemeContext} from '../../providers/ThemeProvider'
 import { Link } from "react-router-dom";
+
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
@@ -22,6 +24,9 @@ const SingleProduct = ({ product }) => {
     dispatch(addToCart({product, quantity: 1, selected: true}))
   };
 
+  const {theme} = useContext(ThemeContext);
+
+
   return (
     <div className="singleProduct" key={product.id}>
       {/* картинка обернута в контэйнер для регулирования высоты */}
@@ -38,7 +43,7 @@ const SingleProduct = ({ product }) => {
         <IconCart className='icons' onClick={()=>{handleAddToCart()}}/>
       </div>
 
-      <div className="singleProduct__info">
+      <div className={`singleProduct__info ${theme ? 'singleProduct__info-light' : 'singleProduct__info-dark'}`}>
         <Link to={`/products/${product.id}`} className="item__title">
           <h4 className="info-title">{product.title}</h4>
         </Link>
