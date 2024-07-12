@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Cart.scss'
 import CartItem from '../../components/CartItem/CartItem'
 import { useSelector } from 'react-redux'
-
+import {ThemeContext} from '../../providers/ThemeProvider'
 
 const Cart = () => {
   const [cart, setCart] = useState( JSON.parse(localStorage.getItem('cart')))
   const [totalSum, setTotalSum] = useState(0)
   const [totalQontity, setTotalQontity] = useState(0)
+  const {theme} = useContext(ThemeContext);
+
 
 useEffect(()=> {
-
-
   setTotalSum(cart?.reduce((acc, curent) => {
     return acc + (curent.price * curent.quantity)
   }, 0))
@@ -41,7 +41,7 @@ useEffect(()=> {
                 cart && cart.map(item => <CartItem product={item} key={item.id}/>)
               }
             </div>
-            <form className='cart__content_form' action="">
+          <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : 'cart__content_form-light'}`} action="">
               <h3>Order details</h3>
               <p>{`${totalQontity} item`}</p>
               <div className="cart__content_form_totoalConteiner">
@@ -49,9 +49,12 @@ useEffect(()=> {
                 <h3>{`$${totalSum}`}</h3>
               </div>
 
-              <input type="text" placeholder='Name'/>
-              <input type="text"  placeholder='Phone number'/>
-              <input type="text" placeholder='Email'/>
+              <input className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`} 
+              type="text" placeholder='Name'/>
+              <input className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
+              type="text"  placeholder='Phone number'/>
+              <input className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
+              type="text" placeholder='Email'/>
               <button>Order</button>
 
 
