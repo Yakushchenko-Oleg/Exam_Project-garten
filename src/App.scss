@@ -14,6 +14,12 @@ a {
   text-decoration: none;
 }
 
+h2 {
+  @include adaptiv-font(64, 40);
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
 
 
 // главный контэйнер
@@ -21,7 +27,7 @@ a {
   margin: 0 auto;
   max-width: 1440px;
   
- 
+ //при переключении темы режим dark, light
   &-dark {
     background-color: $primary-grey;
     color: $primary-white;
@@ -32,7 +38,41 @@ a {
       opacity: 80%;
     }
 
-
+    .icon-favourite {
+      font-size: 48px;
+      fill: $primary-white;
+      stroke-width: 0.8px;
+      stroke: $primary-grey;
+    
+      &:hover {
+          fill: $primary-grey;
+          stroke-width: 0.8px;
+          stroke: black;
+      }
+    
+      &-active {
+          fill: $primary-green;
+          stroke-width: 0.8px;
+      }
+    }
+    
+    .icon-cart {
+      font-size: 48px;
+      fill: $primary-white;
+      stroke-width: 13px;
+      stroke: $primary-grey;
+    
+      &:hover {
+          fill: $primary-grey;
+          stroke-width: 13px;
+          stroke: black;
+      }
+    
+      &-active {
+          fill: $primary-green;
+          stroke-width: 13px;
+      }
+    }
   }
   
   &-light {
@@ -82,12 +122,6 @@ a {
   gap: 50px;
 }
 
-@media screen and (max-width: 360px) {
-  .filter-wrapper {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    width: 100%;
-  }
-}
 
 .loader {
   margin: 0 auto;
@@ -108,13 +142,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-
-h2 {
-  @include adaptiv-font(64, 40);
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-align: center;
 }
 
 .wrapper {
@@ -160,6 +187,7 @@ h2 {
   cursor: default;
 }
 
+// при нажатии на бургер меню
 .bg-opacity {
   position: fixed;
   width: 100%;
@@ -182,9 +210,10 @@ h2 {
 
   &-active {
       fill: $primary-green;
-      stroke-width: 0px;
+      stroke-width: 0.8px;
   }
 }
+
 .icon-cart {
   font-size: 48px;
   fill: $primary-white;
@@ -197,11 +226,11 @@ h2 {
 
   &-active {
       fill: $primary-green;
-      stroke-width: 0px;
+      stroke-width: 13px;
   }
 }
 
-
+// переключатель темы
 .switch {
   background-color: #8B8B8B;
   border-radius: 18px;
@@ -271,5 +300,13 @@ h2 {
     background-color: #8B8B8B;
     border-radius: 50%;
     color: #8B8B8B;
+  }
+}
+
+
+@media screen and (max-width: 360px) {
+  .filter-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    width: 100%;
   }
 }
