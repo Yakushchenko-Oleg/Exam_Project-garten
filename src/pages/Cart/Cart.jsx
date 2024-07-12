@@ -41,7 +41,7 @@ useEffect(()=> {
                 cart && cart.map(item => <CartItem product={item} key={item.id}/>)
               }
             </div>
-          <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : 'cart__content_form-light'}`} action="">
+          <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} action="">
               <h3>Order details</h3>
               <p>{`${totalQontity} item`}</p>
               <div className="cart__content_form_totoalConteiner">

@@ -5,11 +5,14 @@
     border: 1px solid $border-grey;
     border-radius: $radius-big;
     display: flex;
-    gap: 20px;
+    gap: 0px;
     width: 100%;
     background-color: $primary-white;
     position: relative;
     z-index: 1;
+    &-dark{
+        border: 1px solid #8B8B8B;
+    }
 
     &__image{
         width: 40%;
@@ -27,12 +30,21 @@
     } 
 
     &__info{
+        border-radius: 0 12px 12px 0;
         width: 60%;
-        padding: 20px 20px 20px 0;
+        padding: 20px;
         display: flex;
         gap: 12px;
         flex-direction: column;
         justify-content: center;
+        // &-light{
+        //     color: $primary-grey;
+        //  }
+          &-dark{
+             background-color: $element-dark;
+             border: 1px solid #8B8B8B;
+             color: $primary-white;
+         }
 
         &_title-container{
             width: 100%;
@@ -50,7 +62,6 @@
                 overflow: hidden;
                 text-wrap: wrap;
                 text-overflow: ellipsis;
-
                 }
             button{
                 border: none;
@@ -80,12 +91,14 @@
                 border: 1px solid $border-grey;
                 border-radius: $radius-small;
                 align-items: center;
+                &-dark{
+                    border: 1px solid #8B8B8B;
+                }
 
                 > p{
                     padding: 0 31px;
-
-
                 }
+
                 button{
                     border: 1px solid $border-grey;
                     border-radius: $radius-small;
@@ -94,6 +107,7 @@
                     height: 47px;
                     width: 47px;
                     cursor: pointer;
+                    background: none;
                 }
                 button:active{
                     border: 1px solid $primary-grey
