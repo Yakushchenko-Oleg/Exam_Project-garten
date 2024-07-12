@@ -6,21 +6,31 @@ import {ThemeContext} from '../../providers/ThemeProvider'
 
 import { RiHeartFill } from 'react-icons/ri'
 import { GiShoppingBag } from 'react-icons/gi'
+import { LuMoon, LuSunMedium } from 'react-icons/lu'
+import { PiSun } from 'react-icons/pi'
 
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState();
 
   const {theme, toggleTheme} = useContext(ThemeContext);
-
+  // const handleChangeSwitch = (e) => {
+  //   toggleTheme(e.target.checked);
+  // }
   
   return (
-    <nav className={ `navbar ${theme ? 'navbar-light' : 'navbar-dark'} `}>
+    <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'} `}>
     
       <div className="navbar__logo">
         <img src="../../../public/images/navbar/logo.png" />
-        <img className="light" onClick={toggleTheme} src="../../../public/images/navbar/mode=light.png"></img>
-        <img className="dark" src="../../../public/images/navbar/mode=dark.png"></img>
+            
+        <div className="nav__action" onClick={toggleTheme} >
+                <label className={`switch ${theme ? "switch-active" : ""}`} for='checkbox'>
+                  <input className='switch__input' type='checkbox' name='checkbox' ></input>
+                    <span className="switch__slider"> { theme ? <PiSun /> : <LuMoon />}</span>
+                </label>
+        </div>
+
       </div>
 
       {/* если isOpen то - класс menu-wrapper-active */}
@@ -54,7 +64,7 @@ const NavBar = () => {
       <div className="navbar__icon-wrapper">
         <NavLink to="#">
           {/* <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img> */}
-          <RiHeartFill className='icon-heart'/>
+          <RiHeartFill className='icon-favourite'/>
         </NavLink>
 
         <NavLink to="/cart">

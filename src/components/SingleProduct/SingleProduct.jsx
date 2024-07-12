@@ -43,7 +43,7 @@ const SingleProduct = ({ product }) => {
         <IconCart className='icons' onClick={()=>{handleAddToCart()}}/>
       </div>
 
-      <div className={`singleProduct__info ${theme ? 'singleProduct__info-light' : 'singleProduct__info-dark'}`}>
+      <div className={`singleProduct__info ${theme ? 'singleProduct__info-dark' : 'singleProduct__info-light'}`}>
         <Link to={`/products/${product.id}`} className="item__title">
           <h4 className="info-title">{product.title}</h4>
         </Link>
