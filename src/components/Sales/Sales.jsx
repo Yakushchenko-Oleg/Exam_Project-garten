@@ -30,7 +30,7 @@ function mixArray(array) {
 
 return (
 
-  <div className="products container">
+  <div className="products container-mainpage">
       <div className="header-wrapper">
         <h2>Sale</h2>
         <div className="sales__line"></div>

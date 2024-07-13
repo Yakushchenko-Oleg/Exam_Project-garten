@@ -3,12 +3,10 @@
 @import '../../mixin.scss';
 
 .footer {
-    
     text-align: left; 
     gap: 40px;
-    max-width: 1360px;
-    margin: 0 40px 80px 40px;
-    
+    // max-width: 1360px;
+    margin: 80px 40px 80px 40px;
 }
 
 // container - общий 
@@ -98,7 +96,13 @@
     margin: 0 5px;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 1000px){
+    .footer{
+        margin: 60px 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .card {
         flex: 1 1 100%; 
     }

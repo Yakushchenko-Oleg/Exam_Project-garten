@@ -169,6 +169,7 @@ const SingleProductsPage = () => {
           </div>
         </div>
       )}
+      </div>
     </main>
   );
 };

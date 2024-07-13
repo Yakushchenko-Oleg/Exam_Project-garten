@@ -23,7 +23,7 @@ const Categories = () => {
   }, [dispatch]);
 
   return (
-    <div className="products container">
+    <div className="products container-mainpage ">
       <div className="header-wrapper">
         <h2 className="categories-title">Categories</h2>
         <div className="categories__line"></div>
