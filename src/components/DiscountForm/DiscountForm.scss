@@ -4,7 +4,6 @@
 .discount__container{
     background: linear-gradient(80.46deg, #87933D -0.68%, #55610B 66.66%);
     border-radius: $radius-big;
-    // padding: 32px 32px 0 32px;
     color: $primary-white;
     margin-top: 40px;
 }
@@ -14,7 +13,7 @@
     text-align: center;
     font-weight: 700;
     color: $primary-white;
-    margin-top: 32px;
+    padding-top: 32px;
 }
 
 .form__container{
@@ -73,10 +72,16 @@
     font-weight: 400;
 }
 
-@media screen and (max-width: 768px) {
-    .discount__title{
-        margin-top: 32px;
+@media screen and (max-width: 1000px) {
+    .discount__container{
+        margin-top: 30px;
     }
+}
+
+@media screen and (max-width: 768px) {
+    // .discount__title{
+    //     margin-top: 32px;
+    // }
     .form__item{
         input{
         padding: 16px 20px;

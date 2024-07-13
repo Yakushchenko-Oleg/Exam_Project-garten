@@ -104,7 +104,7 @@ const ProductsPage = () => {
           ))}
       </div>
 
-      <div className="filter-wrapper">
+      {/* <div className="filter-wrapper">
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p className="filter-name">Price</p>
           <input className="userInput" type="number" placeholder="from" name="from"></input>
@@ -128,11 +128,37 @@ const ProductsPage = () => {
             <option value="high-to-low">Price: High to Low</option>
           </select>
         </div>
-      </div>
+      </div> */}
 
       <div className="products container">
         <div className="header-wrapper">
           <h2>{categoryTitle}</h2>
+        </div>
+
+        <div className="filter-wrapper">
+        <form className="filter-wrapper__item" onChange={handleUserPrice}>
+          <p className="filter-name">Price</p>
+          <input className="userInput" type="number" placeholder="from" name="from"></input>
+          <input className="userInput" type="number" placeholder="to" name="to"></input>
+        </form>
+
+        <div className="filter-wrapper__item">
+          <p className="filter-name">Discounted items</p>
+          <input
+            className="checkbox"
+            type="checkbox"
+            onChange={handleDiscountApply}
+          ></input>
+        </div>
+
+        <div className="filter-wrapper__item">
+          <p className="filter-name">Sort</p>
+          <select onChange={handleSort}>
+            <option value="default">by default</option>
+            <option value="low-to-high">Price: Low to High</option>
+            <option value="high-to-low">Price: High to Low</option>
+          </select>
+        </div>
         </div>
 
         {isLoading ? (

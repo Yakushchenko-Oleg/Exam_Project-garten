@@ -86,7 +86,7 @@ h2 {
 
 .maincontainer {
   margin:  40px; //Зачем это было сделан6о??? Это заставляет каждый компонент и страницу раздвигаться!! Это нужно регулировать в каждом объекте отдельно
-  //это сделано- потому что кто-то хотел Layout ко всем страницам!) а я ГОВОРИЛА у нас одна страница другая
+  //это сделано- потому что кто-то хотел Layout ко всем страницам!) а я ГОВОРИЛА у нас одна страница другая!!!
   display: flex;
   flex-direction: column;
   gap: 40px; // Те же замечания   // тот же ответ:)))   
@@ -115,13 +115,8 @@ h2 {
     display: inline-block;
   }
 
-  @media (max-width: 999px) { 
-    padding: 32px 0;
-  }  
-
   @media (max-width: 767px) { 
     display: none;
-    
   }
 }
 
@@ -131,8 +126,8 @@ h2 {
   grid-auto-rows: auto;
   width: 80%;
   gap: 50px;
+  margin-bottom: 40px;
 }
-
 
 .loader {
   margin: 0 auto;
@@ -160,7 +155,6 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  // margin-top: 40px;
 }
 
 .wrapper {
@@ -195,10 +189,6 @@ h2 {
   cursor: pointer;
   color: $primary-white;
 }
-
-// .btn:active {
-//   // transform: scale(0.95);
-// }
 
 .btn.added {
   background-color: $primary-grey;
@@ -322,6 +312,31 @@ h2 {
   }
 }
 
+@media screen and (max-width: 1000px){
+  .maincontainer{
+    margin: 40px 20px ; 
+    gap: 32px;
+  }
+
+  .container-mainpage {
+    margin-top: 30px;
+  } 
+
+  .header-wrapper {
+    margin-bottom: 32px;
+  }
+
+  .filter-wrapper {
+    margin-bottom: 32px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .maincontainer{
+    margin: 32px 20px ; 
+    gap: 32px;
+  }
+}
 
 @media screen and (max-width: 360px) {
   .filter-wrapper {

@@ -1,8 +1,5 @@
-// src/components/Contacts/Contacts.jsx
 import React, { useContext } from "react";
 import "./Contacts.scss";
-// import InstagramIcon from "./assets/ic-instagram.png";
-// import WhatsappIcon from "./assets/ic-whatsapp.png";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
 import { ThemeContext } from "../../providers/ThemeProvider";
