@@ -94,59 +94,58 @@ const SingleProductsPage = () => {
         ))}
       </div>
 
-      <div className="product-details">
-        <div className="product-details__container">
-          <div className="product-details__image" onClick={() => setImageOpen(product)}>
-            <img src={`${apiUrl}${product.image}`} alt={product.title} />
-          </div>
-          <div className="product-details__info">
-            <div className="product-details__title-wrapper">
-              <h1 className="product-details__title">{product.title}</h1>
+      <div className="product-details"> 
 
-              <RiHeartFill  className='icon-favourite'/>
-              {/* <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" /> */}
+        <div className="product-details__image" onClick={() => setImageOpen(product)}>
+          <img src={`${apiUrl}${product.image}`} alt={product.title} />
+        </div>
 
-            </div>
-
-            <div className="product-details__price-wrapper">
-              {product.discont_price ? (
-                <>
-                  <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
-                  <span className="original-price product-details__price--original">{`$${product.price}`}</span>
-                  <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
-                </>
-              ) : (
-                <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
-              )}
-            </div>
-
-            <div className="product-details__buttons">
-              <div className="product-details__counter">
-                <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
-                <span className="product-details__quantity">{quantity}</span>
-                <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
-              </div>
-
-              <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
-                onClick={handleAddToCart}
-                disabled={addedToCart}
-              >
-                {addedToCart ? 'Added' : 'Add to cart'}
-              </button>
-            </div>
-          </div>
-          <div className="product-details__description">
-            <span className="product-details__description-label">Description</span>
-            <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
-              {product.description}
-            </p>
-            {product.description.length > 200 && (
-            <button className="product-details__description_read-more" onClick={toggleDescription}>
-              {isDescriptionExpanded ? 'Read less' : 'Read more'}
-            </button>
+        <div className="product-details__title">
+          <h1 className="product-details__title-text">{product.title}</h1>
+          <RiHeartFill className="product-details__title-icon icon-favourite" />
+        </div>
+          
+        <div className="product-details__info">
+          <div className="product-details__price-wrapper">
+            {product.discont_price ? (
+              <>
+                <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
+                <span className="original-price product-details__price--original">{`$${product.price}`}</span>
+                <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+              </>
+            ) : (
+              <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
             )}
           </div>
+
+          <div className="product-details__buttons">
+            <div className="product-details__counter">
+              <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
+              <span className="product-details__quantity">{quantity}</span>
+              <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
+            </div>
+
+            <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
+              onClick={handleAddToCart}
+              disabled={addedToCart}
+            >
+              {addedToCart ? 'Added' : 'Add to cart'}
+            </button>
+          </div>
         </div>
+
+        <div className="product-details__description">
+          <span className="product-details__description-label">Description</span>
+          <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+            {product.description}
+          </p>
+          {product.description.length > 200 && (
+          <button className="product-details__description_read-more" onClick={toggleDescription}>
+            {isDescriptionExpanded ? 'Read less' : 'Read more'}
+          </button>
+          )}
+        </div>
+
       </div>
 
       {imageOpen && (
