@@ -51,6 +51,8 @@ const SingleProductsPage = () => {
 
   if (error) {
     return <h2>Error: {error}</h2>;
+
+    
   }
 
   if (!product.id) {
