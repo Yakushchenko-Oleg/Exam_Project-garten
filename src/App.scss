@@ -27,7 +27,7 @@ h2 {
   margin: 0 auto;
   max-width: 1440px;
   
- //при переключении темы режим dark, light
+  //при переключении темы режим dark, light
   &-dark {
     background-color: $primary-grey;
     color: $primary-white;
@@ -85,14 +85,15 @@ h2 {
 }
 
 .maincontainer {
-  margin: 40px 40px; //Зачем это было сделан6о??? Это заставляет каждый компонент и страницу раздвигаться!! Это нужно регулировать в каждом объекте отдельно
+  margin:  40px; //Зачем это было сделан6о??? Это заставляет каждый компонент и страницу раздвигаться!! Это нужно регулировать в каждом объекте отдельно
+  //это сделано- потому что кто-то хотел Layout ко всем страницам!) а я ГОВОРИЛА у нас одна страница другая
   display: flex;
   flex-direction: column;
-  gap: 80px; // Те же замечания      
+  gap: 40px; // Те же замечания   // тот же ответ:)))   
 }
  
 .product-navigation {
-  margin-bottom: 40px;
+  // margin-bottom: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -148,10 +149,18 @@ h2 {
   }
 }
 
+.container-mainpage {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 40px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  // margin-top: 40px;
 }
 
 .wrapper {

@@ -14,7 +14,7 @@ const Contacts = () => {
 
     return (
         <footer className="footer">
-            <div className="container ">
+            <div className="container-mainpage">
                 <div className="header-wrapper">
                     <h2 className="contact-title">Contact</h2>
                 </div>
