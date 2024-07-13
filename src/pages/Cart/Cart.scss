@@ -147,7 +147,6 @@
 }
 
 
-
 @media screen and (max-width: 1000px) {
     .header-wrapper {
         margin-bottom: 32px;
@@ -164,18 +163,15 @@
         gap: 20px;
         align-items: center;
     }
-   
 }
 
-@media screen and (max-width: 630px) {
-    .cart{
-        
-        h2{
-            text-align: start;
-        }
-   
-    }
-}
+// @media screen and (max-width: 630px) {
+//     .cart{
+//         h2{
+//             text-align: start;
+//         }
+//     }
+// }
 
 @media screen and (max-width: 480px) {
     .cart{
@@ -201,11 +197,6 @@
         justify-content: flex-start;
         gap: 12px;
         margin-bottom: 24px;
-        
-        h2{
-            text-align: center;
-         }       
-      
     }
 }
 
