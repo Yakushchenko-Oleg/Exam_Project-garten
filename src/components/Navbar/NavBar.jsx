@@ -14,9 +14,13 @@ const NavBar = () => {
   const [isOpen, setOpen] = useState();
 
   const {theme, toggleTheme} = useContext(ThemeContext);
-  // const handleChangeSwitch = (e) => {
-  //   toggleTheme(e.target.checked);
-  // }
+
+  // при нажатии на иконку,устанавливается класс active
+  const [isFavourite, setIsFavourite] = useState(false);
+  const handleFavouriteClick = () => {
+    setIsFavourite(!isFavourite);
+  };
+  
   
   return (
     <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'} `}>
@@ -63,16 +67,14 @@ const NavBar = () => {
       </div>
       <div className="navbar__icon-wrapper">
         <NavLink to="#">
-          {/* <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img> */}
-          <RiHeartFill className='icon-favourite'/>
+        <RiHeartFill
+          className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
+          onClick={handleFavouriteClick}
+        />
         </NavLink>
 
         <NavLink to="/cart">
-          {/* <img
-            className="navbar__icon-cart"
-            src="../../../public/images/navbar/basket=empty.png"
-          /> */}
-          <GiShoppingBag className='icon-cart'/>
+        <GiShoppingBag className='icon-cart' />
         </NavLink>
 
         {/* если isOpen то класс burger-x */}

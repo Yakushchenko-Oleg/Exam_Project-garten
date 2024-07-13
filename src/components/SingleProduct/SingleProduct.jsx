@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./SingleProduct.scss";
 import { addToCart } from "@/store/cartSlice ";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,14 @@ import { Link } from "react-router-dom";
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
 
+  // при нажатии на иконку,устанавливается класс active 
+  const [isFavourite, setIsFavourite] = useState(false);
+  const handleFavouriteClick = () => {
+    setIsFavourite(!isFavourite);
+  };
+  // при нажатии на иконку,устанавливается класс active 
+  const [isCart, setIsCart] = useState(false);
+  
   const cart = useSelector(state => state.cart);
 
   if (!product) {
@@ -24,7 +32,8 @@ const SingleProduct = ({ product }) => {
     Math.round(100 - (product.discont_price / product.price) * 100);
 
   const handleAddToCart = () => {
-    dispatch(addToCart({product, quantity: 1, selected: true}))
+    dispatch(addToCart({product, quantity: 1, selected: true}));
+    setIsCart(!isCart);
   };
 
   const {theme} = useContext(ThemeContext);
@@ -42,11 +51,17 @@ const SingleProduct = ({ product }) => {
       )}
 
       <div className="icon-wrapper">
-        <RiHeartFill  className='icon-favourite'/>
-        <GiShoppingBag className='icon-cart' onClick={()=>{handleAddToCart()}}/>
+        <RiHeartFill
+          className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
+          onClick={handleFavouriteClick}
+        />
+        <GiShoppingBag 
+          className={`icon-cart ${isCart ? 'icon-cart-active' : ''}`}
+          onClick={()=>{handleAddToCart()}}
+        />
       </div>
 
-      <div className={`singleProduct__info ${theme ? 'singleProduct__info-dark' : 'singleProduct__info-light'}`}>
+      <div className={`singleProduct__info ${theme ? 'singleProduct__info-dark' : ''}`}>
         <Link to={`/products/${product.id}`} className="item__title">
           <h4 className="info-title">{product.title}</h4>
         </Link>
