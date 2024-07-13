@@ -1,17 +1,40 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '../../App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
+import {ThemeContext} from '../../providers/ThemeProvider'
+
+import { RiHeartFill } from 'react-icons/ri'
+import { GiShoppingBag } from 'react-icons/gi'
+import { LuMoon, LuSunMedium } from 'react-icons/lu'
+import { PiSun } from 'react-icons/pi'
+
 
 const NavBar = () => {
-  const [isOpen, setOpen] = useState()
+  const [isOpen, setOpen] = useState();
+
+  const {theme, toggleTheme} = useContext(ThemeContext);
+
+  // при нажатии на иконку,устанавливается класс active
+  const [isFavourite, setIsFavourite] = useState(false);
+  const handleFavouriteClick = () => {
+    setIsFavourite(!isFavourite);
+  };
+  
   
   return (
-    <nav className="navbar">
+    <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'} `}>
+    
       <div className="navbar__logo">
         <img src="../../../public/images/navbar/logo.png" />
-        <img className="light" src="../../../public/images/navbar/mode=light.png"></img>
-        <img className="dark" src="../../../public/images/navbar/mode=dark.png"></img>
+            
+        <div className="nav__action" onClick={toggleTheme} >
+                <label className={`switch ${theme ? "switch-active" : ""}`} for='checkbox'>
+                  <input className='switch__input' type='checkbox' name='checkbox' ></input>
+                    <span className="switch__slider"> { theme ? <PiSun /> : <LuMoon />}</span>
+                </label>
+        </div>
+
       </div>
 
       {/* если isOpen то - класс menu-wrapper-active */}
@@ -44,14 +67,14 @@ const NavBar = () => {
       </div>
       <div className="navbar__icon-wrapper">
         <NavLink to="#">
-          <img  className="navbar__icon-heart" src="../../../public/images/navbar/heart empty.png"></img>
+        <RiHeartFill
+          className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
+          onClick={handleFavouriteClick}
+        />
         </NavLink>
 
         <NavLink to="/cart">
-          <img
-            className="navbar__icon-cart"
-            src="../../../public/images/navbar/basket=empty.png"
-          />
+        <GiShoppingBag className='icon-cart' />
         </NavLink>
 
         {/* если isOpen то класс burger-x */}

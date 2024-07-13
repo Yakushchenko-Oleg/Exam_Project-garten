@@ -1,10 +1,14 @@
-$primary-grey: #424436;
 $primary-green: #92A134;
 $primary-light-green :#F2F6D3;
+
+$primary-grey: #424436;
 $primary-white: #FFFFFF;
+$element-dark: #383A2C;
+
 $primary-orange: #F26D22;
 
 $body-white: #FFFFF1;
+$body-dark: #424436;
 
 $text-grey: #8B8B8B;
 
@@ -13,3 +17,14 @@ $border-grey :#DDDDDD;
 
 $radius-big: 12px;
 $radius-small: 6px;
+
+
+// ссылки на иконки
+// npm install react-icons
+// 1-heart:
+// import { FaRegHeart } from "react-icons/fa6";
+// <FaRegHeart />
+// 2-cart:
+// import { HiOutlineShoppingBag } from "react-icons/hi2";
+// <HiOutlineShoppingBag />
+// 

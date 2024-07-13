@@ -6,20 +6,82 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-
   font-family: "Montserrat", sans-serif;
-  color: $primary-grey;
+
 }
 
 a {
   text-decoration: none;
 }
 
+h2 {
+  @include adaptiv-font(64, 40);
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+
 // главный контэйнер
 .container-1440 {
   margin: 0 auto;
   max-width: 1440px;
-  background-color: $body-white;
+  
+ //при переключении темы режим dark, light
+  &-dark {
+    background-color: $primary-grey;
+    color: $primary-white;
+    a {
+      color: $primary-white;
+    }
+    .product-navigation {
+      opacity: 80%;
+    }
+
+    .icon-favourite {
+      font-size: 48px;
+      fill: $primary-white;
+      stroke-width: 0.8px;
+      stroke: $primary-grey;
+    
+      &:hover {
+          fill: $primary-grey;
+          stroke-width: 0.8px;
+          stroke: black;
+      }
+    
+      &-active {
+          fill: $primary-green;
+          stroke-width: 0.8px;
+      }
+    }
+    
+    .icon-cart {
+      font-size: 48px;
+      fill: $primary-white;
+      stroke-width: 13px;
+      stroke: $primary-grey;
+    
+      &:hover {
+          fill: $primary-grey;
+          stroke-width: 13px;
+          stroke: black;
+      }
+    
+      &-active {
+          fill: $primary-green;
+          stroke-width: 13px;
+      }
+    }
+  }
+  
+  &-light {
+    background-color: $body-white;
+    color: $primary-grey;
+    a {
+      color: $primary-grey;
+    }
+  }
 }
 
 .maincontainer {
@@ -36,7 +98,8 @@ a {
   gap: 16px;
 
   :last-child {
-    color: $primary-grey;
+    // color: $primary-grey;
+    font-weight: bold;
   }
 
   &__link {
@@ -69,12 +132,6 @@ a {
   gap: 50px;
 }
 
-@media screen and (max-width: 360px) {
-  .filter-wrapper {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    width: 100%;
-  }
-}
 
 .loader {
   margin: 0 auto;
@@ -95,13 +152,6 @@ a {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-}
-
-h2 {
-  @include adaptiv-font(64, 40);
-  font-weight: 700;
-  margin-bottom: 40px;
-  text-align: center;
 }
 
 .wrapper {
@@ -147,6 +197,7 @@ h2 {
   cursor: default;
 }
 
+// при нажатии на бургер меню
 .bg-opacity {
   position: fixed;
   width: 100%;
@@ -169,9 +220,10 @@ h2 {
 
   &-active {
       fill: $primary-green;
-      stroke-width: 0px;
+      stroke-width: 0.8px;
   }
 }
+
 .icon-cart {
   font-size: 48px;
   fill: $primary-white;
@@ -184,7 +236,87 @@ h2 {
 
   &-active {
       fill: $primary-green;
-      stroke-width: 0px;
+      stroke-width: 13px;
   }
 }
 
+// переключатель темы
+.switch {
+  background-color: #8B8B8B;
+  border-radius: 18px;
+  width: 60px;
+  height: 32px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  &__input{
+    //hide checkbox
+    opacity:0;
+    height:0;
+    width:0;
+  }
+
+  &__slider {
+      font-size: 23px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      transition: 0.6s;
+      color: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 4px;
+  }
+
+  &__slider:before{
+    content: '';
+    position: absolute;
+    left: 2px;
+    bottom: 2px;
+    height: 28px;
+    width: 28px;
+    background-color: white;
+    border-radius: 50%;
+    transition: 0.6s;
+  }
+
+  &-active {
+      background-color: white;
+      transition: 0.6s;
+      align-items: center;
+      color: #8B8B8B;
+      position: relative;
+
+      .switch__slider:after{
+        justify-content: flex-start;
+        transition: 0.6s;
+        color: grey;
+        top: 0px;
+        left: 4px;
+        bottom: 0;
+        right: 4px;
+      }
+  }
+
+  &-active:before{
+    transform: translateX(28px);
+    content: '';
+    height: 28px;
+    width: 28px;
+    background-color: #8B8B8B;
+    border-radius: 50%;
+    color: #8B8B8B;
+  }
+}
+
+
+@media screen and (max-width: 360px) {
+  .filter-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    width: 100%;
+  }
+}

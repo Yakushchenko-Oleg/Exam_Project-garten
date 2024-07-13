@@ -20,6 +20,11 @@ const SingleProductsPage = () => {
   const [addedToCart, setAddedToCart] = useState(false);
   const apiUrl = import.meta.env.APP_API_URL;
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
+  // при нажатии на иконку,устанавливается класс active 
+  const [isFavourite, setIsFavourite] = useState(false);
+  const handleFavouriteClick = () => {
+    setIsFavourite(!isFavourite)
+  };
 
   useEffect(() => {
     if (!data.length) {
@@ -98,13 +103,17 @@ const SingleProductsPage = () => {
 
       <div className="product-details"> 
 
+
         <div className="product-details__image" onClick={() => setImageOpen(product)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
         </div>
 
+
         <div className="product-details__title">
           <h1 className="product-details__title-text">{product.title}</h1>
-          <RiHeartFill className="product-details__title-icon icon-favourite" />
+          <RiHeartFill
+          className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
+          onClick={handleFavouriteClick} />
         </div>
           
         <div className="product-details__info">
@@ -126,29 +135,27 @@ const SingleProductsPage = () => {
               <span className="product-details__quantity">{quantity}</span>
               <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
             </div>
-
+            
             <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
               onClick={handleAddToCart}
-              disabled={addedToCart}
-            >
+              disabled={addedToCart} >
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
+          
+          <div className="product-details__description">
+            <span className="product-details__description-label">Description</span>
+            <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+              {product.description}
+            </p>
+            {product.description.length > 200 && (
+            <a className="product-details__description_read-more" onClick={toggleDescription}>
+              {isDescriptionExpanded ? 'Read less' : 'Read more'}
+            </a>
+            )}
+          </div>
         </div>
 
-        <div className="product-details__description">
-          <span className="product-details__description-label">Description</span>
-          <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
-            {product.description}
-          </p>
-          {product.description.length > 200 && (
-          <button className="product-details__description_read-more" onClick={toggleDescription}>
-            {isDescriptionExpanded ? 'Read less' : 'Read more'}
-          </button>
-          )}
-        </div>
-
-      </div>
 
       {imageOpen && (
         <div className="modal" onClick={() => setImageOpen(null)}>

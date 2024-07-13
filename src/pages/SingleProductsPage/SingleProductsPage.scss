@@ -2,6 +2,7 @@
 @import '../../mixin.scss'; 
 
 
+
 .product-details { 
     display: grid; 
     grid-gap: 2%; 
@@ -288,4 +289,109 @@
   .product-details__add-to-cart { 
     margin-top: 0; 
   } 
+
+// .singleProduct {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     border-radius: $radius-big;
+//     position: relative;
+//     z-index: 1;
+//     border: 1px solid $border-grey;
+//     background-color: $primary-white;
+
+//     &:hover {
+//         transform: scale(1.03);
+//         box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+//     }
+    
+    
+//     .img-container{
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         width: 100%;
+//         height: 0;
+//         padding-bottom: 100%; // Соотношение сторон
+//         overflow: hidden;
+//         position: relative;
+//         border-radius: $radius-big $radius-big 0 0;
+//         border-bottom: 1px solid $border-grey;
+
+//         img {
+//             position: absolute;
+//             top: 0;
+//             left: 0;
+//             width: 100%;
+//             height: 100%;
+//          }
+//     }  
+
+//     .discount{
+//             position: absolute;
+//             z-index: 999;
+//             left: 16px;
+//             top: 16px;
+//             background-color: $primary-orange;
+//             padding: 4px 8px;
+//             border-radius: $radius-small;
+    
+//             color: $primary-white;
+//             @include adaptiv-font(20, 18);
+//             font-weight: 600;
+//             line-height: 26px;
+//             letter-spacing: 0.03em;
+//     } 
+
+//     .icon-wrapper{
+//         max-width: 44px;
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: space-between;
+//         gap: 12px;
+//         position: absolute;
+//         z-index: 999;
+//         right: 16px;
+//         top: 16px;
+        
+//         img{
+//             border:none;
+//         }
+//         img:hover{
+//             color: $primary-grey;
+//         }
+//     }
+        
+//     &__info{
+//         width: 100%;
+//         padding: 20px;
+
+//         .info-title{
+//             font-weight: 500;
+//             @include adaptiv-font(20, 18);
+//             display: block;
+//             width: 100%;
+//             overflow: hidden;
+//             text-wrap: nowrap;
+//             text-overflow: ellipsis;
+//             padding-bottom: 16px;
+//         }
+
+//         .info-price{
+//             @include adaptiv-font(40, 36);
+//             font-weight: 600;
+//             line-height: 44px;
+
+//             .original-price{
+//                 padding-left: 16px;
+//                 color: $text-grey;
+//                 text-decoration-line: line-through;
+//                 font-weight: 500;
+//                 @include adaptiv-font(20, 18);
+//             }
+           
+//         }       
+//     }
+
+
 }
