@@ -78,16 +78,16 @@
         padding: 20px;
         border-radius: 0 0 12px 12px;
 
-        &-light{
-            // background-color: $primary-white;
-            color: $primary-grey;
+        // &-light{
+        //     // background-color: $primary-white;
+        //     color: $primary-grey;
 
-        }
+        // }
 
         &-dark{
             background-color: $element-dark;
             color: $primary-white;
-
+            border: 1px solid #8B8B8B;
         }
 
         .info-title{

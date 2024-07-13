@@ -20,6 +20,11 @@ const SingleProductsPage = () => {
   const [addedToCart, setAddedToCart] = useState(false);
   const apiUrl = import.meta.env.APP_API_URL;
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
+  // при нажатии на иконку,устанавливается класс active 
+  const [isFavourite, setIsFavourite] = useState(false);
+  const handleFavouriteClick = () => {
+    setIsFavourite(!isFavourite)
+  };
 
   useEffect(() => {
     if (!data.length) {
@@ -103,8 +108,10 @@ const SingleProductsPage = () => {
             <div className="product-details__title-wrapper">
               <h1 className="product-details__title">{product.title}</h1>
 
-              <RiHeartFill  className='icon-favourite'/>
-              {/* <img src="../../../public/images/singleProduct/icon-he.svg" alt="Icon" className="product-details__icon" /> */}
+              <RiHeartFill
+          className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
+          onClick={handleFavouriteClick}
+        />
 
             </div>
 

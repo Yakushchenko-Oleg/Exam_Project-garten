@@ -61,7 +61,7 @@ const SingleProduct = ({ product }) => {
         />
       </div>
 
-      <div className={`singleProduct__info ${theme ? 'singleProduct__info-dark' : 'singleProduct__info-light'}`}>
+      <div className={`singleProduct__info ${theme ? 'singleProduct__info-dark' : ''}`}>
         <Link to={`/products/${product.id}`} className="item__title">
           <h4 className="info-title">{product.title}</h4>
         </Link>
