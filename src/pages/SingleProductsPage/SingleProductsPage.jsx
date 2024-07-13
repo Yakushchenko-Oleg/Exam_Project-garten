@@ -56,6 +56,8 @@ const SingleProductsPage = () => {
 
   if (error) {
     return <h2>Error: {error}</h2>;
+
+    
   }
 
   if (!product.id) {
@@ -99,49 +101,48 @@ const SingleProductsPage = () => {
         ))}
       </div>
 
-      <div className="product-details">
-        <div className="product-details__container">
-          <div className="product-details__image" onClick={() => setImageOpen(product)}>
-            <img src={`${apiUrl}${product.image}`} alt={product.title} />
-          </div>
-          <div className="product-details__info">
-            <div className="product-details__title-wrapper">
-              <h1 className="product-details__title">{product.title}</h1>
+      <div className="product-details"> 
 
-              <RiHeartFill
+
+        <div className="product-details__image" onClick={() => setImageOpen(product)}>
+          <img src={`${apiUrl}${product.image}`} alt={product.title} />
+        </div>
+
+
+        <div className="product-details__title">
+          <h1 className="product-details__title-text">{product.title}</h1>
+          <RiHeartFill
           className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
-          onClick={handleFavouriteClick}
-        />
-
-            </div>
-
-            <div className="product-details__price-wrapper">
-              {product.discont_price ? (
-                <>
-                  <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
-                  <span className="original-price product-details__price--original">{`$${product.price}`}</span>
-                  <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
-                </>
-              ) : (
-                <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
-              )}
-            </div>
-
-            <div className="product-details__buttons">
-              <div className="product-details__counter">
-                <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
-                <span className="product-details__quantity">{quantity}</span>
-                <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
-              </div>
-
-              <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
-                onClick={handleAddToCart}
-                disabled={addedToCart}
-              >
-                {addedToCart ? 'Added' : 'Add to cart'}
-              </button>
-            </div>
+          onClick={handleFavouriteClick} />
+        </div>
+          
+        <div className="product-details__info">
+          <div className="product-details__price-wrapper">
+            {product.discont_price ? (
+              <>
+                <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
+                <span className="original-price product-details__price--original">{`$${product.price}`}</span>
+                <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+              </>
+            ) : (
+              <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
+            )}
           </div>
+
+          <div className="product-details__buttons">
+            <div className="product-details__counter">
+              <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
+              <span className="product-details__quantity">{quantity}</span>
+              <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
+            </div>
+            
+            <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
+              onClick={handleAddToCart}
+              disabled={addedToCart} >
+              {addedToCart ? 'Added' : 'Add to cart'}
+            </button>
+          </div>
+          
           <div className="product-details__description">
             <span className="product-details__description-label">Description</span>
             <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
@@ -154,7 +155,7 @@ const SingleProductsPage = () => {
             )}
           </div>
         </div>
-      </div>
+
 
       {imageOpen && (
         <div className="modal" onClick={() => setImageOpen(null)}>

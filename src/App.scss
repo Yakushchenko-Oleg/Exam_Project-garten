@@ -85,13 +85,14 @@ h2 {
 }
 
 .maincontainer {
-  margin: 80px 40px;
+  margin: 40px 40px; //Зачем это было сделан6о??? Это заставляет каждый компонент и страницу раздвигаться!! Это нужно регулировать в каждом объекте отдельно
   display: flex;
   flex-direction: column;
-  gap: 80px;
+  gap: 80px; // Те же замечания      
 }
-
+ 
 .product-navigation {
+  margin-bottom: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -111,6 +112,15 @@ h2 {
     padding: 8px 16px;
     border: 1px solid $text-grey;
     display: inline-block;
+  }
+
+  @media (max-width: 999px) { 
+    padding: 32px 0;
+  }  
+
+  @media (max-width: 767px) { 
+    display: none;
+    
   }
 }
 
