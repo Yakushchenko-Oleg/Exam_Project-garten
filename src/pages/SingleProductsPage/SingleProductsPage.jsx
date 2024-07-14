@@ -102,12 +102,10 @@ const SingleProductsPage = () => {
       </div>
 
       <div className="product-details"> 
-
-
+     
         <div className="product-details__image" onClick={() => setImageOpen(product)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
         </div>
-
 
         <div className="product-details__title">
           <h1 className="product-details__title-text">{product.title}</h1>
@@ -131,9 +129,9 @@ const SingleProductsPage = () => {
 
           <div className="product-details__buttons">
             <div className="product-details__counter">
-              <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
+              <a className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</a>
               <span className="product-details__quantity">{quantity}</span>
-              <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
+              <a className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</a>       
             </div>
             
             <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
@@ -142,8 +140,9 @@ const SingleProductsPage = () => {
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
-          
-          <div className="product-details__description">
+        </div>
+
+        <div className="product-details__description">
             <span className="product-details__description-label">Description</span>
             <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
               {product.description}
@@ -153,23 +152,18 @@ const SingleProductsPage = () => {
               {isDescriptionExpanded ? 'Read less' : 'Read more'}
             </a>
             )}
-          </div>
         </div>
 
+      </div>
 
       {imageOpen && (
         <div className="modal" onClick={() => setImageOpen(null)}>
           <div className="modal-content">
-            <div className="modal__header">
-              <button onClick={() => setImageOpen(null)} className="modal__close-button">Close</button>
-            </div>
-            <div className="modal__body">
-              <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
-            </div>
+            <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
           </div>
         </div>
       )}
-      </div>
+
     </main>
   );
 };
