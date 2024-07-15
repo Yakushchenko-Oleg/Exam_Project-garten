@@ -48,6 +48,18 @@ const SingleProductsPage = () => {
     }
   }, [product.id, product.category?.id, product.title]);
 
+  if (isLoading) {
+    return <div className="loader">Loading...</div>;
+  }
+
+  if (error) {
+    return <h2>Error: {error}</h2>;
+}
+
+  if (!product.id) {
+    return <h2>Product not found</h2>;
+  }
+
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
@@ -113,9 +125,11 @@ const SingleProductsPage = () => {
       </div>
 
       <div className="product-details"> 
-
+     
         <div className="product-details__image" onClick={() => setImageOpen(product)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
+        
+          <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
         </div>
 
         <div className="product-details__title">
@@ -140,9 +154,9 @@ const SingleProductsPage = () => {
 
           <div className="product-details__buttons">
             <div className="product-details__counter">
-              <button className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</button>
+              <a className="product-details__quantity-button" onClick={handleDecreaseQuantity} >-</a>
               <span className="product-details__quantity">{quantity}</span>
-              <button className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</button>       
+              <a className="product-details__quantity-button" onClick={handleIncreaseQuantity}>+</a>       
             </div>
             
             <button className={`product-details__add-to-cart btn ${addedToCart ? 'added' : ''}`}
@@ -151,34 +165,29 @@ const SingleProductsPage = () => {
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
-          
-          <div className="product-details__description">
-            <span className="product-details__description-label">Description</span>
-            <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
-              {product.description}
-            </p>
-            {product.description.length > 200 && (
-            <a className="product-details__description_read-more" onClick={toggleDescription}>
-              {isDescriptionExpanded ? 'Read less' : 'Read more'}
-            </a>
-            )}
-          </div>
         </div>
 
+        <div className="product-details__description">
+            <span className="product-details__description-label">Description</span>
+            <p className={`product-details__description-text ${isDescriptionExpanded ? 'description-textexpanded' : ''}`}> {product.description}
+            </p>
+            
+            {/* <a className="product-details__description_read-more" onClick={toggleDescription}>
+              {isDescriptionExpanded ? 'Read less' : 'Read more'}
+            </a> */}
+         
+        </div>
+
+      </div>
 
       {imageOpen && (
         <div className="modal" onClick={() => setImageOpen(null)}>
           <div className="modal-content">
-            <div className="modal__header">
-              <button onClick={() => setImageOpen(null)} className="modal__close-button">Close</button>
-            </div>
-            <div className="modal__body">
-              <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
-            </div>
+            <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
           </div>
         </div>
       )}
-      </div>
+
     </main>
   );
 };
