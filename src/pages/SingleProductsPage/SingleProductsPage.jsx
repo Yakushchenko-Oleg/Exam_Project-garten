@@ -47,22 +47,21 @@ const SingleProductsPage = () => {
       ]);
     }
   }, [product.id, product.category?.id, product.title]);
-
-  if (isLoading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (error) {
-    return <h2>Error: {error}</h2>;
-}
-
-  if (!product.id) {
-    return <h2>Product not found</h2>;
-  }
+  const descriptionLength = 150; // Максимальная длина текста перед усечением
 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
+
+  // Логика для рендеринга текста описания
+  const renderDescription = () => {
+    if (isDescriptionExpanded || product.description.length <= descriptionLength) {
+      return product.description;
+    } else {
+      return `${product.description.substring(0, descriptionLength)}...`;
+    }
+  };
+
 
   const handleIncreaseQuantity = () => {
     setQuantity(prev => prev + 1);
@@ -165,17 +164,18 @@ const SingleProductsPage = () => {
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
-        </div>
-
-        <div className="product-details__description">
-            <span className="product-details__description-label">Description</span>
-            <p className={`product-details__description-text ${isDescriptionExpanded ? 'description-textexpanded' : ''}`}> {product.description}
-            </p>
-            
-            {/* <a className="product-details__description_read-more" onClick={toggleDescription}>
-              {isDescriptionExpanded ? 'Read less' : 'Read more'}
-            </a> */}
-         
+        
+    <div className="product-details__description">
+      <span className="product-details__description-label">Description</span>
+      <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+        {renderDescription()}
+      </p>
+      {product.description.length > descriptionLength && (
+        <a className="product-details__description_read-more" onClick={toggleDescription}>
+          {isDescriptionExpanded ? 'Read less' : 'Read more'}
+        </a>
+      )}
+    </div>
         </div>
 
       </div>
