@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import '../../App.scss';
 import "./Sales.scss";
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllProducts } from '../../store/productSlice'
+import { useSelector } from 'react-redux'
 import SingleProduct from '../SingleProduct/SingleProduct'
 import { Link } from 'react-router-dom'
 
@@ -13,11 +12,6 @@ const Sales = () => {
 const {recivedProducts  = { data: [] }, isLoading, error} = useSelector(state => state.products)
 
 const discoutProducts = recivedProducts.data.filter(item => item.discont_price)
-
-const dispatch = useDispatch()
-useEffect(()=> {
-  dispatch(fetchAllProducts())
-},[dispatch])
 
 function mixArray(array) {
   for (let i = array.length - 1; i > 0; i--) {

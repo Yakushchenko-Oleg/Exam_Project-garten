@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react'
-import '../../App.scss'
+import '@/App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
-import {ThemeContext} from '../../providers/ThemeProvider'
+import {ThemeContext} from '@/providers/ThemeProvider'
 
 import { RiHeartFill } from 'react-icons/ri'
 import { GiShoppingBag } from 'react-icons/gi'
@@ -26,10 +26,10 @@ const NavBar = () => {
     <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'} `}>
     
       <div className="navbar__logo">
-        <img src="../../../public/images/navbar/logo.png" />
+        <img src="@/../public/images/navbar/logo.png" />
             
         <div className="nav__action" onClick={toggleTheme} >
-                <label className={`switch ${theme ? "switch-active" : ""}`} for='checkbox'>
+                <label className={`switch ${theme ? "switch-active" : ""}`} htmlFor='checkbox'>
                   <input className='switch__input' type='checkbox' name='checkbox' ></input>
                     <span className="switch__slider"> { theme ? <PiSun /> : <LuMoon />}</span>
                 </label>

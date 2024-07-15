@@ -2,24 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import CategoriesItem from "../../components/CategoriesItem/CategoriesItem";
-
 import './CategoriesPage.scss'
-import { fetchAllCategoties } from "../../store/categoriesProductsSlice";
 
 const CategoriesPage = () => {
   const { categories, isLoading, error } = useSelector((state) => state.categories);
   const apiUrl = import.meta.env.APP_API_URL;
-  const dispatch = useDispatch();
 
   const [breadcrumbs, setBreadcrumbs] = useState([
     { link: "/", name: "Main page " },
     { link: "/categories", name: " Categories page " }
   ]);
 
-
-  useEffect(() => {
-    dispatch(fetchAllCategoties());
-  }, [dispatch]);
 
   return (
     <main className="maincontainer">

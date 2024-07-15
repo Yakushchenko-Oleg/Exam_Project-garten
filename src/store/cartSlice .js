@@ -30,35 +30,70 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
+        favourite: [],
         discount: false,
         isLoading: false,
         error: null
         },
     reducers: {
+      getCartFromLocalStorage(state){
+        let cartFromStorage = JSON.parse(localStorage.getItem('cart'))
+        if (cartFromStorage) {
+          state.cart = [...cartFromStorage]
+        } else{
+          localStorage.setItem('cart', JSON.stringify([]))
+        }
+      },
+      getFavouritesFromLocalStorage(state){
+        let favouriteFromStorage = JSON.parse(localStorage.getItem('favourite'))
+        if (favouriteFromStorage) {
+          state.favourite = [...favouriteFromStorage]
+        } else{
+          localStorage.setItem('favourite', JSON.stringify([]))
+        }
+      },
       addToCart(state, action) {
-        const {product, quantity, selected} = action.payload
+        const {product, quantity} = action.payload
         let findProduct = state.cart.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве
+       
         if (findProduct) {
           state.cart.map(item => { 
             // findProduct.quantity === quantity
             if (item.id === product.id) 
               { item.quantity === quantity  // в стейте не менфяется количество
             }
-          } 
-        )
+          return item
+          })
         }
         else {
-          state.cart.push({...product, quantity, selected})
+          state.cart.push({...product, quantity})
         }
         localStorage.setItem('cart', JSON.stringify(state.cart))
+
+        const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события
+        window.dispatchEvent(event);
       },
       changeQuantity(state, action) {
         const {product, quantity} = action.payload
-        state.cart.map(item => {if (item.id === product.id){
-          item.quantity === quantity
-        } })
-        localStorage.setItem('cart', JSON.stringify(state.cart))
+        state.cart.map(item => {
+          if (item.id === product.id){
+          item.quantity = quantity
+        } 
+      return item 
+      })
+      localStorage.setItem('cart', JSON.stringify(state.cart))
+
+      const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события
+      window.dispatchEvent(event);
       },
+      removeFromCart(state, {payload}) {
+        state.cart = state.cart.filter(item => item.id !==payload)
+        localStorage.setItem('cart', JSON.stringify(state.cart))
+
+        const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события 
+        window.dispatchEvent(event);
+      },
+
       extraReducers: (builder) => {
         builder
         .addCase(fetchGetDiscount.pending,(state) => {
@@ -79,8 +114,12 @@ const cartSlice = createSlice({
 
 
 export const {
-    addToCart,  
-    changeQuantity
+  getCartFromLocalStorage,
+  getFavouritesFromLocalStorage,
+  addToCart,  
+  changeQuantity,
+  removeFromCart
+
 } = cartSlice.actions
 
 export default cartSlice.reducer

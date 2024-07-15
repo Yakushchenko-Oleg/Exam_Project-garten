@@ -1,37 +1,41 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './CartItem.scss'
 import {  changeQuantity } from '@/store/cartSlice ';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {ThemeContext} from '../../providers/ThemeProvider'
+import { removeFromCart } from '../../store/cartSlice ';
 
 const CartItem = ({product}) => {
   const apiUrl = import.meta.env.APP_API_URL;
   const [quantity, setQuantity] = useState(product.quantity)
-  const dispach = useDispatch()
+  const dispatch = useDispatch()
   const {theme} = useContext(ThemeContext);
 
-  // const handleIncreaseQuantity = () => {
-  //   seQuantity(prev => prev +1)
-  //   dispach(changeQuantity({product, quantity}))
-  // };
-  // const handleDecreaseQuantity = () => {
-  //   seQuantity(prev => prev -1)
-  // };
 
-  
+ 
   const handleIncreaseQuantity = () => {
-    setQuantity(prev => prev + 1);
-    dispach(changeQuantity({product, quantity}))
-
+    setQuantity(prev => prev +=1);
+    dispatch(changeQuantity({product, quantity}))
   };
 
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(prev => prev - 1);
-      dispach(changeQuantity({product, quantity}))
+      setQuantity(prev => prev -=1);
+      dispatch(changeQuantity({product, quantity}))
+    } else{
+      dispatch(removeFromCart(product.id))
     }
   };
+const removeHandler = () => {
+  dispatch(removeFromCart(product.id))
+}
+
+useEffect(() => {
+  if (quantity > 0) {
+    dispatch(changeQuantity({product, quantity}));
+  }
+}, [quantity]);
 
   return (
 
@@ -46,7 +50,7 @@ const CartItem = ({product}) => {
               <Link to={`/products/${product.id}`} className="item__title">
                 <span>{product.title}</span>  
               </Link>
-             <button>X</button> 
+             <button onClick={removeHandler}>X</button> 
             </div>
 
             <div className="cartitem__info__price-wraper">

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 
 import "./Categories.scss";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllCategoties} from "../../store/categoriesProductsSlice";
+import {useSelector } from 'react-redux';
+
 import CategoriesItem from "../CategoriesItem/CategoriesItem";
 
 
@@ -15,12 +15,6 @@ const Categories = () => {
   const slicedCategories = categories.slice(0, 4);
 
   const apiUrl = import.meta.env.APP_API_URL;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAllCategoties());
-  }, [dispatch]);
 
   return (
     <div className="products container-mainpage ">

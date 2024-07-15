@@ -20,17 +20,14 @@ const SingleProductsPage = () => {
   const [addedToCart, setAddedToCart] = useState(false);
   const apiUrl = import.meta.env.APP_API_URL;
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
-  // при нажатии на иконку,устанавливается класс active 
-  const [isFavourite, setIsFavourite] = useState(false);
-  const handleFavouriteClick = () => {
-    setIsFavourite(!isFavourite)
-  };
+  const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
 
-  useEffect(() => {
-    if (!data.length) {
-      dispatch(fetchAllProducts());
-    }
-  }, [dispatch, data.length]);
+
+  // useEffect(() => {
+  //   if (!data.length) {
+  //     dispatch(fetchAllProducts());
+  //   }
+  // }, [dispatch, data.length]);
 
   useEffect(() => {
     if (product && product.category) {
@@ -50,20 +47,6 @@ const SingleProductsPage = () => {
     }
   }, [product.id, product.category?.id, product.title]);
 
-  if (isLoading) {
-    return <div className="loader">Loading...</div>;
-  }
-
-  if (error) {
-    return <h2>Error: {error}</h2>;
-
-    
-  }
-
-  if (!product.id) {
-    return <h2>Product not found</h2>;
-  }
-
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
@@ -76,18 +59,35 @@ const SingleProductsPage = () => {
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(prev => prev - 1);
-      addToCart(false)
+      // addToCart(false)
       setAddedToCart(false)
 
     }
   };
 
+  const handleFavouriteClick = () => {
+    setIsFavourite(!isFavourite)
+  };
+
   const handleAddToCart = () => {
     setAddedToCart(true);
-    dispatch(addToCart({product, quantity, selected: true}))
+    dispatch(addToCart({product, quantity}))
     setQuantity(0);
-    console.log(`Added ${quantity} of ${product.title} to cart from singleProductPage.`);
   };
+
+  if (isLoading) {
+    return <div className="loader">Loading...</div>;
+  }
+
+  if (error) {
+    return <h2>Error: {error}</h2>; 
+  }
+
+  if (!product.id) {
+    return <h2>Product not found</h2>;
+  }
+
+
 
   return (
     <main className="maincontainer">
@@ -103,11 +103,9 @@ const SingleProductsPage = () => {
 
       <div className="product-details"> 
 
-
         <div className="product-details__image" onClick={() => setImageOpen(product)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
         </div>
-
 
         <div className="product-details__title">
           <h1 className="product-details__title-text">{product.title}</h1>

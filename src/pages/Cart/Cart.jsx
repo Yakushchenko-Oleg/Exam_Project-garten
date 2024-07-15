@@ -1,25 +1,42 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Cart.scss'
-import CartItem from '../../components/CartItem/CartItem'
-import { useSelector } from 'react-redux'
-import {ThemeContext} from '../../providers/ThemeProvider'
+import CartItem from '@/components/CartItem/CartItem'
+import {ThemeContext} from '@/providers/ThemeProvider'
 
 const Cart = () => {
   const [cart, setCart] = useState( JSON.parse(localStorage.getItem('cart')))
   const [totalSum, setTotalSum] = useState(0)
-  const [totalQontity, setTotalQontity] = useState(0)
+  const [totalQuantity, setTotalQuantity] = useState(0)
   const {theme} = useContext(ThemeContext);
 
+  const updateCartState = () => {
+    const cartData = JSON.parse(localStorage.getItem('cart'));
+    setCart(cartData);
+  };
 
-useEffect(()=> {
-  setTotalSum(cart?.reduce((acc, curent) => {
-    return acc + (curent.price * curent.quantity)
-  }, 0))
-  setTotalQontity(cart?.reduce((acc, curent) => {
-    return acc + curent.quantity
-  }, 0))
-}, [cart])
+  useEffect(() => {
+    updateCartState();
+    
+    const handleCartUpdate = () => {
+      updateCartState();
+    };
+
+    // Подписка на кастомное событие
+    window.addEventListener('cartUpdate', handleCartUpdate);
+
+    return () => {
+      // Отписка от кастомного события
+      window.removeEventListener('cartUpdate', handleCartUpdate);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (cart) {
+      setTotalSum(cart.reduce((acc, current) => acc + (current.price * current.quantity), 0));
+      setTotalQuantity(cart.reduce((acc, current) => acc + current.quantity, 0));
+    }
+  }, [cart]);
 
   return (
     <main className="maincontainer">
@@ -43,7 +60,7 @@ useEffect(()=> {
             </div>
           <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} action="">
               <h3>Order details</h3>
-              <p>{`${totalQontity} item`}</p>
+              <p>{`${totalQuantity} item`}</p>
               <div className="cart__content_form_totoalConteiner">
                 <p>Total</p>
                 <h3>{`$${totalSum}`}</h3>
