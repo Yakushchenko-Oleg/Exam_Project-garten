@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
+import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
 
 
 const SingleProductsPage = () => {
@@ -20,17 +21,14 @@ const SingleProductsPage = () => {
   const [addedToCart, setAddedToCart] = useState(false);
   const apiUrl = import.meta.env.APP_API_URL;
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
-  // при нажатии на иконку,устанавливается класс active 
-  const [isFavourite, setIsFavourite] = useState(false);
-  const handleFavouriteClick = () => {
-    setIsFavourite(!isFavourite)
-  };
+  const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
 
-  useEffect(() => {
-    if (!data.length) {
-      dispatch(fetchAllProducts());
-    }
-  }, [dispatch, data.length]);
+
+  // useEffect(() => {
+  //   if (!data.length) {
+  //     dispatch(fetchAllProducts());
+  //   }
+  // }, [dispatch, data.length]);
 
   useEffect(() => {
     if (product && product.category) {
@@ -74,18 +72,45 @@ const SingleProductsPage = () => {
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(prev => prev - 1);
-      addToCart(false)
+      // addToCart(false)
       setAddedToCart(false)
 
     }
   };
 
+  const handleFavouriteClick = () => {
+    const carentFavoriteState = !isFavourite
+    setIsFavourite(carentFavoriteState)
+
+    if (!isFavourite) {
+      dispatch(addToFavorites(product))      
+    } else {
+      dispatch(removeFromFavorites(product))      
+    }
+    console.log(isFavourite);
+
+  };
+
   const handleAddToCart = () => {
     setAddedToCart(true);
-    dispatch(addToCart({product, quantity, selected: true}))
+    dispatch(addToCart({product, quantity}))
     setQuantity(0);
-    console.log(`Added ${quantity} of ${product.title} to cart from singleProductPage.`);
   };
+
+
+  if (isLoading) {
+    return <div className="loader">Loading...</div>;
+  }
+
+  if (error) {
+    return <h2>Error: {error}</h2>; 
+  }
+
+  if (!product.id) {
+    return <h2>Product not found</h2>;
+  }
+
+
 
   return (
     <main className="maincontainer">

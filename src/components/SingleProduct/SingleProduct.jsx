@@ -7,6 +7,7 @@ import { GiShoppingBag } from "react-icons/gi";
 import {ThemeContext} from '../../providers/ThemeProvider'
 
 import { Link } from "react-router-dom";
+import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
 
 
 const SingleProduct = ({ product }) => {
@@ -14,9 +15,20 @@ const SingleProduct = ({ product }) => {
 
   // при нажатии на иконку,устанавливается класс active 
   const [isFavourite, setIsFavourite] = useState(false);
+
   const handleFavouriteClick = () => {
-    setIsFavourite(!isFavourite);
+    const carentFavoriteState = !isFavourite
+    setIsFavourite(carentFavoriteState)
+
+    if (!isFavourite) {
+      dispatch(addToFavorites(product))      
+    } else {
+      dispatch(removeFromFavorites(product))      
+    }
+    console.log(isFavourite);
+
   };
+
   // при нажатии на иконку,устанавливается класс active 
   const [isCart, setIsCart] = useState(false);
   
