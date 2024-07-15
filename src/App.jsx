@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './index.css';
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
@@ -11,8 +11,22 @@ import SingleProductsPage from './pages/SingleProductsPage/SingleProductsPage.js
 import ProductsPage from './pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './pages/CategoriesPage/CategoriesPage.jsx';
 import ThemeProvider from './providers/ThemeProvider.jsx';
+import { useDispatch } from 'react-redux';
+import { fetchAllProducts } from './store/productSlice.js';
+import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
+import { getCartFromLocalStorage, getFavouritesFromLocalStorage } from './store/cartSlice .js';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() =>{
+    dispatch(fetchAllProducts());
+    dispatch(fetchAllCategoties());
+    dispatch(getCartFromLocalStorage());
+    dispatch(getFavouritesFromLocalStorage())
+  },[])
+
+
   return (
    
     <Routes>
