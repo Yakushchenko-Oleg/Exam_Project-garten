@@ -56,9 +56,7 @@ const SingleProductsPage = () => {
 
   if (error) {
     return <h2>Error: {error}</h2>;
-
-    
-  }
+}
 
   if (!product.id) {
     return <h2>Product not found</h2>;
@@ -105,6 +103,8 @@ const SingleProductsPage = () => {
      
         <div className="product-details__image" onClick={() => setImageOpen(product)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
+        
+          <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
         </div>
 
         <div className="product-details__title">
@@ -144,14 +144,13 @@ const SingleProductsPage = () => {
 
         <div className="product-details__description">
             <span className="product-details__description-label">Description</span>
-            <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
-              {product.description}
+            <p className={`product-details__description-text ${isDescriptionExpanded ? 'description-textexpanded' : ''}`}> {product.description}
             </p>
-            {product.description.length > 200 && (
+            
             <a className="product-details__description_read-more" onClick={toggleDescription}>
               {isDescriptionExpanded ? 'Read less' : 'Read more'}
             </a>
-            )}
+         
         </div>
 
       </div>
