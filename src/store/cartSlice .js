@@ -30,7 +30,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
-        favourite: [],
+        favorites: [],
         discount: false,
         isLoading: false,
         error: null
@@ -44,12 +44,12 @@ const cartSlice = createSlice({
           localStorage.setItem('cart', JSON.stringify([]))
         }
       },
-      getFavouritesFromLocalStorage(state){
-        let favouriteFromStorage = JSON.parse(localStorage.getItem('favourite'))
-        if (favouriteFromStorage) {
-          state.favourite = [...favouriteFromStorage]
+      getfavoritessFromLocalStorage(state){
+        let favoritesFromStorage = JSON.parse(localStorage.getItem('favorites'))
+        if (favoritesFromStorage) {
+          state.favorites = [...favoritesFromStorage]
         } else{
-          localStorage.setItem('favourite', JSON.stringify([]))
+          localStorage.setItem('favorites', JSON.stringify([]))
         }
       },
       addToCart(state, action) {
@@ -93,6 +93,20 @@ const cartSlice = createSlice({
         const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события 
         window.dispatchEvent(event);
       },
+      addToFavorites(state, action){
+        const product = action.payload
+        let findProduct = state.favorites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
+       
+        if (!findProduct) {
+          state.favorites.push(product)
+        }
+        localStorage.setItem('favorites', JSON.stringify(state.favorites))
+      },
+      removeFromFavorites(state, action){
+        const product = action.payload
+        state.favorites = state.favorites.filter(item => item.id !==product.id)
+        localStorage.setItem('favorites', JSON.stringify(state.favorites))
+      },
 
       extraReducers: (builder) => {
         builder
@@ -115,10 +129,12 @@ const cartSlice = createSlice({
 
 export const {
   getCartFromLocalStorage,
-  getFavouritesFromLocalStorage,
+  getfavoritessFromLocalStorage,
   addToCart,  
   changeQuantity,
-  removeFromCart
+  removeFromCart,
+  addToFavorites,
+  removeFromFavorites,
 
 } = cartSlice.actions
 
