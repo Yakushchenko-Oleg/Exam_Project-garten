@@ -147,9 +147,9 @@ const SingleProductsPage = () => {
             <p className={`product-details__description-text ${isDescriptionExpanded ? 'description-textexpanded' : ''}`}> {product.description}
             </p>
             
-            <a className="product-details__description_read-more" onClick={toggleDescription}>
+            {/* <a className="product-details__description_read-more" onClick={toggleDescription}>
               {isDescriptionExpanded ? 'Read less' : 'Read more'}
-            </a>
+            </a> */}
          
         </div>
 
