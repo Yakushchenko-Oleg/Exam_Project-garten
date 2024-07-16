@@ -203,7 +203,8 @@ h2 {
   height: 100%;
   top: 0;
   left: 0;
-  background: $primary-grey;
+  // background: $primary-grey;
+  background: rgba(128, 128, 128, 0.5);
   backdrop-filter: grayscale(50%);
 }
 
