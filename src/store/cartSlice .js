@@ -38,6 +38,7 @@ const cartSlice = createSlice({
     reducers: {
       getCartFromLocalStorage(state){
         let cartFromStorage = JSON.parse(localStorage.getItem('cart'))
+        
         if (cartFromStorage) {
           state.cart = [...cartFromStorage]
         } else{
@@ -104,6 +105,7 @@ const cartSlice = createSlice({
       },
       removeFromFavorites(state, action){
         const product = action.payload
+
         state.favorites = state.favorites.filter(item => item.id !==product.id)
         localStorage.setItem('favorites', JSON.stringify(state.favorites))
       },
