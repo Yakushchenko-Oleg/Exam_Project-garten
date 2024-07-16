@@ -144,15 +144,9 @@ const ProductsPage = () => {
                   <SingleProduct key={item.id} product={item} />
                 ))
               : data.map((item) => (
-                  <Link
-                    to={`/products/${item.id}`}
-                    className="item__title"
-                    key={item.id}
-                  >
-                    <SingleProduct product={item} />
-                  </Link>
+                <SingleProduct key={item.id} product={item} />
                 ))}
-          </div>
+          </div>  
         )}
         {error && <h2> Error from server: {error} </h2>}
       </div>

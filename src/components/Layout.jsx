@@ -11,6 +11,7 @@ const Layout = () => {
   return (
 
     <div className={ `container-1440 ${theme ? 'container-1440-dark' : 'container-1440-light'}`}>
+      
         <NavBar/>
         
             <Outlet/>

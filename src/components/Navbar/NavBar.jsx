@@ -11,7 +11,8 @@ import { PiSun } from 'react-icons/pi'
 
 
 const NavBar = () => {
-  const [isOpen, setOpen] = useState();
+  const [isOpen, setOpen] = useState(false);
+  const [isModal, setModal] = useState(false);
 
   const {theme, toggleTheme} = useContext(ThemeContext);
 
@@ -23,7 +24,7 @@ const NavBar = () => {
   
   
   return (
-    <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'} `}>
+    <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'}  `}>
     
       <div className="navbar__logo">
         <img src="@/../public/images/navbar/logo.png" />
@@ -38,9 +39,12 @@ const NavBar = () => {
       </div>
 
       {/* если isOpen то - класс menu-wrapper-active */}
-      <div className={`${isOpen ? "bg-opacity" : ""}`}>
+      <div className={`${isOpen ? "bg-opacity" : ""} ${isModal ? 'bg-opacity': ''}`}>
         <div className={`menu-wrapper ${isOpen ? "menu-wrapper-active" : ""}`}>
-          <p className="discount-lable">1 day discount!</p>
+          <p 
+          className="discount-lable"
+          onClick={() => setModal(!isModal)}
+          >1 day discount!</p>
           <ul className="navbar__menu">
             <li>
               <NavLink to="/" className="mainpage">
@@ -63,6 +67,11 @@ const NavBar = () => {
               </NavLink>
             </li>
           </ul>
+        </div>
+        <div className={` ${isModal ? 'modal-item': 'disabled'} `} >
+
+          <div>Вставитиь компонент modal-item</div>
+
         </div>
       </div>
       <div className="navbar__icon-wrapper">

@@ -3,33 +3,34 @@ import { Link } from 'react-router-dom'
 import './Cart.scss'
 import CartItem from '@/components/CartItem/CartItem'
 import {ThemeContext} from '@/providers/ThemeProvider'
+import { useSelector } from 'react-redux'
 
-const Cart = () => {
-  const [cart, setCart] = useState( JSON.parse(localStorage.getItem('cart')))
+const Cart = () => {;
+  const cart = useSelector(state =>state.cart.cart)
+  // const [cart, setCart] = useState( JSON.parse(localStorage.getItem('cart')))
   const [totalSum, setTotalSum] = useState(0)
   const [totalQuantity, setTotalQuantity] = useState(0)
   const {theme} = useContext(ThemeContext);
 
-  const updateCartState = () => {
-    const cartData = JSON.parse(localStorage.getItem('cart'));
-    setCart(cartData);
-  };
+  // const updateCartState = () => {
+  //   setCart(cartData);
+  // };
 
-  useEffect(() => {
-    updateCartState();
+  // useEffect(() => {
+  //   updateCartState();
     
-    const handleCartUpdate = () => {
-      updateCartState();
-    };
+    // const handleCartUpdate = () => {
+    //   updateCartState();
+    // };
 
-    // Подписка на кастомное событие
-    window.addEventListener('cartUpdate', handleCartUpdate);
+    // // Подписка на кастомное событие
+    // window.addEventListener('cartUpdate', handleCartUpdate);
 
-    return () => {
-      // Отписка от кастомного события
-      window.removeEventListener('cartUpdate', handleCartUpdate);
-    };
-  }, []);
+    // return () => {
+    //   // Отписка от кастомного события
+    //   window.removeEventListener('cartUpdate', handleCartUpdate);
+    // };
+  // }, [cart]);
 
   useEffect(() => {
     if (cart) {
