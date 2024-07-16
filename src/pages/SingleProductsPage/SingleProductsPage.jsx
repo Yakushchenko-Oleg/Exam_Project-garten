@@ -60,8 +60,17 @@ const SingleProductsPage = () => {
     return <h2>Product not found</h2>;
   }
 
+  const descriptionLength = 150; 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
+  };
+  // Логика для рендеринга текста описания
+  const renderDescription = () => {
+      if (isDescriptionExpanded || product.description.length <= descriptionLength) {
+        return product.description;
+      } else {
+        return `${product.description.substring(0, descriptionLength)}...`;
+      }
   };
 
   const handleIncreaseQuantity = () => {
@@ -111,7 +120,6 @@ const SingleProductsPage = () => {
   }
 
 
-
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -129,7 +137,13 @@ const SingleProductsPage = () => {
         <div className="product-details__image" onClick={() => setImageOpen(product)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
         
-          <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+        {/* если диск.прайс есть,то применится 2ой discount-hiddenб а если нет, то пусто*/}
+          {product.discont_price ? (
+            <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+          ) : (
+            <></>
+          )}
+        
         </div>
 
         <div className="product-details__title">
@@ -167,16 +181,17 @@ const SingleProductsPage = () => {
           </div>
         </div>
 
-        <div className="product-details__description">
-            <span className="product-details__description-label">Description</span>
-            <p className={`product-details__description-text ${isDescriptionExpanded ? 'description-textexpanded' : ''}`}> {product.description}
-            </p>
-            
-            {/* <a className="product-details__description_read-more" onClick={toggleDescription}>
-              {isDescriptionExpanded ? 'Read less' : 'Read more'}
-            </a> */}
-         
-        </div>
+      <div className="product-details__description">
+        <span className="product-details__description-label">Description</span>
+        <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+          {renderDescription()}
+        </p>
+        {product.description.length > descriptionLength && (
+          <a className="product-details__description_read-more" onClick={toggleDescription}>
+            {isDescriptionExpanded ? 'Read less' : 'Read more'}
+          </a>
+        )}
+      </div>
 
       </div>
 
