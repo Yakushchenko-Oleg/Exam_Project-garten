@@ -23,7 +23,7 @@ const SingleProductsPage = () => {
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
 
-
+  //test 16.07
   // useEffect(() => {
   //   if (!data.length) {
   //     dispatch(fetchAllProducts());
