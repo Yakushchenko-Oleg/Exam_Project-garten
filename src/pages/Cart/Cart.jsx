@@ -7,30 +7,10 @@ import { useSelector } from 'react-redux'
 
 const Cart = () => {;
   const cart = useSelector(state =>state.cart.cart)
-  // const [cart, setCart] = useState( JSON.parse(localStorage.getItem('cart')))
+
   const [totalSum, setTotalSum] = useState(0)
   const [totalQuantity, setTotalQuantity] = useState(0)
   const {theme} = useContext(ThemeContext);
-
-  // const updateCartState = () => {
-  //   setCart(cartData);
-  // };
-
-  // useEffect(() => {
-  //   updateCartState();
-    
-    // const handleCartUpdate = () => {
-    //   updateCartState();
-    // };
-
-    // // Подписка на кастомное событие
-    // window.addEventListener('cartUpdate', handleCartUpdate);
-
-    // return () => {
-    //   // Отписка от кастомного события
-    //   window.removeEventListener('cartUpdate', handleCartUpdate);
-    // };
-  // }, [cart]);
 
   useEffect(() => {
     if (cart) {

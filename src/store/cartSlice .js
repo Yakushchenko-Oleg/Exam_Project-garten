@@ -30,7 +30,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
-        favorites: [],
+        favourites: [],
         discount: false,
         isLoading: false,
         error: null
@@ -45,12 +45,12 @@ const cartSlice = createSlice({
           localStorage.setItem('cart', JSON.stringify([]))
         }
       },
-      getfavoritessFromLocalStorage(state){
-        let favoritesFromStorage = JSON.parse(localStorage.getItem('favorites'))
-        if (favoritesFromStorage) {
-          state.favorites = [...favoritesFromStorage]
+      getfavouritessFromLocalStorage(state){
+        let favouritesFromStorage = JSON.parse(localStorage.getItem('favourites'))
+        if (favouritesFromStorage) {
+          state.favourites = [...favouritesFromStorage]
         } else{
-          localStorage.setItem('favorites', JSON.stringify([]))
+          localStorage.setItem('favourites', JSON.stringify([]))
         }
       },
       addToCart(state, action) {
@@ -61,7 +61,7 @@ const cartSlice = createSlice({
           state.cart.map(item => { 
             // findProduct.quantity === quantity
             if (item.id === product.id) 
-              { item.quantity === quantity  // в стейте не менфяется количество
+              { item.quantity = quantity  // в стейте не менфяется количество
             }
           return item
           })
@@ -70,9 +70,6 @@ const cartSlice = createSlice({
           state.cart.push({...product, quantity})
         }
         localStorage.setItem('cart', JSON.stringify(state.cart))
-
-        const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события
-        window.dispatchEvent(event);
       },
       changeQuantity(state, action) {
         const {product, quantity} = action.payload
@@ -90,24 +87,21 @@ const cartSlice = createSlice({
       removeFromCart(state, {payload}) {
         state.cart = state.cart.filter(item => item.id !==payload)
         localStorage.setItem('cart', JSON.stringify(state.cart))
-
-        const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события 
-        window.dispatchEvent(event);
       },
-      addToFavorites(state, action){
+      addTofavourites(state, action){
         const product = action.payload
-        let findProduct = state.favorites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
+        let findProduct = state.favourites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
        
         if (!findProduct) {
-          state.favorites.push(product)
+          state.favourites.push(product)
         }
-        localStorage.setItem('favorites', JSON.stringify(state.favorites))
+        localStorage.setItem('favourites', JSON.stringify(state.favourites))
       },
-      removeFromFavorites(state, action){
+      removeFromfavourites(state, action){
         const product = action.payload
 
-        state.favorites = state.favorites.filter(item => item.id !==product.id)
-        localStorage.setItem('favorites', JSON.stringify(state.favorites))
+        state.favourites = state.favourites.filter(item => item.id !==product.id)
+        localStorage.setItem('favourites', JSON.stringify(state.favourites))
       },
 
       extraReducers: (builder) => {
@@ -131,12 +125,12 @@ const cartSlice = createSlice({
 
 export const {
   getCartFromLocalStorage,
-  getfavoritessFromLocalStorage,
+  getfavouritessFromLocalStorage,
   addToCart,  
   changeQuantity,
   removeFromCart,
-  addToFavorites,
-  removeFromFavorites,
+  addTofavourites,
+  removeFromfavourites,
 
 } = cartSlice.actions
 

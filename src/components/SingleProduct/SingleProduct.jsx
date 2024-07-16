@@ -7,7 +7,7 @@ import { GiShoppingBag } from "react-icons/gi";
 import {ThemeContext} from '../../providers/ThemeProvider'
 
 import { Link } from "react-router-dom";
-import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
+import { addTofavourites, removeFromfavourites } from "../../store/cartSlice ";
 
 
 const SingleProduct = ({ product }) => {
@@ -17,13 +17,13 @@ const SingleProduct = ({ product }) => {
   const [isFavourite, setIsFavourite] = useState(false);
 
   const handleFavouriteClick = () => {
-    const carentFavoriteState = !isFavourite
-    setIsFavourite(carentFavoriteState)
+    const carentfavouriteState = !isFavourite
+    setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addToFavorites(product))      
+      dispatch(addTofavourites(product))      
     } else {
-      dispatch(removeFromFavorites(product))      
+      dispatch(removeFromfavourites(product))      
     }
     console.log(isFavourite);
 
