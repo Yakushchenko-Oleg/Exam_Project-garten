@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
-import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
+import { addTofavourites, removeFromfavourites } from "../../store/cartSlice ";
 
 
 const SingleProductsPage = () => {
@@ -88,13 +88,13 @@ const SingleProductsPage = () => {
   };
 
   const handleFavouriteClick = () => {
-    const carentFavoriteState = !isFavourite
-    setIsFavourite(carentFavoriteState)
+    const carentfavouriteState = !isFavourite
+    setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addToFavorites(product))      
+      dispatch(addTofavourites(product))      
     } else {
-      dispatch(removeFromFavorites(product))      
+      dispatch(removeFromfavourites(product))      
     }
     console.log(isFavourite);
 

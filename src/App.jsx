@@ -14,7 +14,7 @@ import ThemeProvider from './providers/ThemeProvider.jsx';
 import { useDispatch } from 'react-redux';
 import { fetchAllProducts } from './store/productSlice.js';
 import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
-import { getCartFromLocalStorage, getfavoritessFromLocalStorage } from './store/cartSlice .js';
+import { getCartFromLocalStorage, getfavouritessFromLocalStorage } from './store/cartSlice .js';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const App = () => {
     dispatch(fetchAllProducts());
     dispatch(fetchAllCategoties());
     dispatch(getCartFromLocalStorage());
-    dispatch(getfavoritessFromLocalStorage())
+    dispatch(getfavouritessFromLocalStorage())
   },[])
 
 
