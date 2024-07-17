@@ -1,21 +1,30 @@
-import React, {createContext} from 'react'
+import React, {createContext, useEffect} from 'react'
 import { useState } from 'react';
+// import { useLocalStorage } from '../hooks/useLocalStorage'
 
 export const ThemeContext = createContext();
 
-export const ThemeContextProvider = ( {children} ) => {
+const ThemeContextProvider = ({ children }) => {
+  const [theme, setTheme] = useState(() => {
+    
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme ? JSON.parse(storedTheme) : false;
+  });
 
-  const [theme, setTheme] = useState(false) ;
+  useEffect(() => {
+     localStorage.setItem('theme', JSON.stringify(theme));
+  }, [theme]);
+
 
   const toggleTheme = () => {
-    setTheme(!theme)
-  }
+    setTheme((prevTheme) => !prevTheme);
+  };
 
   return (
-    <ThemeContext.Provider value={ {theme, toggleTheme} }>
-        {children}
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
     </ThemeContext.Provider>
-  )
-}
+  );
+};
 
 export default ThemeContextProvider
