@@ -47,8 +47,8 @@ useEffect(() => {
         <div className={`cartitem__info ${theme ? 'cartitem__info-dark' : ''}`}>
       
             <div className="cartitem__info_title-container">  
-              <Link to={`/products/${product.id}`} className="item__title">
-                <span>{product.title}</span>  
+              <Link to={`/products/${product.id}`} >
+                <span className="item-title">{product.title}</span>  
               </Link>
              <button onClick={removeHandler}>X</button> 
             </div>
