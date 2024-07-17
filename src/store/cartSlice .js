@@ -85,7 +85,7 @@ const cartSlice = createSlice({
       window.dispatchEvent(event);
       },
       removeFromCart(state, {payload}) {
-        state.cart = state.cart.filter(item => item.id !==payload)
+        state.cart = state.cart.filter(item => item.id !==payload.id)
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       addTofavourites(state, action){
