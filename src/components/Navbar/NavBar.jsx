@@ -96,7 +96,7 @@ useEffect(()=>{
       <div className="navbar__icon-wrapper">
         
         <div className="navbar__icon-wrapper_item">
-          <NavLink to="#">
+          <NavLink to="/favourites">
             <RiHeartFill className={`icon-favourite`}/>
           </NavLink>
 
