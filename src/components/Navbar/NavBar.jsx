@@ -32,6 +32,7 @@ const NavBar = () => {
                 <label className={`switch ${theme ? "switch-active" : ""}`} htmlFor='checkbox'>
                   <input className='switch__input' type='checkbox' name='checkbox' ></input>
                     <span className="switch__slider"> { theme ? <PiSun /> : <LuMoon />}</span>
+                 
                 </label>
         </div>
 
