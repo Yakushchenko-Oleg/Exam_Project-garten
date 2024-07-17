@@ -35,6 +35,7 @@ const App = () => {
         <Route path='/categories' element={<CategoriesPage />} />
         <Route path='/categories/:categoryId' element={<ProductsPage />} />
         <Route path='/allproducts' element={<ProductsPage />} />
+        <Route path='/favourites' element={<ProductsPage />} />
         <Route path='/products/:id' element={<SingleProductsPage />} />
         <Route path='/allsales' element={<AllSalesPage />} />
         <Route path='*' element={<Error404 />} />
