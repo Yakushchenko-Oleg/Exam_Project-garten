@@ -24,11 +24,11 @@ const CartItem = ({product}) => {
       setQuantity(prev => prev -=1);
       dispatch(changeQuantity({product, quantity}))
     } else{
-      dispatch(removeFromCart(product.id))
+      dispatch(removeFromCart(product))
     }
   };
 const removeHandler = () => {
-  dispatch(removeFromCart(product.id))
+  dispatch(removeFromCart(product))
 }
 
 useEffect(() => {

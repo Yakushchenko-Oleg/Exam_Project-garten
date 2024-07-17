@@ -14,7 +14,7 @@ import ThemeProvider from './providers/ThemeProvider.jsx';
 import { useDispatch } from 'react-redux';
 import { fetchAllProducts } from './store/productSlice.js';
 import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
-import { getCartFromLocalStorage, getfavoritessFromLocalStorage } from './store/cartSlice .js';
+import { getCartFromLocalStorage, getfavouritessFromLocalStorage } from './store/cartSlice .js';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ const App = () => {
     dispatch(fetchAllProducts());
     dispatch(fetchAllCategoties());
     dispatch(getCartFromLocalStorage());
-    dispatch(getfavoritessFromLocalStorage())
+    dispatch(getfavouritessFromLocalStorage())
   },[])
 
 
@@ -35,6 +35,7 @@ const App = () => {
         <Route path='/categories' element={<CategoriesPage />} />
         <Route path='/categories/:categoryId' element={<ProductsPage />} />
         <Route path='/allproducts' element={<ProductsPage />} />
+        <Route path='/favourites' element={<ProductsPage />} />
         <Route path='/products/:id' element={<SingleProductsPage />} />
         <Route path='/allsales' element={<AllSalesPage />} />
         <Route path='*' element={<Error404 />} />

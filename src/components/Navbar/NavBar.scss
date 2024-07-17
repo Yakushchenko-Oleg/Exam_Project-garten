@@ -47,6 +47,8 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 12px;
+        cursor: pointer;
+        
         .discount-lable{
             background-color: $primary-green;
             color: $primary-white;
@@ -88,6 +90,33 @@
         gap: 24px;
         align-items: center;
         justify-content: center;
+
+        &_item{
+            position: relative;
+
+            .icon-quaontity__wraper {
+                background-color: $primary-green;
+                height: 26px;
+                width: 26px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 7px;
+                right: 23px;
+                z-index: 10;
+    
+                p{
+                    color: $body-white;
+                    font-size: 12px;
+                    font-weight: 600;
+    
+                }
+            }
+        }
+
+
     }
 
     // .icon-cart,  .icon-heart {
@@ -143,11 +172,11 @@
     }
 }
 
-@media screen and (min-width: 701px) {
-    .bg-opacity{
-        display: none;
-    }
-}
+// @media screen and (min-width: 701px) {
+//     .bg-opacity{
+//         display: none;
+//     }
+// }
 
 @media screen and (max-width: 700px) {
     .navbar {

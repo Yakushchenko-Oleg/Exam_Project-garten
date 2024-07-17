@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
-import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
+import { addTofavourites, removeFromfavourites } from "../../store/cartSlice ";
 
 
 const SingleProductsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { recivedProducts, isLoading, error } = useSelector((state) => state.products);
+  const {cart, favourites} = useSelector(state => state.cart);
+
   const { data } = recivedProducts || { data: [] };
   const product = data.find((item) => item.id === parseInt(id)) || {};
   const [imageOpen, setImageOpen] = useState(null);
@@ -22,13 +24,24 @@ const SingleProductsPage = () => {
   const apiUrl = import.meta.env.APP_API_URL;
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
+  
+  useEffect(()=> {
+    let inCart =  cart.find(item => item.id === product.id)
 
+    if (inCart) {
+      setQuantity(inCart.quantity)
+    }
+  },[cart, product])
+  
+  useEffect(()=> {
+    let inFavourite = favourites.find(item => item.id === product.id)
 
-  // useEffect(() => {
-  //   if (!data.length) {
-  //     dispatch(fetchAllProducts());
-  //   }
-  // }, [dispatch, data.length]);
+    if (inFavourite) {
+      setIsFavourite(true)
+    } else{
+      setIsFavourite(false)
+    }
+  },[favourites, product])
 
   useEffect(() => {
     if (product && product.category) {
@@ -81,20 +94,18 @@ const SingleProductsPage = () => {
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(prev => prev - 1);
-      // addToCart(false)
       setAddedToCart(false)
-
     }
   };
 
-  const handleFavouriteClick = () => {
-    const carentFavoriteState = !isFavourite
-    setIsFavourite(carentFavoriteState)
+  const handleAddToFavourite = () => {
+    const carentfavouriteState = !isFavourite
+    setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addToFavorites(product))      
+      dispatch(addTofavourites(product))      
     } else {
-      dispatch(removeFromFavorites(product))      
+      dispatch(removeFromfavourites(product))      
     }
     console.log(isFavourite);
 
@@ -150,7 +161,7 @@ const SingleProductsPage = () => {
           <h1 className="product-details__title-text">{product.title}</h1>
           <RiHeartFill
           className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
-          onClick={handleFavouriteClick} />
+          onClick={handleAddToFavourite} />
         </div>
           
         <div className="product-details__info">
@@ -201,7 +212,8 @@ const SingleProductsPage = () => {
             <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
           </div>
         </div>
-      )}
+      )
+      }
 
     </main>
   );

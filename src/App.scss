@@ -207,6 +207,22 @@ h2 {
   background: rgba(128, 128, 128, 0.5);
   backdrop-filter: grayscale(50%);
 }
+.disabled{
+display: none;
+}
+
+.modal-item{
+display: block;
+position: absolute;
+top: 50%;
+right: 50%;
+transform: translate(50%);
+
+height: 300px; // эти стили поменять помле вставки товара
+width: 300px;
+background-color: red;
+  
+}
 
 .icon-favourite {
   font-size: 48px;
@@ -220,7 +236,7 @@ h2 {
 
   &-active {
       fill: $primary-green;
-      stroke-width: 0.8px;
+      stroke-width: 0;
   }
 }
 
@@ -236,7 +252,7 @@ h2 {
 
   &-active {
       fill: $primary-green;
-      stroke-width: 13px;
+      stroke-width: 0;
   }
 }
 
