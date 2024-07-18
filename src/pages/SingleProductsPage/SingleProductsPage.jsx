@@ -6,6 +6,7 @@ import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
 import { addTofavourites, removeFromfavourites } from "../../store/cartSlice ";
+import Modal from "../../components/Modal/Modal";
 
 
 const SingleProductsPage = () => {
@@ -107,8 +108,6 @@ const SingleProductsPage = () => {
     } else {
       dispatch(removeFromfavourites(product))      
     }
-    console.log(isFavourite);
-
   };
 
   const handleAddToCart = () => {
@@ -145,7 +144,7 @@ const SingleProductsPage = () => {
 
       <div className="product-details"> 
      
-        <div className="product-details__image" onClick={() => setImageOpen(product)}>
+        <div className="product-details__image" onClick={() => setImageOpen(true)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
         
         {/* если диск.прайс есть,то применится 2ой discount-hiddenб а если нет, то пусто*/}
@@ -207,17 +206,21 @@ const SingleProductsPage = () => {
       </div>
 
       {imageOpen && (
-        <div className="modal" onClick={() => setImageOpen(null)}>
-          <div className="modal-content">
-            <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
-          </div>
-        </div>
+
+      <Modal >
+        <img onClick={() => setImageOpen(false)} src={`${apiUrl}${product.image}`} alt={product.title} />
+      </Modal>
+
       )
       }
+
+
 
     </main>
   );
 };
+
+
 
 export default SingleProductsPage;
 

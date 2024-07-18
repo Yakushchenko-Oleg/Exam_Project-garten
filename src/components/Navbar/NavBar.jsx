@@ -8,7 +8,9 @@ import { RiHeartFill } from 'react-icons/ri'
 import { GiShoppingBag } from 'react-icons/gi'
 import { LuMoon, LuSunMedium } from 'react-icons/lu'
 import { PiSun } from 'react-icons/pi'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import Modal from '../Modal/Modal'
+import { addTofavourites, removeFromfavourites } from '../../store/cartSlice '
 
 
 const NavBar = () => {
@@ -18,6 +20,10 @@ const NavBar = () => {
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const {cart, favourites} = useSelector(state => state.cart);
   const {theme, toggleTheme} = useContext(ThemeContext);
+  const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const dispatch = useDispatch();
+
 
 useEffect(()=>{
 if (cart.length>0) {
@@ -37,16 +43,25 @@ useEffect(()=>{
   }
   },[favourites])
 
-  const handleFavouriteClick = () => {
-    // setIsFavourite(!isFavourite);
+  const handleAddToFavourite = () => {
+    const carentfavouriteState = !isFavourite
+    setIsFavourite(carentfavouriteState)
+
+    if (!isFavourite) {
+      dispatch(addTofavourites(product))      
+    } else {
+      dispatch(removeFromfavourites(product))      
+    }
   };
+
   
   
   return (
-    <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'}  `}>
+    <>
+      <nav className={ `navbar ${theme ? 'navbar-dark' : 'navbar-light'}  `}>
     
       <div className="navbar__logo">
-        <img src="@/../public/images/navbar/logo.png" />
+        <img src="/images/navbar/logo.png" />
             
         <div className="nav__action" onClick={toggleTheme} >
           <label className={`switch ${theme ? "switch-active" : ""}`} htmlFor='checkbox'>
@@ -58,11 +73,11 @@ useEffect(()=>{
       </div>
 
       {/* если isOpen то - класс menu-wrapper-active */}
-      <div className={`${isOpen ? "bg-opacity" : ""} ${isModal ? 'bg-opacity': ''}`}>
+      <div className={`${isOpen ? "bg-opacity" : ""}`}>
         <div className={`menu-wrapper ${isOpen ? "menu-wrapper-active" : ""}`}>
           <p 
           className="discount-lable"
-          onClick={() => setModal(!isModal)}
+          onClick={() => setIsModalOpen(!isModalOpen)}
           >1 day discount!</p>
           <ul className="navbar__menu">
             <li>
@@ -86,11 +101,6 @@ useEffect(()=>{
               </NavLink>
             </li>
           </ul>
-        </div>
-        <div className={` ${isModal ? 'modal-item': 'disabled'} `} >
-
-          <div>Вставитиь компонент modal-item</div>
-
         </div>
       </div>
       <div className="navbar__icon-wrapper">
@@ -126,7 +136,51 @@ useEffect(()=>{
           <span></span>
         </div>
       </div>
-    </nav>
+      </nav>
+
+
+      {
+        isModalOpen && 
+        <Modal>
+          <div
+           onClick={() => setIsModalOpen(!isModalOpen)} 
+           >Вставитиь компонент modal-item
+           </div>
+
+
+            <div className="modal-item" onClick={(e) => e.stopPropagation()}> 
+              <div className="modal-item__header"> 
+                <h2>50% discount on product of the day!</h2> 
+                <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
+              </div> 
+              <div className="modal-item__info"> 
+                <div className="product-image-container"> 
+                  <img src="path_to_image" alt="Discounted Product" className="product-image" /> 
+                  <div className="product-info-overlay"> 
+                    <span className="discount-badge">-50%</span> 
+                    <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
+                  </div> 
+                  <div className="product-info"> 
+                    <h3>Secateurs</h3> 
+                    <div className="price-container"> 
+                      <p className="price"> 
+                        <span className="new-price">$120</span> 
+                        <span className="old-price">$240</span> 
+                      </p> 
+                    </div> 
+                  </div> 
+                </div> 
+
+              </div> 
+
+              <button className="btn modal-item__button">Add to cart</button> 
+
+            </div> 
+
+
+        </Modal> 
+        }
+    </>
   );
 }
 
