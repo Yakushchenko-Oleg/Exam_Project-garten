@@ -10,7 +10,8 @@ import { LuMoon, LuSunMedium } from 'react-icons/lu'
 import { PiSun } from 'react-icons/pi'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from '../Modal/Modal'
-import { addTofavourites, removeFromfavourites } from '../../store/cartSlice '
+import { addTofavourites, removeFromfavourites } from '../../store/favouritesSlice'
+// import { addTofavourites, removeFromfavourites } from '../../store/cartSlice '
 
 
 const NavBar = () => {
@@ -18,7 +19,8 @@ const NavBar = () => {
   const [isModal, setModal] = useState(false);
   const[cartNotEmpty, setCartNotEmpty] = useState(false); 
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
-  const {cart, favourites} = useSelector(state => state.cart);
+  const { cart } = useSelector(state => state.cart);
+  const { favourites } = useSelector(state => state.favourites);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -148,12 +150,12 @@ useEffect(()=>{
            </div>
 
 
-            <div className="modal-item" onClick={(e) => e.stopPropagation()}> 
-              <div className="modal-item__header"> 
+            <div className="promo-pro" > 
+              <div className="promo-pro__header"> 
                 <h2>50% discount on product of the day!</h2> 
                 <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
               </div> 
-              <div className="modal-item__info"> 
+              <div className="promo-pro__info"> 
                 <div className="product-image-container"> 
                   <img src="path_to_image" alt="Discounted Product" className="product-image" /> 
                   <div className="product-info-overlay"> 
@@ -173,7 +175,7 @@ useEffect(()=>{
 
               </div> 
 
-              <button className="btn modal-item__button">Add to cart</button> 
+              <button className="btn promo-pro__button">Add to cart</button> 
 
             </div> 
 
