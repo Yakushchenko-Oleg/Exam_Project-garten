@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
-import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
+import { addTofavourites, removeFromfavourites } from "../../store/cartSlice ";
+import Modal from "../../components/Modal/Modal";
 
 
 const SingleProductsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { recivedProducts, isLoading, error } = useSelector((state) => state.products);
+  const {cart, favourites} = useSelector(state => state.cart);
+
   const { data } = recivedProducts || { data: [] };
   const product = data.find((item) => item.id === parseInt(id)) || {};
   const [imageOpen, setImageOpen] = useState(null);
@@ -22,13 +25,24 @@ const SingleProductsPage = () => {
   const apiUrl = import.meta.env.APP_API_URL;
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
+  
+  useEffect(()=> {
+    let inCart =  cart.find(item => item.id === product.id)
 
+    if (inCart) {
+      setQuantity(inCart.quantity)
+    }
+  },[cart, product])
+  
+  useEffect(()=> {
+    let inFavourite = favourites.find(item => item.id === product.id)
 
-  // useEffect(() => {
-  //   if (!data.length) {
-  //     dispatch(fetchAllProducts());
-  //   }
-  // }, [dispatch, data.length]);
+    if (inFavourite) {
+      setIsFavourite(true)
+    } else{
+      setIsFavourite(false)
+    }
+  },[favourites, product])
 
   useEffect(() => {
     if (product && product.category) {
@@ -49,8 +63,17 @@ const SingleProductsPage = () => {
   }, [product.id, product.category?.id, product.title]);
   const descriptionLength = 150; // Максимальная длина текста перед усечением
 
+  const descriptionLength = 150; 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
+  };
+  // Логика для рендеринга текста описания
+  const renderDescription = () => {
+      if (isDescriptionExpanded || product.description.length <= descriptionLength) {
+        return product.description;
+      } else {
+        return `${product.description.substring(0, descriptionLength)}...`;
+      }
   };
 
   // Логика для рендеринга текста описания
@@ -71,23 +94,19 @@ const SingleProductsPage = () => {
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(prev => prev - 1);
-      // addToCart(false)
       setAddedToCart(false)
-
     }
   };
 
-  const handleFavouriteClick = () => {
-    const carentFavoriteState = !isFavourite
-    setIsFavourite(carentFavoriteState)
+  const handleAddToFavourite = () => {
+    const carentfavouriteState = !isFavourite
+    setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addToFavorites(product))      
+      dispatch(addTofavourites(product))      
     } else {
-      dispatch(removeFromFavorites(product))      
+      dispatch(removeFromfavourites(product))      
     }
-    console.log(isFavourite);
-
   };
 
   const handleAddToCart = () => {
@@ -110,7 +129,6 @@ const SingleProductsPage = () => {
   }
 
 
-
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -125,17 +143,23 @@ const SingleProductsPage = () => {
 
       <div className="product-details"> 
      
-        <div className="product-details__image" onClick={() => setImageOpen(product)}>
+        <div className="product-details__image" onClick={() => setImageOpen(true)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
         
-          <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+        {/* если диск.прайс есть,то применится 2ой discount-hiddenб а если нет, то пусто*/}
+          {product.discont_price ? (
+            <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+          ) : (
+            <></>
+          )}
+        
         </div>
 
         <div className="product-details__title">
           <h1 className="product-details__title-text">{product.title}</h1>
           <RiHeartFill
           className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
-          onClick={handleFavouriteClick} />
+          onClick={handleAddToFavourite} />
         </div>
           
         <div className="product-details__info">
@@ -164,6 +188,7 @@ const SingleProductsPage = () => {
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
+<<<<<<< HEAD
         
     <div className="product-details__description">
       <span className="product-details__description-label">Description</span>
@@ -177,20 +202,40 @@ const SingleProductsPage = () => {
       )}
     </div>
         </div>
+=======
+        </div>
+
+      <div className="product-details__description">
+        <span className="product-details__description-label">Description</span>
+        <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+          {renderDescription()}
+        </p>
+        {product.description.length > descriptionLength && (
+          <a className="product-details__description_read-more" onClick={toggleDescription}>
+            {isDescriptionExpanded ? 'Read less' : 'Read more'}
+          </a>
+        )}
+      </div>
+>>>>>>> 4dff41c4e8be16ac9485af858858c53c76841754
 
       </div>
 
       {imageOpen && (
-        <div className="modal" onClick={() => setImageOpen(null)}>
-          <div className="modal-content">
-            <img src={`${apiUrl}${imageOpen.image}`} alt={imageOpen.title} />
-          </div>
-        </div>
-      )}
+
+      <Modal >
+        <img onClick={() => setImageOpen(false)} src={`${apiUrl}${product.image}`} alt={product.title} />
+      </Modal>
+
+      )
+      }
+
+
 
     </main>
   );
 };
+
+
 
 export default SingleProductsPage;
 

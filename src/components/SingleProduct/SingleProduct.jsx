@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./SingleProduct.scss";
 import { addToCart } from "@/store/cartSlice ";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,49 +7,71 @@ import { GiShoppingBag } from "react-icons/gi";
 import {ThemeContext} from '../../providers/ThemeProvider'
 
 import { Link } from "react-router-dom";
-import { addToFavorites, removeFromFavorites } from "../../store/cartSlice ";
+import { addTofavourites, removeFromCart, removeFromfavourites } from "../../store/cartSlice ";
 
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
 
-  // при нажатии на иконку,устанавливается класс active 
-  const [isFavourite, setIsFavourite] = useState(false);
+  const {cart, favourites} = useSelector(state => state.cart);
+  const {theme} = useContext(ThemeContext);
+  const apiUrl = import.meta.env.APP_API_URL;
 
-  const handleFavouriteClick = () => {
-    const carentFavoriteState = !isFavourite
-    setIsFavourite(carentFavoriteState)
+  const [isFavourite, setIsFavourite] = useState(false); // при нажатии на иконку,устанавливается класс active 
+    
+  const [isCart, setIsCart] = useState(false); // при нажатии на иконку,устанавливается класс active 
+
+  useEffect(()=> {
+    let inCart =  cart.find(item => item.id === product.id)
+
+    if (inCart) {
+      setIsCart(true)
+    } else{
+      setIsCart(false)
+    }
+  },[cart, product])
+
+  useEffect(()=> {
+    let inFavourite = favourites.find(item => item.id === product.id)
+
+    if (inFavourite) {
+      setIsFavourite(true)
+    } else{
+      setIsFavourite(false)
+    }
+  },[favourites, product])
+
+  const handleAddToFavourite = () => {
+    const carentfavouriteState = !isFavourite
+    setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addToFavorites(product))      
+      dispatch(addTofavourites(product))      
     } else {
-      dispatch(removeFromFavorites(product))      
+      dispatch(removeFromfavourites(product))      
     }
-    console.log(isFavourite);
-
   };
 
-  // при нажатии на иконку,устанавливается класс active 
-  const [isCart, setIsCart] = useState(false);
+  const handleAddToCart = () => {
+
+    if (!isCart) {
+          dispatch(addToCart({product, quantity: 1}));
+    setIsCart(true);
+    } else{
+      dispatch(removeFromCart(product))
+      setIsCart(false);
+    }
+  };
+
+
   
-  const cart = useSelector(state => state.cart);
 
   if (!product) {
     return <div className="loader"></div>;
   }
 
-  const apiUrl = import.meta.env.APP_API_URL;
-
   const discountCounter = (product) =>
     Math.round(100 - (product.discont_price / product.price) * 100);
-
-  const handleAddToCart = () => {
-    dispatch(addToCart({product, quantity: 1, selected: true}));
-    setIsCart(!isCart);
-  };
-
-  const {theme} = useContext(ThemeContext);
-
 
   return (
     <div className="singleProduct" key={product.id}>
@@ -65,11 +87,11 @@ const SingleProduct = ({ product }) => {
       <div className="icon-wrapper">
         <RiHeartFill
           className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`}
-          onClick={handleFavouriteClick}
+          onClick={handleAddToFavourite}
         />
         <GiShoppingBag 
           className={`icon-cart ${isCart ? 'icon-cart-active' : ''}`}
-          onClick={()=>{handleAddToCart()}}
+          onClick={handleAddToCart}
         />
       </div>
 
