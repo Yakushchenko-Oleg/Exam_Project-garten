@@ -1,37 +1,138 @@
 @import '../../variables.scss';
+@import '../../mixin.scss';
 
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 30px 40px 30px 40px;
+    border-bottom: 1px solid $border-grey;
+    position: sticky;
+    top: 0px;
+    max-width: 1440px;
+    // background-color: #FFFFF1;
+    z-index:99999;
 
-    &__menu {
-        font-size: 20px;
-        line-height: 130%;
+    &-dark {
+        background-color: $primary-grey;
+        color: $primary-white;
+        border-bottom: 1px solid $text-grey;
+        .navbar__burger{
+            span{
+                background-color: $primary-white;
+            }
+        }
+        
+    }
+    
+    &-light {
+        background-color: $body-white;
+        color: $primary-grey;
+    }
+    
+    &__logo{
+        display: flex;
+        gap: 24px;
+        align-items: center ;
+        .light{
+            display: block;
+        }
+        .dark{
+            display: none;
+        }
+    }
+
+    .menu-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 12px;
+        cursor: pointer;
+        
+        .discount-lable{
+            background-color: $primary-green;
+            color: $primary-white;
+            padding: 6px 16px;
+            @include adaptiv-font(20, 18);
+            font-weight: 500;
+            border: none;
+            border-radius: $radius-small;
+            display: inline-block;
+            margin: 0 auto;
+        }
+        p{
+            padding: 6px 16px;
+        }
+      
+    }
+    
+    .navbar__menu {
+        @include adaptiv-font(20, 11);
         list-style: none;
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         gap: 32px;
+        justify-content: space-between;
     }
 
     a {
         text-decoration: none;
-    }
-
-    a:hover {
+        &:hover {
         color: $primary-green;
-        font-weight: bold;
-        font-size: 21px;
+        text-decoration: underline;
         cursor: pointer;
+        }
+    }
+   
+
+    &__icon-wrapper{
+        display:flex;
+        gap: 24px;
+        align-items: center;
+        justify-content: center;
+
+        &_item{
+            position: relative;
+
+            .icon-quaontity__wraper {
+                background-color: $primary-green;
+                height: 26px;
+                width: 26px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 7px;
+                right: 23px;
+                z-index: 10;
+    
+                p{
+                    color: $body-white;
+                    font-size: 12px;
+                    font-weight: 600;
+    
+                }
+            }
+        }
+
+
     }
 
-    &__icon-cart:hover {
-        transform: scale(1.1);
-        cursor: pointer;
-    }
+    // .icon-cart,  .icon-heart {
+    //     @include adaptiv-font(48, 38);
+    //     fill: $primary-white;
+    //     stroke-width: 1px;
+     
+    // }
 
-    .burger{
+    // &__icon-cart:hover, &__icon-heart:hover  {
+    //     fill: $primary-grey;
+        
+    //     cursor: pointer;
+    // }
+ 
+    &__burger{
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -41,53 +142,99 @@
         justify-content: center;
         width: 32px;
         display: none;
-    }
-    
-    .burger span{
+        
+        span{
         width: 100%;
         height: 2px;
         transform: scale(1);
         background-color: $primary-grey;
-   }
-}
-
-@media screen and (min-width: 661px) and (max-width: 768px) {
-    .navbar {
-        padding: 30px 20px 30px 20px;
-        &__menu {
-            gap: 22px;
         }
     }
-    
 }
 
-@media screen and (min-width: 481px) and (max-width: 661px) {
+
+@media screen and (max-width: 1000px) {
     .navbar {
         padding: 30px 20px 30px 20px;
-        &__menu {
-            gap: 15px;
-            font-size: 18px;
+
+        .navbar__menu {
+            gap: 20px;
         }
     }
-    
 }
 
-@media screen and (min-width: 361px) and (max-width: 480px) {
-    .navbar__menu {
-        display: none;
-        
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 30px 20px 30px 20px;
     }
-    .burger {
-        display: block;
+    .navbar__menu{
+        gap: 10px;
     }
- }
+}
 
- @media screen and (min-width: 200px) and (max-width: 360px) {
-    .navbar__menu {
-        display: none;
+// @media screen and (min-width: 701px) {
+//     .bg-opacity{
+//         display: none;
+//     }
+// }
+
+@media screen and (max-width: 700px) {
+    .navbar {
+        padding: 30px 20px 30px 20px;
+              
+        .menu-wrapper-active {
+           transform: translateX(-100%); //выезжает влево
+        }
+
+        .menu-wrapper {
+           position:fixed;
+           top:0;
+           right: -225px;
+           flex-direction: column-reverse;
+           justify-content: start;
+           align-items: flex-start; 
+           width: 220px;
+           height: 100%;
+           background-color: $primary-white;
+           transition: transform 0.3s linear;
+           box-shadow: 5px 5px 4px 4px grey;
+        }
+        .navbar__menu{
+            padding: 130px 32px 32px 32px;
+            display:flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            gap: 36px;
+        }
+            
+        &__burger {
+            display: flex;
+            cursor: pointer;
+        }
+        .burger-x span:nth-child(2) {
+            transform:scale(0);
+        }
+        .burger-x span:nth-child(1) {
+            transform: translateY(11px) rotate(45deg);
+        }
+        .burger-x span:nth-child(3) {
+            transform: translateY(-13px) rotate(-45deg);
+        }
+
     }
-    .burger {
-        display: block;
+    .navbar__icon-wrapper, .navbar__logo{
+        gap: 10px;
     }
- }
+}
+
+ @media screen and (max-width: 360px) {
+    .navbar {
+        padding: 30px 20px 30px 20px;
+        gap: 10px;
+    }
+
+    .navbar__icon-wrapper, .navbar__logo{
+        gap: 8px;
+    }
+}
 

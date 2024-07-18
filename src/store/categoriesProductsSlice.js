@@ -46,12 +46,12 @@ const categoriesProductsSlice = createSlice({
     initialState: {
         categories: [],
         productsFromCategory: {},
+        productsByCategory: {},
         isLoading: false,
         error: null
           },
-    reducers: {// заменить экшны на новые
-      firstReducer(state) {},
-      secondReducer(state) {}
+    reducers: {// сюда добавляются новые экшны при неолбходимости
+
     },
     extraReducers: (builder) => {
       builder
@@ -85,8 +85,8 @@ const categoriesProductsSlice = createSlice({
 
 
 export const {//заменить названия экшнов в экспорте
-    delLastProduct,  
-    sortByPriceAction
+    // delLastProduct,  
+    // sortByPriceAction
 } = categoriesProductsSlice.actions
 
 export default categoriesProductsSlice.reducer

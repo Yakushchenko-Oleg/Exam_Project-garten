@@ -1,0 +1,42 @@
+
+$maxWidth: 1440;
+
+@mixin adaptiv-font($curSize, $minSize) {
+  $addSize: $curSize - $minSize;
+  $addMobSize: $addSize + $addSize * 0.7; //70%
+  @media (max-width: 1440px) {
+    font-size: calc(#{$minSize + px} + #{$addMobSize} * ((100vw - 360px) / #{$maxWidth}));
+  }
+  @media (min-width: 1440px) {
+    font-size: calc(#{$minSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+
+@mixin adaptiv-icon($sizes: (100% null, 85% 480px, 75% 360px)) {
+  @each $size, $breakpoint in $sizes {
+    @if $breakpoint == null {
+      width: $size;
+    } @else {
+      @media (max-width: $breakpoint) {
+        width: $size;
+      }
+    }
+  }
+}
+
+@mixin respond-to($media) {
+  @if $media == 'large' {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $media == 'medium' {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $media == 'small' {
+    @media (max-width: 480px) {
+      @content;
+    }
+  }
+}

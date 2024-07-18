@@ -1,0 +1,24 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+
+.containerError{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    // max-width: 664px;
+    img{
+        width:100%;
+    }
+}
+.error-title{
+    text-align: center;
+}
+
+p{
+    // padding: 0 32px; //не включать! 
+    text-align: center;
+    @include adaptiv-font(20, 18)
+}

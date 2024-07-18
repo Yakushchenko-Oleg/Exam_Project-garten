@@ -1,27 +1,132 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 @import './variables.scss';
+@import './mixin.scss';
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 
-  font-family: Montserrat;
-  color: $primary-grey;
 }
+
+a {
+  text-decoration: none;
+}
+
+h2 {
+  @include adaptiv-font(64, 40);
+  font-weight: 700;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
 
 // главный контэйнер
 .container-1440 {
   margin: 0 auto;
   max-width: 1440px;
+  
+  //при переключении темы режим dark, light
+  &-dark {
+    background-color: $primary-grey;
+    color: $primary-white;
+    a {
+      color: $primary-white;
+    }
+    .product-navigation {
+      opacity: 80%;
+    }
+
+    .icon-favourite {
+      font-size: 48px;
+      fill: $primary-white;
+      stroke-width: 0.8px;
+      stroke: $primary-grey;
+    
+      &:hover {
+          fill: $primary-grey;
+          stroke-width: 0.8px;
+          stroke: black;
+      }
+    
+      &-active {
+          fill: $primary-green;
+          stroke-width: 0.8px;
+      }
+    }
+    
+    .icon-cart {
+      font-size: 48px;
+      fill: $primary-white;
+      stroke-width: 13px;
+      stroke: $primary-grey;
+    
+      &:hover {
+          fill: $primary-grey;
+          stroke-width: 13px;
+          stroke: black;
+      }
+    
+      &-active {
+          fill: $primary-green;
+          stroke-width: 13px;
+      }
+    }
+  }
+  
+  &-light {
+    background-color: $body-white;
+    color: $primary-grey;
+    a {
+      color: $primary-grey;
+    }
+  }
 }
 
-  .maincontainer{
-    margin: 80px 40px 80px 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 80px;
+.maincontainer {
+  margin:  40px; //Зачем это было сделан6о??? Это заставляет каждый компонент и страницу раздвигаться!! Это нужно регулировать в каждом объекте отдельно
+  //это сделано- потому что кто-то хотел Layout ко всем страницам!) а я ГОВОРИЛА у нас одна страница другая!!!
+  display: flex;
+  flex-direction: column;
+  gap: 40px; // Те же замечания   // тот же ответ:)))   
+}
+ 
+.product-navigation {
+  // margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  :last-child {
+    // color: $primary-grey;
+    font-weight: bold;
+  }
+
+  &__link {
+    @include adaptiv-font(16, 12);
+    align-content: center;
+    color: $text-grey;
+    border-radius: $radius-small;
+    font-weight: 500;
+
+    padding: 8px 16px;
+    border: 1px solid $text-grey;
+    display: inline-block;
+  }
+
+  @media (max-width: 767px) { 
+    display: none;
+  }
+}
+
+.filter-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-auto-rows: auto;
+  width: 80%;
+  gap: 50px;
+  margin-bottom: 40px;
 }
 
 .loader {
@@ -29,12 +134,199 @@
   width: 120px;
   height: 20px;
   border-radius: 20px;
-  background:
-      linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
+  background: linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
   animation: l2 2s infinite steps(10);
 }
+
 @keyframes l2 {
   100% {
-      background-size: 110%
+    background-size: 110%;
+  }
+}
+
+.container-mainpage {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: auto;
+  gap: 20px;
+}
+
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.btn { // общие стили для всех кнопок . При необходимости в компонент добавляются стили отличные от общих
+  background-color: $primary-green;
+  color: $primary-white;
+  padding: 16px 32px;
+  @include adaptiv-font(20, 18);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: $radius-small;
+  // transition: transform 0.2s, background-color 0.2s;
+}
+
+.btn:hover {
+  // transform: scale(1.1);
+  background-color: $primary-orange;
+  cursor: pointer;
+  color: $primary-white;
+}
+
+.btn.added {
+  background-color: $primary-grey;
+  color: $primary-white;
+  cursor: default;
+}
+
+// при нажатии на бургер меню
+.bg-opacity {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  // background: $primary-grey;
+  background: rgba(128, 128, 128, 0.5);
+  backdrop-filter: grayscale(50%);
+}
+.disabled{
+display: none;
+}
+
+.modal-item{
+display: block;
+position: absolute;
+top: 50%;
+right: 50%;
+transform: translate(50%);
+
+height: 300px; // эти стили поменять помле вставки товара
+width: 300px;
+background-color: red;
+  
+}
+
+.icon-favourite {
+  font-size: 48px;
+  fill: $primary-white;
+  stroke-width: 0.8px;
+
+  &:hover {
+      fill: $primary-grey;
+      stroke-width: 0px;
+  }
+
+  &-active {
+      fill: $primary-green;
+      stroke-width: 0;
+  }
+}
+
+.icon-cart {
+  font-size: 48px;
+  fill: $primary-white;
+  stroke-width: 13px;
+
+  &:hover {
+      fill: $primary-grey;
+      stroke-width: 0px;
+  }
+
+  &-active {
+      fill: $primary-green;
+      stroke-width: 0;
+  }
+}
+
+// переключатель темы
+.switch {
+  background-color: #8B8B8B;
+  position: relative;
+  border-radius: 18px;
+  width: 60px;
+  height: 32px;
+  padding: 2px;
+  display: flex;
+
+  input {
+      position: absolute;
+      opacity: 0;
+  }
+  
+  &__slider {
+    font-size: 23px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    color: grey;
+  }
+
+  &-active {
+    background-color: white;
+    transition: 0.5s;
+
+    .switch__slider {
+      transform: translateX(28px);
+      color: white;
+      background-color:grey;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .maincontainer{
+    margin: 40px 20px ; 
+    gap: 32px;
+  }
+
+  .container-mainpage {
+    margin-top: 30px;
+  } 
+
+  .header-wrapper {
+    margin-bottom: 32px;
+  }
+
+  .filter-wrapper {
+    margin-bottom: 32px;
+    width: 100%;
+    gap: 25px;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .maincontainer{
+    margin: 32px 20px ; 
+    gap: 32px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .filter-wrapper {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    width: 100%;
   }
 }

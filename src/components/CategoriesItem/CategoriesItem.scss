@@ -1,0 +1,28 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+
+.categories__item {
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius-big;
+   
+    img{
+        // width: 100%;
+        min-height: 350px;
+        border-radius: $radius-big;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    span{
+        padding: 20px;
+        text-align: center;
+        font-weight: 500px;
+        @include adaptiv-font(20, 18);
+    }
+}
+
+.categories__item:hover {
+    transform: scale(1.02);
+    box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
+}
