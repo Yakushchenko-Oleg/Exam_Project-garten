@@ -48,8 +48,9 @@ const productsSlice = createSlice({
       category: null,
     },
     singleProduct: {},
+    promoProduct:{},
+    promoDate: {},
     filteredProducts: [],
-    favorites: [],
     isLoading: false,
     error: null,
   },
@@ -85,18 +86,25 @@ const productsSlice = createSlice({
           : [...state.recivedProducts.data]
       ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
-    setFavourites: (state, {payload} ) =>{
-      const foundProduct = state.recivedProducts.data.find( item => item.id === payload)
 
-      let localProducts = JSON.parse(localStorage.getItem("favourites"))
-
-      if(localProducts){ 
-        let localProduct = localProducts.find(item => item.id === payload)
-        if (localProduct) {
-          localProducts = localProducts.filter(item => item.id !== payload)}
-          
-        }
-    }
+    getPromoProductFromLocalStorage(state){
+      let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct'))
+      
+      if (promoProductFromStorage) {
+        state.promoProduct = promoProductFromStorage
+      } else{
+        localStorage.setItem('promoProduct', JSON.stringify({}))
+      }
+    },
+    getPromoDateFromLocalStorage(state){
+      let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate'))
+      
+      if (promoDateFromStorage) {
+        state.promoDate = [...promoDateFromStorage]
+      } else{
+        localStorage.setItem('promoDate', JSON.stringify({}))
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -125,8 +133,10 @@ const productsSlice = createSlice({
 });
 
 
+
 export default productsSlice.reducer
 
 export const {sortByPriceAction, 
               sortByDiscountAction,
-              sortByUserPriceAction} = productsSlice.actions
+              sortByUserPriceAction,
+              getPromoProductFromLocalStorage} = productsSlice.actions

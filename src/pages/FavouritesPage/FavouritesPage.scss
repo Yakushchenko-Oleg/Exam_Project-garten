@@ -1,0 +1,55 @@
+@import '../../variables.scss';
+@import '../../mixin.scss';
+
+
+    .filter-wrapper__item{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+        .filter-name{
+            font-weight: 600;
+            @include adaptiv-font(20, 18);
+        }
+
+        .userInput, select {
+            max-width: 112px;
+            padding: 8px 16px; 
+            border-radius: $radius-small;
+            color: $text-grey; 
+            border: 1px solid $border-grey;
+        }
+        select{
+            max-width: none;
+        }
+        .checkbox{
+            width: 34px;
+            height: 34px;
+            border-radius: $radius-small;
+            border: 1px solid $border-grey;
+        }
+
+
+ @media screen and (max-width: 480px) {
+    .filter-wrapper__item{
+        gap: 10px;
+    }
+    .userInput, select {
+        max-width: 90px;
+        padding: 8px 8px; 
+    }
+ }
+ 
+ @media screen and (max-width: 360px) {
+    // h2 {
+    //     text-align: left;
+    // }
+
+    .filter-wrapper__item{
+        gap: 10px;
+    }
+    .userInput, select {
+        max-width: 90px;
+        padding: 8px 8px; 
+    }
+ }

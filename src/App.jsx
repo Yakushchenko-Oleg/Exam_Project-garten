@@ -12,9 +12,10 @@ import ProductsPage from './pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './pages/CategoriesPage/CategoriesPage.jsx';
 import ThemeProvider from './providers/ThemeProvider.jsx';
 import { useDispatch } from 'react-redux';
-import { fetchAllProducts } from './store/productSlice.js';
+import { fetchAllProducts, getPromoProductFromLocalStorage } from './store/productSlice.js';
 import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
-import { getCartFromLocalStorage, getfavouritessFromLocalStorage } from './store/cartSlice .js';
+import { getCartFromLocalStorage } from './store/cartSlice .js';
+import { getfavouritessFromLocalStorage } from './store/favouritesSlice.js';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const App = () => {
     dispatch(fetchAllCategoties());
     dispatch(getCartFromLocalStorage());
     dispatch(getfavouritessFromLocalStorage())
+    dispatch(getPromoProductFromLocalStorage())
   },[])
 
 

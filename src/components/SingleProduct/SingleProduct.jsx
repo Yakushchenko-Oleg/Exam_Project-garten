@@ -7,13 +7,15 @@ import { GiShoppingBag } from "react-icons/gi";
 import {ThemeContext} from '../../providers/ThemeProvider'
 
 import { Link } from "react-router-dom";
-import { addTofavourites, removeFromCart, removeFromfavourites } from "../../store/cartSlice ";
+import { removeFromCart } from "../../store/cartSlice ";
+import { addTofavourites, removeFromfavourites } from "../../store/favouritesSlice";
 
 
 const SingleProduct = ({ product }) => {
   const dispatch = useDispatch();
 
-  const {cart, favourites} = useSelector(state => state.cart);
+  const { cart } = useSelector(state => state.cart);
+  const { favourites } = useSelector(state => state.favourites);
   const {theme} = useContext(ThemeContext);
   const apiUrl = import.meta.env.APP_API_URL;
 
