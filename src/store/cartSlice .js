@@ -30,7 +30,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
-        favourites: [],
+        // favourites: [],
         discount: false,
         isLoading: false,
         error: null
@@ -45,14 +45,14 @@ const cartSlice = createSlice({
           localStorage.setItem('cart', JSON.stringify([]))
         }
       },
-      getfavouritessFromLocalStorage(state){
-        let favouritesFromStorage = JSON.parse(localStorage.getItem('favourites'))
-        if (favouritesFromStorage) {
-          state.favourites = [...favouritesFromStorage]
-        } else{
-          localStorage.setItem('favourites', JSON.stringify([]))
-        }
-      },
+      // getfavouritessFromLocalStorage(state){
+      //   let favouritesFromStorage = JSON.parse(localStorage.getItem('favourites'))
+      //   if (favouritesFromStorage) {
+      //     state.favourites = [...favouritesFromStorage]
+      //   } else{
+      //     localStorage.setItem('favourites', JSON.stringify([]))
+      //   }
+      // },
       addToCart(state, action) {
         const {product, quantity} = action.payload
         let findProduct = state.cart.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве
@@ -88,21 +88,21 @@ const cartSlice = createSlice({
         state.cart = state.cart.filter(item => item.id !==payload.id)
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
-      addTofavourites(state, action){
-        const product = action.payload
-        let findProduct = state.favourites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
+      // addTofavourites(state, action){
+      //   const product = action.payload
+      //   let findProduct = state.favourites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
        
-        if (!findProduct) {
-          state.favourites.push(product)
-        }
-        localStorage.setItem('favourites', JSON.stringify(state.favourites))
-      },
-      removeFromfavourites(state, action){
-        const product = action.payload
+      //   if (!findProduct) {
+      //     state.favourites.push(product)
+      //   }
+      //   localStorage.setItem('favourites', JSON.stringify(state.favourites))
+      // },
+      // removeFromfavourites(state, action){
+      //   const product = action.payload
 
-        state.favourites = state.favourites.filter(item => item.id !==product.id)
-        localStorage.setItem('favourites', JSON.stringify(state.favourites))
-      },
+      //   state.favourites = state.favourites.filter(item => item.id !==product.id)
+      //   localStorage.setItem('favourites', JSON.stringify(state.favourites))
+      // },
 
       extraReducers: (builder) => {
         builder
@@ -125,12 +125,12 @@ const cartSlice = createSlice({
 
 export const {
   getCartFromLocalStorage,
-  getfavouritessFromLocalStorage,
+  // getfavouritessFromLocalStorage,
   addToCart,  
   changeQuantity,
   removeFromCart,
-  addTofavourites,
-  removeFromfavourites,
+  // addTofavourites,
+  // removeFromfavourites,
 
 } = cartSlice.actions
 

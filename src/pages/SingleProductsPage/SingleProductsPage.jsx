@@ -2,18 +2,19 @@ import React, { useEffect, useState, useMemo  } from "react";
 import "./SingleProductsPage.scss";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProducts } from "@/store/productSlice";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
-import { addTofavourites, removeFromfavourites } from "../../store/cartSlice ";
+// import { addTofavourites, removeFromfavourites } from "../../store/favouritesSlice ";
 import Modal from "../../components/Modal/Modal";
+import { addTofavourites, removeFromfavourites } from "../../store/favouritesSlice";
 
 
 const SingleProductsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { recivedProducts, isLoading, error } = useSelector((state) => state.products);
-  const {cart, favourites} = useSelector(state => state.cart);
+  const { cart } = useSelector(state => state.cart);
+  const { favourites } = useSelector(state => state.favourites);
 
   const { data } = recivedProducts || { data: [] };
   const product = data.find((item) => item.id === parseInt(id)) || {};
