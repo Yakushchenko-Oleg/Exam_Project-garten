@@ -33,10 +33,8 @@ useEffect(()=> {
   if (discount) {
     setIsDiscount(true)
   }
-console.log(localStorage.getItem('discount'))
 },[])
 
-   console.log(isDiscount);
   
   return (
     <div className="discount__container">
