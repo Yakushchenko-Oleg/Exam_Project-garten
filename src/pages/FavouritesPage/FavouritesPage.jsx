@@ -1,66 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "./FavouritesPage.scss";
 import { Link, useParams } from "react-router-dom";
-import {
-  fetchProductsByCategory,
-  fetchAllProducts,
-  sortByPriceAction,
-  sortByDiscountAction,
-  sortByUserPriceAction
-} from "../../store/productSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
 
+import { getfavouritessFromLocalStorage,
+        sortByPriceAction,
+        sortByDiscountAction,
+        sortByUserPriceAction
+ } from "../../store/favouritesSlice.js";
+
 
 const FavouritesPage = () => {
-  
+   
   const dispatch = useDispatch();
-  const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
-    (state) => state.products
+  const { favourites, isLoading, error } = useSelector(
+    (state) => state.favourites
   );
-  const { data, category } = recivedProducts;
-
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [categoryTitle, setCategoryTitle] = useState("All Products");
   const [sortValue, setSortValue] = useState("default")
 
-  const { categoryId } = useParams();
 
   useEffect(() => {
-    if (categoryId) {
-      dispatch(fetchProductsByCategory(categoryId));
-    } else {
-      dispatch(fetchAllProducts());
-    }
-  }, [categoryId, dispatch]);
+    if (favourites) {
+      dispatch(getfavouritessFromLocalStorage());}
+    }, [dispatch]);
 
   useEffect(() => {
-    if (categoryId && category) {
-      setCategoryTitle(category.title);
+    if (favourites.length > 0) {
       setBreadcrumbs([
-        { link: "/", name: "Main page " },
-        { link: "/categories", name: " Categories page " },
-        { link: `/categories/${categoryId}`, name: category.title },
-      ]);
-    } else {
-      setCategoryTitle("All Products");
-      setBreadcrumbs([
-        { link: "/", name: "Main page " },
-        { link: "/allproducts", name: " All products " },
+        { link: "/", name: "Main page" },
+        { link: "/favourites", name: "Favourites" },
       ]);
     }
-  }, [categoryId, category]);
+  }, [favourites]);
 
-  //ф-ции для сортировки продуктов на странице
-  const handleSort = (event) => {
-    setSortValue(event.target.value);
-  };
-
-  useEffect(()=>{
-    dispatch(sortByPriceAction({ value: sortValue}));
-  },[sortValue])
-
-
+  // ф-ции для сортировки - из FavouritesSlice!
   const handleUserPrice = (event) => {
     event.preventDefault(); 
 
@@ -83,12 +58,20 @@ const FavouritesPage = () => {
    
     dispatch(sortByDiscountAction({ applyDiscount: userValue }));
    
-    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
     dispatch(sortByPriceAction({ value: sortValue}));  
-    
   };
- 
+
+  const handleSort = (event) => {
+    setSortValue(event.target.value);
+  };
+
+  useEffect(()=>{
+    dispatch(sortByPriceAction({ value: sortValue}));
+  },[sortValue, dispatch])
+    
+   
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -106,7 +89,7 @@ const FavouritesPage = () => {
 
       <div className="products container">
         <div className="header-wrapper">
-          <h2>{categoryTitle}</h2>
+          <h2>Favourite Products</h2>
         </div>
 
         <div className="filter-wrapper">
@@ -139,13 +122,15 @@ const FavouritesPage = () => {
           <div className="loader"></div>
         ) : (
           <div className="wrapper">
-            {filteredProducts && filteredProducts.length > 0
-              ? filteredProducts.map((item) => (
+            {favourites && favourites.length > 0
+              ? favourites.map((item) => (
                   <SingleProduct key={item.id} product={item} />
                 ))
-              : data.map((item) => (
-                <SingleProduct key={item.id} product={item} />
-                ))}
+              : (<div className="cart__enpty">
+                <p className='notfound'>No favourite products found</p>
+                <Link to="/allproducts"> <button className='btn'> Continue Shopping </button></Link>
+              </div>)
+            }
           </div>  
         )}
         {error && <h2> Error from server: {error} </h2>}
