@@ -26,18 +26,6 @@ const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const dispatch = useDispatch();
 
-  // const promoProduct =   {
-  //   id: 10,
-  //   title: "Amaryllis \"Picotee,\" one bulb in cachepot",
-  //   price: 72,
-  //   discont_price: 36,
-  //   description: "There is nothing in the Amaryllis world to compare with \"Picotee.\" Crisp white petals, with edges finely penciled in rich red, present a clean, tailored look that`s utterly distinctive. This choice variety is slow to reproduce (though heavy blooming) and therefore always in short supply. We offer one bulb in a 7\" red foil cachepot.",
-  //   image: "/product_img/10.jpeg",
-  //   createdAt: "2022-10-02T14:43:29.000Z",
-  //   updatedAt: "2022-10-02T14:43:29.000Z",
-  //   categoryId: 2
-  // }
-
   useEffect(()=>{
     dispatch(checkPromoProduct())
   },[isModalOpen])
