@@ -1,4 +1,4 @@
-import { createSlice,  createAsyncThunk } from "@reduxjs/toolkit"
+  import { createSlice,  createAsyncThunk } from "@reduxjs/toolkit"
 
 
 const URL = import.meta.env.APP_API_URL
@@ -34,30 +34,35 @@ const favouritesSlice = createSlice({
         state.favourites = state.favourites.filter(item => item.id !==product.id)
         localStorage.setItem('favourites', JSON.stringify(state.favourites))
       },
-
-      extraReducers: (builder) => {
-        // builder
-        // .addCase(fetchGetDiscount.pending,(state) => {
-        //   state.isLoading = true, 
-        //   state.error = null
-        // })
-        // .addCase(fetchGetDiscount.fulfilled, (state)  =>{
-        //   state.isLoading = false,
-        //   state.discount = true
-        // })
-        // .addCase(fetchGetDiscount.rejected, (state, action) => {
-        //   state.isLoading = null
-        //   state.error = action.payload 
-        // })
-      }
+      //сортировки 
+      sortByPriceAction(state, action) {
+        const { value } = action.payload;
+        state.favourites = state.favourites.sort(
+          value === "low-to-high" ? (a, b) => a.price - b.price
+          : value === "high-to-low" ? (a, b) => b.price - a.price
+          : (a, b) => a.id - b.id
+        );
+      },
+      sortByDiscountAction(state, action) {
+        const { applyDiscount } = action.payload;
+        state.favourites = applyDiscount 
+        ? state.favourites.filter(item => item.discont_price)
+        : state.favourites;
+      },
+      sortByUserPriceAction(state, action) {
+        const { minValue, maxValue } = action.payload;
+        state.favourites = state.favourites.filter(item => item.price >= minValue && item.price <= maxValue);
+      },
     }
   })
-
 
 export const {
   getfavouritessFromLocalStorage,
   addTofavourites,
   removeFromfavourites,
+  sortByPriceAction,
+  sortByDiscountAction,
+  sortByUserPriceAction
 
 } = favouritesSlice.actions
 

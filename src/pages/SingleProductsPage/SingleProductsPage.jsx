@@ -62,10 +62,12 @@ const SingleProductsPage = () => {
       ]);
     }
   }, [product.id, product.category?.id, product.title]);
-  const descriptionLength = 150; // Максимальная длина текста перед усечением
+
+  const descriptionLength = 150; 
   const toggleDescription = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
+ 
 
   // Логика для рендеринга текста описания
   const renderDescription = () => {
@@ -179,20 +181,19 @@ const SingleProductsPage = () => {
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
-
+        
+    <div className="product-details__description">
+      <span className="product-details__description-label">Description</span>
+      <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+        {renderDescription()}
+      </p>
+      {product.description.length > descriptionLength && (
+        <a className="product-details__description_read-more" onClick={toggleDescription}>
+          {isDescriptionExpanded ? 'Read less' : 'Read more'}
+        </a>
+      )}
+    </div>
         </div>
-
-      <div className="product-details__description">
-        <span className="product-details__description-label">Description</span>
-        <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
-          {renderDescription()}
-        </p>
-        {product.description.length > descriptionLength && (
-          <a className="product-details__description_read-more" onClick={toggleDescription}>
-            {isDescriptionExpanded ? 'Read less' : 'Read more'}
-          </a>
-        )}
-      </div>
 
       </div>
 

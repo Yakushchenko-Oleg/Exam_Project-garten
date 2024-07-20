@@ -3,7 +3,6 @@ import '@/App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
 import {ThemeContext} from '@/providers/ThemeProvider'
-
 import { RiHeartFill } from 'react-icons/ri'
 import { GiShoppingBag } from 'react-icons/gi'
 import { LuMoon, LuSunMedium } from 'react-icons/lu'
@@ -11,17 +10,17 @@ import { PiSun } from 'react-icons/pi'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from '../Modal/Modal'
 import { addTofavourites, removeFromfavourites } from '../../store/favouritesSlice'
-// import { addTofavourites, removeFromfavourites } from '../../store/cartSlice '
+import { checkPromoProduct } from '../../store/productSlice'
 
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
-  const [isModal, setModal] = useState(false);
+  // const [isModal, setModal] = useState(false); не испорльзуется
   const[cartNotEmpty, setCartNotEmpty] = useState(false); 
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
-  // const { promoProduct } = useSelector(state => state.products);
+  const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -96,12 +95,11 @@ useEffect(()=>{
 
       </div>
 
-      {/* если isOpen то - класс menu-wrapper-active */}
-      <div className={`${isOpen ? "bg-opacity" : ""}`}>
+      <div className={`${isOpen ? "bg-opacity" : ""}`}>  {/* если isOpen то - класс menu-wrapper-active */}
         <div className={`menu-wrapper ${isOpen ? "menu-wrapper-active" : ""}`}>
           <p 
           className="discount-lable"
-          onClick={() => setIsModalOpen(!isModalOpen)}
+          onClick={() => setIsModalOpen(true)}
           >1 day discount!</p>
           <ul className="navbar__menu">
             <li>
@@ -166,9 +164,7 @@ useEffect(()=>{
       {
         isModalOpen && 
         <Modal>
-          <div
-           onClick={() => setIsModalOpen(!isModalOpen)} 
-           >Вставитиь компонент modal-item
+          <div>
            </div>
 
 
@@ -177,6 +173,7 @@ useEffect(()=>{
                 <h2>50% discount on product of the day!</h2> 
                 <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
               </div> 
+
               <div className="promo-pro__info"> 
                 <div className="product-image-container"> 
                 <img src={promoProduct.image} alt={promoProduct.title} className="product-image" />
@@ -196,7 +193,6 @@ useEffect(()=>{
                     </div> 
                   </div> 
                 </div> 
-
               </div> 
 
               <button
@@ -209,8 +205,6 @@ useEffect(()=>{
 
 
             </div> 
-
-
         </Modal> 
         }
     </>

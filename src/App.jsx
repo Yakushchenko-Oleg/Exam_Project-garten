@@ -16,6 +16,7 @@ import { fetchAllProducts, getPromoProductFromLocalStorage } from './store/produ
 import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
 import { getCartFromLocalStorage } from './store/cartSlice .js';
 import { getfavouritessFromLocalStorage } from './store/favouritesSlice.js';
+import FavouritesPage from './pages/FavouritesPage/FavouritesPage.jsx';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const App = () => {
     dispatch(fetchAllCategoties());
     dispatch(getCartFromLocalStorage());
     dispatch(getfavouritessFromLocalStorage())
-    dispatch(getPromoProductFromLocalStorage())
+    // dispatch(getPromoProductFromLocalStorage())
   },[])
 
 
@@ -37,7 +38,7 @@ const App = () => {
         <Route path='/categories' element={<CategoriesPage />} />
         <Route path='/categories/:categoryId' element={<ProductsPage />} />
         <Route path='/allproducts' element={<ProductsPage />} />
-        <Route path='/favourites' element={<ProductsPage />} />
+        <Route path='/favourites' element={<FavouritesPage />} />
         <Route path='/products/:id' element={<SingleProductsPage />} />
         <Route path='/allsales' element={<AllSalesPage />} />
         <Route path='*' element={<Error404 />} />
