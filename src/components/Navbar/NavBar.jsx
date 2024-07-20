@@ -20,18 +20,25 @@ const NavBar = () => {
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
-  const { promoProduct } = useSelector(state => state.products);
+  // const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(checkPromoProduct())
-  },[isModalOpen])
-  
-
-  
+   const promoProduct = {
+     id: 10,
+     title: "Amaryllis \"Picotee,\" one bulb in cachepot",
+     price: 72,
+   discont_price: 36,
+     description: "There is nothing in the Amaryllis world to compare with \"Picotee.\" Crisp white petals, with edges finely penciled in rich red, present a clean, tailored look that`s utterly distinctive. This choice variety is slow to reproduce (though heavy blooming) and therefore always in short supply. We offer one bulb in a 7\" red foil cachepot.",
+    image: "./product_img/10.jpeg",
+     createdAt: "2022-10-02T14:43:29.000Z",
+     updatedAt: "2022-10-02T14:43:29.000Z",
+    categoryId: 2
+   }
+  console.log('Image URL:', promoProduct.image);
+ 
 useEffect(()=>{
 if (cart.length>0) {
   setCartNotEmpty(true)
@@ -59,6 +66,15 @@ useEffect(()=>{
     } else {
       dispatch(removeFromfavourites(product))      
     }
+  };
+  const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
+
+  
+  const handleAddToCart = () => {
+   
+    console.log('Product added to cart!'); 
+    setAddedToCart(true); 
+    
   };
 
   
@@ -160,24 +176,33 @@ useEffect(()=>{
 
               <div className="promo-pro__info"> 
                 <div className="product-image-container"> 
-                  <img src="path_to_image" alt="Discounted Product" className="product-image" /> 
+                <img src={promoProduct.image} alt={promoProduct.title} className="product-image" />
+
+
                   <div className="product-info-overlay"> 
                     <span className="discount-badge">-50%</span> 
                     <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
                   </div> 
                   <div className="product-info"> 
-                    <h3>Secateurs</h3> 
+                    <h3>{promoProduct.title}</h3> 
                     <div className="price-container"> 
                       <p className="price"> 
-                        <span className="new-price">$120</span> 
-                        <span className="old-price">$240</span> 
+                      <span className="new-price">${promoProduct.discont_price}</span>
+                      <span className="old-price">${promoProduct.price}</span>
                       </p> 
                     </div> 
                   </div> 
                 </div> 
               </div> 
 
-              <button className="btn promo-pro__button">Add to cart</button> 
+              <button
+                className={`btn promo-pro__button ${addedToCart ? 'added' : ''}`}
+                onClick={handleAddToCart}
+                disabled={addedToCart}
+              >
+                {addedToCart ? 'Added' : 'Add to cart'}
+              </button>
+
 
             </div> 
         </Modal> 

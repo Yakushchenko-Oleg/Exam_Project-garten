@@ -11,45 +11,48 @@
     top: 0px;
     max-width: 1440px;
     // background-color: #FFFFF1;
-    z-index:99999;
+    z-index: 99999;
 
     &-dark {
         background-color: $primary-grey;
         color: $primary-white;
         border-bottom: 1px solid $text-grey;
-        .navbar__burger{
-            span{
+
+        .navbar__burger {
+            span {
                 background-color: $primary-white;
             }
         }
-        
+
     }
-    
+
     &-light {
         background-color: $body-white;
         color: $primary-grey;
     }
-    
-    &__logo{
+
+    &__logo {
         display: flex;
         gap: 24px;
-        align-items: center ;
-        .light{
+        align-items: center;
+
+        .light {
             display: block;
         }
-        .dark{
+
+        .dark {
             display: none;
         }
     }
 
-    .menu-wrapper{
+    .menu-wrapper {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         gap: 12px;
         cursor: pointer;
-        
-        .discount-lable{
+
+        .discount-lable {
             background-color: $primary-green;
             color: $primary-white;
             padding: 6px 16px;
@@ -60,12 +63,13 @@
             display: inline-block;
             margin: 0 auto;
         }
-        p{
+
+        p {
             padding: 6px 16px;
         }
-      
+
     }
-    
+
     .navbar__menu {
         @include adaptiv-font(20, 11);
         list-style: none;
@@ -77,21 +81,22 @@
 
     a {
         text-decoration: none;
+
         &:hover {
-        color: $primary-green;
-        text-decoration: underline;
-        cursor: pointer;
+            color: $primary-green;
+            text-decoration: underline;
+            cursor: pointer;
         }
     }
-   
 
-    &__icon-wrapper{
-        display:flex;
+
+    &__icon-wrapper {
+        display: flex;
         gap: 24px;
         align-items: center;
         justify-content: center;
 
-        &_item{
+        &_item {
             position: relative;
 
             .icon-quaontity__wraper {
@@ -106,12 +111,12 @@
                 top: 7px;
                 right: 23px;
                 z-index: 10;
-    
-                p{
+
+                p {
                     color: $body-white;
                     font-size: 12px;
                     font-weight: 600;
-    
+
                 }
             }
         }
@@ -123,16 +128,16 @@
     //     @include adaptiv-font(48, 38);
     //     fill: $primary-white;
     //     stroke-width: 1px;
-     
+
     // }
 
     // &__icon-cart:hover, &__icon-heart:hover  {
     //     fill: $primary-grey;
-        
+
     //     cursor: pointer;
     // }
- 
-    &__burger{
+
+    &__burger {
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -142,12 +147,12 @@
         justify-content: center;
         width: 32px;
         display: none;
-        
-        span{
-        width: 100%;
-        height: 2px;
-        transform: scale(1);
-        background-color: $primary-grey;
+
+        span {
+            width: 100%;
+            height: 2px;
+            transform: scale(1);
+            background-color: $primary-grey;
         }
     }
 }
@@ -167,7 +172,8 @@
     .navbar {
         padding: 30px 20px 30px 20px;
     }
-    .navbar__menu{
+
+    .navbar__menu {
         gap: 10px;
     }
 }
@@ -181,60 +187,201 @@
 @media screen and (max-width: 700px) {
     .navbar {
         padding: 30px 20px 30px 20px;
-              
+
         .menu-wrapper-active {
-           transform: translateX(-100%); //выезжает влево
+            transform: translateX(-100%); //выезжает влево
         }
 
         .menu-wrapper {
-           position:fixed;
-           top:0;
-           right: -225px;
-           flex-direction: column-reverse;
-           justify-content: start;
-           align-items: flex-start; 
-           width: 220px;
-           height: 100%;
-           background-color: $primary-white;
-           transition: transform 0.3s linear;
-           box-shadow: 5px 5px 4px 4px grey;
+            position: fixed;
+            top: 0;
+            right: -225px;
+            flex-direction: column-reverse;
+            justify-content: start;
+            align-items: flex-start;
+            width: 220px;
+            height: 100%;
+            background-color: $primary-white;
+            transition: transform 0.3s linear;
+            box-shadow: 5px 5px 4px 4px grey;
         }
-        .navbar__menu{
+
+        .navbar__menu {
             padding: 130px 32px 32px 32px;
-            display:flex;
+            display: flex;
             justify-content: flex-start;
             flex-direction: column;
             gap: 36px;
         }
-            
+
         &__burger {
             display: flex;
             cursor: pointer;
         }
+
         .burger-x span:nth-child(2) {
-            transform:scale(0);
+            transform: scale(0);
         }
+
         .burger-x span:nth-child(1) {
             transform: translateY(11px) rotate(45deg);
         }
+
         .burger-x span:nth-child(3) {
             transform: translateY(-13px) rotate(-45deg);
         }
 
     }
-    .navbar__icon-wrapper, .navbar__logo{
+
+    .navbar__icon-wrapper,
+    .navbar__logo {
         gap: 10px;
     }
 }
 
- @media screen and (max-width: 360px) {
+@media screen and (max-width: 360px) {
     .navbar {
         padding: 30px 20px 30px 20px;
         gap: 10px;
     }
 
-    .navbar__icon-wrapper, .navbar__logo{
+    .navbar__icon-wrapper,
+    .navbar__logo {
         gap: 8px;
     }
 }
 
+.promo-pro {
+    background-color: $primary-green;
+    padding: 32px;
+    border-radius: $radius-big;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.promo-pro__header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    h2 {
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 44px;
+        color: $primary-white;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        color: $primary-white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+}
+
+.promo-pro__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .product-image-container {
+        width: 100%;
+        height: 284px;
+        margin-bottom: 16px;
+        position: relative;
+        background-color: $primary-white;
+        border-radius: $radius-big;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: $radius-small;
+        }
+
+        .product-info-overlay {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+
+            .discount-badge {
+                background-color: #FF6347;
+                color: white;
+                padding: 5px 10px;
+                border-radius: 12px;
+                font-size: 14px;
+                font-weight: bold;
+                position: absolute;
+                top: 15px;
+                left: 15px;
+            }
+
+            .icon-favourite {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.product-info {
+    position: absolute;
+    bottom: 0; // Позиционирование в нижней части контейнера
+    left: 0; // Растягивание на всю ширину контейнера
+    color: #424436; // Белый текст
+    padding: 10px 20px; // Внутренние отступы
+
+    h3 {
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    .price {
+        display: flex;
+        align-items: baseline;
+        font-size: 16px;
+        font-weight: bold; 
+        gap: 16px;
+
+        .new-price {
+            color: #424436;
+            font-size: 40px;
+            font-weight: 600;
+            line-height: 44px;
+            text-align: left;
+
+            // Задаем цвет для новой цены
+        }
+
+        .old-price {
+            text-decoration: line-through; // Зачеркиваем старую цену
+            color: $primary-grey; // Цвет старой цены
+            opacity: 0.7; // Немного уменьшаем яркость для старой цены
+        }
+    }
+}
+
+.promo-pro__button {
+    background-color: $primary-white;
+    width: 100%;
+    cursor: pointer;
+    color: $primary-grey;
+    border: none;
+    // padding: 10px 20px; 
+    border-radius: $radius-small;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
+}
