@@ -9,23 +9,29 @@ import { LuMoon, LuSunMedium } from 'react-icons/lu'
 import { PiSun } from 'react-icons/pi'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from '../Modal/Modal'
-import { addTofavourites, removeFromfavourites } from '../../store/favouritesSlice'
-import { checkPromoProduct } from '../../store/productSlice'
+import { addTofavourites, removeFromfavourites } from '@/store/favouritesSlice'
+import { checkPromoProduct } from '@/store/productSlice'
+import { addToCart } from "@/store/cartSlice ";
+
 
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
-  // const [isModal, setModal] = useState(false); не испорльзуется
+  const [isModal, setModal] = useState(false); // не испорльзуется
   const[cartNotEmpty, setCartNotEmpty] = useState(false); 
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
   const { promoProduct } = useSelector(state => state.products);
+  const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
+
+  const apiUrl = import.meta.env.APP_API_URL;
   const dispatch = useDispatch();
-  const apiUrl = import.meta.env.APP_API_URL; 
+  
 
   //  const promoProduct = {
   //    id: 10,
@@ -40,42 +46,43 @@ const NavBar = () => {
   //  }
   // console.log('Image URL:', promoProduct.image);
  
-useEffect(()=>{
-if (cart.length>0) {
-  setCartNotEmpty(true)
-}
-else{
-  setCartNotEmpty(false) 
-}
-},[cart])
-
-useEffect(()=>{
-  if (favourites.length>0) {
-    setFavouritesNotEmpty(true)
+  useEffect(()=>{
+  if (cart.length>0) {
+    setCartNotEmpty(true)
   }
   else{
-    setFavouritesNotEmpty(false) 
+    setCartNotEmpty(false) 
   }
-  },[favourites])
+  },[cart])
+
+  useEffect(()=>{
+    if (favourites.length>0) {
+      setFavouritesNotEmpty(true)
+    }
+    else{
+      setFavouritesNotEmpty(false) 
+    }
+    },[favourites])
+
+  useEffect(()=>{
+    dispatch(checkPromoProduct())
+  },[isModalOpen, dispatch])
 
   const handleAddToFavourite = () => {
     const carentfavouriteState = !isFavourite
     setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addTofavourites(product))      
+      dispatch(addTofavourites(promoProduct))      
     } else {
-      dispatch(removeFromfavourites(product))      
+      dispatch(removeFromfavourites(promoProduct))      
     }
   };
-  const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
-
   
   const handleAddToCart = () => {
-   
     console.log('Product added to cart!'); 
+    dispatch(addToCart({promoProduct, quantity: 1}))
     setAddedToCart(true); 
-    
   };
 
   
@@ -163,7 +170,7 @@ useEffect(()=>{
 
 
       {
-        isModalOpen && 
+        isModalOpen && promoProduct &&
         <Modal>
           <div>
            </div>
@@ -201,7 +208,6 @@ useEffect(()=>{
               >
                 {addedToCart ? 'Added' : 'Add to cart'}
               </button>
-
 
             </div> 
         </Modal> 

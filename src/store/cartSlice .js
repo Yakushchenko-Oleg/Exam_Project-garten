@@ -61,7 +61,7 @@ const cartSlice = createSlice({
           state.cart.map(item => { 
             // findProduct.quantity === quantity
             if (item.id === product.id) 
-              { item.quantity = quantity  // в стейте не менфяется количество
+              { item.quantity = quantity  
             }
           return item
           })

@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { v4 as uuidv4 } from 'uuid';
 
 const URL = `${import.meta.env.APP_API_URL}`
 
@@ -55,7 +56,7 @@ const productsSlice = createSlice({
       data: [],
       category: null,
     },
-    singleProduct: {},
+    // singleProduct: {},
     promoProduct: {},
     promoDate: null,
     filteredProducts: [],
@@ -93,16 +94,21 @@ const productsSlice = createSlice({
       ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
 
-    // getPromoProductFromLocalStorage(state){
-    //   let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct'))
+    getPromoProductFromLocalStorage(state){
+      let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct'))
       
-    //   if (promoProductFromStorage) {
-    //     state.promoProduct = promoProductFromStorage
-    //   } else{
-    //     const currentPromoProduct = mixArray(state.recivedProducts.data)[0]
-    //     localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
-    //   }
-    // },
+      if (promoProductFromStorage) {
+        state.promoProduct = promoProductFromStorage
+      } else{
+        const rundomProduct = mixArray([...state.recivedProducts?.data])[0] // берет первый объект из прермешанного массива продуктов,
+        const currentPromoProduct =  {
+          ...rundomProduct, 
+          id: uuidv4(), 
+          discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
+        }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
+        localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+      }
+    },
     // getPromoDateFromLocalStorage(state){
     //   let promoDateFromStorage = localStorage.getItem('promoDate')
       
@@ -116,30 +122,43 @@ const productsSlice = createSlice({
     checkPromoProduct(state) {
       let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
       let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
-      const currentDate = new Date(new Date().setHours(0, 0, 0, 0)).toLocaleDateString() // возвращает текущую дату с временем 00 00 00 
-      const currentPromoProduct = mixArray(state.recivedProducts.data)[0] // берет первый объект из прермешанного массива продуктов
-    
-      console.log('Текущая дата:', currentDate)
-      console.log('Дата c Local Storage:', promoDateFromStorage)
-      console.log('promoProduct c Local Storage:', promoProductFromStorage)
+      const currentDate = new Date(new Date().setHours(0, 0, 0, 0)).toLocaleDateString() // возвращает текущую дату в виде строки
+      const rundomProduct = mixArray([...state.recivedProducts?.data])[0] // берет первый объект из прермешанного массива продуктов,
+      const currentPromoProduct =  {
+        ...rundomProduct, 
+        id: uuidv4(), 
+        discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
+      }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
+          
+      console.log('Текущая дата:', currentDate, typeof(currentDate))
+      console.log('Дата c Local Storage:', promoDateFromStorage, typeof(promoDateFromStorage))
+      console.log('currentPromoProduct :', currentPromoProduct, typeof(currentPromoProduct));
+      console.log('promoProduct c Local Storage:',promoProductFromStorage, typeof(promoProductFromStorage))
+      
     
       if (promoProductFromStorage) {
         if (promoDateFromStorage !== currentDate) {
-          console.log('PromoDate не совпадаеи, обнавляем PromoProduct.')
+          console.log('PromoDate не совпадают, обнавляем PromoProduct и promoDate.')
           state.promoDate = currentDate
           state.promoProduct = currentPromoProduct
           localStorage.setItem('promoDate', JSON.stringify(currentDate))
           localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+        } else{
+          console.log('PromoDate совпадают, проверяем PromoProduct из Local Storage на наличие  image')
+          if (!promoDateFromStorage?.image) {
+            state.promoProduct = currentPromoProduct
+            localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+            console.log('PromoProduct из Local Storage не имеет image по этому он невалидный, обнавляем его на:',  currentPromoProduct)
+          }
         }
       } else {
-        console.log('PromoProduct не найден по этому обнавлен.')
+        console.log('PromoProduct не найден по этому обнавлен на:', currentPromoProduct)
         state.promoDate = currentDate
         state.promoProduct = currentPromoProduct
         localStorage.setItem('promoDate', JSON.stringify(currentDate))
         localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
       }
-    },
-    
+    },  
   },
   extraReducers: (builder) => {
     builder
@@ -148,7 +167,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         (state.isLoading = false),
-          (state.recivedProducts.data = action.payload);
+        (state.recivedProducts.data = action.payload);
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = null;

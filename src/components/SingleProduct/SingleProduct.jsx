@@ -34,9 +34,9 @@ const SingleProduct = ({ product }) => {
   },[cart, product])
 
   useEffect(()=> {
-    let inFavourite = favourites.find(item => item.id === product.id)
+    let inFavourites = favourites.find(item => item.id === product.id)
 
-    if (inFavourite) {
+    if (inFavourites) {
       setIsFavourite(true)
     } else{
       setIsFavourite(false)
@@ -57,8 +57,8 @@ const SingleProduct = ({ product }) => {
   const handleAddToCart = () => {
 
     if (!isCart) {
-          dispatch(addToCart({product, quantity: 1}));
-    setIsCart(true);
+      dispatch(addToCart({product, quantity: 1}));
+      setIsCart(true);
     } else{
       dispatch(removeFromCart(product))
       setIsCart(false);
