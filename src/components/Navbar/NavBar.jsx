@@ -23,6 +23,7 @@ const NavBar = () => {
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
   const { promoProduct } = useSelector(state => state.products);
+  const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -183,8 +184,7 @@ const NavBar = () => {
 
               <div className="promo-pro__info"> 
                 <div className="product-image-container"> 
-                <img src={`${apiUrl}/${promoProduct.image}`} alt={promoProduct.title} className="product-image" />
-
+                <img src={`${apiUrl}/${promoProduct.image}`}alt={promoProduct.title} className="product-image"/>
                   <div className="product-info-overlay"> 
                     <span className="discount-badge">-50%</span> 
                     <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
