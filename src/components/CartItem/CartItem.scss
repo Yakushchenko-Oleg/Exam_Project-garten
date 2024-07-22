@@ -111,8 +111,6 @@
 
             }        
             &_price-container{
-                // align-items: center;
-                // padding-left: 12px;
                 @include adaptiv-font(40, 36);
                 font-weight: 600;
                 line-height: 44px;
@@ -148,8 +146,11 @@
 
 @media screen and (max-width: 480px) {
     .cartitem__info {
-        gap: 10px;
-        padding: 20px 10px 20px 10px;
+        gap: 5px;
+        padding: 10px;
+    }
+    .cartitem__info__price-wraper {
+        gap: 5px;
     }
 }
 
