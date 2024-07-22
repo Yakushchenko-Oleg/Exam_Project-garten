@@ -13,6 +13,7 @@
     z-index: 1;
     &-dark{
         border: 1px solid #8B8B8B;
+        background-color: $element-dark;
     }
 
     &__image{
@@ -38,19 +39,15 @@
        
         &-dark{
              background-color: $element-dark;
-             border: 1px solid #8B8B8B;
+             border: none;
              color: $primary-white;
         }
 
         &_title-container{
             display: flex;
             width: 100%;
-            // max-height: 60px;
-            // overflow: hidden;
-            // text-wrap: wrap;
-            // text-overflow: ellipsis;
-           
-             .item-title{
+          
+            .item-title{
                 
                 font-weight: 500;
                 @include adaptiv-font(20, 18);
