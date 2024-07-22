@@ -17,7 +17,7 @@ import { addToCart } from "@/store/cartSlice ";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
-  const [isModal, setModal] = useState(false); // не испорльзуется
+  
   const[cartNotEmpty, setCartNotEmpty] = useState(false); 
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
@@ -172,11 +172,7 @@ const NavBar = () => {
       {
         isModalOpen && promoProduct &&
         <Modal>
-          <div>
-           </div>
-
-
-            <div className="promo-pro" > 
+          <div className="promo-pro" > 
               <div className="promo-pro__header"> 
                 <h2 className="promo-title">50% discount on product of the day!</h2> 
                 <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
@@ -209,11 +205,11 @@ const NavBar = () => {
                 {addedToCart ? 'Added' : 'Add to cart'}
               </button>
 
-            </div> 
+          </div> 
         </Modal> 
-        }
+      }
     </>
-  );
+  )
 }
 
 export default NavBar
