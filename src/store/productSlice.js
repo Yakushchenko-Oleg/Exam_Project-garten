@@ -94,31 +94,21 @@ const productsSlice = createSlice({
       ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
 
-    getPromoProductFromLocalStorage(state){
-      let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct'))
+    // getPromoProductFromLocalStorage(state){
+    //   let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct'))
       
-      if (promoProductFromStorage) {
-        state.promoProduct = promoProductFromStorage
-      } else{
-        const rundomProduct = mixArray([...state.recivedProducts?.data])[0] // берет первый объект из прермешанного массива продуктов,
-        const currentPromoProduct =  {
-          ...rundomProduct, 
-          id: uuidv4(), 
-          discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
-        }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
-        localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
-      }
-    },
-    // getPromoDateFromLocalStorage(state){
-    //   let promoDateFromStorage = localStorage.getItem('promoDate')
-      
-    //   if (promoDateFromStorage) {
-    //     state.promoDate = promoDateFromStorage
+    //   if (promoProductFromStorage) {
+    //     state.promoProduct = promoProductFromStorage
     //   } else{
-    //     // localStorage.setItem('promoDate', JSON.stringify(null))
+    //     const rundomProduct = mixArray([...state.recivedProducts?.data])[0] // берет первый объект из прермешанного массива продуктов,
+    //     const currentPromoProduct =  {
+    //       ...rundomProduct, 
+    //       id: uuidv4(), 
+    //       discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
+    //     }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
+    //     localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
     //   }
     // },
-
     checkPromoProduct(state) {
       let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
       let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
@@ -144,12 +134,12 @@ const productsSlice = createSlice({
           localStorage.setItem('promoDate', JSON.stringify(currentDate))
           localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
         } else{
-          console.log('PromoDate совпадают, проверяем PromoProduct из Local Storage на наличие  image')
-          if (!promoDateFromStorage?.image) {
-            state.promoProduct = currentPromoProduct
-            localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
-            console.log('PromoProduct из Local Storage не имеет image по этому он невалидный, обнавляем его на:',  currentPromoProduct)
-          }
+          // console.log('PromoDate совпадают, проверяем PromoProduct из Local Storage на наличие  image')
+          // if (!promoDateFromStorage?.image) {
+          //   state.promoProduct = currentPromoProduct
+          //   localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+          //   console.log('PromoProduct из Local Storage не имеет image по этому он невалидный, обнавляем его на:',  currentPromoProduct)
+          // }
         }
       } else {
         console.log('PromoProduct не найден по этому обнавлен на:', currentPromoProduct)
@@ -163,21 +153,42 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProducts.pending, (state) => {
-        (state.isLoading = true), (state.error = null);
+        state.isLoading = true
+        state.error = null
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
-        (state.isLoading = false),
-        (state.recivedProducts.data = action.payload);
+        state.isLoading = false
+        state.recivedProducts.data = action.payload // обновляем массив продуктов в состоянии
+
+        // Обновляем promoProduct 
+        let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
+      
+        if (promoProductFromStorage) {
+          state.promoProduct = promoProductFromStorage
+        } else{
+          const rundomProduct = mixArray([...action.payload])[0] // берет первый объект из прермешанного массива продуктов,
+          console.log(rundomProduct);
+          const currentPromoProduct =  {
+            ...rundomProduct, 
+            id: uuidv4(), 
+            discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
+          }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
+          localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+          const currentDate = new Date(new Date().setHours(0, 0, 0, 0)).toLocaleDateString() // возвращает текущую дату в виде строки
+          localStorage.setItem('promoDate', JSON.stringify(currentDate)) // сохраняем текущую ждату в local Storage
+        }
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = null;
         state.error = action.payload; // Принимает payload (error.message) от rejectWithValue из блока catch
       })
       .addCase(fetchProductsByCategory.pending, (state) => {
-        (state.isLoading = true), (state.error = null);
+        state.isLoading = true
+        state.error = null
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
-        (state.isLoading = false), (state.recivedProducts = action.payload);
+        state.isLoading = false
+        state.recivedProducts = action.payload
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
         state.isLoading = null;

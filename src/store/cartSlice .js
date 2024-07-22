@@ -25,12 +25,34 @@ export const fetchGetDiscount = createAsyncThunk(
     }
   }
 )
+export const fetchOrder= createAsyncThunk(
+  'cart/fetchOrder',
+  async function (formData, {rejectWithValue}) {
+
+    try {
+      const responce = await fetch(`${URL}/order/send`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({...formData, order: cart}) // не уверен что правильно передаю  cart
+      })
+      console.log(responce, formData);
+      if (!responce.ok) {
+        throw new Error('Failed to send an Order')      
+        }  else {localStorage.removeItem('cart')} // стераем карзину в localStorage
+  
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
-        // favourites: [],
         discount: false,
         isLoading: false,
         error: null
@@ -45,21 +67,12 @@ const cartSlice = createSlice({
           localStorage.setItem('cart', JSON.stringify([]))
         }
       },
-      // getfavouritessFromLocalStorage(state){
-      //   let favouritesFromStorage = JSON.parse(localStorage.getItem('favourites'))
-      //   if (favouritesFromStorage) {
-      //     state.favourites = [...favouritesFromStorage]
-      //   } else{
-      //     localStorage.setItem('favourites', JSON.stringify([]))
-      //   }
-      // },
       addToCart(state, action) {
         const {product, quantity} = action.payload
         let findProduct = state.cart.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве
        
         if (findProduct) {
           state.cart.map(item => { 
-            // findProduct.quantity === quantity
             if (item.id === product.id) 
               { item.quantity = quantity  
             }
@@ -88,21 +101,6 @@ const cartSlice = createSlice({
         state.cart = state.cart.filter(item => item.id !==payload.id)
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
-      // addTofavourites(state, action){
-      //   const product = action.payload
-      //   let findProduct = state.favourites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
-       
-      //   if (!findProduct) {
-      //     state.favourites.push(product)
-      //   }
-      //   localStorage.setItem('favourites', JSON.stringify(state.favourites))
-      // },
-      // removeFromfavourites(state, action){
-      //   const product = action.payload
-
-      //   state.favourites = state.favourites.filter(item => item.id !==product.id)
-      //   localStorage.setItem('favourites', JSON.stringify(state.favourites))
-      // },
 
       extraReducers: (builder) => {
         builder
@@ -125,13 +123,9 @@ const cartSlice = createSlice({
 
 export const {
   getCartFromLocalStorage,
-  // getfavouritessFromLocalStorage,
   addToCart,  
   changeQuantity,
   removeFromCart,
-  // addTofavourites,
-  // removeFromfavourites,
-
 } = cartSlice.actions
 
 export default cartSlice.reducer
