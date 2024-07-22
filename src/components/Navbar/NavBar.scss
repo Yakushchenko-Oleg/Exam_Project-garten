@@ -259,6 +259,8 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    width: 548px;
+    height: auto;
 }
 
 .promo-pro__header {
@@ -288,14 +290,15 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+   
 
     .product-image-container {
         width: 100%;
-        height: 284px;
         margin-bottom: 16px;
         position: relative;
         background-color: $primary-white;
         border-radius: $radius-big;
+        overflow: hidden;
 
         img {
             width: 100%;
@@ -317,7 +320,7 @@
                 background-color: #FF6347;
                 color: white;
                 padding: 5px 10px;
-                border-radius: 12px;
+                border-radius: $radius-small;
                 font-size: 14px;
                 font-weight: bold;
                 position: absolute;
@@ -336,11 +339,12 @@
 }
 
 .product-info {
-    position: absolute;
+ 
     bottom: 0; // Позиционирование в нижней части контейнера
     left: 0; // Растягивание на всю ширину контейнера
     color: #424436; // Белый текст
     padding: 10px 20px; // Внутренние отступы
+    background-color: $primary-white;
 
     h3 {
         font-size: 20px;
