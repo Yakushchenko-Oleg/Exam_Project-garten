@@ -20,24 +20,25 @@ const NavBar = () => {
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
-  // const { promoProduct } = useSelector(state => state.products);
+  const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const dispatch = useDispatch();
+  const apiUrl = import.meta.env.APP_API_URL; 
 
-   const promoProduct = {
-     id: 10,
-     title: "Amaryllis \"Picotee,\" one bulb in cachepot",
-     price: 72,
-   discont_price: 36,
-     description: "There is nothing in the Amaryllis world to compare with \"Picotee.\" Crisp white petals, with edges finely penciled in rich red, present a clean, tailored look that`s utterly distinctive. This choice variety is slow to reproduce (though heavy blooming) and therefore always in short supply. We offer one bulb in a 7\" red foil cachepot.",
-    image: "./product_img/10.jpeg",
-     createdAt: "2022-10-02T14:43:29.000Z",
-     updatedAt: "2022-10-02T14:43:29.000Z",
-    categoryId: 2
-   }
-  console.log('Image URL:', promoProduct.image);
+  //  const promoProduct = {
+  //    id: 10,
+  //    title: "Amaryllis \"Picotee,\" one bulb in cachepot",
+  //    price: 72,
+  //  discont_price: 36,
+  //    description: "There is nothing in the Amaryllis world to compare with \"Picotee.\" Crisp white petals, with edges finely penciled in rich red, present a clean, tailored look that`s utterly distinctive. This choice variety is slow to reproduce (though heavy blooming) and therefore always in short supply. We offer one bulb in a 7\" red foil cachepot.",
+  //   image: "./product_img/10.jpeg",
+  //    createdAt: "2022-10-02T14:43:29.000Z",
+  //    updatedAt: "2022-10-02T14:43:29.000Z",
+  //   categoryId: 2
+  //  }
+  // console.log('Image URL:', promoProduct.image);
  
 useEffect(()=>{
 if (cart.length>0) {
@@ -176,9 +177,7 @@ useEffect(()=>{
 
               <div className="promo-pro__info"> 
                 <div className="product-image-container"> 
-                <img src={promoProduct.image} alt={promoProduct.title} className="product-image" />
-
-
+                <img src={`${apiUrl}/${promoProduct.image}`}alt={promoProduct.title} className="product-image"/>
                   <div className="product-info-overlay"> 
                     <span className="discount-badge">-50%</span> 
                     <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
