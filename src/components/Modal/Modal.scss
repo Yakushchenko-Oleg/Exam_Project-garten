@@ -14,11 +14,8 @@
     backdrop-filter: grayscale(50%);
     
     &-content { 
-        max-height: 50%;
-    //   border: 1px solid white; 
-    //   width: 70%;
-    //   height: auto;
-    margin-top: 180px;
+      max-height: 50%;
+      margin: 180px auto;
       > img { 
         height: 100%;
         width: 100%;

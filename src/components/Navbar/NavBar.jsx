@@ -23,7 +23,7 @@ const NavBar = () => {
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
   const { promoProduct } = useSelector(state => state.products);
-  const { promoProduct } = useSelector(state => state.products);
+  // const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -178,7 +178,7 @@ const NavBar = () => {
 
             <div className="promo-pro" > 
               <div className="promo-pro__header"> 
-                <h2>50% discount on product of the day!</h2> 
+                <h2 className="promo-title">50% discount on product of the day!</h2> 
                 <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
               </div> 
 
