@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import '@/App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
@@ -13,8 +13,6 @@ import { addTofavourites, removeFromfavourites } from '@/store/favouritesSlice'
 import { checkPromoProduct } from '@/store/productSlice'
 import { addToCart } from "@/store/cartSlice ";
 
-
-
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
   const [isModal, setModal] = useState(false); // не испорльзуется
@@ -23,29 +21,14 @@ const NavBar = () => {
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
   const { promoProduct } = useSelector(state => state.products);
-  const { promoProduct } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
-
+  const hasRenderedOnce = useRef(false); // Флаг для отслеживания первого рендера
   const apiUrl = import.meta.env.APP_API_URL;
   const dispatch = useDispatch();
   
-
-  //  const promoProduct = {
-  //    id: 10,
-  //    title: "Amaryllis \"Picotee,\" one bulb in cachepot",
-  //    price: 72,
-  //  discont_price: 36,
-  //    description: "There is nothing in the Amaryllis world to compare with \"Picotee.\" Crisp white petals, with edges finely penciled in rich red, present a clean, tailored look that`s utterly distinctive. This choice variety is slow to reproduce (though heavy blooming) and therefore always in short supply. We offer one bulb in a 7\" red foil cachepot.",
-  //   image: "./product_img/10.jpeg",
-  //    createdAt: "2022-10-02T14:43:29.000Z",
-  //    updatedAt: "2022-10-02T14:43:29.000Z",
-  //   categoryId: 2
-  //  }
-  // console.log('Image URL:', promoProduct.image);
- 
   useEffect(()=>{
   if (cart.length>0) {
     setCartNotEmpty(true)
@@ -64,9 +47,13 @@ const NavBar = () => {
     }
     },[favourites])
 
-  useEffect(()=>{
-    dispatch(checkPromoProduct())
-  },[isModalOpen, dispatch])
+    useEffect(() => {
+      if (hasRenderedOnce.current) {
+        dispatch(checkPromoProduct());
+      } else {
+        hasRenderedOnce.current = true; // Устанавливаем флаг в true после первого рендера
+      }
+    }, [isModalOpen, dispatch]);
 
   const handleAddToFavourite = () => {
     const carentfavouriteState = !isFavourite
@@ -79,13 +66,13 @@ const NavBar = () => {
     }
   };
   
-  const handleAddToCart = () => {
+  const handleAddToCart = (product) => {
     console.log('Product added to cart!'); 
-    dispatch(addToCart({promoProduct, quantity: 1}))
+    dispatch(addToCart({product, quantity: 1}))
     setAddedToCart(true); 
   };
 
-  
+   
   
   return (
     <>
@@ -96,7 +83,7 @@ const NavBar = () => {
             
         <div className="nav__action" onClick={toggleTheme} >
           <label className={`switch ${theme ? "switch-active" : ""}`} htmlFor='checkbox'>
-            <input className='switch__input' type='checkbox' name='checkbox' ></input>
+            <input className='switch__input' type='checkbox' name='checkbox'  ></input>
               <span className="switch__slider"> { theme ? <PiSun /> : <LuMoon />}</span>
           </label>
         </div>
@@ -203,7 +190,7 @@ const NavBar = () => {
 
               <button
                 className={`btn promo-pro__button ${addedToCart ? 'added' : ''}`}
-                onClick={handleAddToCart}
+                onClick={()=>handleAddToCart(promoProduct)}
                 disabled={addedToCart}
               >
                 {addedToCart ? 'Added' : 'Add to cart'}
