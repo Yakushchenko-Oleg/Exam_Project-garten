@@ -36,11 +36,6 @@ const Cart = () => {;
     reset()
   }
 
-  const handleSubmitForm = (event) => {
-    event.preventDefault();
-    console.log('order placed');
-  };
-
   return (
     <main className="maincontainer">
       <div className="cart container">
