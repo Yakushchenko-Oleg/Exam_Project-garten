@@ -65,6 +65,7 @@ const FavouritesPage = () => {
 
   const handleSort = (event) => {
     setSortValue(event.target.value);
+    
   };
 
   useEffect(()=>{
