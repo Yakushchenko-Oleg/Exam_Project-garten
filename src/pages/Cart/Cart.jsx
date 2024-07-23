@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom'
 import './Cart.scss'
 import CartItem from '@/components/CartItem/CartItem'
 import {ThemeContext} from '@/providers/ThemeProvider'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { fetchOrder } from '../../store/cartSlice '
 import Modal from '../../components/Modal/Modal'
 
-const Cart = () => {;
+const Cart = () => {
+  const dispatch = useDispatch()
   const cart = useSelector(state =>state.cart.cart)
   const [isOrderPlaced, setisOrderPlaced] = useState(false)
   const [totalSum, setTotalSum] = useState(0)
@@ -25,15 +26,20 @@ const Cart = () => {;
 
   useEffect(() => {
     if (cart) {
-      setTotalSum(+(cart.reduce((acc, current) => acc + (current.price * current.quantity), 0)).toFixed(2)); // С помощью метода reduce проходимся по массиву и подсчитываем сумму содержимого, с помощью toFixed  округляем цифру до 2-х знаков после запятой, с помощью + переводим данные в формат number т.к. метод toFixed переаодит данные автоматически в строку
+      setTotalSum(+(cart.reduce((acc, current) => acc + ((current.discont_price? current.discont_price : current.price )* current.quantity), 0)).toFixed(2)); // С помощью метода reduce проходимся по массиву и подсчитываем сумму содержимого, с помощью toFixed  округляем цифру до 2-х знаков после запятой, с помощью + переводим данные в формат number т.к. метод toFixed переаодит данные автоматически в строку
       setTotalQuantity(cart.reduce((acc, current) => acc + current.quantity, 0));// С помощью метода reduce проходимся по массиву и подсчитываем общее количество содержимого
     }
   }, [cart]);
+  
+  if (isSubmitSuccessful) {
+    setisOrderPlaced(true)
+  }
 
   const handleOrderSubmit =  (data) => {
-    fetchOrder(data)
+    dispatch( fetchOrder({...data, cart}))
+    
   console.log(data);
-    reset()
+    // reset()
   }
 
   return (
@@ -106,7 +112,7 @@ const Cart = () => {;
               />
               <p className='errornessage'>{errors.email?.message}</p>
 
-              <button onClick={() => setisOrderPlaced(true)}>Order</button>
+              <button>Order</button>
 
             </form>
 

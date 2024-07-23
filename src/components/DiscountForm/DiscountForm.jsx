@@ -22,7 +22,7 @@ const DiscountForm = () => {
 
   const handleDiscountSubmit = (data) => {
     fetchGetDiscount(data)
-  console.log(data);
+  // console.log(data);
     reset()
   }
 
