@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import './CartItem.scss'
 import {  changeQuantity } from '@/store/cartSlice ';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {ThemeContext} from '../../providers/ThemeProvider'
 import { removeFromCart } from '../../store/cartSlice ';
@@ -11,8 +11,7 @@ const CartItem = ({product}) => {
   const [quantity, setQuantity] = useState(product.quantity)
   const dispatch = useDispatch()
   const {theme} = useContext(ThemeContext);
-
-
+  const { cart } = useSelector(state => state.cart);
  
   const handleIncreaseQuantity = () => {
     setQuantity(prev => prev +=1);
@@ -30,6 +29,9 @@ const CartItem = ({product}) => {
 const removeHandler = () => {
   dispatch(removeFromCart(product))
 }
+useEffect(()=>{
+  setQuantity(product.quantity)
+}, [cart])
 
 useEffect(() => {
   if (quantity > 0) {

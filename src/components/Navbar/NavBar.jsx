@@ -20,12 +20,11 @@ const NavBar = () => {
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
-  const { promoProduct } = useSelector(state => state.products);
+  const { promoProduct, products } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
-  const hasRenderedOnce = useRef(false); // Флаг для отслеживания первого рендера
   const apiUrl = import.meta.env.APP_API_URL;
   const dispatch = useDispatch();
   
@@ -47,14 +46,6 @@ const NavBar = () => {
     }
     },[favourites])
 
-    useEffect(() => {
-      if (hasRenderedOnce.current) {
-        dispatch(checkPromoProduct());
-      } else {
-        hasRenderedOnce.current = true; // Устанавливаем флаг в true после первого рендера
-      }
-    }, [isModalOpen, dispatch]);
-
   const handleAddToFavourite = () => {
     const carentfavouriteState = !isFavourite
     setIsFavourite(carentfavouriteState)
@@ -67,8 +58,9 @@ const NavBar = () => {
   };
   
   const handleAddToCart = (product) => {
-    console.log('Product added to cart!'); 
-    dispatch(addToCart({product, quantity: 1}))
+    const productInCart = cart.find(item => item.id === product.id)
+    const addingQuantity = productInCart ?  productInCart.quantity + 1 :  1
+    dispatch(addToCart({product, quantity: addingQuantity }));
     setAddedToCart(true); 
   };
 
@@ -94,7 +86,10 @@ const NavBar = () => {
         <div className={`menu-wrapper ${isOpen ? "menu-wrapper-active" : ""}`}>
           <p 
           className="discount-lable"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            dispatch(checkPromoProduct());
+            setIsModalOpen(true)
+          }}
           >1 day discount!</p>
           <ul className="navbar__menu">
             <li>

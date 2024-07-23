@@ -7,40 +7,57 @@ export const fetchGetDiscount = createAsyncThunk(
   'cart/fetchGetDiscount',
   async function (formData, {rejectWithValue}) {
 
-    try {
-      const responce = await fetch(`${URL}/sale/send`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }, 
-        body: JSON.stringify(formData)
-      })
-      console.log(responce, formData);
-      if (!responce.ok) {
-        throw new Error('Failed to send a discount request')      
-        }  else {localStorage.setItem('discount', true)}
+    console.log(formData, rejectWithValue)
+
+    // try {
+    //   const responce = await fetch(`${URL}/sale/send`, {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-Type': 'application/json'
+    //     }, 
+    //     body: JSON.stringify(formData)
+    //   })
+    //   console.log(responce, formData);
+    //   if (!responce.ok) {
+    //     throw new Error('Failed to send a discount request')      
+    //     }  else {localStorage.setItem('discount', true)}
   
-    } catch (error) {
-      return rejectWithValue(error.message)
-    }
+    // } catch (error) {
+    //   return rejectWithValue(error.message)
+    // }
   }
 )
-export const fetchOrder= createAsyncThunk(
+export const fetchOrder = createAsyncThunk(
   'cart/fetchOrder',
-  async function (formData, {rejectWithValue}) {
+   function (formData, {rejectWithValue}) {
 
     try {
-      const responce = await fetch(`${URL}/order/send`, {
+
+      // fetch('https://exam-server-5c4e.onrender.com/order/send', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //    ...formData
+      //   }),
+      //   headers: {
+      //     'Content-type': 'application/json; charset=UTF-8',
+      //   },
+      // })
+      //   .then((response) => response.json())
+        // .then((json) => console.log(json));
+
+      const responese = fetch("https://exam-server-5c4e.onrender.com/order/send", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({...formData, order: cart}) // не уверен что правильно передаю  cart
-      })
-      console.log(responce, formData);
-      if (!responce.ok) {
-        throw new Error('Failed to send an Order')      
-        }  else {localStorage.removeItem('cart')} // стераем карзину в localStorage
+        body: JSON.stringify({...formData}) // не уверен что правильно передаю  cart
+      }).then(res => res.json()).then(console.log)
+      // console.log(responese, formData);
+
+
+      // if (!responese.ok) {
+      //   throw new Error('Failed to send an Order')      
+      //   }  else {localStorage.removeItem('cart')} // стираем корзину в localStorage
   
     } catch (error) {
       return rejectWithValue(error.message)
@@ -113,6 +130,18 @@ const cartSlice = createSlice({
           state.discount = true
         })
         .addCase(fetchGetDiscount.rejected, (state, action) => {
+          state.isLoading = null
+          state.error = action.payload 
+        })
+        .addCase(fetchOrder.pending,(state) => {
+          state.isLoading = true, 
+          state.error = null
+        })
+        .addCase(fetchOrder.fulfilled, (state)  =>{
+          state.isLoading = false,
+          console.log(state)
+        })
+        .addCase(fetchOrder.rejected, (state, action) => {
           state.isLoading = null
           state.error = action.payload 
         })

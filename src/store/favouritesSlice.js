@@ -51,7 +51,7 @@ const favouritesSlice = createSlice({
       },
       sortByUserPriceAction(state, action) {
         const { minValue, maxValue } = action.payload;
-        state.favourites = state.favourites.filter(item => item.price >= minValue && item.price <= maxValue);
+        state.favourites = state.favourites.filter(item => item.price >= minValue & item.price <= maxValue);
       },
     }
   })
