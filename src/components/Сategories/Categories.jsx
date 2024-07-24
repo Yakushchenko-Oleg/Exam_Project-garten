@@ -15,6 +15,7 @@ const Categories = () => {
   const slicedCategories = categories.slice(0, 4);
 
   const apiUrl = import.meta.env.APP_API_URL;
+// const test = [1, 2, 3, 4]
 
   return (
     <div className="products container-mainpage ">
@@ -30,8 +31,14 @@ const Categories = () => {
           isLoading ? (
             <div className="loader"></div>
           ) : ( 
+
+            // {
+            //   test.map(item => <div className="loader"key={item} ></div>)
+
+            // }
             <div className="wrapper">
             {
+              
               slicedCategories.map( item => (
                 <Link to={`/categories/${item.id}`} className="item__link" key={item.id}>
                 <CategoriesItem item={item} apiUrl={apiUrl} />
@@ -41,6 +48,7 @@ const Categories = () => {
             </div>
           )
         }
+
         {error && <h2> Error from server: {error} </h2>}
 
       <Link to="/categories">
