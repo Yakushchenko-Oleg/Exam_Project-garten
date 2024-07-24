@@ -13,7 +13,6 @@ import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
 
 
 const ProductsPage = () => {
-  
   const dispatch = useDispatch();
   const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
     (state) => state.products
@@ -22,7 +21,7 @@ const ProductsPage = () => {
 
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
-  const [sortValue, setSortValue] = useState("default")
+  const [sortValue, setSortValue] = useState("default");
 
   const { categoryId } = useParams();
 
@@ -56,13 +55,12 @@ const ProductsPage = () => {
     setSortValue(event.target.value);
   };
 
-  useEffect(()=>{
-    dispatch(sortByPriceAction({ value: sortValue}));
-  },[sortValue])
-
+  useEffect(() => {
+    dispatch(sortByPriceAction({ value: sortValue }));
+  }, [sortValue]);
 
   const handleUserPrice = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
@@ -73,24 +71,21 @@ const ProductsPage = () => {
 
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByPriceAction({ value: sortValue}));
+    dispatch(sortByPriceAction({ value: sortValue }));
 
     dispatch(sortByDiscountAction({ applyDiscount: userValue }));
   };
 
   const handleDiscountApply = (event) => {
     const userValue = event.target.checked;
-   
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-   
-    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByPriceAction({ value: sortValue}));
-    
+    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+
+    dispatch(sortByPriceAction({ value: sortValue }));
   };
 
-  // const test = [1, 2, 3, 4 ,5 ,6, 7, 8]
- 
+  const skeleton = [1, 2, 3, 4, 5, 6, 7, 8];
+
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -112,42 +107,49 @@ const ProductsPage = () => {
         </div>
 
         <div className="filter-wrapper">
-        <form className="filter-wrapper__item" onChange={handleUserPrice}>
-          <p className="filter-name">Price</p>
-          <input className="userInput" type="number" placeholder="from" name="from"></input>
-          <input className="userInput" type="number" placeholder="to" name="to"></input>
-        </form>
+          <form className="filter-wrapper__item" onChange={handleUserPrice}>
+            <p className="filter-name">Price</p>
+            <input
+              className="userInput"
+              type="number"
+              placeholder="from"
+              name="from"
+            ></input>
+            <input
+              className="userInput"
+              type="number"
+              placeholder="to"
+              name="to"
+            ></input>
+          </form>
 
-        <div className="filter-wrapper__item">
-          <p className="filter-name">Discounted items</p>
-          <input
-            className="checkbox"
-            type="checkbox"
-            onChange={handleDiscountApply}
-          ></input>
-        </div>
+          <div className="filter-wrapper__item">
+            <p className="filter-name">Discounted items</p>
+            <input
+              className="checkbox"
+              type="checkbox"
+              onChange={handleDiscountApply}
+            ></input>
+          </div>
 
-        <div className="filter-wrapper__item">
-          <p className="filter-name">Sort</p>
-          <select onChange={handleSort}>
-            <option value="default">by default</option>
-            <option value="low-to-high">Price: Low to High</option>
-            <option value="high-to-low">Price: High to Low</option>
-          </select>
-        </div>
+          <div className="filter-wrapper__item">
+            <p className="filter-name">Sort</p>
+            <select onChange={handleSort}>
+              <option value="default">by default</option>
+              <option value="low-to-high">Price: Low to High</option>
+              <option value="high-to-low">Price: High to Low</option>
+            </select>
+          </div>
         </div>
 
         {isLoading ? (
-          <div className="loader"></div>
-
-
-        //   <div className="wrapper"> //Скилетон
-        //   {
-        //     test.map(item => <div className="loader"key={item} ></div>)
-
-        //   }
-      
-        // </div>
+          //если идет загрузка, вставляем Скeлетон
+          <div className="wrapper">
+            {skeleton.map((item) => (
+              <div className="loader" key={item}></div>
+            ))
+            }
+          </div>
         ) : (
           <div className="wrapper">
             {filteredProducts && filteredProducts.length > 0
@@ -155,9 +157,9 @@ const ProductsPage = () => {
                   <SingleProduct key={item.id} product={item} />
                 ))
               : data.map((item) => (
-                <SingleProduct key={item.id} product={item} />
+                  <SingleProduct key={item.id} product={item} />
                 ))}
-          </div>  
+          </div>
         )}
         {error && <h2> Error from server: {error} </h2>}
       </div>
