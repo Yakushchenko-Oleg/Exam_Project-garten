@@ -85,9 +85,11 @@ const ProductsPage = () => {
    
     // dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByPriceAction({ value: sortValue}));  
+    dispatch(sortByPriceAction({ value: sortValue}));
     
   };
+
+  // const test = [1, 2, 3, 4 ,5 ,6, 7, 8]
  
   return (
     <main className="maincontainer">
@@ -137,6 +139,15 @@ const ProductsPage = () => {
 
         {isLoading ? (
           <div className="loader"></div>
+
+
+        //   <div className="wrapper"> //Скилетон
+        //   {
+        //     test.map(item => <div className="loader"key={item} ></div>)
+
+        //   }
+      
+        // </div>
         ) : (
           <div className="wrapper">
             {filteredProducts && filteredProducts.length > 0

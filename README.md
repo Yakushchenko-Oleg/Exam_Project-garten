@@ -4,9 +4,8 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
+URL deploy of project: https://exam-project-garden.vercel.app
+URL Git epository  https://github.com/Yakushchenko-Oleg/Exam_Project-garten
 
 Daily Srum Meeting- SPRINT 1
 
@@ -16,18 +15,3 @@ Daily Srum Meeting- SPRINT 1
 16.06 - создали thunk через react-tool-kit. получили список товаров с бэка
 18.06 - обсудили редьюсер для получения продуктов в Sales
 
-
-
-?? Проблемы Спринт1 ??
-
-? layout не создаем?
-? роутер  для mainPage
-? что делает кнопка Get a discount (нужно ли проверять, получал ли юзер уже скидку)
-? добавить полоску к all categories
-? в бургер меню - сделать выпадающее меню
-? в медиа не появляется бургер меню
-
-//this is the test elena
-//this is the testConflict +
-//this is THE TEST CONFLICT с моей ветки 2106,2 в лэссон =
-// Result of my Test
