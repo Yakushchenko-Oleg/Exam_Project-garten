@@ -18,7 +18,7 @@ const Cart = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors, isSubmitSuccessful, isSubmitting },
     reset,
     } = useForm()
 
@@ -29,24 +29,31 @@ const Cart = () => {
     }
   }, [cart]);
   
-  if (isSubmitSuccessful) {
-    setisOrderPlaced(true)
-  }
-
-  // useEffect(()=>{
-  //   setisOrderPlaced(!isOrderPlaced)
-  // },[isSubmitSuccessful])
+  // if (isSubmitSuccessful) {
+  //   setisOrderPlaced(true)
+  // }
 
   const handleOrderSubmit =  (data) => {
     dispatch( fetchOrder({...data, order: cart}))
-    
-    console.log('isSubmitSuccessful:', isSubmitSuccessful);
     reset()
   }
 
+  useEffect(()=>{
+    if (isSubmitSuccessful) {
+      setisOrderPlaced(true)
+    }
+  },[isSubmitSuccessful])
+
+
+
+
   return (
     <main className="maincontainer">
-      <div className="cart container">
+
+      {
+        isSubmitting 
+        ? <div>Loading Order....</div> 
+        :       <div className="cart container">
         <div className="header-wrapper">
           <h2>Shopping cart</h2>
           <div className="cart__line"></div>
@@ -63,10 +70,10 @@ const Cart = () => {
             </div>
           
           <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} 
-            onSubmit={()=> {
+            onSubmit={
               handleSubmit(handleOrderSubmit)
-              setisOrderPlaced(true)
-            }}>
+
+            }>
               <h3>Order details</h3>
               <p>{`${totalQuantity} item`}</p>
               <div className="cart__content_form_totoalConteiner">
@@ -127,7 +134,8 @@ const Cart = () => {
               </span>
             </Link>
           </div>
-        ) : (
+        ) 
+        : (
           <div className="cart__enpty">
             <span>Looks like you have no items in your basket currently</span>
             <Link to="/allproducts">
@@ -138,6 +146,8 @@ const Cart = () => {
 
         
       </div>
+      }
+
 
       {isOrderPlaced && (
         <Modal>

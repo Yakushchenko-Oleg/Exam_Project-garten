@@ -3,6 +3,7 @@ import '../../App.scss'
 import  './DiscountForm.scss'
 import { useForm } from "react-hook-form"
 import { fetchGetDiscount } from '../../store/cartSlice ';
+import { useDispatch } from 'react-redux';
 
 
 // import { v4 as uuidv4 } from 'uuid'
@@ -10,23 +11,23 @@ import { fetchGetDiscount } from '../../store/cartSlice ';
 
 const DiscountForm = () => {
 
+  const dispatch = useDispatch();
+  const [isDiscount, setIsDiscount] = useState( false) // пока не работаеь эта конструкция
+
     const {
       register,
       handleSubmit,
-      // watch,
-      formState: { errors },
-      reset,
-      isSubmitting,
-      isSubmitSuccessful
+      formState: { errors, isSubmitting, isSubmitSuccessful },
+      reset
     } = useForm()
 
   const handleDiscountSubmit = (data) => {
-    fetchGetDiscount(data)
+    dispatch(fetchGetDiscount(data))
   // console.log(data);
     reset()
   }
 
-  const [isDiscount, setIsDiscount] = useState( false) // пока не работаеь эта конструкция
+
 
 useEffect(()=> {
   let discount = JSON.parse(localStorage.getItem('discount'))
@@ -34,6 +35,12 @@ useEffect(()=> {
     setIsDiscount(true)
   }
 },[])
+
+useEffect(()=> {
+  if (isSubmitSuccessful) {
+    setIsDiscount(true)
+  }
+},[isSubmitSuccessful])
 
   
   return (
@@ -96,7 +103,8 @@ useEffect(()=> {
           <p className='errornessage'>
 
           </p>
-          <button className="discount__btn btn" disabled={isSubmitting}> 
+          <button className="discount__btn btn" disabled={isDiscount}
+          > 
             {
               isDiscount === true? "You've got a discount" :'Get a discount' // пока не работаеь эта конструкция
             }
