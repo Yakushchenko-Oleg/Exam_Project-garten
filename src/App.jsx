@@ -26,7 +26,6 @@ const App = () => {
     dispatch(fetchAllCategoties());
     dispatch(getCartFromLocalStorage());
     dispatch(getfavouritessFromLocalStorage())
-    // dispatch(getPromoProductFromLocalStorage())
   },[])
 
 

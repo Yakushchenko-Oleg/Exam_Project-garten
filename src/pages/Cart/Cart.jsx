@@ -18,10 +18,9 @@ const Cart = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
     reset,
-    isSubmitting,
-    isSubmitSuccessful
+    isSubmitting
   } = useForm()
 
   useEffect(() => {
@@ -36,9 +35,10 @@ const Cart = () => {
   }
 
   const handleOrderSubmit =  (data) => {
-    dispatch( fetchOrder({...data, cart}))
+    dispatch( fetchOrder({...data,order: cart}))
     
-  console.log(data);
+  // console.log('isSubmitSuccessful:', isSubmitSuccessful);
+  // alert(`isSubmitSuccessful:`, isSubmitSuccessful ? "TRUE" : "FALSE")
     // reset()
   }
 
