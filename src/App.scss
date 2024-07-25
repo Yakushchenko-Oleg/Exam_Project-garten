@@ -130,18 +130,9 @@ h2 {
 }
 
 .loader {
-  margin: 0 auto;
-  width: 120px;
-  height: 20px;
-  border-radius: 20px;
-  background: linear-gradient(orange 0 0) 0/0% no-repeat lightblue;
-  animation: l2 2s infinite steps(10);
-}
-
-@keyframes l2 {
-  100% {
-    background-size: 110%;
-  }
+  height: 422px;
+  border-radius: $radius-small;
+  background-color: #F2F6D3;
 }
 
 .container-mainpage {

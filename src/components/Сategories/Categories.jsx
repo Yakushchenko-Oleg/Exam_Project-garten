@@ -2,10 +2,9 @@ import React, { useEffect } from "react";
 
 import "./Categories.scss";
 import { Link } from "react-router-dom";
-import {useSelector } from 'react-redux';
+import { useSelector } from "react-redux";
 
 import CategoriesItem from "../CategoriesItem/CategoriesItem";
-
 
 const Categories = () => {
   const { categories, isLoading, error } = useSelector(
@@ -15,7 +14,8 @@ const Categories = () => {
   const slicedCategories = categories.slice(0, 4);
 
   const apiUrl = import.meta.env.APP_API_URL;
-// const test = [1, 2, 3, 4]
+
+  const skeleton = [1, 2, 3, 4];
 
   return (
     <div className="products container-mainpage ">
@@ -26,38 +26,37 @@ const Categories = () => {
           <span className="categories__link">All categories</span>
         </Link>
       </div>
-      
-        {
-          isLoading ? (
-            <div className="loader"></div>
-          ) : ( 
 
-            // {
-            //   test.map(item => <div className="loader"key={item} ></div>)
+      {isLoading ? (
+        <div className="wrapper">
+          {skeleton.map((item) => (
+            <div className="loader" key={item}></div>
+          ))
+          }
+        </div>
+      ) : (
+        <div className="wrapper">
+          {slicedCategories.map((item) => (
+            <Link
+              to={`/categories/${item.id}`}
+              className="item__link"
+              key={item.id}
+            >
+              <CategoriesItem item={item} apiUrl={apiUrl} />
+            </Link>
+          ))}
+        </div>
+      )}
 
-            // }
-            <div className="wrapper">
-            {
-              
-              slicedCategories.map( item => (
-                <Link to={`/categories/${item.id}`} className="item__link" key={item.id}>
-                <CategoriesItem item={item} apiUrl={apiUrl} />
-              </Link>
-              ))
-            }
-            </div>
-          )
-        }
-
-        {error && <h2> Error from server: {error} </h2>}
+      {error && <h2> Error from server: {error} </h2>}
 
       <Link to="/categories">
-        <span className="categories__link categories__link-hidden">All categories</span>
-      </Link>  
-      
+        <span className="categories__link categories__link-hidden">
+          All categories
+        </span>
+      </Link>
     </div>
   );
 };
-
 
 export default Categories;
