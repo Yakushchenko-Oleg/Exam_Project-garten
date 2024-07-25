@@ -40,6 +40,10 @@
 
     &__item {
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        
         .form-input {
             width: 100%;
             padding: 16px 32px;

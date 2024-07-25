@@ -21,6 +21,7 @@ function mixArray(array) {
   return array;
 }
 
+const skeleton = [1, 2, 3, 4];
 
 return (
 
@@ -34,7 +35,12 @@ return (
       </div>
 
       {isLoading ? (
-        <div className="loader"></div>
+        <div className="wrapper">
+        {skeleton.map((item) => (
+          <div className="loader" key={item}></div>
+        ))
+        }
+      </div>
       ) : (
         <div className="wrapper">
           {

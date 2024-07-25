@@ -18,11 +18,9 @@ const Cart = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful, isSubmitting },
     reset,
-    isSubmitting,
-    isSubmitSuccessful
-  } = useForm()
+    } = useForm()
 
   useEffect(() => {
     if (cart) {
@@ -31,20 +29,31 @@ const Cart = () => {
     }
   }, [cart]);
   
-  if (isSubmitSuccessful) {
-    setisOrderPlaced(true)
-  }
+  // if (isSubmitSuccessful) {
+  //   setisOrderPlaced(true)
+  // }
 
   const handleOrderSubmit =  (data) => {
-    dispatch( fetchOrder({...data, cart}))
-    
-  console.log(data);
-    // reset()
+    dispatch( fetchOrder({...data, order: cart}))
+    reset()
   }
+
+  useEffect(()=>{
+    if (isSubmitSuccessful) {
+      setisOrderPlaced(true)
+    }
+  },[isSubmitSuccessful])
+
+
+
 
   return (
     <main className="maincontainer">
-      <div className="cart container">
+
+      {
+        isSubmitting 
+        ? <div>Loading Order....</div> 
+        :       <div className="cart container">
         <div className="header-wrapper">
           <h2>Shopping cart</h2>
           <div className="cart__line"></div>
@@ -61,7 +70,10 @@ const Cart = () => {
             </div>
           
           <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} 
-            onSubmit={handleSubmit(handleOrderSubmit)}>
+            onSubmit={
+              handleSubmit(handleOrderSubmit)
+
+            }>
               <h3>Order details</h3>
               <p>{`${totalQuantity} item`}</p>
               <div className="cart__content_form_totoalConteiner">
@@ -81,7 +93,7 @@ const Cart = () => {
                   maxLength:{ value: 20, message: 'Maximum name length 20 letters'}
                 })}
               />
-              <p className='errornessage'>{errors.username?.message}</p>
+              <p className='cart__errornessage'>{errors.username?.message}</p>
 
               <input 
                 className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
@@ -97,7 +109,7 @@ const Cart = () => {
                   },
                 })}
               />
-              <p className='errornessage'>{errors.phonenumber?.message}</p>
+              <p className='cart__errornessage'>{errors.phonenumber?.message}</p>
 
               <input 
                 className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
@@ -110,7 +122,7 @@ const Cart = () => {
                   pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: 'Incorrect email format'}
                 })}
               />
-              <p className='errornessage'>{errors.email?.message}</p>
+              <p className='cart__errornessage'>{errors.email?.message}</p>
 
               <button>Order</button>
 
@@ -122,7 +134,8 @@ const Cart = () => {
               </span>
             </Link>
           </div>
-        ) : (
+        ) 
+        : (
           <div className="cart__enpty">
             <span>Looks like you have no items in your basket currently</span>
             <Link to="/allproducts">
@@ -133,6 +146,8 @@ const Cart = () => {
 
         
       </div>
+      }
+
 
       {isOrderPlaced && (
         <Modal>

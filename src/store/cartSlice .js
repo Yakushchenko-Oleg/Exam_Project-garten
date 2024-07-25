@@ -9,56 +9,54 @@ export const fetchGetDiscount = createAsyncThunk(
 
     console.log(formData, rejectWithValue)
 
-    // try {
-    //   const responce = await fetch(`${URL}/sale/send`, {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }, 
-    //     body: JSON.stringify(formData)
-    //   })
-    //   console.log(responce, formData);
-    //   if (!responce.ok) {
-    //     throw new Error('Failed to send a discount request')      
-    //     }  else {localStorage.setItem('discount', true)}
-  
-    // } catch (error) {
-    //   return rejectWithValue(error.message)
-    // }
-  }
-)
-export const fetchOrder = createAsyncThunk(
-  'cart/fetchOrder',
-   function (formData, {rejectWithValue}) {
-
-    try {
-
-      // fetch('https://exam-server-5c4e.onrender.com/order/send', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //    ...formData
-      //   }),
-      //   headers: {
-      //     'Content-type': 'application/json; charset=UTF-8',
-      //   },
-      // })
-      //   .then((response) => response.json())
-        // .then((json) => console.log(json));
-
-      const responese = fetch("https://exam-server-5c4e.onrender.com/order/send", {
+ 
+     try {
+      const responese = await fetch(`${URL}/sale/send`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({...formData}) // не уверен что правильно передаю  cart
-      }).then(res => res.json()).then(console.log)
-      // console.log(responese, formData);
+        body: JSON.stringify({...formData})
+      })
+         
+      if (!responese.ok) {
+        throw new Error('Failed to send an Order')      
+        } else{
+          localStorage.setItem('discount', true)
+        }
 
+        const data = await responese.json()
 
-      // if (!responese.ok) {
-      //   throw new Error('Failed to send an Order')      
-      //   }  else {localStorage.removeItem('cart')} // стираем корзину в localStorage
-  
+        return data 
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+export const fetchOrder = createAsyncThunk(
+  'cart/fetchOrder',
+   async function (formData, {rejectWithValue}) {
+
+    try {
+      const responese = await fetch(`${URL}/order/send`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({...formData})
+      })
+        
+      
+      
+      if (!responese.ok) {
+        throw new Error('Failed to send an Order')      
+        } else{
+          localStorage.removeItem('cart') // стираем корзину в localStorage
+        }
+
+        const data = await responese.json()
+
+        return data 
     } catch (error) {
       return rejectWithValue(error.message)
     }
@@ -103,16 +101,15 @@ const cartSlice = createSlice({
       },
       changeQuantity(state, action) {
         const {product, quantity} = action.payload
+        
         state.cart.map(item => {
           if (item.id === product.id){
           item.quantity = quantity
-        } 
-      return item 
-      })
-      localStorage.setItem('cart', JSON.stringify(state.cart))
+          } 
+        return item 
+        })
 
-      const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события
-      window.dispatchEvent(event);
+        localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       removeFromCart(state, {payload}) {
         state.cart = state.cart.filter(item => item.id !==payload.id)
@@ -120,7 +117,7 @@ const cartSlice = createSlice({
       },
 
       extraReducers: (builder) => {
-        builder
+        builder // не работают кейсы
         .addCase(fetchGetDiscount.pending,(state) => {
           state.isLoading = true, 
           state.error = null
@@ -133,13 +130,16 @@ const cartSlice = createSlice({
           state.isLoading = null
           state.error = action.payload 
         })
+
         .addCase(fetchOrder.pending,(state) => {
           state.isLoading = true, 
           state.error = null
         })
         .addCase(fetchOrder.fulfilled, (state)  =>{
           state.isLoading = false,
-          console.log(state)
+          state.cart = [] // не обнуляется корзтна в стейте
+          console.log(action.payload);
+
         })
         .addCase(fetchOrder.rejected, (state, action) => {
           state.isLoading = null

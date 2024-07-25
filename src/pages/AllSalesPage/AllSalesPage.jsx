@@ -63,6 +63,8 @@ const AllSalesPage = () => {
     dispatch(sortByPriceAction({ value: sortValue }));
   };
 
+  const skeleton = [1, 2, 3, 4, 5, 6, 7, 8];
+
   return (
     <main className="maincontainer">
       <div className="product-navigation">
@@ -97,7 +99,12 @@ const AllSalesPage = () => {
         </div>
 
         {isLoading ? (
-          <div className="loader"></div>
+         <div className="wrapper">
+         {skeleton.map((item) => (
+           <div className="loader" key={item}></div>
+         ))
+         }
+       </div>
         ) : (
           <div className="wrapper">
             {data && data.map((item) => (

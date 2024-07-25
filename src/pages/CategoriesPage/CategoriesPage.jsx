@@ -12,7 +12,7 @@ const CategoriesPage = () => {
     { link: "/", name: "Main page " },
     { link: "/categories", name: " Categories page " }
   ]);
-
+  const skeleton = [1, 2, 3, 4, 5];
 
   return (
     <main className="maincontainer">
@@ -31,7 +31,12 @@ const CategoriesPage = () => {
         </div>
         
           {isLoading ? (
-            <div className="loader"></div>
+            <div className="wrapper">
+            {skeleton.map((item) => (
+              <div className="loader" key={item}></div>
+            ))
+            }
+          </div>
         ) : (
           <div className="wrapper">
             {categories.map(item => (
