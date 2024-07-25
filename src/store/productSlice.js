@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { v4 as uuidv4 } from 'uuid';
 
 const URL = `${import.meta.env.APP_API_URL}`
 
@@ -55,8 +56,7 @@ const productsSlice = createSlice({
       data: [],
       category: null,
     },
-    singleProduct: {},
-    promoProduct: {},
+     promoProduct: {},
     promoDate: null,
     filteredProducts: [],
     isLoading: false,
@@ -93,72 +93,65 @@ const productsSlice = createSlice({
       ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
 
-    // getPromoProductFromLocalStorage(state){
-    //   let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct'))
-      
-    //   if (promoProductFromStorage) {
-    //     state.promoProduct = promoProductFromStorage
-    //   } else{
-    //     const currentPromoProduct = mixArray(state.recivedProducts.data)[0]
-    //     localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
-    //   }
-    // },
-    // getPromoDateFromLocalStorage(state){
-    //   let promoDateFromStorage = localStorage.getItem('promoDate')
-      
-    //   if (promoDateFromStorage) {
-    //     state.promoDate = promoDateFromStorage
-    //   } else{
-    //     // localStorage.setItem('promoDate', JSON.stringify(null))
-    //   }
-    // },
-
     checkPromoProduct(state) {
       let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
       let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
-      const currentDate = new Date(new Date().setHours(0, 0, 0, 0)).toLocaleDateString() // возвращает текущую дату с временем 00 00 00 
-      const currentPromoProduct = mixArray(state.recivedProducts.data)[0] // берет первый объект из прермешанного массива продуктов
-    
-      console.log('Текущая дата:', currentDate)
-      console.log('Дата c Local Storage:', promoDateFromStorage)
-      console.log('promoProduct c Local Storage:', promoProductFromStorage)
-    
+      const currentDate = new Date(new Date().setHours(0, 0, 0, 0)).toLocaleDateString() // возвращает текущую дату в виде строки
+      const rundomProduct = mixArray([...state.recivedProducts?.data])[0] // берет первый объект из прермешанного массива продуктов,
+      const currentPromoProduct =  {
+        ...rundomProduct, 
+        id: uuidv4(), 
+        discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
+      }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
+            
       if (promoProductFromStorage) {
         if (promoDateFromStorage !== currentDate) {
-          console.log('PromoDate не совпадаеи, обнавляем PromoProduct.')
+          console.log('PromoDate не совпадают, обнавляем PromoProduct и promoDate.')
           state.promoDate = currentDate
           state.promoProduct = currentPromoProduct
           localStorage.setItem('promoDate', JSON.stringify(currentDate))
           localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
-        }
+        } 
       } else {
-        console.log('PromoProduct не найден по этому обнавлен.')
+        console.log('PromoProduct не найден по этому обнавлен на:', currentPromoProduct)
         state.promoDate = currentDate
         state.promoProduct = currentPromoProduct
         localStorage.setItem('promoDate', JSON.stringify(currentDate))
         localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
       }
-    },
-    
+    },  
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProducts.pending, (state) => {
-        (state.isLoading = true), (state.error = null);
+        state.isLoading = true
+        state.error = null
       })
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
-        (state.isLoading = false),
-          (state.recivedProducts.data = action.payload);
+        state.isLoading = false
+        state.recivedProducts.data = action.payload // обновляем массив продуктов в состоянии
+
+        // Обновляем promoProduct 
+        let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
+        let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
+
+        if (promoProductFromStorage) {
+          state.promoProduct = promoProductFromStorage
+          state.promoDate = promoDateFromStorage
+
+        }
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
         state.isLoading = null;
         state.error = action.payload; // Принимает payload (error.message) от rejectWithValue из блока catch
       })
       .addCase(fetchProductsByCategory.pending, (state) => {
-        (state.isLoading = true), (state.error = null);
+        state.isLoading = true
+        state.error = null
       })
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
-        (state.isLoading = false), (state.recivedProducts = action.payload);
+        state.isLoading = false
+        state.recivedProducts = action.payload
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
         state.isLoading = null;

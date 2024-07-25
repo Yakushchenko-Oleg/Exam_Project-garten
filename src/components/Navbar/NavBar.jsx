@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import '@/App.scss'
 import { NavLink } from 'react-router-dom'
 import './NavBar.scss'
@@ -9,75 +9,62 @@ import { LuMoon, LuSunMedium } from 'react-icons/lu'
 import { PiSun } from 'react-icons/pi'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from '../Modal/Modal'
-import { addTofavourites, removeFromfavourites } from '../../store/favouritesSlice'
-import { checkPromoProduct } from '../../store/productSlice'
-
+import { addTofavourites, removeFromfavourites } from '@/store/favouritesSlice'
+import { checkPromoProduct } from '@/store/productSlice'
+import { addToCart } from "@/store/cartSlice ";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
-  // const [isModal, setModal] = useState(false); не испорльзуется
+  
   const[cartNotEmpty, setCartNotEmpty] = useState(false); 
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
-  // const { promoProduct } = useSelector(state => state.products);
+  const { promoProduct, products } = useSelector(state => state.products);
   const {theme, toggleTheme} = useContext(ThemeContext);
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
+  const apiUrl = import.meta.env.APP_API_URL;
   const dispatch = useDispatch();
-
-   const promoProduct = {
-     id: 10,
-     title: "Amaryllis \"Picotee,\" one bulb in cachepot",
-     price: 72,
-   discont_price: 36,
-     description: "There is nothing in the Amaryllis world to compare with \"Picotee.\" Crisp white petals, with edges finely penciled in rich red, present a clean, tailored look that`s utterly distinctive. This choice variety is slow to reproduce (though heavy blooming) and therefore always in short supply. We offer one bulb in a 7\" red foil cachepot.",
-    image: "./product_img/10.jpeg",
-     createdAt: "2022-10-02T14:43:29.000Z",
-     updatedAt: "2022-10-02T14:43:29.000Z",
-    categoryId: 2
-   }
-  console.log('Image URL:', promoProduct.image);
- 
-useEffect(()=>{
-if (cart.length>0) {
-  setCartNotEmpty(true)
-}
-else{
-  setCartNotEmpty(false) 
-}
-},[cart])
-
-useEffect(()=>{
-  if (favourites.length>0) {
-    setFavouritesNotEmpty(true)
+  
+  useEffect(()=>{
+  if (cart.length>0) {
+    setCartNotEmpty(true)
   }
   else{
-    setFavouritesNotEmpty(false) 
+    setCartNotEmpty(false) 
   }
-  },[favourites])
+  },[cart])
+
+  useEffect(()=>{
+    if (favourites.length>0) {
+      setFavouritesNotEmpty(true)
+    }
+    else{
+      setFavouritesNotEmpty(false) 
+    }
+    },[favourites])
 
   const handleAddToFavourite = () => {
     const carentfavouriteState = !isFavourite
     setIsFavourite(carentfavouriteState)
 
     if (!isFavourite) {
-      dispatch(addTofavourites(product))      
+      dispatch(addTofavourites(promoProduct))      
     } else {
-      dispatch(removeFromfavourites(product))      
+      dispatch(removeFromfavourites(promoProduct))      
     }
   };
-  const [addedToCart, setAddedToCart] = useState(false); // Состояние для отслеживания добавления в корзину
-
   
-  const handleAddToCart = () => {
-   
-    console.log('Product added to cart!'); 
+  const handleAddToCart = (product) => {
+    const productInCart = cart.find(item => item.id === product.id)
+    const addingQuantity = productInCart ?  productInCart.quantity + 1 :  1
+    dispatch(addToCart({product, quantity: addingQuantity }));
     setAddedToCart(true); 
-    
   };
 
-  
+   
   
   return (
     <>
@@ -88,7 +75,7 @@ useEffect(()=>{
             
         <div className="nav__action" onClick={toggleTheme} >
           <label className={`switch ${theme ? "switch-active" : ""}`} htmlFor='checkbox'>
-            <input className='switch__input' type='checkbox' name='checkbox' ></input>
+            <input className='switch__input' type='checkbox' name='checkbox'  ></input>
               <span className="switch__slider"> { theme ? <PiSun /> : <LuMoon />}</span>
           </label>
         </div>
@@ -99,7 +86,10 @@ useEffect(()=>{
         <div className={`menu-wrapper ${isOpen ? "menu-wrapper-active" : ""}`}>
           <p 
           className="discount-lable"
-          onClick={() => setIsModalOpen(true)}
+          onClick={() => {
+            dispatch(checkPromoProduct());
+            setIsModalOpen(true)
+          }}
           >1 day discount!</p>
           <ul className="navbar__menu">
             <li>
@@ -162,23 +152,17 @@ useEffect(()=>{
 
 
       {
-        isModalOpen && 
+        isModalOpen && promoProduct &&
         <Modal>
-          <div>
-           </div>
-
-
-            <div className="promo-pro" > 
+          <div className="promo-pro" > 
               <div className="promo-pro__header"> 
-                <h2>50% discount on product of the day!</h2> 
+                <h2 className="promo-title">50% discount on product of the day!</h2> 
                 <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
               </div> 
 
               <div className="promo-pro__info"> 
                 <div className="product-image-container"> 
-                <img src={promoProduct.image} alt={promoProduct.title} className="product-image" />
-
-
+                <img src={`${apiUrl}/${promoProduct.image}`}alt={promoProduct.title} className="product-image"/>
                   <div className="product-info-overlay"> 
                     <span className="discount-badge">-50%</span> 
                     <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
@@ -197,18 +181,17 @@ useEffect(()=>{
 
               <button
                 className={`btn promo-pro__button ${addedToCart ? 'added' : ''}`}
-                onClick={handleAddToCart}
+                onClick={()=>handleAddToCart(promoProduct)}
                 disabled={addedToCart}
               >
                 {addedToCart ? 'Added' : 'Add to cart'}
               </button>
 
-
-            </div> 
+          </div> 
         </Modal> 
-        }
+      }
     </>
-  );
+  )
 }
 
 export default NavBar

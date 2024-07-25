@@ -7,30 +7,67 @@ export const fetchGetDiscount = createAsyncThunk(
   'cart/fetchGetDiscount',
   async function (formData, {rejectWithValue}) {
 
-    try {
-      const responce = await fetch(`${URL}/sale/send`, {
+    console.log(formData, rejectWithValue)
+
+ 
+     try {
+      const responese = await fetch(`${URL}/sale/send`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify(formData)
+        body: JSON.stringify({...formData})
       })
-      console.log(responce, formData);
-      if (!responce.ok) {
-        throw new Error('Failed to send a discount request')      
-        }  else {localStorage.setItem('discount', true)}
-  
+         
+      if (!responese.ok) {
+        throw new Error('Failed to send an Order')      
+        } else{
+          localStorage.setItem('discount', true)
+        }
+
+        const data = await responese.json()
+
+        return data 
+    } catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
+export const fetchOrder = createAsyncThunk(
+  'cart/fetchOrder',
+   async function (formData, {rejectWithValue}) {
+
+    try {
+      const responese = await fetch(`${URL}/order/send`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({...formData})
+      })
+        
+      
+      
+      if (!responese.ok) {
+        throw new Error('Failed to send an Order')      
+        } else{
+          localStorage.removeItem('cart') // стираем корзину в localStorage
+        }
+
+        const data = await responese.json()
+
+        return data 
     } catch (error) {
       return rejectWithValue(error.message)
     }
   }
 )
 
+
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cart: [],
-        // favourites: [],
         discount: false,
         isLoading: false,
         error: null
@@ -45,23 +82,14 @@ const cartSlice = createSlice({
           localStorage.setItem('cart', JSON.stringify([]))
         }
       },
-      // getfavouritessFromLocalStorage(state){
-      //   let favouritesFromStorage = JSON.parse(localStorage.getItem('favourites'))
-      //   if (favouritesFromStorage) {
-      //     state.favourites = [...favouritesFromStorage]
-      //   } else{
-      //     localStorage.setItem('favourites', JSON.stringify([]))
-      //   }
-      // },
       addToCart(state, action) {
         const {product, quantity} = action.payload
         let findProduct = state.cart.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве
        
         if (findProduct) {
           state.cart.map(item => { 
-            // findProduct.quantity === quantity
             if (item.id === product.id) 
-              { item.quantity = quantity  // в стейте не менфяется количество
+              { item.quantity = quantity  
             }
           return item
           })
@@ -73,39 +101,23 @@ const cartSlice = createSlice({
       },
       changeQuantity(state, action) {
         const {product, quantity} = action.payload
+        
         state.cart.map(item => {
           if (item.id === product.id){
           item.quantity = quantity
-        } 
-      return item 
-      })
-      localStorage.setItem('cart', JSON.stringify(state.cart))
+          } 
+        return item 
+        })
 
-      const event = new Event('cartUpdate'); // Создание и диспатчинг кастомного события
-      window.dispatchEvent(event);
+        localStorage.setItem('cart', JSON.stringify(state.cart))
       },
       removeFromCart(state, {payload}) {
         state.cart = state.cart.filter(item => item.id !==payload.id)
         localStorage.setItem('cart', JSON.stringify(state.cart))
       },
-      // addTofavourites(state, action){
-      //   const product = action.payload
-      //   let findProduct = state.favourites.find(item => item.id === product.id) // получаем в переменную ссылку на объект в массиве или null если его нет
-       
-      //   if (!findProduct) {
-      //     state.favourites.push(product)
-      //   }
-      //   localStorage.setItem('favourites', JSON.stringify(state.favourites))
-      // },
-      // removeFromfavourites(state, action){
-      //   const product = action.payload
-
-      //   state.favourites = state.favourites.filter(item => item.id !==product.id)
-      //   localStorage.setItem('favourites', JSON.stringify(state.favourites))
-      // },
 
       extraReducers: (builder) => {
-        builder
+        builder // не работают кейсы
         .addCase(fetchGetDiscount.pending,(state) => {
           state.isLoading = true, 
           state.error = null
@@ -118,6 +130,21 @@ const cartSlice = createSlice({
           state.isLoading = null
           state.error = action.payload 
         })
+
+        .addCase(fetchOrder.pending,(state) => {
+          state.isLoading = true, 
+          state.error = null
+        })
+        .addCase(fetchOrder.fulfilled, (state)  =>{
+          state.isLoading = false,
+          state.cart = [] // не обнуляется корзтна в стейте
+          console.log(action.payload);
+
+        })
+        .addCase(fetchOrder.rejected, (state, action) => {
+          state.isLoading = null
+          state.error = action.payload 
+        })
       }
     }
   })
@@ -125,13 +152,9 @@ const cartSlice = createSlice({
 
 export const {
   getCartFromLocalStorage,
-  // getfavouritessFromLocalStorage,
   addToCart,  
   changeQuantity,
   removeFromCart,
-  // addTofavourites,
-  // removeFromfavourites,
-
 } = cartSlice.actions
 
 export default cartSlice.reducer

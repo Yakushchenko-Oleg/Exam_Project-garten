@@ -87,7 +87,7 @@
                 justify-content: space-between;
                 align-items: baseline;
                 
-                p{
+                > p{
                     font-weight: 600;
                     size: 40px;
                     color: $text-grey;
@@ -104,7 +104,6 @@
                 height: 58px;
                 border: 1px solid $border-grey;
                 border-radius: $radius-small;
-                margin-bottom: 16px;
                 padding: 16px 32px;
                 &-light{
                    color: $primary-grey;
@@ -123,11 +122,22 @@
                 color: $text-grey;
             }
 
+            .cart__errornessage{
+                color: $primary-orange;
+                margin-top: 5px;
+                margin-bottom: 11px;
+                font-size: 15px;
+                font-weight: 400;
+                
+            }
+            
+
             button{
                 background-color: $primary-green;
                 color: $primary-white;
                 font-weight: 600;
                 font-size: 20px;
+                margin-top: 16px;
                 width: 100%;
                 padding: 16px 32px;
                 border: none;
@@ -146,15 +156,56 @@
     }
 }
 
+// модальное окно
+.modal-order {
+    margin: 0 auto;
+    background-color: $primary-green;
+    padding: 32px;
+    border-radius: $radius-big;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    // width: 548px;
+    width: 85%;
+    height: auto;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        @include adaptiv-font(44, 28);
+        margin-bottom: 12px;
+    }
+
+    &__title{
+    text-align: start;
+    @include adaptiv-font(40, 25);
+    font-weight: 600;
+    color: $primary-white;
+    }
+
+    &__close-button {
+    background: none;
+    border: none;
+    color: $primary-white;
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-start;
+    }
+
+    &__text{
+        color: $primary-white;
+        text-align: justify;
+        @include adaptiv-font(20, 16);
+    }
+}
+
+
 
 @media screen and (max-width: 1000px) {
     .header-wrapper {
         margin-bottom: 32px;
     }
-    // .cartitem{
-    //     width: auto;
-    //     height: 180px;
-    // }
 }
 
 @media screen and (max-width: 768px) {
@@ -168,14 +219,6 @@
         align-items: center;
     }
 }
-
-// @media screen and (max-width: 630px) {
-//     .cart{
-//         h2{
-//             text-align: start;
-//         }
-//     }
-// }
 
 @media screen and (max-width: 480px) {
     .cart{
@@ -192,7 +235,11 @@
     .cart__link-hidden{
         display: inline-block;
     }
-    }    
+    }
+    
+    .modal-order{
+        padding: 20px;
+    }
 }
 
 @media screen and (max-width: 360px) {

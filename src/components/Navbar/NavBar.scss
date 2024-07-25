@@ -10,8 +10,7 @@
     position: sticky;
     top: 0px;
     max-width: 1440px;
-    // background-color: #FFFFF1;
-    z-index: 99999;
+     z-index: 99999;
 
     &-dark {
         background-color: $primary-grey;
@@ -124,19 +123,6 @@
 
     }
 
-    // .icon-cart,  .icon-heart {
-    //     @include adaptiv-font(48, 38);
-    //     fill: $primary-white;
-    //     stroke-width: 1px;
-
-    // }
-
-    // &__icon-cart:hover, &__icon-heart:hover  {
-    //     fill: $primary-grey;
-
-    //     cursor: pointer;
-    // }
-
     &__burger {
         display: flex;
         flex-direction: column;
@@ -155,6 +141,150 @@
             background-color: $primary-grey;
         }
     }
+}
+
+// модальное окно промопродукта
+
+.promo-pro {
+    margin: 0 auto;
+    background-color: $primary-green;
+    padding: 32px;
+    border-radius: $radius-big;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    // width: 548px;
+    width: 65%;
+    height: auto;
+}
+
+.promo-pro__header {
+    
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+
+    .promo-title{
+        text-align: start;
+        @include adaptiv-font(40, 25);
+        font-weight: 600;
+        color: $primary-white;
+    }
+
+    .close-button {
+        background: none;
+        border: none;
+        color: $primary-white;
+        font-size: 24px;
+        cursor: pointer;
+        align-self: flex-start;
+    }
+}
+
+.promo-pro__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+   
+
+    .product-image-container {
+        width: 100%;
+        margin-bottom: 16px;
+        position: relative;
+        background-color: $primary-white;
+        border-radius: $radius-big;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 284px;
+            object-fit: cover;
+            border-radius: $radius-small;
+        }
+
+        .product-info-overlay {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
+
+            .discount-badge {
+                background-color: #FF6347;
+                color: white;
+                padding: 5px 10px;
+                border-radius: $radius-small;
+                font-size: 14px;
+                font-weight: bold;
+                position: absolute;
+                top: 15px;
+                left: 15px;
+            }
+
+            .icon-favourite {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+.product-info {
+ 
+    bottom: 0; // Позиционирование в нижней части контейнера
+    left: 0; // Растягивание на всю ширину контейнера
+    color: #424436; // Белый текст
+    padding: 10px 20px; // Внутренние отступы
+    background-color: $primary-white;
+
+    h3 {
+        @include adaptiv-font(20, 16);
+        font-weight: 500;
+    }
+
+    .price {
+        display: flex;
+        align-items: baseline;
+        @include adaptiv-font(20, 18);
+        font-weight: bold; 
+        gap: 16px;
+
+        .new-price {
+            color: #424436;
+            @include adaptiv-font(40, 32);
+            font-weight: 600;
+            line-height: 44px;
+            text-align: left;
+
+            // Задаем цвет для новой цены
+        }
+
+        .old-price {
+            text-decoration: line-through; // Зачеркиваем старую цену
+            color: $primary-grey; // Цвет старой цены
+            opacity: 0.7; // Немного уменьшаем яркость для старой цены
+        }
+    }
+}
+
+.promo-pro__button {
+    background-color: $primary-white;
+    width: 100%;
+    cursor: pointer;
+    color: $primary-grey;
+    border: none;
+    // padding: 10px 20px; 
+    border-radius: $radius-small;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 26px;
+    text-align: center;
 }
 
 
@@ -178,11 +308,6 @@
     }
 }
 
-// @media screen and (min-width: 701px) {
-//     .bg-opacity{
-//         display: none;
-//     }
-// }
 
 @media screen and (max-width: 700px) {
     .navbar {
@@ -237,6 +362,10 @@
     .navbar__logo {
         gap: 10px;
     }
+
+    .promo-pro {
+        padding: 20px;
+    }
 }
 
 @media screen and (max-width: 360px) {
@@ -249,139 +378,16 @@
     .navbar__logo {
         gap: 8px;
     }
-}
 
-.promo-pro {
-    background-color: $primary-green;
-    padding: 32px;
-    border-radius: $radius-big;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
-
-.promo-pro__header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-
-    h2 {
-        font-size: 40px;
-        font-weight: 600;
-        line-height: 44px;
-        color: $primary-white;
+   .promo-pro__info .product-image-container img {
+        height: 220px;
     }
 
-    .close-button {
-        background: none;
-        border: none;
-        color: $primary-white;
-        font-size: 24px;
-        cursor: pointer;
-    }
-}
-
-.promo-pro__info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-
-    .product-image-container {
-        width: 100%;
-        height: 284px;
-        margin-bottom: 16px;
-        position: relative;
-        background-color: $primary-white;
-        border-radius: $radius-big;
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: $radius-small;
-        }
-
-        .product-info-overlay {
-            display: flex;
-            justify-content: space-between;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 10px;
-
-            .discount-badge {
-                background-color: #FF6347;
-                color: white;
-                padding: 5px 10px;
-                border-radius: 12px;
-                font-size: 14px;
-                font-weight: bold;
-                position: absolute;
-                top: 15px;
-                left: 15px;
-            }
-
-            .icon-favourite {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                cursor: pointer;
-            }
-        }
-    }
-}
-
-.product-info {
-    position: absolute;
-    bottom: 0; // Позиционирование в нижней части контейнера
-    left: 0; // Растягивание на всю ширину контейнера
-    color: #424436; // Белый текст
-    padding: 10px 20px; // Внутренние отступы
-
-    h3 {
-        font-size: 20px;
-        font-weight: 500;
+    .product-info .price {
+        gap: 8px;
     }
 
-    .price {
-        display: flex;
-        align-items: baseline;
-        font-size: 16px;
-        font-weight: bold; 
-        gap: 16px;
-
-        .new-price {
-            color: #424436;
-            font-size: 40px;
-            font-weight: 600;
-            line-height: 44px;
-            text-align: left;
-
-            // Задаем цвет для новой цены
-        }
-
-        .old-price {
-            text-decoration: line-through; // Зачеркиваем старую цену
-            color: $primary-grey; // Цвет старой цены
-            opacity: 0.7; // Немного уменьшаем яркость для старой цены
-        }
+    .promo-pro__button {
+        padding: 16px 10px;
     }
-}
-
-.promo-pro__button {
-    background-color: $primary-white;
-    width: 100%;
-    cursor: pointer;
-    color: $primary-grey;
-    border: none;
-    // padding: 10px 20px; 
-    border-radius: $radius-small;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 26px;
-    text-align: center;
 }

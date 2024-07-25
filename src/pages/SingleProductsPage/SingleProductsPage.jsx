@@ -12,21 +12,23 @@ import { addTofavourites, removeFromfavourites } from "../../store/favouritesSli
 const SingleProductsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { recivedProducts, isLoading, error } = useSelector((state) => state.products);
+  const { recivedProducts, promoProduct, isLoading, error } = useSelector((state) => state.products);
   const { cart } = useSelector(state => state.cart);
   const { favourites } = useSelector(state => state.favourites);
-
   const { data } = recivedProducts || { data: [] };
-  const product = data.find((item) => item.id === parseInt(id)) || {};
   const [imageOpen, setImageOpen] = useState(null);
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const apiUrl = import.meta.env.APP_API_URL;
-  const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
+
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
-  
+  // const allProducts =
+  const product = [...data, promoProduct].find((item) => item.id == id) || {};
+
+  const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
+
   useEffect(()=> {
     let inCart =  cart.find(item => item.id === product.id)
 
