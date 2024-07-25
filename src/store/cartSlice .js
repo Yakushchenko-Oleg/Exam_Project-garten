@@ -32,33 +32,20 @@ export const fetchOrder = createAsyncThunk(
    function (formData, {rejectWithValue}) {
 
     try {
-
-      // fetch('https://exam-server-5c4e.onrender.com/order/send', {
-      //   method: 'POST',
-      //   body: JSON.stringify({
-      //    ...formData
-      //   }),
-      //   headers: {
-      //     'Content-type': 'application/json; charset=UTF-8',
-      //   },
-      // })
-      //   .then((response) => response.json())
-        // .then((json) => console.log(json));
-
-      const responese = fetch("https://exam-server-5c4e.onrender.com/order/send", {
+      const responese = fetch(`${URL}/order/send`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         }, 
         body: JSON.stringify({...formData}) // не уверен что правильно передаю  cart
-      }).then(res => res.json()).then(console.log)
-      // console.log(responese, formData);
+      }).then(res => res.json()).then(console.log,)
+        
 
+        // localStorage.removeItem('cart') // стираем корзину в localStorage
 
-      // if (!responese.ok) {
-      //   throw new Error('Failed to send an Order')      
-      //   }  else {localStorage.removeItem('cart')} // стираем корзину в localStorage
-  
+      if (!res.ok) {
+        throw new Error('Failed to send an Order')      
+        } 
     } catch (error) {
       return rejectWithValue(error.message)
     }
@@ -133,18 +120,19 @@ const cartSlice = createSlice({
           state.isLoading = null
           state.error = action.payload 
         })
-        .addCase(fetchOrder.pending,(state) => {
-          state.isLoading = true, 
-          state.error = null
-        })
-        .addCase(fetchOrder.fulfilled, (state)  =>{
-          state.isLoading = false,
-          console.log(state)
-        })
-        .addCase(fetchOrder.rejected, (state, action) => {
-          state.isLoading = null
-          state.error = action.payload 
-        })
+
+        // .addCase(fetchOrder.pending,(state) => {
+        //   state.isLoading = true, 
+        //   state.error = null
+        // })
+        // .addCase(fetchOrder.fulfilled, (state)  =>{
+        //   state.isLoading = false,
+        //   console.log(state)
+        // })
+        // .addCase(fetchOrder.rejected, (state, action) => {
+        //   state.isLoading = null
+        //   state.error = action.payload 
+        // })
       }
     }
   })
