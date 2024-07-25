@@ -20,8 +20,7 @@ const Cart = () => {
     handleSubmit,
     formState: { errors, isSubmitSuccessful },
     reset,
-    isSubmitting
-  } = useForm()
+    } = useForm()
 
   useEffect(() => {
     if (cart) {
@@ -34,12 +33,15 @@ const Cart = () => {
     setisOrderPlaced(true)
   }
 
+  // useEffect(()=>{
+  //   setisOrderPlaced(!isOrderPlaced)
+  // },[isSubmitSuccessful])
+
   const handleOrderSubmit =  (data) => {
-    dispatch( fetchOrder({...data,order: cart}))
+    dispatch( fetchOrder({...data, order: cart}))
     
-  // console.log('isSubmitSuccessful:', isSubmitSuccessful);
-  // alert(`isSubmitSuccessful:`, isSubmitSuccessful ? "TRUE" : "FALSE")
-    // reset()
+    console.log('isSubmitSuccessful:', isSubmitSuccessful);
+    reset()
   }
 
   return (
@@ -61,7 +63,10 @@ const Cart = () => {
             </div>
           
           <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} 
-            onSubmit={handleSubmit(handleOrderSubmit)}>
+            onSubmit={()=> {
+              handleSubmit(handleOrderSubmit)
+              setisOrderPlaced(true)
+            }}>
               <h3>Order details</h3>
               <p>{`${totalQuantity} item`}</p>
               <div className="cart__content_form_totoalConteiner">
@@ -81,7 +86,7 @@ const Cart = () => {
                   maxLength:{ value: 20, message: 'Maximum name length 20 letters'}
                 })}
               />
-              <p className='errornessage'>{errors.username?.message}</p>
+              <p className='cart__errornessage'>{errors.username?.message}</p>
 
               <input 
                 className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
@@ -97,7 +102,7 @@ const Cart = () => {
                   },
                 })}
               />
-              <p className='errornessage'>{errors.phonenumber?.message}</p>
+              <p className='cart__errornessage'>{errors.phonenumber?.message}</p>
 
               <input 
                 className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
@@ -110,7 +115,7 @@ const Cart = () => {
                   pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: 'Incorrect email format'}
                 })}
               />
-              <p className='errornessage'>{errors.email?.message}</p>
+              <p className='cart__errornessage'>{errors.email?.message}</p>
 
               <button>Order</button>
 

@@ -38,10 +38,10 @@ export const fetchOrder = createAsyncThunk(
             'Content-Type': 'application/json'
         }, 
         body: JSON.stringify({...formData}) // не уверен что правильно передаю  cart
-      }).then(res => res.json()).then(
-        console.log,
+      }).then(res => res.json()).then(console.log,)
+        
 
-        localStorage.removeItem('cart')) // стираем корзину в localStorage
+        // localStorage.removeItem('cart') // стираем корзину в localStorage
 
       if (!res.ok) {
         throw new Error('Failed to send an Order')      
@@ -121,18 +121,18 @@ const cartSlice = createSlice({
           state.error = action.payload 
         })
 
-        .addCase(fetchOrder.pending,(state) => {
-          state.isLoading = true, 
-          state.error = null
-        })
-        .addCase(fetchOrder.fulfilled, (state)  =>{
-          state.isLoading = false,
-          console.log(state)
-        })
-        .addCase(fetchOrder.rejected, (state, action) => {
-          state.isLoading = null
-          state.error = action.payload 
-        })
+        // .addCase(fetchOrder.pending,(state) => {
+        //   state.isLoading = true, 
+        //   state.error = null
+        // })
+        // .addCase(fetchOrder.fulfilled, (state)  =>{
+        //   state.isLoading = false,
+        //   console.log(state)
+        // })
+        // .addCase(fetchOrder.rejected, (state, action) => {
+        //   state.isLoading = null
+        //   state.error = action.payload 
+        // })
       }
     }
   })
