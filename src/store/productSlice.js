@@ -103,14 +103,7 @@ const productsSlice = createSlice({
         id: uuidv4(), 
         discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
       }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
-          
-      console.log('Текущая дата:', currentDate, typeof(currentDate))
-      console.log('Дата c Local Storage:', promoDateFromStorage, typeof(promoDateFromStorage))
-      console.log('currentPromoProduct :', currentPromoProduct, typeof(currentPromoProduct));
-      console.log('promoProduct c Local Storage:',promoProductFromStorage, typeof(promoProductFromStorage))
-      console.log("state.promoProduct", state.promoProduct);
-      
-    
+            
       if (promoProductFromStorage) {
         if (promoDateFromStorage !== currentDate) {
           console.log('PromoDate не совпадают, обнавляем PromoProduct и promoDate.')
@@ -142,7 +135,6 @@ const productsSlice = createSlice({
         let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
         let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
 
-      
         if (promoProductFromStorage) {
           state.promoProduct = promoProductFromStorage
           state.promoDate = promoDateFromStorage
