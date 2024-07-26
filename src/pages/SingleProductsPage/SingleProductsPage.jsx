@@ -183,8 +183,9 @@ const SingleProductsPage = () => {
               {addedToCart ? 'Added' : 'Add to cart'}
             </button>
           </div>
+        </div>
         
-    <div className="product-details__description">
+        <div className="product-details__description">
       <span className="product-details__description-label">Description</span>
       <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
         {renderDescription()}
@@ -194,7 +195,6 @@ const SingleProductsPage = () => {
           {isDescriptionExpanded ? 'Read less' : 'Read more'}
         </a>
       )}
-    </div>
         </div>
 
       </div>
