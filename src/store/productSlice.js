@@ -5,8 +5,8 @@ const URL = `${import.meta.env.APP_API_URL}`
 
 function mixArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
-      const randomObj = Math.floor(Math.random() * (i + 1));
-      [array[i], array[randomObj]] = [array[randomObj], array[i]];
+    const randomObj = Math.floor(Math.random() * (i + 1));
+    [array[i], array[randomObj]] = [array[randomObj], array[i]];
   }
   return array;
 }
@@ -23,8 +23,8 @@ export const fetchAllProducts = createAsyncThunk(
       
       const data = await resp.json()
       return data
-
-    } catch (error) {
+    } 
+    catch (error) {
       return rejectWithValue(error.message)
     }
   }
@@ -42,8 +42,8 @@ export const fetchProductsByCategory = createAsyncThunk(
       
       const data  = await resp.json()
       return data
-
-    } catch (error) {
+    } 
+    catch (error) {
       return rejectWithValue(error.message)
     }
   }
@@ -56,7 +56,7 @@ const productsSlice = createSlice({
       data: [],
       category: null,
     },
-     promoProduct: {},
+    promoProduct: {},
     promoDate: null,
     filteredProducts: [],
     isLoading: false,
@@ -65,17 +65,11 @@ const productsSlice = createSlice({
   reducers: {
     sortByPriceAction(state, action) {
       const { value } = action.payload;
-      state.filteredProducts 
-      // = 
-      // (state.filteredProducts.length > 0
-      //     ? state.filteredProducts
-      //     : [...state.recivedProducts.data]
-      // )
-      .sort(
-          value === "low-to-high" ? (a, b) => (a.discont_price ? a.discont_price : a.price) - (b.discont_price ? b.discont_price : b.price)
-          : value === "high-to-low" ? (a, b) => (b.discont_price ? b.discont_price : b.price) - (a.discont_price ? a.discont_price : a.price)
-          : (a, b) => a.id - b.id
-        );
+      state.filteredProducts.sort(
+        value === "low-to-high" ? (a, b) => (a.discont_price ? a.discont_price : a.price) - (b.discont_price ? b.discont_price : b.price)
+        : value === "high-to-low" ? (a, b) => (b.discont_price ? b.discont_price : b.price) - (a.discont_price ? a.discont_price : a.price)
+        : (a, b) => a.id - b.id
+      );
     },
     sortByDiscountAction(state, action) {
       const { applyDiscount } = action.payload;
@@ -89,12 +83,7 @@ const productsSlice = createSlice({
     sortByUserPriceAction(state, action) {
       const { minValue, maxValue } = action.payload;
       state.filteredProducts = state.recivedProducts.data.filter(item => (item.discont_price ? item.discont_price : item.price) >= minValue && (item.discont_price ? item.discont_price : item.price) <= maxValue);
-      // (state.filteredProducts.length > 0 
-      //     ? state.filteredProducts 
-      //     : [...state.recivedProducts.data]
-      // ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
-
     checkPromoProduct(state) {
       let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
       let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
@@ -141,7 +130,6 @@ const productsSlice = createSlice({
         if (promoProductFromStorage) {
           state.promoProduct = promoProductFromStorage
           state.promoDate = promoDateFromStorage
-
         }
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {

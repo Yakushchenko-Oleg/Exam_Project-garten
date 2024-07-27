@@ -41,17 +41,11 @@ const favouritesSlice = createSlice({
     },
     sortByPriceAction(state, action) {
       const { value } = action.payload;
-      state.filtredFavourites 
-      // = 
-      // (state.filtredFavourites.length > 0
-      //     ? state.filtredFavourites
-      //     : [...favourites]
-      // )
-      .sort(
-          value === "low-to-high" ? (a, b) => (a.discont_price ? a.discont_price : a.price) - (b.discont_price ? b.discont_price : b.price)
-          : value === "high-to-low" ? (a, b) => (b.discont_price ? b.discont_price : b.price) - (a.discont_price ? a.discont_price : a.price)
-          : (a, b) => a.id - b.id
-        );
+      state.filtredFavourites .sort(
+        value === "low-to-high" ? (a, b) => (a.discont_price ? a.discont_price : a.price) - (b.discont_price ? b.discont_price : b.price)
+        : value === "high-to-low" ? (a, b) => (b.discont_price ? b.discont_price : b.price) - (a.discont_price ? a.discont_price : a.price)
+        : (a, b) => a.id - b.id
+      );
     },
     sortByDiscountAction(state, action) {
       const { applyDiscount } = action.payload;

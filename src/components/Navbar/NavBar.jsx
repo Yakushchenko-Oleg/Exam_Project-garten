@@ -15,7 +15,6 @@ import { addToCart } from "@/store/cartSlice ";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
-  
   const[cartNotEmpty, setCartNotEmpty] = useState(false); 
   const[favouritesNotEmpty, setFavouritesNotEmpty] = useState(false); 
   const { cart } = useSelector(state => state.cart);
@@ -44,7 +43,7 @@ const NavBar = () => {
     else{
       setFavouritesNotEmpty(false) 
     }
-    },[favourites])
+  },[favourites])
 
   const handleAddToFavourite = () => {
     const carentfavouriteState = !isFavourite
@@ -93,24 +92,16 @@ const NavBar = () => {
           >1 day discount!</p>
           <ul className="navbar__menu">
             <li>
-              <NavLink to="/" className="mainpage">
-                Main Page
-              </NavLink>
+              <NavLink to="/" className="mainpage"> Main Page </NavLink>
             </li>
             <li>
-              <NavLink to="/categories" className="categories">
-                Categories
-              </NavLink>
+              <NavLink to="/categories" className="categories">  Categories </NavLink>
             </li>
             <li>
-              <NavLink to="/allproducts" className="allproducts">
-                All products
-              </NavLink>
+              <NavLink to="/allproducts" className="allproducts"> All products </NavLink>
             </li>
             <li>
-              <NavLink to="/allsales" className="allsalles">
-                All sales
-              </NavLink>
+              <NavLink to="/allsales" className="allsalles"> All sales </NavLink>
             </li>
           </ul>
         </div>
@@ -155,37 +146,37 @@ const NavBar = () => {
         isModalOpen && promoProduct &&
         <Modal>
           <div className="promo-pro" > 
-              <div className="promo-pro__header"> 
-                <h2 className="promo-title">50% discount on product of the day!</h2> 
-                <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
-              </div> 
+            <div className="promo-pro__header"> 
+              <h2 className="promo-title">50% discount on product of the day!</h2> 
+              <button className="close-button" onClick={() => setIsModalOpen(false)}>X</button> 
+            </div> 
 
-              <div className="promo-pro__info"> 
-                <div className="product-image-container"> 
+            <div className="promo-pro__info"> 
+              <div className="product-image-container"> 
                 <img src={`${apiUrl}/${promoProduct.image}`}alt={promoProduct.title} className="product-image"/>
-                  <div className="product-info-overlay"> 
-                    <span className="discount-badge">-50%</span> 
-                    <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
-                  </div> 
-                  <div className="product-info"> 
-                    <h3>{promoProduct.title}</h3> 
-                    <div className="price-container"> 
-                      <p className="price"> 
-                      <span className="new-price">${promoProduct.discont_price}</span>
-                      <span className="old-price">${promoProduct.price}</span>
-                      </p> 
-                    </div> 
+                <div className="product-info-overlay"> 
+                  <span className="discount-badge">-50%</span> 
+                  <RiHeartFill className={`icon-favourite ${isFavourite ? 'icon-favourite-active' : ''}`} onClick={handleAddToFavourite} /> 
+                </div> 
+                <div className="product-info"> 
+                  <h3>{promoProduct.title}</h3> 
+                  <div className="price-container"> 
+                    <p className="price"> 
+                    <span className="new-price">${promoProduct.discont_price}</span>
+                    <span className="old-price">${promoProduct.price}</span>
+                    </p> 
                   </div> 
                 </div> 
               </div> 
+            </div> 
 
-              <button
-                className={`btn promo-pro__button ${addedToCart ? 'added' : ''}`}
-                onClick={()=>handleAddToCart(promoProduct)}
-                disabled={addedToCart}
-              >
-                {addedToCart ? 'Added' : 'Add to cart'}
-              </button>
+            <button
+              className={`btn promo-pro__button ${addedToCart ? 'added' : ''}`}
+              onClick={()=>handleAddToCart(promoProduct)}
+              disabled={addedToCart}
+            >
+              {addedToCart ? 'Added' : 'Add to cart'}
+            </button>
 
           </div> 
         </Modal> 

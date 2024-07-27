@@ -146,19 +146,21 @@ const ProductsPage = () => {
         {isLoading ? (
           //если идет загрузка, вставляем Скeлетон
           <div className="wrapper">
-            {skeleton.map((item) => (
+            {
+              skeleton.map((item) => (
               <div className="loader" key={item}></div>
-            ))
+              ))
             }
           </div>
-        ) : (
+        ) 
+        : (
           <div className="wrapper">         
           {
-          filteredProducts && filteredProducts.length > 0
-              ? filteredProducts.map((item) => (
-                  <SingleProduct key={item.id} product={item} />
-                ))
-              : <h2>Ничего не найдено!!!!</h2>
+            filteredProducts && filteredProducts.length > 0
+            ? filteredProducts.map((item) => (
+                <SingleProduct key={item.id} product={item} />
+              ))
+            : <h2>Ничего не найдено!!!!</h2>
           }
           </div>
         )}

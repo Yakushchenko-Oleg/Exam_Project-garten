@@ -1,52 +1,46 @@
-import React, { useEffect } from "react";
-
+import React from "react";
 import "./Categories.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
 import CategoriesItem from "../CategoriesItem/CategoriesItem";
 
 const Categories = () => {
-  const { categories, isLoading, error } = useSelector(
-    (state) => state.categories
-  );
-
+  const { categories, isLoading, error } = useSelector((state) => state.categories);
   const slicedCategories = categories.slice(0, 4);
-
   const apiUrl = import.meta.env.APP_API_URL;
-
   const skeleton = [1, 2, 3, 4];
 
   return (
     <div className="products container-mainpage ">
       <div className="header-wrapper">
         <h2 className="categories-title">Categories</h2>
-        <div className="categories__line"></div>
+        <div className="categories__line">
+        </div>
         <Link to="/categories">
           <span className="categories__link">All categories</span>
         </Link>
       </div>
 
-      {isLoading ? (
-        <div className="wrapper">
+      {isLoading 
+      ? <div className="wrapper">
           {skeleton.map((item) => (
             <div className="loader" key={item}></div>
           ))
           }
         </div>
-      ) : (
-        <div className="wrapper">
-          {slicedCategories.map((item) => (
-            <Link
-              to={`/categories/${item.id}`}
-              className="item__link"
-              key={item.id}
-            >
-              <CategoriesItem item={item} apiUrl={apiUrl} />
-            </Link>
-          ))}
-        </div>
-      )}
+       : <div className="wrapper">
+            {slicedCategories.map((item) => (
+              <Link
+                to={`/categories/${item.id}`}
+                className="item__link"
+                key={item.id}
+              >
+                <CategoriesItem item={item} apiUrl={apiUrl} />
+              </Link>
+            ))
+            }
+          </div>
+      }
 
       {error && <h2> Error from server: {error} </h2>}
 

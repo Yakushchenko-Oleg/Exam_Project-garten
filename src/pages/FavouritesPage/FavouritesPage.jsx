@@ -9,7 +9,6 @@ import { sortByPriceAction,
          sortByUserPriceAction
  } from "../../store/favouritesSlice.js";
 
-
 const FavouritesPage = () => {
    
   const dispatch = useDispatch();
@@ -19,12 +18,6 @@ const FavouritesPage = () => {
   const [minValue, setMinValue] =useState(-Infinity)
   const [maxValue, setMaxValue] =useState(Infinity)
   const [discountItems, setDiscountItems] = useState(false)
-
-
-  // useEffect(() => {
-  //   if (filtredFavourites) {
-  //     dispatch(getfavouritessFromLocalStorage());}
-  //   }, [dispatch]);
 
   useEffect(() => {
     if (filtredFavourites.length > 0) {
@@ -93,34 +86,35 @@ const FavouritesPage = () => {
         </div>
 
         <div className="filter-wrapper">
-        <form className="filter-wrapper__item" onChange={handleUserPrice}>
-          <p className="filter-name">Price</p>
-          <input className="userInput" type="number" placeholder="from" name="from"></input>
-          <input className="userInput" type="number" placeholder="to" name="to"></input>
-        </form>
+          <form className="filter-wrapper__item" onChange={handleUserPrice}>
+            <p className="filter-name">Price</p>
+            <input className="userInput" type="number" placeholder="from" name="from"></input>
+            <input className="userInput" type="number" placeholder="to" name="to"></input>
+          </form>
 
-        <div className="filter-wrapper__item">
-          <p className="filter-name">Discounted items</p>
-          <input
-            className="checkbox"
-            type="checkbox"
-            onChange={handleDiscountApply}
-          ></input>
-        </div>
+          <div className="filter-wrapper__item">
+            <p className="filter-name">Discounted items</p>
+            <input
+              className="checkbox"
+              type="checkbox"
+              onChange={handleDiscountApply}
+            ></input>
+           </div>
 
-        <div className="filter-wrapper__item">
-          <p className="filter-name">Sort</p>
-          <select onChange={handleSort}>
-            <option value="default">by default</option>
-            <option value="low-to-high">Price: Low to High</option>
-            <option value="high-to-low">Price: High to Low</option>
-          </select>
-        </div>
+          <div className="filter-wrapper__item">
+            <p className="filter-name">Sort</p>
+            <select onChange={handleSort}>
+              <option value="default">by default</option>
+              <option value="low-to-high">Price: Low to High</option>
+              <option value="high-to-low">Price: High to Low</option>
+            </select>
+          </div>
         </div>
 
         {isLoading ? (
           <div className="loader"></div>
-        ) : (
+        ) 
+        : (
           <div className="wrapper">
             {filtredFavourites && filtredFavourites.length > 0
               ? filtredFavourites.map((item) => (
