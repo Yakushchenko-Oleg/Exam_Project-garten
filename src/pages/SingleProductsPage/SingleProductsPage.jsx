@@ -24,9 +24,7 @@ const SingleProductsPage = () => {
   const apiUrl = import.meta.env.APP_API_URL;
 
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
-  // const allProducts =
   const product = [...data, promoProduct].find((item) => item.id == id) || {};
-
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
 
   useEffect(()=> {

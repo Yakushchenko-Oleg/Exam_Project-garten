@@ -1,7 +1,6 @@
 import React, {createContext, useEffect} from 'react'
 import { useState } from 'react';
 
-
 export const ThemeContext = createContext();
 
 const ThemeContextProvider = ({ children }) => {
@@ -17,7 +16,6 @@ const ThemeContextProvider = ({ children }) => {
     const toggleTheme = () => {
     setTheme((prevTheme) => !prevTheme);
   };
-
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

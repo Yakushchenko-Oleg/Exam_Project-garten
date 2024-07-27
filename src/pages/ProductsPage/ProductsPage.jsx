@@ -14,18 +14,14 @@ import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
 
 const ProductsPage = () => {
   const dispatch = useDispatch();
-  const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
-    (state) => state.products
-  );
-  const { data, category } = recivedProducts;
-
+  const { recivedProducts, filteredProducts, isLoading, error } = useSelector((state) => state.products);
+  const { category } = recivedProducts;
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
   const [sortValue, setSortValue] = useState("default");
   const [minValue, setMinValue] =useState(-Infinity)
   const [maxValue, setMaxValue] =useState(Infinity)
   const [discountItems, setDiscountItems] = useState(false)
-
   const { categoryId } = useParams();
 
   useEffect(() => {
@@ -34,7 +30,7 @@ const ProductsPage = () => {
     } else {
       dispatch(fetchAllProducts());
     }
-  }, [categoryId, /*dispatch*/]);
+  }, [categoryId]);
 
   useEffect(() => {
     if (categoryId && category) {
@@ -60,8 +56,6 @@ const ProductsPage = () => {
   useEffect(() => {
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
     dispatch(sortByPriceAction({ value: sortValue }));
-    
-    // dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
   }, [minValue, maxValue]);
   
   useEffect(() => {
@@ -73,15 +67,9 @@ const ProductsPage = () => {
       }
   }, [discountItems]);
   
-  
-
-
-  //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
     setSortValue(event.target.value);
   };
-
-
 
   const handleUserPrice = (event) => {
     event.preventDefault();
@@ -91,28 +79,13 @@ const ProductsPage = () => {
 
     setMinValue(formObject.from === "" ? -Infinity : +formObject.from);
     setMaxValue(formObject.to === "" ? Infinity : +formObject.to);
-
-    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
-
-    // dispatch(sortByPriceAction({ value: sortValue }));
-
-    // dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
   };
 
   const handleDiscountApply = (event) => {
     setDiscountItems(event.target.checked);
-
-
-    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
-
-    // dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
-
-    // dispatch(sortByPriceAction({ value: sortValue }));
   };
 
-  const skeleton = [1, 2, 3, 4, 5, 6, 7, 8];
-
-  console.log("filteredProducts", filteredProducts);
+  const skeleton = [1, 2, 3, 4, 5, 6, 7, 8]; // Массив для итерации по нему с помощью MAP и отрисовки скелетон
 
   return (
     <main className="maincontainer">
@@ -173,27 +146,21 @@ const ProductsPage = () => {
         {isLoading ? (
           //если идет загрузка, вставляем Скeлетон
           <div className="wrapper">
-            {skeleton.map((item) => (
+            {
+              skeleton.map((item) => (
               <div className="loader" key={item}></div>
-            ))
+              ))
             }
           </div>
-        ) : (
-          <div className="wrapper">
-            {/* {filteredProducts && filteredProducts.length > 0
-              ? filteredProducts.map((item) => (
-                  <SingleProduct key={item.id} product={item} />
-                ))
-              : data.map((item) => (
-                  <SingleProduct key={item.id} product={item} />
-                ))} */}
-          
-          {filteredProducts && filteredProducts.length > 0
-              ? filteredProducts.map((item) => (
-                  <SingleProduct key={item.id} product={item} />
-                ))
-              : <h2>Ничего не найдено!!!!</h2>
-
+        ) 
+        : (
+          <div className="wrapper">         
+          {
+            filteredProducts && filteredProducts.length > 0
+            ? filteredProducts.map((item) => (
+                <SingleProduct key={item.id} product={item} />
+              ))
+            : <h2>Ничего не найдено!!!!</h2>
           }
           </div>
         )}

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './index.css';
+
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 import MainPage from './pages/MainPage.jsx';
@@ -10,27 +10,26 @@ import Layout from './components/Layout.jsx';
 import SingleProductsPage from './pages/SingleProductsPage/SingleProductsPage.jsx';
 import ProductsPage from './pages/ProductsPage/ProductsPage.jsx';
 import CategoriesPage from './pages/CategoriesPage/CategoriesPage.jsx';
-import ThemeProvider from './providers/ThemeProvider.jsx';
 import { useDispatch } from 'react-redux';
-import { fetchAllProducts, getPromoProductFromLocalStorage } from './store/productSlice.js';
+import { fetchAllProducts } from './store/productSlice.js';
 import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
 import { getCartFromLocalStorage } from './store/cartSlice .js';
 import { getfavouritessFromLocalStorage } from './store/favouritesSlice.js';
 import FavouritesPage from './pages/FavouritesPage/FavouritesPage.jsx';
 
 const App = () => {
+
   const dispatch = useDispatch();
 
-  useEffect(() =>{
+  useEffect(() =>{ //загрузка данных для работы при загрузке страницы
     dispatch(fetchAllProducts());
     dispatch(fetchAllCategoties());
     dispatch(getCartFromLocalStorage());
     dispatch(getfavouritessFromLocalStorage())
   },[])
 
-
   return (
-   
+
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route index element={<MainPage />} />
