@@ -9,6 +9,7 @@ const favouritesSlice = createSlice({
     name: 'favourites',
     initialState: {
         favourites: [],
+        filtredFavourites: [],
         },
     reducers: {
       getfavouritessFromLocalStorage(state){
@@ -25,6 +26,7 @@ const favouritesSlice = createSlice({
        
         if (!findProduct) {
           state.favourites.push(product)
+          state.filtredFavourites = state.favourites
         }
         localStorage.setItem('favourites', JSON.stringify(state.favourites))
       },
@@ -32,6 +34,8 @@ const favouritesSlice = createSlice({
         const product = action.payload
 
         state.favourites = state.favourites.filter(item => item.id !==product.id)
+        state.filtredFavourites = state.favourites
+
         localStorage.setItem('favourites', JSON.stringify(state.favourites))
       },
       //сортировки 

@@ -22,6 +22,9 @@ const ProductsPage = () => {
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("All Products");
   const [sortValue, setSortValue] = useState("default");
+  const [minValue, setMinValue] =useState(-Infinity)
+  const [maxValue, setMaxValue] =useState(Infinity)
+  const [discountItems, setDiscountItems] = useState(false)
 
   const { categoryId } = useParams();
 
@@ -31,7 +34,7 @@ const ProductsPage = () => {
     } else {
       dispatch(fetchAllProducts());
     }
-  }, [categoryId, dispatch]);
+  }, [categoryId, /*dispatch*/]);
 
   useEffect(() => {
     if (categoryId && category) {
@@ -50,41 +53,66 @@ const ProductsPage = () => {
     }
   }, [categoryId, category]);
 
+  useEffect(() => {
+    dispatch(sortByPriceAction({ value: sortValue }));
+  }, [sortValue]);
+
+  useEffect(() => {
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
+    dispatch(sortByPriceAction({ value: sortValue }));
+    
+    // dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
+  }, [minValue, maxValue]);
+  
+  useEffect(() => {
+    if (discountItems) {
+        dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
+      } else {
+        dispatch(sortByUserPriceAction({ minValue, maxValue }));
+        dispatch(sortByPriceAction({ value: sortValue }));
+      }
+  }, [discountItems]);
+  
+  
+
+
   //ф-ции для сортировки продуктов на странице
   const handleSort = (event) => {
     setSortValue(event.target.value);
   };
 
-  useEffect(() => {
-    dispatch(sortByPriceAction({ value: sortValue }));
-  }, [sortValue]);
+
 
   const handleUserPrice = (event) => {
     event.preventDefault();
 
     let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
-    console.log(formObject);
 
-    const minValue = formObject.from === "" ? -Infinity : +formObject.from;
-    const maxValue = formObject.to === "" ? Infinity : +formObject.to;
+    setMinValue(formObject.from === "" ? -Infinity : +formObject.from);
+    setMaxValue(formObject.to === "" ? Infinity : +formObject.to);
 
-    dispatch(sortByUserPriceAction({ minValue, maxValue }));
+    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
 
-    dispatch(sortByPriceAction({ value: sortValue }));
+    // dispatch(sortByPriceAction({ value: sortValue }));
 
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    // dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
   };
 
   const handleDiscountApply = (event) => {
-    const userValue = event.target.checked;
+    setDiscountItems(event.target.checked);
 
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
 
-    dispatch(sortByPriceAction({ value: sortValue }));
+    // dispatch(sortByUserPriceAction({ minValue, maxValue }));
+
+    // dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
+
+    // dispatch(sortByPriceAction({ value: sortValue }));
   };
 
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8];
+
+  console.log("filteredProducts", filteredProducts);
 
   return (
     <main className="maincontainer">
@@ -152,13 +180,21 @@ const ProductsPage = () => {
           </div>
         ) : (
           <div className="wrapper">
-            {filteredProducts && filteredProducts.length > 0
+            {/* {filteredProducts && filteredProducts.length > 0
               ? filteredProducts.map((item) => (
                   <SingleProduct key={item.id} product={item} />
                 ))
               : data.map((item) => (
                   <SingleProduct key={item.id} product={item} />
-                ))}
+                ))} */}
+          
+          {filteredProducts && filteredProducts.length > 0
+              ? filteredProducts.map((item) => (
+                  <SingleProduct key={item.id} product={item} />
+                ))
+              : <h2>Ничего не найдено!!!!</h2>
+
+          }
           </div>
         )}
         {error && <h2> Error from server: {error} </h2>}

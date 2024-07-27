@@ -52,7 +52,7 @@
       //завернуть содержимое в одну строку:
       display: -webkit-box;
       // -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
+      line-clamp: 1;
       overflow: hidden;
       text-overflow: ellipsis;
     } 
@@ -252,7 +252,7 @@
   .product-details__title-text {
     max-height: 74px;
      -webkit-box-orient: vertical;
-     -webkit-line-clamp: 2;
+     line-clamp: 2;
      line-height: 36px;
   }
 
