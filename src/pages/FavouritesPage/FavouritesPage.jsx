@@ -1,76 +1,75 @@
 import React, { useEffect, useState } from "react";
 import "./FavouritesPage.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
 
-import { getfavouritessFromLocalStorage,
-        sortByPriceAction,
-        sortByDiscountAction,
-        sortByUserPriceAction
+import { sortByPriceAction,
+         sortByDiscountAction,
+         sortByUserPriceAction
  } from "../../store/favouritesSlice.js";
 
 
 const FavouritesPage = () => {
    
   const dispatch = useDispatch();
-  const { favourites, isLoading, error } = useSelector(
-    (state) => state.favourites
-  );
+  const { filtredFavourites, isLoading, error } = useSelector((state) => state.favourites );
   const [breadcrumbs, setBreadcrumbs] = useState([]);
-  const [sortValue, setSortValue] = useState("default")
+  const [sortValue, setSortValue] = useState("default");
+  const [minValue, setMinValue] =useState(-Infinity)
+  const [maxValue, setMaxValue] =useState(Infinity)
+  const [discountItems, setDiscountItems] = useState(false)
 
+
+  // useEffect(() => {
+  //   if (filtredFavourites) {
+  //     dispatch(getfavouritessFromLocalStorage());}
+  //   }, [dispatch]);
 
   useEffect(() => {
-    if (favourites) {
-      dispatch(getfavouritessFromLocalStorage());}
-    }, [dispatch]);
-
-  useEffect(() => {
-    if (favourites.length > 0) {
+    if (filtredFavourites.length > 0) {
       setBreadcrumbs([
         { link: "/", name: "Main page" },
         { link: "/favourites", name: "Favourites" },
       ]);
     }
-  }, [favourites]);
+  }, [filtredFavourites]);
 
-  // ф-ции для сортировки - из FavouritesSlice!
+  useEffect(() => {
+    dispatch(sortByPriceAction({ value: sortValue }));
+  }, [sortValue]);
+
+  useEffect(() => {
+    dispatch(sortByUserPriceAction({ minValue, maxValue }));
+    dispatch(sortByPriceAction({ value: sortValue }));
+  }, [minValue, maxValue]);
+  
+  useEffect(() => {
+    if (discountItems) {
+        dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
+      } else {
+        dispatch(sortByUserPriceAction({ minValue, maxValue }));
+        dispatch(sortByPriceAction({ value: sortValue }));
+      }
+  }, [discountItems]);
+  
+  const handleSort = (event) => {
+    setSortValue(event.target.value);
+  };
+
   const handleUserPrice = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
-    console.log(formObject);
 
-    const minValue = formObject.from === "" ? -Infinity : +formObject.from;
-    const maxValue = formObject.to === "" ? Infinity : +formObject.to;
-
-    dispatch(sortByUserPriceAction({ minValue, maxValue }));
-
-    dispatch(sortByPriceAction({ value: sortValue}));
-
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
+    setMinValue(formObject.from === "" ? -Infinity : +formObject.from);
+    setMaxValue(formObject.to === "" ? Infinity : +formObject.to);
   };
 
   const handleDiscountApply = (event) => {
-    const userValue = event.target.checked;
-   
-    dispatch(sortByDiscountAction({ applyDiscount: userValue }));
-   
-    dispatch(sortByUserPriceAction({ minValue, maxValue }));
-
-    dispatch(sortByPriceAction({ value: sortValue}));  
+    setDiscountItems(event.target.checked);
   };
-
-  const handleSort = (event) => {
-    setSortValue(event.target.value);
-    
-  };
-
-  useEffect(()=>{
-    dispatch(sortByPriceAction({ value: sortValue}));
-  },[sortValue, dispatch])
     
    
   return (
@@ -123,8 +122,8 @@ const FavouritesPage = () => {
           <div className="loader"></div>
         ) : (
           <div className="wrapper">
-            {favourites && favourites.length > 0
-              ? favourites.map((item) => (
+            {filtredFavourites && filtredFavourites.length > 0
+              ? filtredFavourites.map((item) => (
                   <SingleProduct key={item.id} product={item} />
                 ))
               : (<div className="cart__enpty">

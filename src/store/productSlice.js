@@ -77,7 +77,6 @@ const productsSlice = createSlice({
           : (a, b) => a.id - b.id
         );
     },
-    
     sortByDiscountAction(state, action) {
       const { applyDiscount } = action.payload;
       state.filteredProducts = 
