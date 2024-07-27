@@ -13,18 +13,6 @@ $maxWidth: 1440;
 }
 
 
-@mixin adaptiv-icon($sizes: (100% null, 85% 480px, 75% 360px)) {
-  @each $size, $breakpoint in $sizes {
-    @if $breakpoint == null {
-      width: $size;
-    } @else {
-      @media (max-width: $breakpoint) {
-        width: $size;
-      }
-    }
-  }
-}
-
 @mixin respond-to($media) {
   @if $media == 'large' {
     @media (min-width: 1200px) {

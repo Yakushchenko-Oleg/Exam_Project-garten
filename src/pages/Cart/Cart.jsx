@@ -29,10 +29,6 @@ const Cart = () => {
     }
   }, [cart]);
   
-  // if (isSubmitSuccessful) {
-  //   setisOrderPlaced(true)
-  // }
-
   const handleOrderSubmit =  (data) => {
     dispatch( fetchOrder({...data, order: cart}))
     reset()

@@ -65,16 +65,19 @@ const productsSlice = createSlice({
   reducers: {
     sortByPriceAction(state, action) {
       const { value } = action.payload;
-      state.filteredProducts = 
-      (state.filteredProducts.length > 0
-          ? state.filteredProducts
-          : [...state.recivedProducts.data]
-      ).sort(
-          value === "low-to-high" ? (a, b) => a.price - b.price
-          : value === "high-to-low" ? (a, b) => b.price - a.price
+      state.filteredProducts 
+      // = 
+      // (state.filteredProducts.length > 0
+      //     ? state.filteredProducts
+      //     : [...state.recivedProducts.data]
+      // )
+      .sort(
+          value === "low-to-high" ? (a, b) => (a.discont_price ? a.discont_price : a.price) - (b.discont_price ? b.discont_price : b.price)
+          : value === "high-to-low" ? (a, b) => (b.discont_price ? b.discont_price : b.price) - (a.discont_price ? a.discont_price : a.price)
           : (a, b) => a.id - b.id
         );
     },
+    
     sortByDiscountAction(state, action) {
       const { applyDiscount } = action.payload;
       state.filteredProducts = 
@@ -86,11 +89,11 @@ const productsSlice = createSlice({
     },
     sortByUserPriceAction(state, action) {
       const { minValue, maxValue } = action.payload;
-      state.filteredProducts = 
-      (state.filteredProducts.length > 0 
-          ? state.filteredProducts 
-          : [...state.recivedProducts.data]
-      ).filter(item => item.price >= minValue && item.price <= maxValue);
+      state.filteredProducts = state.recivedProducts.data.filter(item => (item.discont_price ? item.discont_price : item.price) >= minValue && (item.discont_price ? item.discont_price : item.price) <= maxValue);
+      // (state.filteredProducts.length > 0 
+      //     ? state.filteredProducts 
+      //     : [...state.recivedProducts.data]
+      // ).filter(item => item.price >= minValue && item.price <= maxValue);
     },
 
     checkPromoProduct(state) {
@@ -130,6 +133,7 @@ const productsSlice = createSlice({
       .addCase(fetchAllProducts.fulfilled, (state, action) => {
         state.isLoading = false
         state.recivedProducts.data = action.payload // обновляем массив продуктов в состоянии
+        state.filteredProducts = action.payload // обновляем массив фильтрованных продуктов
 
         // Обновляем promoProduct 
         let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
@@ -152,6 +156,7 @@ const productsSlice = createSlice({
       .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
         state.isLoading = false
         state.recivedProducts = action.payload
+        state.filteredProducts = action.payload.data
       })
       .addCase(fetchProductsByCategory.rejected, (state, action) => {
         state.isLoading = null;
