@@ -1,7 +1,6 @@
 @import '../../variables.scss';
 @import '../../mixin.scss';
 
-
 h2 {
     margin-bottom: 0;
 }
@@ -32,92 +31,91 @@ h2 {
     border-radius: $radius-small;
     padding: 8px 16px;
     border: 1px solid $text-grey;
-    // display: inline-block;
 }
-    
-    
+
+
 @media screen and (max-width: 1000px) {
     .header-wrapper {
         margin-bottom: 32px;
     }
-    
+
     .wrapper {
         gap: 10px;
     }
 }
-    
- @media screen and (max-width: 768px) {
+
+@media screen and (max-width: 768px) {
     .header-wrapper {
         margin-bottom: 32px;
     }
+
     .wrapper {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 }
-    
+
 @media screen and (max-width: 500px) {
     .header-wrapper {
         margin-bottom: 24px;
         justify-content: space-between;
-      
+
         .categories__line {
             display: none;
         }
     }
-}  
+}
 
 @media screen and (max-width: 470px) {
     .categories__link {
-            padding: 8px 8px;
-        }
+        padding: 8px 8px;
+    }
 }
 
 @media screen and (max-width: 450px) {
-    
-    .container{
+    .container {
         align-items: center;
     }
 
     .header-wrapper {
         .categories__line {
-             display: none;
+            display: none;
         }
-    
+
         .categories__link {
-             display: none;
+            display: none;
         }
     }
-    
+
     .wrapper {
         grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     }
-    
+
     .categories__link-hidden {
         display: inline-block;
     }
 }
-    
+
 @media screen and (max-width: 360px) {
     .header-wrapper {
         flex-direction: column;
         justify-content: flex-start;
         gap: 12px;
         margin-bottom: 24px;
-    
+
         .categories__line {
             display: none;
         }
-    
+
         .categories__link {
             display: none;
         }
     }
-    
+
     .wrapper {
-         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
-    
+
     .categories__link-hidden {
-         display: inline-block;
+        display: inline-block;
     }
 }

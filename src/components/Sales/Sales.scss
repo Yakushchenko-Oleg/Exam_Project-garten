@@ -1,21 +1,21 @@
 @import '../../variables.scss';
 @import '../../mixin.scss';
 
-   
-h2{
+
+h2 {
     margin-bottom: 0;
 }
-        
-.sales__line{
+
+.sales__line {
     height: 1px;
     flex-grow: 1; // Занимаедоступное свободнопространство
     margin-left: 32px;
     background: $text-grey;
     display: block;
- }
+}
 
-.sales__link{
-     @include adaptiv-font(16, 12);
+.sales__link {
+    @include adaptiv-font(16, 12);
     color: $text-grey;
     align-content: center;
     border-radius: $radius-small;
@@ -23,8 +23,8 @@ h2{
     border: 1px solid $text-grey;
     display: block;
 }
-    
-.sales__link-hidden{
+
+.sales__link-hidden {
     display: none;
     margin-top: 24px;
     @include adaptiv-font(16, 12);
@@ -32,7 +32,6 @@ h2{
     border-radius: $radius-small;
     padding: 8px 16px;
     border: 1px solid $text-grey;
-    // display: inline-block;
 }
 
 
@@ -46,6 +45,7 @@ h2{
     .header-wrapper {
         margin-bottom: 32px;
     }
+
     .wrapper {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
@@ -58,7 +58,7 @@ h2{
     }
 
     .wrapper {
-    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
     }
 }
 
@@ -68,7 +68,7 @@ h2{
         justify-content: flex-start;
         gap: 12px;
         margin-bottom: 24px;
-                
+
         .sales__line {
             display: none;
         }
@@ -82,7 +82,7 @@ h2{
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
 
-    .sales__link-hidden{
+    .sales__link-hidden {
         display: inline-block;
     }
 }

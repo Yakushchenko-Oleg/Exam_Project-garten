@@ -15,9 +15,8 @@
         transform: scale(1.03);
         box-shadow: 5px 5px 5px rgba(53, 53, 53, 0.5);
     }
-    
-    
-    .img-container{
+
+    .img-container {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,26 +34,25 @@
             left: 0;
             width: 100%;
             height: 100%;
-         }
-    }  
+        }
+    }
 
-    .discount{
-            position: absolute;
-            z-index: 999;
-            left: 16px;
-            top: 16px;
-            background-color: $primary-orange;
-            padding: 4px 8px;
-            border-radius: $radius-small;
-    
-            color: $primary-white;
-            @include adaptiv-font(20, 18);
-            font-weight: 600;
-            line-height: 26px;
-            letter-spacing: 0.03em;
-    } 
+    .discount {
+        position: absolute;
+        z-index: 999;
+        left: 16px;
+        top: 16px;
+        background-color: $primary-orange;
+        padding: 4px 8px;
+        border-radius: $radius-small;
+        color: $primary-white;
+        @include adaptiv-font(20, 18);
+        font-weight: 600;
+        line-height: 26px;
+        letter-spacing: 0.03em;
+    }
 
-    .icon-wrapper{
+    .icon-wrapper {
         max-width: 44px;
         display: flex;
         flex-direction: column;
@@ -64,33 +62,28 @@
         z-index: 999;
         right: 16px;
         top: 16px;
-        
-        img{
-            border:none;
+
+        img {
+            border: none;
         }
-        img:hover{
+
+        img:hover {
             color: $primary-grey;
         }
     }
-        
-    &__info{
+
+    &__info {
         width: 100%;
         padding: 20px;
         border-radius: 0 0 12px 12px;
 
-        // &-light{
-        //     // background-color: $primary-white;
-        //     color: $primary-grey;
-
-        // }
-
-        &-dark{
+        &-dark {
             background-color: $element-dark;
             color: $primary-white;
             border: 1px solid #8B8B8B;
         }
 
-        .info-title{
+        .info-title {
             font-weight: 500;
             @include adaptiv-font(20, 18);
             display: block;
@@ -101,20 +94,18 @@
             padding-bottom: 16px;
         }
 
-        .info-price{
+        .info-price {
             @include adaptiv-font(40, 36);
             font-weight: 600;
             line-height: 44px;
 
-            .original-price{
+            .original-price {
                 padding-left: 16px;
-                // color: $text-grey;
                 opacity: 60%;
                 text-decoration-line: line-through;
                 font-weight: 500;
                 @include adaptiv-font(20, 18);
             }
-           
-        }       
+        }
     }
 }
