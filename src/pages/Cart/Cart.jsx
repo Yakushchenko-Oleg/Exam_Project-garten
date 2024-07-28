@@ -28,20 +28,17 @@ const Cart = () => {
       setTotalQuantity(cart.reduce((acc, current) => acc + current.quantity, 0));// С помощью метода reduce проходимся по массиву и подсчитываем общее количество содержимого
     }
   }, [cart]);
-  
-  const handleOrderSubmit =  (data) => {
-    dispatch( fetchOrder({...data, order: cart}))
-    reset()
-  }
-
+ 
   useEffect(()=>{
     if (isSubmitSuccessful) {
       setisOrderPlaced(true)
     }
-  },[isSubmitSuccessful])
+  },[isSubmitSuccessful]) 
 
-
-
+  const handleOrderSubmit =  (data) => {
+    dispatch( fetchOrder({...data, order: cart}))
+    reset()
+  }
 
   return (
     <main className="maincontainer">
@@ -49,99 +46,93 @@ const Cart = () => {
       {
         isSubmitting 
         ? <div>Loading Order....</div> 
-        :       <div className="cart container">
-        <div className="header-wrapper">
-          <h2>Shopping cart</h2>
-          <div className="cart__line"></div>
-          <Link to="/allproducts">
-            <span className="cart__link">Back to the store</span>
-          </Link>
-        </div>
-
-        {cart && cart.length > 0 ? (
-          <div className="cart__content">
-            <div className="cart__content_list">
-              {cart &&
-                cart.map((item) => <CartItem product={item} key={item.id} />)}
+        : <div className="cart container">
+            <div className="header-wrapper">
+              <h2>Shopping cart</h2>
+              <div className="cart__line"></div>
+              <Link to="/allproducts">
+                <span className="cart__link">Back to the store</span>
+              </Link>
             </div>
-          
-          <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} 
-            onSubmit={
-              handleSubmit(handleOrderSubmit)
 
-            }>
-              <h3>Order details</h3>
-              <p>{`${totalQuantity} item`}</p>
-              <div className="cart__content_form_totoalConteiner">
-                <p>Total</p>
-                <h3>{`$${totalSum}`}</h3>
-              </div>
+            {
+              cart && cart.length > 0 
+              ? <div className="cart__content">
+                  <div className="cart__content_list">
+                    {cart &&
+                      cart.map((item) => <CartItem product={item} key={item.id} />)}
+                  </div>
+              
+                  <form className={`cart__content_form ${theme ? 'cart__content_form-dark' : ''}`} 
+                    onSubmit={ handleSubmit(handleOrderSubmit)}>
+                      
+                    <h3>Order details</h3>
+                    <p>{`${totalQuantity} item`}</p>
 
-              <input 
-                className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`} 
-                placeholder="Name"
-                type="text"
-                id="username"
-                name="username"
-                {...register("username", {
-                  required: 'Name required',
-                  minLength:{value: 2, message: 'Minimum name length 2 letters'},
-                  maxLength:{ value: 20, message: 'Maximum name length 20 letters'}
-                })}
-              />
-              <p className='cart__errornessage'>{errors.username?.message}</p>
+                    <div className="cart__content_form_totoalConteiner">
+                      <p>Total</p>
+                      <h3>{`$${totalSum}`}</h3>
+                    </div>
 
-              <input 
-                className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
-                placeholder="Phone number"
-                type="tel"
-                id="phonenumber"
-                name="phonenumber"
-                {...register('phonenumber', {
-                  required: 'Phone number required',
-                  pattern: {
-                    value: /(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/g,
-                    message: 'Incorrect phone number'
-                  },
-                })}
-              />
-              <p className='cart__errornessage'>{errors.phonenumber?.message}</p>
+                    <input  className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`} 
+                      placeholder="Name"
+                      type="text"
+                      id="username"
+                      name="username"
+                      {...register("username", {
+                        required: 'Name required',
+                        minLength:{value: 2, message: 'Minimum name length 2 letters'},
+                        maxLength:{ value: 20, message: 'Maximum name length 20 letters'}
+                      })}
+                    />
+                    <p className='cart__errornessage'>{errors.username?.message}</p>
 
-              <input 
-                className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
-                placeholder="Email"
-                type="text"
-                id="email"
-                name="email"
-                {...register("email", {
-                  required: 'Email required',
-                  pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: 'Incorrect email format'}
-                })}
-              />
-              <p className='cart__errornessage'>{errors.email?.message}</p>
+                    <input className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
+                      placeholder="Phone number"
+                      type="tel"
+                      id="phonenumber"
+                      name="phonenumber"
+                      {...register('phonenumber', {
+                        required: 'Phone number required',
+                        pattern: {
+                          value: /(?:([+]\d{1,4})[-.\s]?)?(?:[(](\d{1,3})[)][-.\s]?)?(\d{1,4})[-.\s]?(\d{1,4})[-.\s]?(\d{1,9})/g,
+                          message: 'Incorrect phone number'
+                        },
+                      })}
+                    />
+                    <p className='cart__errornessage'>{errors.phonenumber?.message}</p>
 
-              <button>Order</button>
+                    <input className={`cart__input ${theme ? 'cart__input-dark' : 'cart__input-light'}`}
+                      placeholder="Email"
+                      type="text"
+                      id="email"
+                      name="email"
+                      {...register("email", {
+                        required: 'Email required',
+                        pattern: {value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g, message: 'Incorrect email format'}
+                      })}
+                    />
+                    <p className='cart__errornessage'>{errors.email?.message}</p>
 
-            </form>
+                    <button>Order</button>
+                  </form>
 
-            <Link to="/allproducts">
-              <span className="cart__link cart__link-hidden">
-                Back to the store
-              </span>
-            </Link>
+                  <Link to="/allproducts">
+                    <span className="cart__link cart__link-hidden">
+                      Back to the store
+                    </span>
+                  </Link>
+                </div>
+            
+              : <div className="cart__enpty">
+                  <span>Looks like you have no items in your basket currently</span>
+                  <Link to="/allproducts">
+                    <button className="btn"> Continue Shopping </button>
+                  </Link>
+                </div>
+            }
+
           </div>
-        ) 
-        : (
-          <div className="cart__enpty">
-            <span>Looks like you have no items in your basket currently</span>
-            <Link to="/allproducts">
-              <button className="btn"> Continue Shopping </button>
-            </Link>
-          </div>
-        )}
-
-        
-      </div>
       }
 
 
