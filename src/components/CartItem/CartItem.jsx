@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import './CartItem.scss'
+import React, { useContext, useEffect, useState } from 'react';
+import './CartItem.scss';
 import {  changeQuantity } from '@/store/cartSlice ';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {ThemeContext} from '../../providers/ThemeProvider'
+import {ThemeContext} from '../../providers/ThemeProvider';
 import { removeFromCart } from '../../store/cartSlice ';
 
 const CartItem = ({product}) => {
