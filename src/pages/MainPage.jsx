@@ -12,9 +12,9 @@ const MainPage = () => {
     <>
       <Header />
       <main className='maincontainer'>  
-          <Categories />
-          <DiscountForm />
-          <Sales />
+        <Categories />
+        <DiscountForm />
+        <Sales />
       </main>
     </>
   )
