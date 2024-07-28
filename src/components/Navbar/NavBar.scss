@@ -10,7 +10,7 @@
     position: sticky;
     top: 0px;
     max-width: 1440px;
-     z-index: 99999;
+    z-index: 99999;
 
     &-dark {
         background-color: $primary-grey;
@@ -66,7 +66,6 @@
         p {
             padding: 6px 16px;
         }
-
     }
 
     .navbar__menu {
@@ -87,7 +86,6 @@
             cursor: pointer;
         }
     }
-
 
     &__icon-wrapper {
         display: flex;
@@ -115,12 +113,9 @@
                     color: $body-white;
                     font-size: 12px;
                     font-weight: 600;
-
                 }
             }
         }
-
-
     }
 
     &__burger {
@@ -144,7 +139,6 @@
 }
 
 // модальное окно промопродукта
-
 .promo-pro {
     margin: 0 auto;
     background-color: $primary-green;
@@ -154,13 +148,11 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    // width: 548px;
     width: 65%;
     height: auto;
 }
 
-.promo-pro__header {
-    
+.promo-pro__header { 
     display: flex;
     justify-content: space-between;
     margin-bottom: 16px;
@@ -236,11 +228,10 @@
 }
 
 .product-info {
- 
-    bottom: 0; // Позиционирование в нижней части контейнера
-    left: 0; // Растягивание на всю ширину контейнера
-    color: #424436; // Белый текст
-    padding: 10px 20px; // Внутренние отступы
+    bottom: 0;
+    left: 0;
+    color: #424436;
+    padding: 10px 20px;
     background-color: $primary-white;
 
     h3 {
@@ -261,14 +252,12 @@
             font-weight: 600;
             line-height: 44px;
             text-align: left;
-
-            // Задаем цвет для новой цены
         }
 
         .old-price {
-            text-decoration: line-through; // Зачеркиваем старую цену
-            color: $primary-grey; // Цвет старой цены
-            opacity: 0.7; // Немного уменьшаем яркость для старой цены
+            text-decoration: line-through;
+            color: $primary-grey;
+            opacity: 0.7;
         }
     }
 }
@@ -279,7 +268,6 @@
     cursor: pointer;
     color: $primary-grey;
     border: none;
-    // padding: 10px 20px; 
     border-radius: $radius-small;
     font-weight: 600;
     font-size: 20px;
@@ -307,7 +295,6 @@
         gap: 10px;
     }
 }
-
 
 @media screen and (max-width: 700px) {
     .navbar {
@@ -355,7 +342,6 @@
         .burger-x span:nth-child(3) {
             transform: translateY(-13px) rotate(-45deg);
         }
-
     }
 
     .navbar__icon-wrapper,
