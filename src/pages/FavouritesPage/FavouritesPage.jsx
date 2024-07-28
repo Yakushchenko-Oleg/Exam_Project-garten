@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
 
-import { sortByPriceAction,
-         sortByDiscountAction,
-         sortByUserPriceAction
- } from "../../store/favouritesSlice.js";
+import { 
+  sortByPriceAction,
+  sortByDiscountAction,
+  sortByUserPriceAction } from "../../store/favouritesSlice.js";
 
 const FavouritesPage = () => {
    
@@ -20,6 +20,7 @@ const FavouritesPage = () => {
   const [discountItems, setDiscountItems] = useState(false)
 
   useEffect(() => {
+
     if (filtredFavourites.length > 0) {
       setBreadcrumbs([
         { link: "/", name: "Main page" },
@@ -38,6 +39,7 @@ const FavouritesPage = () => {
   }, [minValue, maxValue]);
   
   useEffect(() => {
+
     if (discountItems) {
         dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
       } else {
@@ -64,20 +66,21 @@ const FavouritesPage = () => {
     setDiscountItems(event.target.checked);
   };
     
-   
   return (
     <main className="maincontainer">
+
       <div className="product-navigation">
-        {breadcrumbs &&
-          breadcrumbs.map((item) => (
+        {
+          breadcrumbs && breadcrumbs.map((item) => (
             <Link
               key={item.link}
               to={item.link}
               className="product-navigation__link"
-            >
+              >
               {item.name}
             </Link>
-          ))}
+          ))
+        }
       </div>
 
       <div className="products container">
@@ -86,6 +89,7 @@ const FavouritesPage = () => {
         </div>
 
         <div className="filter-wrapper">
+
           <form className="filter-wrapper__item" onChange={handleUserPrice}>
             <p className="filter-name">Price</p>
             <input className="userInput" type="number" placeholder="from" name="from"></input>
@@ -98,7 +102,8 @@ const FavouritesPage = () => {
               className="checkbox"
               type="checkbox"
               onChange={handleDiscountApply}
-            ></input>
+              >
+            </input>
            </div>
 
           <div className="filter-wrapper__item">
@@ -111,23 +116,25 @@ const FavouritesPage = () => {
           </div>
         </div>
 
-        {isLoading ? (
-          <div className="loader"></div>
-        ) 
-        : (
-          <div className="wrapper">
-            {filtredFavourites && filtredFavourites.length > 0
-              ? filtredFavourites.map((item) => (
-                  <SingleProduct key={item.id} product={item} />
-                ))
-              : (<div className="cart__enpty">
-                <p className='notfound'>No favourite products found</p>
-                <Link to="/allproducts"> <button className='btn'> Continue Shopping </button></Link>
-              </div>)
-            }
-          </div>  
-        )}
-        {error && <h2> Error from server: {error} </h2>}
+        {
+          isLoading 
+          ? <div className="loader"></div>
+          
+          : <div className="wrapper">
+              {filtredFavourites && filtredFavourites.length > 0
+                ? filtredFavourites.map((item) => (
+                    <SingleProduct key={item.id} product={item} />
+                  ))
+                : (<div className="cart__enpty">
+                  <p className='notfound'>No favourite products found</p>
+                  <Link to="/allproducts"> <button className='btn'> Continue Shopping </button></Link>
+                </div>)
+              }
+            </div>  
+        }
+        {
+          error && <h2> Error from server: {error} </h2>
+        }
       </div>
     </main>
   );

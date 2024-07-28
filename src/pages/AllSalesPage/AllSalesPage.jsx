@@ -11,15 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "@/components/SingleProduct/SingleProduct";
 
 const AllSalesPage = () => {
-  const dispatch = useDispatch();
-  const { recivedProducts, filteredProducts, isLoading, error } = useSelector(
-    (state) => state.products
-  );
 
+  const dispatch = useDispatch();
+  const { recivedProducts, filteredProducts, isLoading, error } = useSelector((state) => state.products);
   const [sortValue, setSortValue] = useState("default");
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [categoryTitle, setCategoryTitle] = useState("Title");
-
   let  data  = [];
 
   if (filteredProducts && filteredProducts.length > 0) {
@@ -40,26 +37,24 @@ const AllSalesPage = () => {
     ]);
   }, []);
 
-  const handleSort = (event) => {
-    setSortValue(event.target.value);
-  };
-
   useEffect(()=>{
     dispatch(sortByPriceAction({ value: sortValue}));
   },[sortValue])
+
+  const handleSort = (event) => {
+    setSortValue(event.target.value);
+  };
 
   const handleUserPrice = (event) => {
     event.preventDefault();
 
     let formData = new FormData(event.target.parentElement); //userInput
     let formObject = Object.fromEntries(formData);
-    console.log(formObject);
 
     const minValue = formObject.from === "" ? -Infinity : +formObject.from;
     const maxValue = formObject.to === "" ? Infinity : +formObject.to;
 
     dispatch(sortByUserPriceAction({ minValue, maxValue }));
-
     dispatch(sortByPriceAction({ value: sortValue }));
   };
 
@@ -77,6 +72,7 @@ const AllSalesPage = () => {
       </div>
 
       <div className="filter-wrapper">
+
         <form className="filter-wrapper__item" onChange={handleUserPrice}>
           <p className="filter-name">Price</p>
           <input className="userInput" type='number' placeholder='from' name='from'></input>
@@ -94,24 +90,27 @@ const AllSalesPage = () => {
       </div>
 
       <div className="products container">
+
         <div className="header-wrapper">
           <h2>All sales</h2>
         </div>
 
-        {isLoading ? (
-         <div className="wrapper">
-         {skeleton.map((item) => (
-           <div className="loader" key={item}></div>
-         ))
-         }
-       </div>
-        ) : (
-          <div className="wrapper">
-            {data && data.map((item) => (
-              <SingleProduct key={item.id} product={item} />
-            ))}
-          </div>
-        )}
+        {isLoading 
+          ? <div className="wrapper">
+              {
+              skeleton.map((item) => (
+                <div className="loader" key={item}></div>
+              ))
+              }
+            </div>
+          : <div className="wrapper">
+              {
+              data && data.map((item) => (
+                <SingleProduct key={item.id} product={item} />
+              ))
+              }
+            </div>
+          }
         {error && <h2> Error from server: {error} </h2>}
       </div>
     </main>

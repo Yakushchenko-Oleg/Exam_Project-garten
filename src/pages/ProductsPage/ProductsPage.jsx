@@ -6,8 +6,7 @@ import {
   fetchAllProducts,
   sortByPriceAction,
   sortByDiscountAction,
-  sortByUserPriceAction
-} from "../../store/productSlice";
+  sortByUserPriceAction } from "../../store/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import SingleProduct from "../../components/SingleProduct/SingleProduct.jsx";
 
@@ -33,6 +32,7 @@ const ProductsPage = () => {
   }, [categoryId]);
 
   useEffect(() => {
+
     if (categoryId && category) {
       setCategoryTitle(category.title);
       setBreadcrumbs([
@@ -59,6 +59,7 @@ const ProductsPage = () => {
   }, [minValue, maxValue]);
   
   useEffect(() => {
+
     if (discountItems) {
         dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
       } else {
@@ -90,16 +91,18 @@ const ProductsPage = () => {
   return (
     <main className="maincontainer">
       <div className="product-navigation">
-        {breadcrumbs &&
+        {
+          breadcrumbs &&
           breadcrumbs.map((item) => (
             <Link
               key={item.link}
               to={item.link}
               className="product-navigation__link"
-            >
+              >
               {item.name}
             </Link>
-          ))}
+          ))
+        }
       </div>
 
       <div className="products container">
@@ -143,28 +146,28 @@ const ProductsPage = () => {
           </div>
         </div>
 
-        {isLoading ? (
-          //если идет загрузка, вставляем Скeлетон
-          <div className="wrapper">
-            {
-              skeleton.map((item) => (
-              <div className="loader" key={item}></div>
-              ))
-            }
-          </div>
-        ) 
-        : (
-          <div className="wrapper">         
-          {
-            filteredProducts && filteredProducts.length > 0
-            ? filteredProducts.map((item) => (
-                <SingleProduct key={item.id} product={item} />
-              ))
-            : <h2>Ничего не найдено!!!!</h2>
-          }
-          </div>
-        )}
-        {error && <h2> Error from server: {error} </h2>}
+        {
+        isLoading 
+          ? <div className="wrapper">
+              {
+                skeleton.map((item) => (
+                <div className="loader" key={item}></div>
+                ))
+              }
+            </div>
+          : <div className="wrapper">         
+              {
+                filteredProducts && filteredProducts.length > 0
+                ? filteredProducts.map((item) => (
+                    <SingleProduct key={item.id} product={item} />
+                  ))
+                : <h2>Ничего не найдено!!!!</h2>
+              }
+            </div>
+        }
+        {
+          error && <h2> Error from server: {error} </h2>
+        }
       </div>
     </main>
   );

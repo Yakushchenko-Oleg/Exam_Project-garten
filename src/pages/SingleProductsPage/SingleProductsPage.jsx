@@ -4,10 +4,9 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "@/store/cartSlice ";
 import { RiHeartFill } from "react-icons/ri";
-// import { addTofavourites, removeFromfavourites } from "../../store/favouritesSlice ";
 import Modal from "../../components/Modal/Modal";
 import { addTofavourites, removeFromfavourites } from "../../store/favouritesSlice";
-
+const apiUrl = import.meta.env.APP_API_URL;
 
 const SingleProductsPage = () => {
   const { id } = useParams();
@@ -21,8 +20,6 @@ const SingleProductsPage = () => {
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
-  const apiUrl = import.meta.env.APP_API_URL;
-
   const [isFavourite, setIsFavourite] = useState(false);// при нажатии на иконку,устанавливается класс active 
   const product = [...data, promoProduct].find((item) => item.id == id) || {};
   const memoizedProduct = useMemo(() => product, [product?.id, product?.title, product?.category?.id, product?.category?.name]);
@@ -68,16 +65,14 @@ const SingleProductsPage = () => {
     setIsDescriptionExpanded(!isDescriptionExpanded);
   };
  
+  const renderDescription = () => { // Логика для рендеринга текста описания
 
-  // Логика для рендеринга текста описания
-  const renderDescription = () => {
     if (isDescriptionExpanded || product.description.length <= descriptionLength) {
       return product.description;
     } else {
       return `${product.description.substring(0, descriptionLength)}...`;
     }
   };
-
 
   const handleIncreaseQuantity = () => {
     setQuantity(prev => prev + 1);
@@ -92,6 +87,7 @@ const SingleProductsPage = () => {
   };
 
   const handleAddToFavourite = () => {
+
     const carentfavouriteState = !isFavourite
     setIsFavourite(carentfavouriteState)
 
@@ -124,6 +120,7 @@ const SingleProductsPage = () => {
 
   return (
     <main className="maincontainer">
+
       <div className="product-navigation">
         {breadcrumbs.map((item) => (
           <span key={item.link}>
@@ -138,14 +135,11 @@ const SingleProductsPage = () => {
      
         <div className="product-details__image" onClick={() => setImageOpen(true)}>
           <img src={`${apiUrl}${product.image}`} alt={product.title} />
-        
-        {/* если диск.прайс есть,то применится 2ой discount-hiddenб а если нет, то пусто*/}
-          {product.discont_price ? (
-            <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
-          ) : (
-            <></>
-          )}
-        
+            {
+              product.discont_price 
+              ? <span className="product-details__discount-hidden">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+              : <></>
+            } 
         </div>
 
         <div className="product-details__title">
@@ -156,16 +150,16 @@ const SingleProductsPage = () => {
         </div>
           
         <div className="product-details__info">
+          
           <div className="product-details__price-wrapper">
-            {product.discont_price ? (
-              <>
-                <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
-                <span className="original-price product-details__price--original">{`$${product.price}`}</span>
-                <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
-              </>
-            ) : (
-              <span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
-            )}
+            {product.discont_price 
+              ? <>
+                  <span className="discount-price product-details__price--discount">{`$${product.discont_price}`}</span>
+                  <span className="original-price product-details__price--original">{`$${product.price}`}</span>
+                  <span className="product-details__discount">{`-${Math.round(100 - (product.discont_price / product.price) * 100)}%`}</span>
+                </>
+              :<span className="product-details__price product-details__price--discount">{`$${product.price}`}</span>
+            }
           </div>
 
           <div className="product-details__buttons">
@@ -184,30 +178,27 @@ const SingleProductsPage = () => {
         </div>
         
         <div className="product-details__description">
-      <span className="product-details__description-label">Description</span>
-      <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
-        {renderDescription()}
-      </p>
-      {product.description.length > descriptionLength && (
-        <a className="product-details__description_read-more" onClick={toggleDescription}>
-          {isDescriptionExpanded ? 'Read less' : 'Read more'}
-        </a>
-      )}
+          <span className="product-details__description-label">Description</span>
+          <p className={`product-details__description-text ${isDescriptionExpanded ? 'expanded' : ''}`}>
+            {renderDescription()}
+          </p>
+          {
+            product.description.length > descriptionLength && 
+              <a className="product-details__description_read-more" onClick={toggleDescription}>
+                {isDescriptionExpanded ? 'Read less' : 'Read more'}
+              </a>
+          }
         </div>
-
       </div>
 
-      {imageOpen && (
 
-      <Modal >
-        <img onClick={() => setImageOpen(false)} src={`${apiUrl}${product.image}`} alt={product.title} />
-      </Modal>
-
-      )
+      {
+        imageOpen && 
+          <Modal >
+            <img onClick={() => setImageOpen(false)} src={`${apiUrl}${product.image}`} alt={product.title} />
+          </Modal>
       }
-
-
-
+      
     </main>
   );
 };
