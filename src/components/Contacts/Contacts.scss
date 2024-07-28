@@ -1,15 +1,11 @@
-/* src/components/Contacts/Contacts.scss */
 @import '../../variables.scss';
 @import '../../mixin.scss';
 
 .footer {
-    text-align: left; 
+    text-align: left;
     gap: 40px;
-    // max-width: 1360px;
     margin: 80px 40px 80px 40px;
 }
-
-// container - общий 
 
 .contact-content {
     width: 100%;
@@ -29,38 +25,37 @@
 }
 
 .card {
-    
     padding: 32px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    flex: 1 1 calc(50% - 40px); 
+    flex: 1 1 calc(50% - 40px);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 16px;
 
-    &-light{
+    &-light {
         color: $primary-grey;
-        background-color: $primary-light-green; 
+        background-color: $primary-light-green;
     }
 
-    &-dark{
+    &-dark {
         background-color: $element-dark;
         color: $primary-white;
     }
-
 }
 
 .map-card {
-    background: $primary-light-green; 
-    border-radius: 20px; 
+    background: $primary-light-green;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
-    height: 400px; 
+    height: 400px;
     margin-top: 20px;
     overflow: hidden;
-    &-dark{
+
+    &-dark {
         opacity: 60%;
     }
 }
@@ -82,13 +77,14 @@
 
 .label {
     display: block;
-    font-weight: normal; 
-    font-size: 0.8em; 
+    font-weight: normal;
+    font-size: 0.8em;
 }
+
 .value {
     margin-top: 5px;
-    font-size: 1.2em; 
-    font-weight: bold; 
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 .social-icon {
@@ -96,15 +92,15 @@
     margin: 0 5px;
 }
 
-@media screen and (max-width: 1000px){
-    .footer{
+@media screen and (max-width: 1000px) {
+    .footer {
         margin: 60px 20px;
     }
 }
 
 @media screen and (max-width: 768px) {
     .card {
-        flex: 1 1 100%; 
+        flex: 1 1 100%;
     }
 
     .map-card {

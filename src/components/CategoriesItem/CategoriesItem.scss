@@ -5,16 +5,15 @@
     display: flex;
     flex-direction: column;
     border-radius: $radius-big;
-   
-    img{
-        // width: 100%;
+
+    img {
         min-height: 350px;
         border-radius: $radius-big;
         width: 100%;
         object-fit: cover;
     }
 
-    span{
+    span {
         padding: 20px;
         text-align: center;
         font-weight: 500px;
