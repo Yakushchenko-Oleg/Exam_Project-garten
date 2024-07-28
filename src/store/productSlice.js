@@ -1,6 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { v4 as uuidv4 } from 'uuid';
 
 const URL = `${import.meta.env.APP_API_URL}`
+
+function mixArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const randomObj = Math.floor(Math.random() * (i + 1));
+    [array[i], array[randomObj]] = [array[randomObj], array[i]];
+  }
+  return array;
+}
 
 export const fetchAllProducts = createAsyncThunk(
   'products/fetchAllProducts',
@@ -14,47 +23,141 @@ export const fetchAllProducts = createAsyncThunk(
       
       const data = await resp.json()
       return data
+    } 
+    catch (error) {
+      return rejectWithValue(error.message)
+    }
+  }
+)
 
-    } catch (error) {
+export const fetchProductsByCategory = createAsyncThunk(
+  'products/fetchProductsByCategory',
+  async function (categoryId, {rejectWithValue}) {
+
+    try {
+      const resp = await fetch(`${URL}/categories/${categoryId}`)
+      if (!resp.ok) {
+        throw new Error('Server Error')
+      } 
+      
+      const data  = await resp.json()
+      return data
+    } 
+    catch (error) {
       return rejectWithValue(error.message)
     }
   }
 )
 
 const productsSlice = createSlice({
-    name: 'products',
-    initialState: {
-    products: [],
-    singleProduct: {},
+  name: "products",
+  initialState: {
+    recivedProducts: {
+      data: [],
+      category: null,
+    },
+    promoProduct: {},
+    promoDate: null,
+    filteredProducts: [],
     isLoading: false,
-    error: null
+    error: null,
+  },
+  reducers: {
+    sortByPriceAction(state, action) {
+      const { value } = action.payload;
+      state.filteredProducts.sort(
+        value === "low-to-high" ? (a, b) => (a.discont_price ? a.discont_price : a.price) - (b.discont_price ? b.discont_price : b.price)
+        : value === "high-to-low" ? (a, b) => (b.discont_price ? b.discont_price : b.price) - (a.discont_price ? a.discont_price : a.price)
+        : (a, b) => a.id - b.id
+      );
     },
-    reducers: {
-      delLastProduct(state) {},// заменить экшны на новые      
-      sortByPriceAction(state) { }
+    sortByDiscountAction(state, action) {
+      const { applyDiscount } = action.payload;
+      state.filteredProducts = 
+      applyDiscount ? (
+            state.filteredProducts.length > 0 
+            ? state.filteredProducts.filter(item => item.discont_price) 
+            : [...state.recivedProducts.data].filter(item => item.discont_price)
+      ) : [...state.recivedProducts.data];
     },
-    extraReducers: (builder) => {
-      builder
-      .addCase(fetchAllProducts.pending,(state) => {
-        state.isLoading = true, 
+    sortByUserPriceAction(state, action) {
+      const { minValue, maxValue } = action.payload;
+      state.filteredProducts = state.recivedProducts.data.filter(item => (item.discont_price ? item.discont_price : item.price) >= minValue && (item.discont_price ? item.discont_price : item.price) <= maxValue);
+    },
+    checkPromoProduct(state) {
+      let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
+      let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
+      const currentDate = new Date(new Date().setHours(0, 0, 0, 0)).toLocaleDateString() // возвращает текущую дату в виде строки
+      const rundomProduct = mixArray([...state.recivedProducts?.data])[0] // берет первый объект из прермешанного массива продуктов,
+      const currentPromoProduct =  {
+        ...rundomProduct, 
+        id: uuidv4(), 
+        discont_price: +(rundomProduct?.price * 0.5).toFixed(2)
+      }  // меняем id и цену со скидкой округляя ее до двух знаков, с помощью + переводим ы число т.к метод toFixed преводит данные в строку 
+            
+      if (promoProductFromStorage) {
+        if (promoDateFromStorage !== currentDate) {
+          console.log('PromoDate не совпадают, обнавляем PromoProduct и promoDate.')
+          state.promoDate = currentDate
+          state.promoProduct = currentPromoProduct
+          localStorage.setItem('promoDate', JSON.stringify(currentDate))
+          localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+        } 
+      } else {
+        console.log('PromoProduct не найден по этому обнавлен на:', currentPromoProduct)
+        state.promoDate = currentDate
+        state.promoProduct = currentPromoProduct
+        localStorage.setItem('promoDate', JSON.stringify(currentDate))
+        localStorage.setItem('promoProduct', JSON.stringify(currentPromoProduct))
+      }
+    },  
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllProducts.pending, (state) => {
+        state.isLoading = true
         state.error = null
       })
-      .addCase(fetchAllProducts.fulfilled, (state, action)  =>{
-        state.isLoading = false,
-        state.products = action.payload
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.recivedProducts.data = action.payload // обновляем массив продуктов в состоянии
+        state.filteredProducts = action.payload // обновляем массив фильтрованных продуктов
+
+        // Обновляем promoProduct 
+        let promoProductFromStorage = JSON.parse(localStorage.getItem('promoProduct')) 
+        let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
+
+        if (promoProductFromStorage) {
+          state.promoProduct = promoProductFromStorage
+          state.promoDate = promoDateFromStorage
+        }
       })
       .addCase(fetchAllProducts.rejected, (state, action) => {
-        state.isLoading = null
-        state.error = action.payload // Принимает payload (error.message) от rejectWithValue из блока catch
+        state.isLoading = null;
+        state.error = action.payload; // Принимает payload (error.message) от rejectWithValue из блока catch
       })
-    }
-})
+      .addCase(fetchProductsByCategory.pending, (state) => {
+        state.isLoading = true
+        state.error = null
+      })
+      .addCase(fetchProductsByCategory.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.recivedProducts = action.payload
+        state.filteredProducts = action.payload.data
+      })
+      .addCase(fetchProductsByCategory.rejected, (state, action) => {
+        state.isLoading = null;
+        state.error = action.payload; // Принимает payload (error.message) от rejectWithValue из блока catch
+      });
+  },
+});
 
 
 
 export default productsSlice.reducer
 
-export const { //заменить названия экшнов в экспорте
-    delLastProduct, 
-    sortByPriceAction
-} = productsSlice.actions
+export const {sortByPriceAction, 
+              sortByDiscountAction,
+              sortByUserPriceAction,
+              getPromoProductFromLocalStorage,
+              checkPromoProduct} = productsSlice.actions

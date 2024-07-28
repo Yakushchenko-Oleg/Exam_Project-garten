@@ -1,52 +1,61 @@
 import React, { useEffect } from 'react'
 import '../../App.scss';
 import "./Sales.scss";
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllProducts } from '../../store/productSlice'
+import { useSelector } from 'react-redux'
 import SingleProduct from '../SingleProduct/SingleProduct'
 import { Link } from 'react-router-dom'
 
-
 const Sales = () => {
 
-const {products, isLoading, error} = useSelector(state => state.products)
+const {recivedProducts  = { data: [] }, isLoading, error} = useSelector(state => state.products)
+const discoutProducts = recivedProducts.data.filter(item => item.discont_price)
 
-const discoutProducts = products.filter(item => item.discont_price)
-console.log(discoutProducts);
-  
+function mixArray(array) {
 
-const dispatch = useDispatch()
-
-useEffect(()=> {dispatch(fetchAllProducts())},[dispatch])
-
-function randomIndexInArray(array) {
-   return Math.floor(Math.random() * array.length)
+  for (let i = array.length - 1; i > 0; i--) {
+      const randomObj = Math.floor(Math.random() * (i + 1));
+      [array[i], array[randomObj]] = [array[randomObj], array[i]];
+  }
+  return array;
 }
+
+const skeleton = [1, 2, 3, 4]; // массив для отрисовки скелетона
 
 return (
 
-  <div className="sales">
-      <div className="sales__header-wrapper">
+  <div className="products container-mainpage">
+      <div className="header-wrapper">
         <h2>Sale</h2>
-        <div className="sales__header-wrapper_line"></div>
+        <div className="sales__line"></div>
         <Link to="/allsales">
           <span className="sales__link">All sales</span>
         </Link>
       </div>
 
       {isLoading ? (
-        <div className="loader"></div>
+        <div className="wrapper">
+        {skeleton.map((item) => (
+          <div className="loader" key={item}></div>
+        ))
+        }
+      </div>
       ) : (
-        <div className="sales__wrapper">
-          
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
-          <SingleProduct product={discoutProducts[randomIndexInArray(discoutProducts)]}/>
+        <div className="wrapper">
+          {
+            discoutProducts && mixArray(discoutProducts).slice(0,4).map(item =>
+              <SingleProduct key={item.id} product={item}/>
+            )
+          }
         </div>
       )}
       {error && <h2> Error from server: {error} </h2>}
+
+    <Link to="/allsales">
+          <span className="sales__link sales__link-hidden">All sales</span>
+    </Link>  
+    
     </div>
   )
 }
 export default Sales
+
