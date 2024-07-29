@@ -34,8 +34,15 @@ const FavouritesPage = () => {
   }, [sortValue]);
 
   useEffect(() => {
-    dispatch(sortByUserPriceAction({ minValue, maxValue }));
-    dispatch(sortByPriceAction({ value: sortValue }));
+    
+    if (discountItems) {
+      dispatch(sortByUserPriceAction({ minValue, maxValue }));
+      dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
+      dispatch(sortByPriceAction({ value: sortValue }));
+    } else {
+      dispatch(sortByUserPriceAction({ minValue, maxValue }));
+      dispatch(sortByPriceAction({ value: sortValue }));
+    }
   }, [minValue, maxValue]);
   
   useEffect(() => {
