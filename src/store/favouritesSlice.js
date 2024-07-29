@@ -49,12 +49,10 @@ const favouritesSlice = createSlice({
     },
     sortByDiscountAction(state, action) {
       const { applyDiscount } = action.payload;
-      state.filtredFavourites = applyDiscount 
-      ? (state.filtredFavourites.length > 0 
-        ? state.filtredFavourites.filter(item => item.discont_price) 
-        : [...favourites].filter(item => item.discont_price)
-      ) 
-      : [...favourites];
+
+      if (applyDiscount) {
+        state.filtredFavourites = state.filtredFavourites.filter(item => item.discont_price)
+      }
     },
     sortByUserPriceAction(state, action) {
       const { minValue, maxValue } = action.payload;
