@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import './App.scss';
 import { Route, Routes } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { fetchAllCategoties } from './store/categoriesProductsSlice.js';
 import { getCartFromLocalStorage } from './store/cartSlice .js';
 import { getfavouritessFromLocalStorage } from './store/favouritesSlice.js';
 import FavouritesPage from './pages/FavouritesPage/FavouritesPage.jsx';
+import { ThemeContext } from './providers/ThemeProvider.jsx';
 
 const App = () => {
 
@@ -27,6 +28,15 @@ const App = () => {
     dispatch(getCartFromLocalStorage());
     dispatch(getfavouritessFromLocalStorage())
   },[])
+
+  const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const rootElement = document.getElementById('root');
+    if (rootElement) {
+      rootElement.className = theme ? 'root-dark' : ''
+    }
+  }, [theme]);
 
   return (
 
