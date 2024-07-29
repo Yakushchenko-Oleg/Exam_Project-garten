@@ -54,8 +54,14 @@ const ProductsPage = () => {
   }, [sortValue]);
 
   useEffect(() => {
-    dispatch(sortByUserPriceAction({ minValue, maxValue }));
-    dispatch(sortByPriceAction({ value: sortValue }));
+    if (discountItems) {
+      dispatch(sortByUserPriceAction({ minValue, maxValue }));
+      dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
+      dispatch(sortByPriceAction({ value: sortValue }));
+    } else {
+      dispatch(sortByUserPriceAction({ minValue, maxValue }));
+      dispatch(sortByPriceAction({ value: sortValue }));
+    }
   }, [minValue, maxValue]);
   
   useEffect(() => {
@@ -161,7 +167,7 @@ const ProductsPage = () => {
                 ? filteredProducts.map((item) => (
                     <SingleProduct key={item.id} product={item} />
                   ))
-                : <h2>Ничего не найдено!!!!</h2>
+                : <h2>Nothing was found!!!!</h2>
               }
             </div>
         }

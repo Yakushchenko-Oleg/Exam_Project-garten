@@ -50,13 +50,12 @@
             width: 100%;
 
             .item-title {
-
                 font-weight: 500;
                 @include adaptiv-font(20, 18);
                 //завернуть содержимое в одну строку:
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
-                line-clamp: 1;
+                -webkit-line-clamp: 2;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
@@ -65,7 +64,6 @@
                 border: none;
                 height: 12px;
                 width: 12px;
-
                 font-weight: 600;
                 background: none;
                 position: absolute;
@@ -88,17 +86,25 @@
                 border: 1px solid $border-grey;
                 border-radius: $radius-small;
                 align-items: center;
+                :first-child{
+                    border-left: none;
+                }
+                :last-child{
+                    border-right: none;
+                }
 
                 &-dark {
                     border: 1px solid #8B8B8B;
                 }
 
                 >p {
-                    padding: 0 31px;
+                    padding: 0 20px;
                 }
 
                 button {
                     border: 1px solid $border-grey;
+                    border-bottom: none;
+                    border-top: none;
                     border-radius: $radius-small;
                     font-size: 25px;
                     color: $text-grey;
@@ -151,24 +157,42 @@
     }
 }
 
+@media screen and (max-width: 540px) {
+    .cartitem__info {
+        gap: 6px;
+
+        &_title-container {
+            .item-title {
+                -webkit-line-clamp: 1;
+            }
+        }
+
+        &__price-wraper {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+    }
+}
+
 @media screen and (max-width: 480px) {
     .cartitem__info {
-        gap: 5px;
+        gap: 6px;
         padding: 10px;
     }
 
     .cartitem__info__price-wraper {
-        gap: 5px;
+        gap: 4px;
     }
 }
 
 @media screen and (max-width: 360px) {
     .cartitem__info {
-        gap: 5px;
+        gap: 6px;
         padding: 20px 10px 20px 10px;
     }
 
     .cartitem__info__price-wraper {
-        gap: 5px;
+        gap: 4px;
     }
 }

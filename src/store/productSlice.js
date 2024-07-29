@@ -73,16 +73,16 @@ const productsSlice = createSlice({
     },
     sortByDiscountAction(state, action) {
       const { applyDiscount } = action.payload;
-      state.filteredProducts = 
-      applyDiscount ? (
-            state.filteredProducts.length > 0 
-            ? state.filteredProducts.filter(item => item.discont_price) 
-            : [...state.recivedProducts.data].filter(item => item.discont_price)
-      ) : [...state.recivedProducts.data];
+
+      if (applyDiscount) {
+        state.filteredProducts= state.filteredProducts.filter(item => item.discont_price)
+      }
     },
     sortByUserPriceAction(state, action) {
       const { minValue, maxValue } = action.payload;
-      state.filteredProducts = state.recivedProducts.data.filter(item => (item.discont_price ? item.discont_price : item.price) >= minValue && (item.discont_price ? item.discont_price : item.price) <= maxValue);
+      state.filteredProducts = state.recivedProducts.data.filter(item => 
+        (item.discont_price ? item.discont_price : item.price) >= minValue 
+        && (item.discont_price ? item.discont_price : item.price) <= maxValue);
     },
     checkPromoProduct(state) {
       let promoDateFromStorage = JSON.parse(localStorage.getItem('promoDate')) 
