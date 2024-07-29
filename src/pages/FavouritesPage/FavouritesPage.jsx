@@ -34,6 +34,7 @@ const FavouritesPage = () => {
   }, [sortValue]);
 
   useEffect(() => {
+    
     if (discountItems) {
       dispatch(sortByUserPriceAction({ minValue, maxValue }));
       dispatch(sortByDiscountAction({ applyDiscount: discountItems }));
