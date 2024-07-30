@@ -1,4 +1,3 @@
-// src/pages/AllSalesPage/AllSalesPage.jsx
 import React, { useEffect, useState } from "react";
 import "./AllSalesPage.scss";
 import { Link } from "react-router-dom";
