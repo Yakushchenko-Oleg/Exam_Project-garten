@@ -42,9 +42,9 @@ h2 {
       color: $primary-white;
     }
 
-    .navbar__menu a {
-      color: $primary-grey;
-    }
+    // .navbar__menu a {
+    //   color: $primary-grey;
+    // }
 
     .product-navigation {
       opacity: 80%;
@@ -94,6 +94,11 @@ h2 {
       color: $primary-grey;
     }
   }
+}
+
+//если isOpen в бургер меню
+.menu-wrapper-active a{
+  color: grey;
 }
 
 .maincontainer {
