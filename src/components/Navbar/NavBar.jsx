@@ -106,6 +106,7 @@ const NavBar = () => {
           </ul>
         </div>
       </div>
+      
       <div className="navbar__icon-wrapper">
         
         <div className="navbar__icon-wrapper_item">

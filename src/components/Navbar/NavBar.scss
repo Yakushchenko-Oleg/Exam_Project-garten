@@ -22,7 +22,12 @@
                 background-color: $primary-white;
             }
         }
+    }
 
+    .burger-x{
+        span {
+            background-color: $primary-grey;
+        }
     }
 
     &-light {
@@ -136,6 +141,7 @@
             background-color: $primary-grey;
         }
     }
+    
 }
 
 // модальное окно промопродукта
@@ -302,6 +308,7 @@
 
         .menu-wrapper-active {
             transform: translateX(-100%); //выезжает влево
+     
         }
 
         .menu-wrapper {
@@ -324,6 +331,7 @@
             justify-content: flex-start;
             flex-direction: column;
             gap: 36px;
+        
         }
 
         &__burger {
